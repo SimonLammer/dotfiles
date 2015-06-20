@@ -17,3 +17,17 @@ set softtabstop=4 " Indents use 4 columns
 
 " Backspace
 set backspace=indent,eol,start " Enable removal of indents, EOLs and starts using backspace
+
+" Disable arrow keys
+no  <up>    <Nop>
+no  <left>  <Nop>
+no  <down>  <Nop>
+no  <right> <Nop>
+ino <up>    <Nop>
+ino <left>  <Nop>
+ino <down>  <Nop>
+ino <right> <Nop>
+vno <up>    <Nop>
+vno <left>  <Nop>
+vno <down>  <Nop>
+vno <right> <Nop>
