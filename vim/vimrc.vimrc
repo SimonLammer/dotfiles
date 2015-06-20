@@ -31,3 +31,17 @@ vno <up>    <Nop>
 vno <left>  <Nop>
 vno <down>  <Nop>
 vno <right> <Nop>
+
+" Change leader
+let mapleader="#"
+
+" Quick pairs
+imap <leader>' ''<ESC>i
+imap <leader>" ""<ESC>i
+imap <leader>{ {}<ESC>i
+imap <leader>[ []<ESC>i
+imap <leader>( ()<ESC>i
+imap <leader>< <><ESC>i
+
+" Simple escape from insert mode
+imap <leader>e <ESC>
