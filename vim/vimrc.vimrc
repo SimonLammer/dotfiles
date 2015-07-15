@@ -1,3 +1,6 @@
+" Encoding
+set encoding=utf-8
+
 " GVim stuff
 set guifont=Courier\ New:h13
 set mouse=c                  " Disable mouse clicks
@@ -48,3 +51,7 @@ imap <leader>e <ESC>
 
 " Pathogen
 execute pathogen#infect()
+
+" Powerline
+set laststatus=2 " Show powerline
+" let g:Powerline_symbols="fancy" " Need a appropriate font for that
