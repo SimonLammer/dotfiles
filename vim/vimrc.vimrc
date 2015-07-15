@@ -46,9 +46,17 @@ imap <leader>[ []<ESC>i
 imap <leader>( ()<ESC>i
 imap <leader>< <><ESC>i
 
+" Quick true/false replacement
+no <leader>t wbcetrue<ESC>b
+no <leader>f wbcefalse<ESC>b
+
 " Simple escape from insert mode
 ino <leader>e <ESC>
 no <leader>e <Nop>
+
+
+" other mappings
+no <leader><Space> a <ESC>
 
 " Pathogen
 execute pathogen#infect()
