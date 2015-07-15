@@ -47,7 +47,8 @@ imap <leader>( ()<ESC>i
 imap <leader>< <><ESC>i
 
 " Simple escape from insert mode
-imap <leader>e <ESC>
+ino <leader>e <ESC>
+no <leader>e <Nop>
 
 " Pathogen
 execute pathogen#infect()
