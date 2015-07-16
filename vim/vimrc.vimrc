@@ -59,8 +59,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 "(/          \)/__(  )__\/__\   /__\   /_____((_/    \__/    \____/  /____/   
 
 " Escape insert mode whilst avoiding carpal tunnel syndrome
-imap jk <ESC>
-imap kj <ESC>
+imap jj <ESC>
 
 " Change leader
 let mapleader=","
