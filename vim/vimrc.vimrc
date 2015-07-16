@@ -49,6 +49,7 @@ set laststatus=2 " Show powerline
 
 " NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif " close window instead of maximizing nerdtree
+no <leader>n :NERDTreeToggle<cr>
 
 "   __    __      ____    _____  _____  _____     __      _   _____    _____  
 "   \ \  / /     (    )  (  __ \(  __ \(_   _)   /  \    / ) / ___ \  / ____\ 
@@ -59,8 +60,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 "(/          \)/__(  )__\/__\   /__\   /_____((_/    \__/    \____/  /____/   
 
 " Escape insert mode whilst avoiding carpal tunnel syndrome
-imap jk <ESC>
-imap kj <ESC>
+imap jj <ESC>
 
 " Change leader
 let mapleader=","
