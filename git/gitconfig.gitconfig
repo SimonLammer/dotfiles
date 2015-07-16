@@ -3,3 +3,5 @@
 	name = Simon Lammer
 [push]
 	default = simple
+[core]
+	editor = vim
