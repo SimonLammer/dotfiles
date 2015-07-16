@@ -63,6 +63,9 @@ no <leader>n :NERDTreeToggle<cr>
 imap jj <ESC>
 
 " Change leader
+no , <Nop>
+ino , <Nop>
+vno , <Nop>
 let mapleader=","
 
 " Disable arrow keys
