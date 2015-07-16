@@ -49,7 +49,6 @@ set laststatus=2 " Show powerline
 
 " NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif " close window instead of maximizing nerdtree
-no <leader>n :NERDTreeToggle<cr>
 
 "   __    __      ____    _____  _____  _____     __      _   _____    _____  
 "   \ \  / /     (    )  (  __ \(  __ \(_   _)   /  \    / ) / ___ \  / ____\ 
@@ -63,10 +62,13 @@ no <leader>n :NERDTreeToggle<cr>
 imap jj <ESC>
 
 " Change leader
-no , <Nop>
-ino , <Nop>
-vno , <Nop>
 let mapleader=","
+no  <leader> <Nop>
+ino <leader> <Nop>
+vno <leader> <Nop>
+
+" Plugin bindings
+no <leader>n :NERDTreeToggle<cr>
 
 " Disable arrow keys
 no  <up>    <Nop>
