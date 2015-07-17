@@ -64,7 +64,7 @@ imap jj <ESC>
 " Change leader
 let mapleader=","
 no  <leader> <Nop>
-ino <leader> <Nop>
+"ino <leader> <Nop>
 vno <leader> <Nop>
 
 " Plugin bindings
