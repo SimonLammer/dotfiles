@@ -33,6 +33,9 @@ set softtabstop=4 " Indents use 4 columns
 " Backspace
 set backspace=indent,eol,start " Enable removal of indents, EOLs and starts using backspace
 
+" Change working directory to currently opened file
+set autochdir
+
 "  _____    _____       __    __      _____     _____      __      _    _____ 
 " (  __ \  (_   _)      ) )  ( (     / ___ \   (_   _)    /  \    / )  / ____\
 "  ) )_) )   | |       ( (    ) )   / /   \_)    | |     / /\ \  / /  ( (___  
