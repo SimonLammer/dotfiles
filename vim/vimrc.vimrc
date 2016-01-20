@@ -19,7 +19,7 @@ set mouse=c                  " Disable mouse clicks
 " Overall appearance
 colors desert        " Choose cholorscheme
 syntax on            " Enable syntax-highlighting
-set wrap!            " Disable wrapping
+set wrap             " Enable wrapping
 set nu               " Display line numbers
 set relativenumber "Display relative numbers
 
