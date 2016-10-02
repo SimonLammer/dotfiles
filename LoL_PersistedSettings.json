@@ -754,6 +754,15 @@ final settings
                     ]
                 },
                 {
+                    "name": "ColorPalette",
+                    "settings": [
+                        {
+                            "name": "ColorPalette",
+                            "value": "1"
+                        }
+                    ]
+                },
+                {
                     "name": "FloatingText",
                     "settings": [
                         {
@@ -976,7 +985,7 @@ final settings
                         },
                         {
                             "name": "ItemShopStartPane",
-                            "value": "0"
+                            "value": "1"
                         },
                         {
                             "name": "KeyboardScrollSpeed",
@@ -993,6 +1002,10 @@ final settings
                         {
                             "name": "MiddleMouseScrollSpeed",
                             "value": "0.5000"
+                        },
+                        {
+                            "name": "MinimapMoveSelf",
+                            "value": "0"
                         },
                         {
                             "name": "MinimapScale",
@@ -1188,7 +1201,7 @@ final settings
                         },
                         {
                             "name": "evtPlayerAttackMove",
-                            "value": "[<Unbound>],[<Unbound>]"
+                            "value": "[Button 1]"
                         },
                         {
                             "name": "evtPlayerAttackMoveClick",
@@ -1204,7 +1217,7 @@ final settings
                         },
                         {
                             "name": "evtPlayerSelectClick",
-                            "value": "[<Unbound>],[Shift][Button 1]"
+                            "value": "[Button 1,[Shift][Button 1]"
                         },
                         {
                             "name": "evtSelectAlly1",
@@ -1404,6 +1417,10 @@ final settings
                         },
                         {
                             "name": "evtUseItem4",
+                            "value": "[<Unbound>]"
+                        },
+                        {
+                            "name": "evtUseItem5",
                             "value": "[<Unbound>]"
                         },
                         {
