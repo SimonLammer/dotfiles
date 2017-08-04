@@ -5,3 +5,9 @@
 	default = simple
 [core]
 	editor = vim
+
+[alias]
+	s = status
+	lg = log --all --oneline --graph --decorate
+	co = checkout
+	last = log HEAD -1 --decorate
