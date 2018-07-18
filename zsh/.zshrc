@@ -57,6 +57,8 @@ ZSH_THEME="mortalscumbag"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+# export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=4
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -70,7 +72,14 @@ plugins=(
   #ssh-agent
   sudo
   tmux
+  zsh-autosuggestions
 )
+
+# Remove tmux plugin if tmux is not installed
+which tmux >/dev/null 2>1
+if [ $? -ne 0 ]; then
+  plugins=$(echo $plugins | sed -E 's/ ?tmux//g')
+fi
 
 source $ZSH/oh-my-zsh.sh
 
@@ -82,11 +91,11 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='code -nw'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -104,7 +113,8 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # tmux
-if [ -z "$TMUX" ]; then
+which tmux >/dev/null 2>1
+if [ $? -eq 0 ] && [ -z "$TMUX" ]; then
 	t=$(tmux new)
 	if [ $t = '[exited]' ]; then
 		exit
