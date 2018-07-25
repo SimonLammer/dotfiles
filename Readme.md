@@ -188,7 +188,6 @@ ln -isv ~/.dotfiles/vim/.vimrc ~/.
 
 ~~~shell
 ln -isv ~/.dotfiles/vscode/settings.json ~/.config/Code/User/.
-ln -isv ~/.dotfiles/vscode/keybindings.json ~/.config/Code/User/.
 ~~~
 
 ## Install Extensions
