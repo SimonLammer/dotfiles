@@ -160,6 +160,22 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ln -isv ~/.dotfiles/tmux/.tmux.conf ~/.
 ~~~
 
+# VIM
+
+~~~shell
+sudo apt install -y vim
+~~~
+
+## [vim-plug](https://github.com/junegunn/vim-plug)
+
+The plugin manager will be installed automatically from the ```.vimrc```.
+
+## Link [dotfiles]
+
+~~~shell
+ln -isv ~/.dotfiles/vim/.vimrc ~/.
+~~~
+
 # VirtualBox
 
 [Download page][virtualbox_download]
@@ -216,7 +232,7 @@ ln -isv ~/.dotfiles/zsh/.zshrc ~/.
 ---
 
 ~~~shell
-sudo apt install -y cowsay curl git gparted htop pm-utils ssh tmux xclip zsh
+sudo apt install -y cowsay curl git gparted htop pm-utils ssh tmux xclip vim zsh
 ~~~
 
 ---

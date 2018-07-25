@@ -9,11 +9,26 @@
 "
 " Font: Jacky - http://patorjk.com/software/taag/#p=display&f=Jacky
 
-" Encoding
-set encoding=utf-8
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin()
+
+Plug 'tpope/vim-sensible'
+Plug 'kristijanhusak/vim-hybrid-material'
+
+call plug#end()
+
+let g:enable_bold_font = 1
+set background=dark
+colorscheme hybrid_reverse
+
 
 " GVim stuff
-set guifont=Courier\ New:h13 " avoid eye cancer
+set guifont=Courier\ New:h13 " Avoid eye cancer
 set mouse=c                  " Disable mouse clicks
 
 " Overall appearance
@@ -25,33 +40,14 @@ set relativenumber "Display relative numbers
 
 " Indenting
 set autoindent    " Enable autoindenting
-set tabstop=4     " Tabs display as 4 spaces
+set tabstop=2     " Tabs display as 4 spaces
 set expandtab     " Replace tabs with spaces
 set shiftwidth=4
-set softtabstop=4 " Indents use 4 columns
-
-" Backspace
-set backspace=indent,eol,start " Enable removal of indents, EOLs and starts using backspace
+set softtabstop=2 " Indents use 4 columns
 
 " Change working directory to currently opened file
 set autochdir
 
-"  _____    _____       __    __      _____     _____      __      _    _____ 
-" (  __ \  (_   _)      ) )  ( (     / ___ \   (_   _)    /  \    / )  / ____\
-"  ) )_) )   | |       ( (    ) )   / /   \_)    | |     / /\ \  / /  ( (___  
-" (  ___/    | |        ) )  ( (   ( (  ____     | |     ) ) ) ) ) )   \___ \ 
-"  ) )       | |   __  ( (    ) )  ( ( (__  )    | |    ( ( ( ( ( (        ) )
-" ( (      __| |___) )  ) \__/ (    \ \__/ /    _| |__  / /  \ \/ /    ___/ / 
-" /__\     \________/   \______/     \____/    /_____( (_/    \__/    /____/  
-                                                                             
-" Pathogen
-execute pathogen#infect()
-
-" Powerline
-set laststatus=2 " Show powerline
-
-" NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif " close window instead of maximizing nerdtree
 
 "   __    __      ____    _____  _____  _____     __      _   _____    _____  
 "   \ \  / /     (    )  (  __ \(  __ \(_   _)   /  \    / ) / ___ \  / ____\ 
@@ -74,18 +70,18 @@ vno <leader> <Nop>
 no <leader>n :NERDTreeToggle<cr>
 
 " Disable arrow keys
-no  <up>    <Nop>
-no  <left>  <Nop>
-no  <down>  <Nop>
-no  <right> <Nop>
-ino <up>    <Nop>
-ino <left>  <Nop>
-ino <down>  <Nop>
-ino <right> <Nop>
-vno <up>    <Nop>
-vno <left>  <Nop>
-vno <down>  <Nop>
-vno <right> <Nop>
+"no  <up>    <Nop>
+"no  <left>  <Nop>
+"no  <down>  <Nop>
+"no  <right> <Nop>
+"ino <up>    <Nop>
+"ino <left>  <Nop>
+"ino <down>  <Nop>
+"ino <right> <Nop>
+"vno <up>    <Nop>
+"vno <left>  <Nop>
+"vno <down>  <Nop>
+"vno <right> <Nop>
 
 " Quick pairs
 imap <leader>' ''<ESC>i
