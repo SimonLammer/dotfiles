@@ -76,7 +76,7 @@ plugins=(
 )
 
 # Remove tmux plugin if tmux is not installed
-which tmux >/dev/null 2>1
+which tmux >/dev/null 2>&1
 if [ $? -ne 0 ]; then
   plugins=$(echo $plugins | sed -E 's/ ?tmux//g')
 fi
@@ -113,12 +113,23 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # tmux
-which tmux >/dev/null 2>1
+which tmux >/dev/null 2>&1
 if [ $? -eq 0 ] && [ -z "$TMUX" ]; then
-	t=$(tmux new)
-	if [ $t = '[exited]' ]; then
-		exit
-	else
-		echo $t
-	fi
+	start_tmux=true
+	if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+		echo "Do you want to create a tmux session. (This will clear the screen!)"
+		read "choice?(Y/n)? " 
+    case "$choice" in
+      n|N ) start_tmux=false
+      # * ) echo "y";;
+    esac
+  fi
+  if [ $start_tmux = true ]; then
+    t=$(tmux new) # TODO: don't execute if $choice is no
+    if [ $t = '[exited]' ]; then
+      exit
+    else
+      echo $t
+    fi
+  fi
 fi
