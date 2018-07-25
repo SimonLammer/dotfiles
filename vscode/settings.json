@@ -1,4 +1,74 @@
 {
     "terminal.integrated.fontSize": 15,
-    "editor.tabSize": 2
+    "editor.fontSize": 15,
+    "editor.tabSize": 2,
+    "editor.renderWhitespace": "boundary",
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.find.autoFindInSelection": true,
+    "editor.mouseWheelZoom": true,
+    "editor.showFoldingControls": "always",
+    "editor.smoothScrolling": true,
+    "editor.lineNumbers": "relative",
+    "workbench.activityBar.visible": false,
+
+    // VSCodeVIM
+    "vim.easymotion": true,
+    "vim.easymotionKeys": "hklyuiopnm,qwertzxcvbasdgjf", // Removed: ;
+    "vim.statusBarColorControl": true,
+    "vim.statusBarColors": { // color palette: https://camo.githubusercontent.com/a5a278806880562d3d205ac224103b55e8ae36d9/687474703a2f2f692e696d6775722e636f6d2f3439714b7959572e706e67
+        "normal": "#076678",
+        "insert": "#427b58",
+        "replace": "#af3a03",
+        "visual": "#b57614",
+        "visualline": "#b57614",
+        "visualblock": "#b57614"
+    },
+    "vim.useSystemClipboard": true,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["j", "j"],
+            "after": ["<Esc>"]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["Z", "Z"],
+            "commands": [
+                ":wq"
+            ]
+        }
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                ">"
+            ],
+            "commands": [
+                "editor.action.indentLines"
+            ]
+        },
+        {
+            "before": [
+                "<"
+            ],
+            "commands": [
+                "editor.action.outdentLines"
+            ]
+        },
+    ],
+    "vim.handleKeys":{
+        "<C-a>": false,
+        "<C-c>": false,
+        "<C-f>": false,
+        "<C-n>": false,
+        "<C-v>": false,
+    },
+
+    // Stuff below will changed dynamically
+    "window.zoomLevel": 0,
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#076678",
+        "statusBar.noFolderBackground": "#076678",
+        "statusBar.debuggingBackground": "#076678"
+    },
 }
