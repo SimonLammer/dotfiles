@@ -102,6 +102,23 @@ Settings > Advanced > Excluded file and folder names:
 - \*-local
 - \*-local.\*
 
+# Python
+
+[Download page](https://www.python.org/getit/)
+
+[Reference](https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-local-programming-environment-on-ubuntu-16-04)
+~~~shell
+sudo apt install -y python3-pip build-essential libssl-dev libffi-dev python-dev
+~~~
+
+## pipenv
+
+[Reference](https://packaging.python.org/tutorials/managing-dependencies/#managing-dependencies)
+
+~~~shell
+pip3 install --user pipenv
+~~~
+
 # [Ranger][ranger_github]
 
 ~~~shell
@@ -231,7 +248,19 @@ ln -isv ~/.dotfiles/zsh/.zshrc ~/.
 ---
 
 ~~~shell
-sudo apt install -y cowsay curl git gparted htop pm-utils ssh tmux xclip vim zsh
+sudo apt install -y \
+  cowsay\
+  curl\
+  git\
+  gparted\
+  htop\
+  pm-utils\
+  python3-pip build-essential libssl-dev libffi-dev python-dev\
+  ssh\
+  tmux\
+  xclip\
+  vim\
+  zsh
 ~~~
 
 ---
@@ -251,6 +280,8 @@ sudo apt install -y cowsay curl git gparted htop pm-utils ssh tmux xclip vim zsh
 - SSH
   - Login with key instead of password
     - Add key of localhost
+- ? Powerline font
+  - Tmux powerline theme
 
 
 
