@@ -1,3 +1,7 @@
+# Source ~/.profile if it exists
+# https://superuser.com/a/398990
+[[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
