@@ -1,5 +1,9 @@
 **This repo contains multiple settings and configuration files for several programs.**
 
+ASCII art fonts were created using:
+- http://patorjk.com/software/taag/#p=display&f=Epic&t=github.com%2FSimonLammer%2Fdotfiles
+- http://patorjk.com/software/taag/#p=display&f=Ivrit&t=github.com%2FSimonLammer%2Fdotfiles
+
 Below is a collection of wisdom, useful for setting up computers.
 
 ---
@@ -46,7 +50,7 @@ sudo blkid | grep "^$dev" -m 1 | sed -E 's@.* UUID=\"([^"]+).* TYPE="([^"]+).*@#
 
 # Eclipse
 
-[Download page][eclipse_download]
+[Download page](https://www.eclipse.org/downloads/)
 
 ~~~shell
 tar -xf eclipse*.tar.gz
@@ -57,7 +61,7 @@ eclipse-installer/eclipse-inst # Installation Folder: ~
 
 ## Use different GTK_THEME
 
-[Reference][firefox_gtk_theme]
+[Reference](https://askubuntu.com/a/778388)
 
 ~~~ shell
 sudo sed -Ei '/export MOZ_APP_LAUNCHER/a\\n# Use specific GTK_THEME instead of system default\nGTK_THEME=Adwaita:light\nexport GTK_THEME' /usr/lib/firefox/firefox.sh
@@ -93,14 +97,26 @@ sudo apt-get install chrome-gnome-shell
 sudo apt install -y openjdk-8-jdk openjdk-8-doc
 ~~~
 
+# Lutris
+
+*I like the idea, but it didn't work for me, so I'll stay on [Play on Linux](#Play-on-Linux) for now*
+
+[Reference](https://lutris.net/downloads/)
+
 # Mega
 
-[Download page][megasync_download]
+[Download page](https://mega.nz/sync)
 
 Settings > Advanced > Excluded file and folder names:
 
 - \*-local
 - \*-local.\*
+
+# Play on Linux
+
+~~~shell
+sudo apt install -y playonlinux
+~~~
 
 # Python
 
@@ -119,7 +135,7 @@ sudo apt install -y python3-pip build-essential libssl-dev libffi-dev python-dev
 pip3 install --user pipenv
 ~~~
 
-# [Ranger][ranger_github]
+# [Ranger](https://github.com/ranger/ranger)
 
 ~~~shell
 sudo apt install -y ranger
@@ -165,7 +181,7 @@ type %userprofile%\.ssh\id_rsa.pub | clip
 sudo apt install -y tmux xclip
 ~~~
 
-## [Tmux Plugin Manager][tmux_plugin_manager]
+## [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm)
 
 ~~~shell
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -195,11 +211,11 @@ ln -isv ~/.dotfiles/vim/.vimrc ~/.
 
 # VirtualBox
 
-[Download page][virtualbox_download]
+[Download page](https://www.virtualbox.org/wiki/Downloads)
 
 # Visual Studio Code
 
-[Download page][vsc_download]
+[Download page](https://code.visualstudio.com/download)
 
 ## Link [dotfiles]
 
@@ -254,6 +270,7 @@ sudo apt install -y \
   git\
   gparted\
   htop\
+  openjdk-8-jdk openjdk-8-doc\
   pm-utils\
   python3-pip build-essential libssl-dev libffi-dev python-dev\
   ssh\
@@ -262,6 +279,8 @@ sudo apt install -y \
   vim\
   zsh
 ~~~
+
+[Ninite](https://ninite.com/)
 
 ---
 
@@ -285,14 +304,4 @@ sudo apt install -y \
 
 
 
-[Ninite](ninite)
-
-[eclipse_download]: https://www.eclipse.org/downloads/
 [dotfiles]: #dotfiles
-[firefox_gtk_theme]: https://askubuntu.com/a/778388
-[megasync_download]: https://mega.nz/sync
-[ninite]: https://ninite.com/
-[ranger_github]: https://github.com/ranger/ranger
-[tmux_plugin_manager]: https://github.com/tmux-plugins/tpm
-[virtualbox_download]: https://www.virtualbox.org/wiki/Downloads
-[vsc_download]: https://code.visualstudio.com/download

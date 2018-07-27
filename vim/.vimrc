@@ -1,31 +1,12 @@
-"              __    __    _____     __    __     ______       ____  
-"              ) )  ( (   (_   _)    \ \  / /    (   __ \     / ___) 
-"             ( (    ) )    | |      () \/ ()     ) (__) )   / /     
-"              \ \  / /     | |      / _  _ \    (    __/   ( (      
-"               \ \/ /      | |     / / \/ \ \    ) \ \  _  ( (      
-"         __     \  /      _| |__  /_/      \_\  ( ( \ \_))  \ \___  
-"        (__)     \/      /_____( (/          \)  )_) \__/    \____) 
-"
-"
-" Font: Jacky - http://patorjk.com/software/taag/#p=display&f=Jacky
-
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-call plug#begin()
-
-Plug 'tpope/vim-sensible'
-Plug 'kristijanhusak/vim-hybrid-material'
-
-call plug#end()
-
-let g:enable_bold_font = 1
-set background=dark
-colorscheme hybrid_reverse
-
+"          _________ _______  _______  _______ 
+" |\     /|\__   __/(       )(  ____ )(  ____ \
+" | )   ( |   ) (   | () () || (    )|| (    \/
+" | |   | |   | |   | || || || (____)|| |      
+" ( (   ) )   | |   | |(_)| ||     __)| |      
+"  \ \_/ /    | |   | |   | || (\ (   | |      
+"  _\   /  ___) (___| )   ( || ) \ \__| (____/\
+" (_)\_/   \_______/|/     \||/   \__/(_______/
+"                                             
 
 " GVim stuff
 set guifont=Courier\ New:h13 " Avoid eye cancer
@@ -48,14 +29,34 @@ set softtabstop=2 " Indents use 4 columns
 " Change working directory to currently opened file
 set autochdir
 
+"  ____  _             _           
+" |  _ \| |_   _  __ _(_)_ __  ___ 
+" | |_) | | | | |/ _` | | '_ \/ __|
+" |  __/| | |_| | (_| | | | | \__ \
+" |_|   |_|\__,_|\__, |_|_| |_|___/
+"                |___/             
 
-"   __    __      ____    _____  _____  _____     __      _   _____    _____  
-"   \ \  / /     (    )  (  __ \(  __ \(_   _)   /  \    / ) / ___ \  / ____\ 
-"   () \/ ()     / /\ \   ) )_) )) )_) ) | |    / /\ \  / / / /   \_)( (___   
-"   / _  _ \    ( (__) ) (  ___/(  ___/  | |    ) ) ) ) ) )( (  ____  \___ \  
-"  / / \/ \ \    )    (   ) )    ) )     | |   ( ( ( ( ( ( ( ( (__  )     ) ) 
-" /_/      \_\  /  /\  \ ( (    ( (     _| |__ / /  \ \/ /  \ \__/ /  ___/ /  
-"(/          \)/__(  )__\/__\   /__\   /_____((_/    \__/    \____/  /____/   
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin()
+Plug 'tpope/vim-sensible'
+Plug 'kristijanhusak/vim-hybrid-material'
+call plug#end()
+
+let g:enable_bold_font = 1
+set background=dark
+colorscheme hybrid_reverse
+
+"  __  __                   _                 
+" |  \/  | __ _ _ __  _ __ (_)_ __   __ _ ___ 
+" | |\/| |/ _` | '_ \| '_ \| | '_ \ / _` / __|
+" | |  | | (_| | |_) | |_) | | | | | (_| \__ \
+" |_|  |_|\__,_| .__/| .__/|_|_| |_|\__, |___/
+"              |_|   |_|            |___/     
 
 " Escape insert mode whilst avoiding carpal tunnel syndrome
 imap jj <ESC>

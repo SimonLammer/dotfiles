@@ -1,3 +1,13 @@
+#     _______  _______           _______  _______ 
+#    / ___   )(  ____ \|\     /|(  ____ )(  ____ \
+#    \/   )  || (    \/| )   ( || (    )|| (    \/
+#        /   )| (_____ | (___) || (____)|| |      
+#       /   / (_____  )|  ___  ||     __)| |      
+#      /   /        ) || (   ) || (\ (   | |      
+#  _  /   (_/\/\____) || )   ( || ) \ \__| (____/\
+# (_)(_______/\_______)|/     \||/   \__/(_______/
+#                                                 
+
 # Source ~/.profile if it exists
 # https://superuser.com/a/398990
 [[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
@@ -6,7 +16,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/slammer/.oh-my-zsh
+export ZSH=/home/slammer/.oh-my-zsh
 
 # tmux
 ZSH_TMUX_AUTOSTART=false # will be started at the bottom
@@ -36,11 +46,8 @@ ZSH_THEME="mortalscumbag"
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
 # Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
@@ -56,7 +63,7 @@ ZSH_THEME="mortalscumbag"
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -105,7 +112,7 @@ fi
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
+export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -129,7 +136,7 @@ if [ $? -eq 0 ] && [ -z "$TMUX" ]; then
     esac
   fi
   if [ $start_tmux = true ]; then
-    t=$(tmux new) # TODO: don't execute if $choice is no
+    t=$(tmux new)
     if [ $t = '[exited]' ]; then
       exit
     else
