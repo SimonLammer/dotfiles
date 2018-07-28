@@ -195,6 +195,26 @@ type %userprofile%\.ssh\id_rsa.pub | clip
 - [Gitlab](https://gitlab.com/profile/keys)\
   https://docs.gitlab.com/ee/user/gitlab_com/#ssh-host-keys-fingerprints
 
+# Steam
+
+## Can't launch
+
+[Reference](https://askubuntu.com/questions/962737/steam-not-opening-tar-this-does-not-look-like-a-tar-archive#1018230)
+
+Output of ```steam```:
+~~~shell
+tar: This does not look like a tar archive
+xz: (stdin): File format not recognized
+tar: Child returned status 1
+tar: Error is not recoverable: exiting now
+find: ‘/home/slammer/.steam/ubuntu12_32/steam-runtime’: No such file or directory
+~~~
+
+To fix this, create the folder mentioned:
+~~~shell
+mkdir ~/.steam/ubuntu12_32/steam-runtime
+~~~
+
 # Tmux 
 ~~~shell
 sudo apt install -y tmux xclip
