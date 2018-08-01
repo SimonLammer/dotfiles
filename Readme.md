@@ -46,6 +46,27 @@ mkdir -p $target
 sudo blkid | grep "^$dev" -m 1 | sed -E 's@.* UUID=\"([^"]+).* TYPE="([^"]+).*@# '$dev'\nUUID=\1 '$target' \2@' | sudo tee -a /etc/fstab
 ~~~
 
+# Unity
+
+## Tweak tool
+
+[Reference](https://ubuntoid.com/install-unity-tweak-tool-ubuntu-16-04/)
+~~~shell
+sudo apt install -y unity-tweak-tool
+~~~
+
+# Gnome shell
+
+## Specify different GTK_THEME for application
+
+[Reference](https://askubuntu.com/a/778388)
+
+### Firefox
+
+~~~ shell
+sudo sed -Ei '/export MOZ_APP_LAUNCHER/a\\n# Use specific GTK_THEME instead of system default\nGTK_THEME=Adwaita:light\nexport GTK_THEME' /usr/lib/firefox/firefox.sh
+~~~
+
 ---
 
 # Eclipse
@@ -57,20 +78,18 @@ tar -xf eclipse*.tar.gz
 eclipse-installer/eclipse-inst # Installation Folder: ~
 ~~~
 
-# Firefox
-
-## Use different GTK_THEME
-
-[Reference](https://askubuntu.com/a/778388)
-
-~~~ shell
-sudo sed -Ei '/export MOZ_APP_LAUNCHER/a\\n# Use specific GTK_THEME instead of system default\nGTK_THEME=Adwaita:light\nexport GTK_THEME' /usr/lib/firefox/firefox.sh
-~~~
-
 # Git
 
 ~~~shell
 sudo apt install -y git
+~~~
+
+# [Gti](https://github.com/rwos/gti)
+
+~~~shell
+sudo add-apt-repository ppa:mamantoha/gti
+sudo apt-get update
+sudo apt-get install -y gti
 ~~~
 
 ## Dotfiles
@@ -322,19 +341,24 @@ ln -isv ~/.dotfiles/zsh/.zshrc ~/.
 
 ~~~shell
 sudo apt install -y \
-  cowsay\
   curl\
   git\
   gparted\
   htop\
   openjdk-8-jdk openjdk-8-doc\
-  pm-utils\
-  python3-pip build-essential libssl-dev libffi-dev python-dev\
   ssh\
   tmux\
   xclip\
   vim\
   zsh
+~~~
+
+Fun additions:
+~~~shell
+sudo apt install -y \
+  cmatrix\
+  cowsay\
+  sl
 ~~~
 
 [Ninite](https://ninite.com/)
@@ -350,8 +374,9 @@ sudo apt install -y \
   - Use light theme
 - Latex
   - md -> latex
-- Lutris
+- POL
   - Skyrim
+    - voices
     - Mods
 - SSH
   - Login with key instead of password
