@@ -21,3 +21,6 @@
 	co = checkout
 	last = log HEAD -1 --decorate
 	cam = commit -am
+	cm = commit -m
+	d = diff
+	dc = diff --cached

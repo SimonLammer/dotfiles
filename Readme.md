@@ -367,6 +367,8 @@ sudo apt install -y \
 
 # TODO
 
+- Gnome Shell
+  - Window snapping
 - Anki
 - Firefox
   - Informative default page
