@@ -24,3 +24,6 @@
 	cm = commit -m
 	d = diff
 	dc = diff --cached
+	a = add
+	unstage = reset HEAD
+	u = reset HEAD
