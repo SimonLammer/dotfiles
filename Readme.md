@@ -220,6 +220,20 @@ mkdir ~/.steam/ubuntu12_32/steam-runtime
 sudo apt install -y tmux xclip
 ~~~
 
+## Install other version
+
+[Download the latest release from github](https://github.com/tmux/tmux/releases)
+~~~shell
+sudo apt-get install -y libevent-dev libncurses5-dev libncursesw5-dev
+wget https://github.com/libevent/libevent/releases/download/release-2.1.8-stable/libevent-2.1.8-stable.tar.gz
+tar xf tar xf libevent-2.1.8-stable.tar.gz
+wget https://github.com/tmux/tmux/releases/download/2.7/tmux-2.7.tar.gz
+tar xf tmux-2.7.tar.gz
+cd tmux-2.7.tar.gz
+./configure && make
+sudo make install
+~~~
+
 ## [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm)
 
 ~~~shell
@@ -231,6 +245,10 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ~~~shell
 ln -isv ~/.dotfiles/tmux/.tmux.conf ~/.
 ~~~
+
+## Install Plugins
+
+Within tmux hit ```<prefix>-I```.
 
 # VIM
 
