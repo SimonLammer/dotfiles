@@ -69,6 +69,25 @@ sudo sed -Ei '/export MOZ_APP_LAUNCHER/a\\n# Use specific GTK_THEME instead of s
 
 ---
 
+# Docker
+
+[Reference](https://docs.docker.com/install/linux/docker-ce/ubuntu/#upgrade-docker-ce-1)
+~~~shell
+wget -O- get.docker.com | bash
+~~~
+
+## Install latest docker-compose
+
+[Reference](https://gist.github.com/deviantony/2b5078fe1675a5fedabf1de3d1f2652a)
+
+~~~shell
+sudo apt remove -y docker-compose # remove old version
+COMPOSE_VERSION=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep 'tag_name' | cut -d\" -f4)
+sudo sh -c "curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"
+sudo chmod +x /usr/local/bin/docker-compose
+sudo sh -c "curl -L https://raw.githubusercontent.com/docker/compose/${COMPOSE_VERSION}/contrib/completion/bash/docker-compose > /etc/bash_completion.d/docker-compose"
+~~~
+
 # Eclipse
 
 [Download page](https://www.eclipse.org/downloads/)
@@ -177,6 +196,17 @@ pip3 install --user pipenv
 
 ~~~shell
 sudo apt install -y ranger
+~~~
+
+# Ruby
+
+[Reference](https://www.digitalocean.com/community/tutorials/how-to-install-ruby-and-set-up-a-local-programming-environment-on-ubuntu-16-04)
+
+~~~shell
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+wget -O - https://get.rvm.io | bash -s stable
+source ~/.rvm/scripts/rvm
+rvm install ruby --default
 ~~~
 
 # SSH
