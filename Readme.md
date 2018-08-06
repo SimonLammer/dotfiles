@@ -287,7 +287,7 @@ ln -isv ~/.dotfiles/vscode/settings.json ~/.config/Code/User/.
 ~~~shell
 for ext in \
   'coenraads.bracket-pair-colorizer'\
-  'Gruntfuggly.activitusbar'
+  'Gruntfuggly.activitusbar'\
   'kenhowardpdx.vscode-gist'\
   'ms-python.python'\
   'ms-vscode.cpptools'\
