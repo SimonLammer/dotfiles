@@ -57,6 +57,20 @@ tar -xf eclipse*.tar.gz
 eclipse-installer/eclipse-inst # Installation Folder: ~
 ~~~
 
+## Create a .desktop file to launch eclipse
+
+[Reference](https://askubuntu.com/questions/418407/how-do-i-create-a-desktop-file-to-launch-eclipse)
+
+~~~
+Name=Eclipse
+Comment=Eclipse
+Exec=/home/user/eclipse/eclipse
+Icon=/home/user/eclipse/icon.xpm
+Terminal=false
+Type=Application
+Categories=
+~~~
+
 # Firefox
 
 ## Use different GTK_THEME
