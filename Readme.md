@@ -89,8 +89,14 @@ sudo apt install -y git
 
 ## Dotfiles
 
+Https:
 ~~~shell
 git clone https://github.com/SimonLammer/dotfiles ~/.dotfiles
+~~~
+
+SSH:
+~~~shell
+git clone git@github.com:SimonLammer/dotfiles.git
 ~~~
 
 ## Link [dotfiles]
