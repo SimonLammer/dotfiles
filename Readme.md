@@ -46,18 +46,28 @@ mkdir -p $target
 sudo blkid | grep "^$dev" -m 1 | sed -E 's@.* UUID=\"([^"]+).* TYPE="([^"]+).*@# '$dev'\nUUID=\1 '$target' \2@' | sudo tee -a /etc/fstab
 ~~~
 
----
+# Unity
 
-# Eclipse
+## Tweak tool
 
-[Download page](https://www.eclipse.org/downloads/)
-
+[Reference](https://ubuntoid.com/install-unity-tweak-tool-ubuntu-16-04/)
 ~~~shell
-tar -xf eclipse*.tar.gz
-eclipse-installer/eclipse-inst # Installation Folder: ~
+sudo apt install -y unity-tweak-tool
 ~~~
 
-## Create a .desktop file to launch eclipse
+# Gnome shell
+
+## Specify different GTK_THEME for application
+
+[Reference](https://askubuntu.com/a/778388)
+
+### Firefox
+
+~~~ shell
+sudo sed -Ei '/export MOZ_APP_LAUNCHER/a\\n# Use specific GTK_THEME instead of system default\nGTK_THEME=Adwaita:light\nexport GTK_THEME' /usr/lib/firefox/firefox.sh
+~~~
+
+## Create a .desktop file to launch an application
 
 [Reference](https://askubuntu.com/questions/418407/how-do-i-create-a-desktop-file-to-launch-eclipse)
 
@@ -71,20 +81,48 @@ Type=Application
 Categories=
 ~~~
 
-# Firefox
+---
 
-## Use different GTK_THEME
+# Docker
 
-[Reference](https://askubuntu.com/a/778388)
+[Reference](https://docs.docker.com/install/linux/docker-ce/ubuntu/#upgrade-docker-ce-1)
+~~~shell
+wget -O- get.docker.com | bash
+~~~
 
-~~~ shell
-sudo sed -Ei '/export MOZ_APP_LAUNCHER/a\\n# Use specific GTK_THEME instead of system default\nGTK_THEME=Adwaita:light\nexport GTK_THEME' /usr/lib/firefox/firefox.sh
+## Install latest docker-compose
+
+[Reference](https://gist.github.com/deviantony/2b5078fe1675a5fedabf1de3d1f2652a)
+
+~~~shell
+sudo apt remove -y docker-compose # remove old version
+COMPOSE_VERSION=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep 'tag_name' | cut -d\" -f4)
+sudo sh -c "curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"
+sudo chmod +x /usr/local/bin/docker-compose
+sudo sh -c "curl -L https://raw.githubusercontent.com/docker/compose/${COMPOSE_VERSION}/contrib/completion/bash/docker-compose > /etc/bash_completion.d/docker-compose"
+~~~
+
+# Eclipse
+
+[Download page](https://www.eclipse.org/downloads/)
+
+~~~shell
+tar -xf eclipse*.tar.gz
+eclipse-installer/eclipse-inst # Installation Folder: ~
 ~~~
 
 # Git
 
 ~~~shell
 sudo apt install -y git
+~~~
+
+# [Gti](https://github.com/rwos/gti)
+
+~~~shell
+sudo add-apt-repository ppa:mamantoha/gti
+sudo apt-get update
+sudo apt-get install -y gti
 ~~~
 
 ## Dotfiles
@@ -180,6 +218,17 @@ pip3 install --user pipenv
 sudo apt install -y ranger
 ~~~
 
+# Ruby
+
+[Reference](https://www.digitalocean.com/community/tutorials/how-to-install-ruby-and-set-up-a-local-programming-environment-on-ubuntu-16-04)
+
+~~~shell
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+wget -O - https://get.rvm.io | bash -s stable
+source ~/.rvm/scripts/rvm
+rvm install ruby --default
+~~~
+
 # SSH
 
 ~~~shell
@@ -240,6 +289,20 @@ mkdir ~/.steam/ubuntu12_32/steam-runtime
 sudo apt install -y tmux xclip
 ~~~
 
+## Install other version
+
+[Download the latest release from github](https://github.com/tmux/tmux/releases)
+~~~shell
+sudo apt-get install -y libevent-dev libncurses5-dev libncursesw5-dev
+wget https://github.com/libevent/libevent/releases/download/release-2.1.8-stable/libevent-2.1.8-stable.tar.gz
+tar xf tar xf libevent-2.1.8-stable.tar.gz
+wget https://github.com/tmux/tmux/releases/download/2.7/tmux-2.7.tar.gz
+tar xf tmux-2.7.tar.gz
+cd tmux-2.7.tar.gz
+./configure && make
+sudo make install
+~~~
+
 ## [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm)
 
 ~~~shell
@@ -251,6 +314,10 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ~~~shell
 ln -isv ~/.dotfiles/tmux/.tmux.conf ~/.
 ~~~
+
+## Install Plugins
+
+Within tmux hit ```<prefix>-I```.
 
 # VIM
 
@@ -324,19 +391,24 @@ ln -isv ~/.dotfiles/zsh/.zshrc ~/.
 
 ~~~shell
 sudo apt install -y \
-  cowsay\
   curl\
   git\
   gparted\
   htop\
   openjdk-8-jdk openjdk-8-doc\
-  pm-utils\
-  python3-pip build-essential libssl-dev libffi-dev python-dev\
   ssh\
   tmux\
   xclip\
   vim\
   zsh
+~~~
+
+Fun additions:
+~~~shell
+sudo apt install -y \
+  cmatrix\
+  cowsay\
+  sl
 ~~~
 
 [Ninite](https://ninite.com/)
@@ -345,6 +417,8 @@ sudo apt install -y \
 
 # TODO
 
+- Gnome Shell
+  - Window snapping
 - Anki
 - Firefox
   - Informative default page
@@ -352,8 +426,9 @@ sudo apt install -y \
   - Use light theme
 - Latex
   - md -> latex
-- Lutris
+- POL
   - Skyrim
+    - voices
     - Mods
 - SSH
   - Login with key instead of password
