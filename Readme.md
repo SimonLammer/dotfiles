@@ -67,6 +67,20 @@ sudo apt install -y unity-tweak-tool
 sudo sed -Ei '/export MOZ_APP_LAUNCHER/a\\n# Use specific GTK_THEME instead of system default\nGTK_THEME=Adwaita:light\nexport GTK_THEME' /usr/lib/firefox/firefox.sh
 ~~~
 
+## Create a .desktop file to launch an application
+
+[Reference](https://askubuntu.com/questions/418407/how-do-i-create-a-desktop-file-to-launch-eclipse)
+
+~~~
+Name=Eclipse
+Comment=Eclipse
+Exec=/home/user/eclipse/eclipse
+Icon=/home/user/eclipse/icon.xpm
+Terminal=false
+Type=Application
+Categories=
+~~~
+
 ---
 
 # Docker
@@ -113,8 +127,14 @@ sudo apt-get install -y gti
 
 ## Dotfiles
 
+Https:
 ~~~shell
 git clone https://github.com/SimonLammer/dotfiles ~/.dotfiles
+~~~
+
+SSH:
+~~~shell
+git clone git@github.com:SimonLammer/dotfiles.git
 ~~~
 
 ## Link [dotfiles]
@@ -334,7 +354,7 @@ ln -isv ~/.dotfiles/vscode/settings.json ~/.config/Code/User/.
 ~~~shell
 for ext in \
   'coenraads.bracket-pair-colorizer'\
-  'Gruntfuggly.activitusbar'
+  'Gruntfuggly.activitusbar'\
   'kenhowardpdx.vscode-gist'\
   'ms-python.python'\
   'ms-vscode.cpptools'\
