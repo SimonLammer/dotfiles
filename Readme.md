@@ -83,6 +83,12 @@ Categories=
 
 ---
 
+# ag [The Silver Searcher](https://github.com/ggreer/the_silver_searcher)
+
+~~~shell
+sudo apt-get install -y silversearcher-ag
+~~~
+
 # Docker
 
 [Reference](https://docs.docker.com/install/linux/docker-ce/ubuntu/#upgrade-docker-ce-1)
