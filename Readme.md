@@ -413,6 +413,7 @@ sudo apt install -y \
 - SSH
   - Login with key instead of password
     - Add key of localhost
+  - Automatically trust GH and GL
 - ? Powerline font
   - Tmux powerline theme
 
