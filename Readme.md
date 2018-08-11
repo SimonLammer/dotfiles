@@ -368,6 +368,12 @@ for ext in \
 ;do code --install-extension $ext; done
 ~~~
 
+# VLC
+
+~~~shell
+sudo apt install -y vlc
+~~~
+
 # ZSH
 
 ~~~shell
