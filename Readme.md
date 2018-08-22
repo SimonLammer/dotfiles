@@ -83,6 +83,12 @@ Categories=
 
 ---
 
+# ag [The Silver Searcher](https://github.com/ggreer/the_silver_searcher)
+
+~~~shell
+sudo apt-get install -y silversearcher-ag
+~~~
+
 # Docker
 
 [Reference](https://docs.docker.com/install/linux/docker-ce/ubuntu/#upgrade-docker-ce-1)
@@ -362,6 +368,12 @@ for ext in \
 ;do code --install-extension $ext; done
 ~~~
 
+# VLC
+
+~~~shell
+sudo apt install -y vlc
+~~~
+
 # ZSH
 
 ~~~shell
@@ -435,6 +447,7 @@ sudo apt install -y \
 - SSH
   - Login with key instead of password
     - Add key of localhost
+  - Automatically trust GH and GL
 - ? Powerline font
   - Tmux powerline theme
 

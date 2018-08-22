@@ -27,3 +27,6 @@
 	a = add
 	unstage = reset HEAD
 	u = reset HEAD
+	cc = !git clone $(xclip -o -selection c)
+	ap = add -p
+	pushu = !$(git push 2>&1 | grep git)
