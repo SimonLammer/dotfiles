@@ -409,6 +409,7 @@ sudo apt install -y \
   htop\
   openjdk-8-jdk openjdk-8-doc\
   ssh\
+  tree\
   tmux\
   xclip\
   vim\
