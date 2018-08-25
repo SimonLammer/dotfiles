@@ -124,14 +124,6 @@ eclipse-installer/eclipse-inst # Installation Folder: ~
 sudo apt install -y git
 ~~~
 
-# [Gti](https://github.com/rwos/gti)
-
-~~~shell
-sudo add-apt-repository ppa:mamantoha/gti
-sudo apt-get update
-sudo apt-get install -y gti
-~~~
-
 ## Dotfiles
 
 Https:
@@ -149,6 +141,15 @@ git clone git@github.com:SimonLammer/dotfiles.git
 ~~~shell
 ln -isv ~/.dotfiles/git/.gitconfig ~/.
 ~~~
+
+# [Gti](https://github.com/rwos/gti)
+
+~~~shell
+sudo add-apt-repository ppa:mamantoha/gti
+sudo apt-get update
+sudo apt-get install -y gti
+~~~
+
 
 # Gnome Shell
 
