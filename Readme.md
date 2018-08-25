@@ -12,6 +12,7 @@ Below is a collection of wisdom, useful for setting up computers.
 
 [Reference](http://chriseiffel.com/uncategorized/step-by-step-how-to-get-hibernate-working-for-linux-ubuntu-11-04-mint-11/)
 [Reference 2](http://ubuntuhandbook.org/index.php/2017/10/enable-hibernate-ubuntu-17-10/)
+[Reference 3](https://ubuntuforums.org/showthread.php?t=2391841)
 
 Ensure there is enough swap space.
 ~~~shell
@@ -353,6 +354,7 @@ ln -isv ~/.dotfiles/vim/.vimrc ~/.
 
 ~~~shell
 ln -isv ~/.dotfiles/vscode/settings.json ~/.config/Code/User/.
+ln -isv ~/.dotfiles/vscode/keybindings.json ~/.config/Code/User/.
 ~~~
 
 ## Install Extensions
