@@ -237,21 +237,6 @@ source ~/.rvm/scripts/rvm
 rvm install ruby --default
 ~~~
 
-## VSCode debugging
-
-**Haven't gotten this to work yet**
-
-[Reference](https://stackoverflow.com/questions/14060513/error-installing-debugger-failed-to-build-gem-native-extension-with-ruby-1-9-3)
-
-~~~shell
-gem install debugger-ruby_core_source
-~~~
-
-**JRuby:**
-~~~shell
-gem install ruby-debug
-~~~
-
 # SSH
 
 ~~~shell
