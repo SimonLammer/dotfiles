@@ -118,6 +118,17 @@ tar -xf eclipse*.tar.gz
 eclipse-installer/eclipse-inst # Installation Folder: ~
 ~~~
 
+# Elasticsearch
+
+[Download page](https://www.elastic.co/downloads)
+
+Debian:
+~~~shell
+wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.0.deb
+wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.0.deb.sha512
+shasum -a 512 -c elasticsearch-6.4.0.deb.sha512 && sudo dpkg -i elasticsearch-6.4.0.deb
+~~~
+
 # Git
 
 ~~~shell
@@ -177,6 +188,17 @@ Settings > Advanced > Excluded file and folder names:
 
 - \*-local
 - \*-local.\*
+
+# NodeJS
+
+[Download page](https://nodejs.org/en/download/)
+
+## 8.x
+~~~shell
+sudo apt-get install curl python-software-properties
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+sudo apt-get install nodejs
+~~~
 
 # Play on Linux
 
