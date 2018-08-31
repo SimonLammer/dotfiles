@@ -83,6 +83,7 @@
         "<C-f>": false,
         "<C-n>": false,
         "<C-v>": false,
+        "<C-w>": false,
     },
 
     //  ____                              _      

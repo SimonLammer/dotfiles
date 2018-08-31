@@ -14,10 +14,30 @@
 [push]
 	default = simple
 [core]
-	editor = code -wn
+	editor = vim
 [alias]
 	s = status
 	lg = log --all --oneline --graph --decorate
 	co = checkout
 	last = log HEAD -1 --decorate
+	ca = commit -a
+	cA = commit --amend
+	caA = commit -a --amend
+	cm = commit -m
 	cam = commit -am
+	d = diff
+	dc = diff --cached
+	a = add
+	unstage = reset HEAD
+	u = reset HEAD
+	cc = !git clone $(xclip -o -selection c)
+	ap = add -p
+	pushu = !$(git push 2>&1 | grep git)
+	cob = checkout -b
+
+  # Create an ignored folder
+	mkdiri = !"if [ \"$1\" = \"\" ]; then dir='_ignored'; else dir=$1; fi; mkdir -v $dir" && bash -c 'echo -e \"\\\\u2a\"' > "$dir/.gitignore" "#"
+
+	# Quote / unquote a sh command, converting it to / from a git alias string
+  # https://stackoverflow.com/a/39616600/2808520
+	quote-string = "!read -r l; printf \\\"!; printf %s \"$l\" | sed 's/\\([\\\"]\\)/\\\\\\1/g'; printf \" #\\\"\\n\" #"
