@@ -16,11 +16,14 @@ buildscript {
   }
 }
 
-val MUSTACHE_DATA_FILENAME = extra["mustacheDataFilename"] as String
+val MUSTACHE_DATA_FILENAME  = extra["mustacheDataFilename"]  as String
+val MUSTACHE_EXT            = extra["mustacheExt"]           as String
+val MUSTACHE_PARTIAL_EXT    = extra["mustachePartialExt"]    as String
+val MUSTACHE_PARTIAL_PREFIX = extra["mustachePartialPrefix"] as String
+val MUSTACHE_PARTIAL_SUFFIX = extra["mustachePartialSuffix"] as String
 
 val YAML = Yaml()
 val MUSTACHE = "mustache"
-val MUSTACHE_EXT = MUSTACHE
 val MUSTACHE_FACTORY = DefaultMustacheFactory()
 val MUSTACHE_WRAPPERS = mapOf<Any, Any>(
   "first" to Function<String, String> {
@@ -32,21 +35,18 @@ val MUSTACHE_WRAPPERS = mapOf<Any, Any>(
 )
 
 tasks {
+  val dotfilesGroup = "Dotfiles"
+
   val mustache by creating {
+    group = dotfilesGroup
     doLast {
-      val yaml = YAML.load(FileInputStream(File(MUSTACHE_DATA_FILENAME)))
-      val mf = DefaultMustacheFactory()
-      val mustache = mf.compile("template.mustache")
-      mustache.execute(
-        PrintWriter(System.out),
-        listOf(yaml, MUSTACHE_WRAPPERS)
-      ).flush()
+      println(".done")
     }
   }
 }
 
 File(".").walkTopDown().forEach { input ->
-  if(input.isFile() && input.name.endsWith(".$MUSTACHE_EXT")) {
+  if(input.isFile() && input.name.endsWith(".$MUSTACHE_EXT") && !input.name.endsWith(".$MUSTACHE_PARTIAL_EXT")) {
     val output = File(input.parent, input.name.substring(0, input.name.length - MUSTACHE_EXT.length - 1))
     val taskName = "$MUSTACHE#${input.path.substring(2).replace("/", ",")}"
     logger.lifecycle("Creating mustache task for ${input.path} (\"$taskName\")")
@@ -71,8 +71,8 @@ File(".").walkTopDown().forEach { input ->
         data.add(MUSTACHE_WRAPPERS)
         data.reverse()
         logger.info("Parsing with $data")
-        val mustache = MUSTACHE_FACTORY.compile(StringReader("{{> ${input.path}}}"), input.name)
-        mustache.execute(PrintWriter(System.out), data).flush()
+        val mustache = MUSTACHE_FACTORY.compile(StringReader("$MUSTACHE_PARTIAL_PREFIX${input.path}$MUSTACHE_PARTIAL_SUFFIX"), input.name)
+        mustache.execute(FileWriter(output), data).flush()
         println()
       }
     }
