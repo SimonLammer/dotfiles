@@ -1,20 +1,22 @@
-import org.ajoberstar.grgit.Grgit
+import com.github.mustachejava.*
+import java.io.*
 
-plugins {
-  id("org.ajoberstar.grgit") version "3.0.0-beta.1" // http://ajoberstar.org/grgit/grgit-reference.html
-}
+plugins {}
+repositories {}
 
-repositories {
-  jcenter()
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath("com.github.spullara.mustache.java:compiler:0.9.5")
+  }
 }
 
 tasks {
-  val foo by creating {
-    println("Hello World!")
-  }
-  
-  val gitls by creating {
-    val repo = Grgit.open()
-    println(repo.head().author.name)
+  val mustache by creating {
+    val mf = DefaultMustacheFactory()
+    val mustache = mf.compile(StringReader("Hello {{text}}"), "greeting")
+    mustache.execute(PrintWriter(System.out), hashMapOf("text" to "world")).flush()
   }
 }
