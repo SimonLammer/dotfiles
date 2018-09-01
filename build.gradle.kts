@@ -45,29 +45,33 @@ tasks {
   }
 }
 
-File(".").walkTopDown().forEach { file ->
-  if(file.isFile() && file.name.endsWith(".$MUSTACHE_EXT")) {
-    println(file)
-
-    val task = tasks.create("$MUSTACHE'${file.path.substring(2).replace("/", ",")}") {
+File(".").walkTopDown().forEach { input ->
+  if(input.isFile() && input.name.endsWith(".$MUSTACHE_EXT")) {
+    val output = File(input.parent, input.name.substring(0, input.name.length - MUSTACHE_EXT.length - 1))
+    val taskName = "$MUSTACHE#${input.path.substring(2).replace("/", ",")}"
+    logger.lifecycle("Creating mustache task for ${input.path} (\"$taskName\")")
+    val task = tasks.create(taskName) {
       group = "$MUSTACHE"
+      inputs.file(input)
+      outputs.file(output)
       doLast {
-        println(file)
+        logger.lifecycle("Preparing for parsing of ${input.path} to ${output.path}")
         val data = mutableListOf()
-        var dir = file.parentFile
+        var dir = input.parentFile
         while (dir != null) {
           dir.listFiles(FilenameFilter { dir: File, name: String ->
             name == MUSTACHE_DATA_FILENAME
           }).forEach {
             val yaml = YAML.load(FileInputStream(it))
             data.add(yaml)
+            logger.info("Adding data souce ${it.path}")
           }
           dir = dir.parentFile
         }
         data.add(MUSTACHE_WRAPPERS)
         data.reverse()
-        println(data)
-        val mustache = MUSTACHE_FACTORY.compile(FileReader(file), file.name)
+        logger.info("Parsing with $data")
+        val mustache = MUSTACHE_FACTORY.compile(StringReader("{{> ${input.path}}}"), input.name)
         mustache.execute(PrintWriter(System.out), data).flush()
         println()
       }
