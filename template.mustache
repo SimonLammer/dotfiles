@@ -1,24 +1,3 @@
 Hello {{text}}
 Hello {{> template-partial}}
 {{> .mustache/a}}
-
-Foo: {{foo}}
-
-{{#data}}
-  {{.}}
-{{/data}}
-
-first: {{ data[0] }}
-first: {{ data.[0] }}
-first: {{ data.0 }}
-
-{{#first}}
-  {{#data}}
-    line
-  {{/data}}
-{{/first}}
-~
-{{#data}}
-  line
-{{/data}}
-~
