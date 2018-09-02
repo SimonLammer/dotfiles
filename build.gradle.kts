@@ -1,6 +1,10 @@
 import java.util.function.Function
+import java.util.Collections
+import java.nio.charset.*
 import java.io.*
 import com.github.mustachejava.*
+import com.github.mustachejava.reflect.*
+import com.github.mustachejava.util.*
 import org.yaml.snakeyaml.*
 
 plugins {}
@@ -16,64 +20,91 @@ buildscript {
   }
 }
 
-val MUSTACHE_DATA_FILENAME  = extra["mustacheDataFilename"]  as String
-val MUSTACHE_EXT            = extra["mustacheExt"]           as String
-val MUSTACHE_PARTIAL_EXT    = extra["mustachePartialExt"]    as String
-val MUSTACHE_PARTIAL_PREFIX = extra["mustachePartialPrefix"] as String
-val MUSTACHE_PARTIAL_SUFFIX = extra["mustachePartialSuffix"] as String
+apply {
+  from("gradle/external/mustache-wrappers.gradle.kts")
+}
+
+val MUSTACHE_DATA_FILENAME          = extra["mustacheDataFilename"]  as String
+val MUSTACHE_DATA_FILE_CONCATINATOR = extra["mustacheDataFileConcatinator"] as String
+val MUSTACHE_EXT                    = extra["mustacheExt"]           as String
+val MUSTACHE_PARTIAL_EXT            = extra["mustachePartialExt"]    as String
+val MUSTACHE_PARTIAL_PREFIX         = extra["mustachePartialPrefix"] as String
+val MUSTACHE_PARTIAL_SUFFIX         = extra["mustachePartialSuffix"] as String
+
+val GRADLE_PROPERTIES = File("gradle.properties")
 
 val YAML = Yaml()
 val MUSTACHE = "mustache"
-val MUSTACHE_FACTORY = DefaultMustacheFactory()
-val MUSTACHE_WRAPPERS = mapOf<Any, Any>(
-  "first" to Function<String, String> {
-    it.substring(0, it.indexOf("\n") + 1)
-  },
-  "last" to Function<String, String> {
-    it.substring(it.indexOf("\n"))
+val MUSTACHE_FACTORY = object : DefaultMustacheFactory() { // TODO https://groups.google.com/forum/#!topic/mustachejava/tk4g5SqvOdI
+  override fun getObjectHandler(): ObjectHandler {
+    return object : ReflectionObjectHandler() {
+      override fun find(name: String, scopes: List<Any?>): com.github.mustachejava.util.Wrapper {
+        val wrapper = super.find(name, scopes)
+        if (wrapper == null) {
+          println("Mustache variable '$name' not in scope!")
+          throw RuntimeException("Mustache variable '$name' not in scope!")
+        }
+        return wrapper
+      }
+    }
   }
-)
+}
+val MUSTACHE_WRAPPERS = listOf( // will be mapped to mapOf<String, Any>
+  "firstLine",
+  "lastLine",
+  "withoutLastLine"
+).map {
+  it to Function<String, String> {
+    val f = extra[it] as (s: String) -> String
+    f(it)
+  }
+}.toMap<String, Any>()
 
 tasks {
   val dotfilesGroup = "Dotfiles"
 
-  val mustache by creating {
+  tasks.create("mustache") {
     group = dotfilesGroup
     doLast {
       println(".done")
     }
   }
+
+  tasks.create("foo") {
+    doLast {
+      println("bar")
+    }
+  }
 }
 
 File(".").walkTopDown().forEach { input ->
-  if(input.isFile() && input.name.endsWith(".$MUSTACHE_EXT") && !input.name.endsWith(".$MUSTACHE_PARTIAL_EXT")) {
+  if (input.isFile() && input.name.endsWith(".$MUSTACHE_EXT") && !input.name.endsWith(".$MUSTACHE_PARTIAL_EXT")) {
     val output = File(input.parent, input.name.substring(0, input.name.length - MUSTACHE_EXT.length - 1))
     val taskName = "$MUSTACHE#${input.path.substring(2).replace("/", ",")}"
     logger.lifecycle("Creating mustache task for ${input.path} (\"$taskName\")")
     val task = tasks.create(taskName) {
       group = "$MUSTACHE"
-      inputs.file(input)
+      inputs.files(listOf(GRADLE_PROPERTIES, input))
       outputs.file(output)
       doLast {
         logger.lifecycle("Preparing for parsing of ${input.path} to ${output.path}")
-        val data = mutableListOf()
-        var dir = input.parentFile
-        while (dir != null) {
-          dir.listFiles(FilenameFilter { dir: File, name: String ->
-            name == MUSTACHE_DATA_FILENAME
-          }).forEach {
-            val yaml = YAML.load(FileInputStream(it))
-            data.add(yaml)
-            logger.info("Adding data souce ${it.path}")
-          }
-          dir = dir.parentFile
+        val dataInputStreams = fetchMustacheFiles(input.parentFile).map {
+          logger.info("Adding data source ${it.path}")
+          FileInputStream(it)
         }
-        data.add(MUSTACHE_WRAPPERS)
-        data.reverse()
-        logger.info("Parsing with $data")
+        logger.lifecycle("Loading data")
+        val data = mutableListOf<Any>(MUSTACHE_WRAPPERS)
+        data.addAll(
+          YAML.loadAll(
+            concatMustacheInputStreams(
+              dataInputStreams
+            )
+          )
+        )
+        logger.info("Data: $data")
+        logger.lifecycle("Parsing")
         val mustache = MUSTACHE_FACTORY.compile(StringReader("$MUSTACHE_PARTIAL_PREFIX${input.path}$MUSTACHE_PARTIAL_SUFFIX"), input.name)
         mustache.execute(FileWriter(output), data).flush()
-        println()
       }
     }
 
@@ -82,3 +113,40 @@ File(".").walkTopDown().forEach { input ->
     }
   }
 }
+
+fun fetchMustacheFiles(_dir: File?) :List<File> {
+  var dir = _dir
+  var files = mutableListOf<File>()
+  while (dir != null) {
+    files.addAll(
+      dir.listFiles(FilenameFilter { _, name: String ->
+        name == MUSTACHE_DATA_FILENAME
+      })
+    )
+    dir = dir.parentFile
+  }
+  Collections.reverse(files)
+  return files
+}
+
+fun concatInputStreams(streams: Iterable<InputStream>, concatinatorFactory: () -> InputStream) :InputStream {
+  val iterator = streams.iterator()
+  return if (!iterator.hasNext()) {
+    ByteArrayInputStream(byteArrayOf())
+  } else {
+    var concatinatedInputStreams = mutableListOf(iterator.next())
+    while (iterator.hasNext()) {
+      concatinatedInputStreams.add(concatinatorFactory())
+      concatinatedInputStreams.add(iterator.next())
+    }
+    SequenceInputStream(Collections.enumeration(concatinatedInputStreams))
+  }
+}
+
+fun mustacheFileConcatinatorInputStream(): InputStream {
+  val concatinatorByteArray = MUSTACHE_DATA_FILE_CONCATINATOR.toByteArray(Charsets.UTF_8)
+  return ByteArrayInputStream(concatinatorByteArray)
+}
+
+fun concatMustacheInputStreams(streams: Iterable<InputStream>) =
+  concatInputStreams(streams, { mustacheFileConcatinatorInputStream() })
