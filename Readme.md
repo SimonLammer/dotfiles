@@ -118,6 +118,10 @@ tar -xf eclipse*.tar.gz
 eclipse-installer/eclipse-inst # Installation Folder: ~
 ~~~
 
+## Lombok
+
+[Download page](https://projectlombok.org/download)
+
 # Elasticsearch
 
 [Download page](https://www.elastic.co/downloads)
