@@ -37,17 +37,16 @@
     "vim.easymotionKeys": "hklyuiopnm,qwertzxcvbasdgjf", // Removed: ;
     "vim.statusBarColorControl": true,
     "vim.statusBarColors": { // color palette: https://camo.githubusercontent.com/a5a278806880562d3d205ac224103b55e8ae36d9/687474703a2f2f692e696d6775722e636f6d2f3439714b7959572e706e67
-    {{#withoutLast}}
+    {{#withoutLastLine}}
     {{#vim-modes}}
         "{{name}}": "{{color.hex}}",
     {{/vim-modes}}
-    {{/withoutLast}}
-    {{#last}}
+    {{/withoutLastLine}}
+    {{#lastLine}}
     {{#vim-modes}}
         "{{name}}": "{{color.hex}}"
     {{/vim-modes}}
-    {{/last}}
-        // {{foo.hex}}
+    {{/lastLine}}
     },
     "vim.useSystemClipboard": true,
     "vim.insertModeKeyBindings": [

@@ -32,21 +32,18 @@ val MUSTACHE_PARTIAL_PREFIX         = extra["mustachePartialPrefix"] as String
 val MUSTACHE_PARTIAL_SUFFIX         = extra["mustachePartialSuffix"] as String
 
 val GRADLE_PROPERTIES = File("gradle.properties")
+val MUSTACHE_WRAPPERS_GRADLE = File("gradle/external/mustache-wrappers.gradle.kts")
 
 val YAML = Yaml()
 val MUSTACHE = "mustache"
-val MUSTACHE_FACTORY = object : DefaultMustacheFactory() { // TODO https://groups.google.com/forum/#!topic/mustachejava/tk4g5SqvOdI
-  override fun getObjectHandler(): ObjectHandler {
-    return object : ReflectionObjectHandler() {
-      override fun find(name: String, scopes: List<Any?>): com.github.mustachejava.util.Wrapper {
-        val wrapper = super.find(name, scopes)
-        if (wrapper == null) {
-          println("Mustache variable '$name' not in scope!")
-          throw RuntimeException("Mustache variable '$name' not in scope!")
-        }
-        return wrapper
-      }
+val MUSTACHE_FACTORY = DefaultMustacheFactory()
+MUSTACHE_FACTORY.objectHandler = object : ReflectionObjectHandler() {
+  override fun find(name: String, scopes: List<Any?>): com.github.mustachejava.util.Wrapper {
+    val wrapper = super.find(name, scopes)
+    if (wrapper is MissingWrapper) {
+      throw RuntimeException("Mustache variable '$name' not in scope!")
     }
+    return wrapper
   }
 }
 val MUSTACHE_WRAPPERS = listOf( // will be mapped to mapOf<String, Any>
@@ -54,8 +51,8 @@ val MUSTACHE_WRAPPERS = listOf( // will be mapped to mapOf<String, Any>
   "lastLine",
   "withoutLastLine"
 ).map {
+  val f = extra[it] as (s: String) -> String
   it to Function<String, String> {
-    val f = extra[it] as (s: String) -> String
     f(it)
   }
 }.toMap<String, Any>()
@@ -79,12 +76,12 @@ tasks {
 
 File(".").walkTopDown().forEach { input ->
   if (input.isFile() && input.name.endsWith(".$MUSTACHE_EXT") && !input.name.endsWith(".$MUSTACHE_PARTIAL_EXT")) {
-    val output = File(input.parent, input.name.substring(0, input.name.length - MUSTACHE_EXT.length - 1))
+    val output = File(input.parent, "${input.name.substring(0, input.name.length - MUSTACHE_EXT.length - 1)}.tmp")
     val taskName = "$MUSTACHE#${input.path.substring(2).replace("/", ",")}"
     logger.lifecycle("Creating mustache task for ${input.path} (\"$taskName\")")
     val task = tasks.create(taskName) {
       group = "$MUSTACHE"
-      inputs.files(listOf(GRADLE_PROPERTIES, input))
+      inputs.files(listOf(GRADLE_PROPERTIES, MUSTACHE_WRAPPERS_GRADLE, input))
       outputs.file(output)
       doLast {
         logger.lifecycle("Preparing for parsing of ${input.path} to ${output.path}")
