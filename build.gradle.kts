@@ -1,6 +1,7 @@
 import java.util.function.Function
 import java.util.Collections
 import java.nio.charset.*
+import java.nio.file.Files
 import java.io.*
 import com.github.mustachejava.*
 import com.github.mustachejava.reflect.*
@@ -47,6 +48,7 @@ MUSTACHE_FACTORY.objectHandler = object : ReflectionObjectHandler() {
   }
 }
 val MUSTACHE_WRAPPERS = listOf( // will be mapped to mapOf<String, Any>
+  "debug",
   "firstLine",
   "lastLine",
   "withoutLastLine"
@@ -60,16 +62,20 @@ val MUSTACHE_WRAPPERS = listOf( // will be mapped to mapOf<String, Any>
 tasks {
   val dotfilesGroup = "Dotfiles"
 
-  tasks.create("mustache") {
+  val mustacheTest = tasks.create("mustacheTest") {
     group = dotfilesGroup
+    
     doLast {
-      println(".done")
+      // no-op
     }
   }
 
-  tasks.create("foo") {
+  tasks.create("mustache") {
+    group = dotfilesGroup
+    dependsOn(mustacheTest)
+    
     doLast {
-      println("bar")
+      // no-op
     }
   }
 }
@@ -112,6 +118,50 @@ File(".").walkTopDown().forEach { input ->
 
     tasks.named("mustache").configure {
       dependsOn(task)
+    }
+
+    if (input.path.startsWith("./gradle/external/tests")) {
+      val testTask = tasks.create("mustacheTest${taskName.substring(taskName.indexOf('#'))}") {
+        group = "${MUSTACHE}Test"
+        dependsOn(task)
+        val expectationFile = File(input.parent, "${input.name.substring(0, input.name.length - MUSTACHE_EXT.length - 1)}.expected")
+        val inputsFiles = mutableListOf(expectationFile)
+        inputsFiles.addAll(task.inputs.files.files)
+        inputs.files(inputsFiles)
+        outputs.files(listOf())
+
+        doLast {
+          logger.lifecycle("Asserting that '${output.path}' and '${expectationFile.path}' are equal in content")
+          val expected = BufferedReader(FileReader(expectationFile))
+          val actual   = BufferedReader(FileReader(output))
+
+          fun throwGradleException(s: String) {
+            expected.close()
+            actual.close()
+            throw GradleException(s)
+          }
+
+          var lineNumber = 0
+          while (true) {
+            lineNumber++
+            val expectedLine = expected.readLine()
+            val actualLine   = actual.readLine()
+
+            if ((expectedLine == null) != (actualLine == null)) {
+              throwGradleException("Number of lines doesn't match!")
+            }
+            if (expectedLine == null || actualLine == null) {
+              break
+            }
+            if (!actualLine.equals(expectedLine)) {
+              throwGradleException("Line ${lineNumber} doesn't match!\n\texpected: '$expectedLine'\n\t     got: '$actualLine'")
+            }
+          }
+        }
+      }
+      tasks.named("mustacheTest").configure {
+        dependsOn(testTask)
+      }
     }
   }
 }

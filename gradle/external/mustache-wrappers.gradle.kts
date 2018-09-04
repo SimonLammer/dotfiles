@@ -1,6 +1,12 @@
+extra["debug"] = fun(s: String): String {
+  return s
+}
+
 extra["firstLine"] = fun(s: String): String {
-  return processTrimmed(s) {
-    unlessSingleLine(it) {
+  return if (s.indexOf("\n") == -1) {
+    s
+  } else {
+    processTrimmed(s) {
       it.substring(0, it.indexOf("\n"))
     }
   }
@@ -8,13 +14,22 @@ extra["firstLine"] = fun(s: String): String {
 
 extra["lastLine"] = fun(s: String): String {
   return processTrimmedEnd(s) {
-    it.substring(it.lastIndexOf("\n") + 1)
+    if (it.indexOf("\n") == -1) {
+      it
+    } else {
+      it.substring(it.lastIndexOf("\n") + 1)
+    }
   }
 }
 
 extra["withoutLastLine"] = fun(s: String): String {
-  return processTrimmed(s) {
+  val value = processTrimmed(s) {
     it.substring(0, Math.max(0, it.lastIndexOf("\n")))
+  }
+  return if (value.trim().length == 0) {
+    ""
+  } else {
+    value
   }
 }
 
@@ -32,12 +47,4 @@ fun processTrimmedStart(s: String, f: (s: String) -> String): String {
 fun processTrimmedEnd(s: String, f: (s: String) -> String): String {
   val endIndex = s.trimEnd().length
   return "${f(s.substring(0, endIndex))}${s.substring(endIndex)}"
-}
-
-fun unlessSingleLine(s: String, f: (s: String) -> String): String {
-  return if (s.indexOf("\n") == -1) {
-    s
-  } else {
-    f(s)
-  }
 }

@@ -1,0 +1,11 @@
+emptyArray: []
+singleItemArray:
+  - SingleItem
+multiItemArray:
+  - FirstItem
+  - SecondItem
+  - ThirdItem
+multiItemObjectArray:
+  - key: firstValue
+  - key: secondValue
+  - key: thirdValue
