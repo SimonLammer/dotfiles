@@ -82,7 +82,7 @@ tasks {
 
 File(".").walkTopDown().forEach { input ->
   if (input.isFile() && input.name.endsWith(".$MUSTACHE_EXT") && !input.name.endsWith(".$MUSTACHE_PARTIAL_EXT")) {
-    val output = File(input.parent, "${input.name.substring(0, input.name.length - MUSTACHE_EXT.length - 1)}.tmp")
+    val output = File(input.parent, "${input.name.substring(0, input.name.length - MUSTACHE_EXT.length - 1)}")
     val taskName = "$MUSTACHE#${input.path.substring(2).replace("/", ",")}"
     logger.lifecycle("Creating mustache task for ${input.path} (\"$taskName\")")
 
