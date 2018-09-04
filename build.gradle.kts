@@ -96,6 +96,10 @@ File(".").walkTopDown().forEach { input ->
       inputs.files(inputsFiles)
       outputs.file(output)
 
+      if (!isTestMustacheFile(input)) {
+        mustRunAfter(tasks.named("${MUSTACHE}Test"))
+      }
+
       doLast {
         logger.lifecycle("Preparing for parsing of ${input.path} to ${output.path}")
         val dataInputStreams = mustacheDataFiles.map {
@@ -122,7 +126,7 @@ File(".").walkTopDown().forEach { input ->
       dependsOn(task)
     }
 
-    if (input.path.startsWith("./gradle/external/tests")) {
+    if (isTestMustacheFile(input)) {
       val testTask = tasks.create("mustacheTest${taskName.substring(taskName.indexOf('#'))}") {
         group = "${MUSTACHE}Test"
         dependsOn(task)
@@ -167,6 +171,8 @@ File(".").walkTopDown().forEach { input ->
     }
   }
 }
+
+fun isTestMustacheFile(file: File): Boolean = file.path.startsWith("./gradle/external/tests")
 
 fun fetchMustacheDataFiles(_dir: File?) :List<File> {
   var dir = _dir
