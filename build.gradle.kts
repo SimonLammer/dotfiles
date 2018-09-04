@@ -7,6 +7,7 @@ import com.github.mustachejava.*
 import com.github.mustachejava.reflect.*
 import com.github.mustachejava.util.*
 import org.yaml.snakeyaml.*
+import com.github.ricksbrown.cowsay.Cowsay
 
 plugins {}
 repositories {}
@@ -18,6 +19,7 @@ buildscript {
   dependencies {
     classpath("com.github.spullara.mustache.java:compiler:+")
     classpath("org.yaml:snakeyaml:+")
+    classpath("com.github.ricksbrown:cowsay:+")
   }
 }
 
@@ -66,7 +68,7 @@ tasks {
     group = dotfilesGroup
     
     doLast {
-      // no-op
+      println(Cowsay.think(arrayOf("-f", "ghostbusters", "tested tests tested")))
     }
   }
 
@@ -75,7 +77,7 @@ tasks {
     dependsOn(mustacheTest)
     
     doLast {
-      // no-op
+      println(Cowsay.say(arrayOf("-f", "stegosaurus", "I've successfully rendered all of your mustache templates.")))
     }
   }
 }
