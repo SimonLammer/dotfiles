@@ -79,13 +79,18 @@ File(".").walkTopDown().forEach { input ->
     val output = File(input.parent, "${input.name.substring(0, input.name.length - MUSTACHE_EXT.length - 1)}.tmp")
     val taskName = "$MUSTACHE#${input.path.substring(2).replace("/", ",")}"
     logger.lifecycle("Creating mustache task for ${input.path} (\"$taskName\")")
+
     val task = tasks.create(taskName) {
       group = "$MUSTACHE"
-      inputs.files(listOf(GRADLE_PROPERTIES, MUSTACHE_WRAPPERS_GRADLE, input))
+      val inputsFiles = mutableListOf(GRADLE_PROPERTIES, MUSTACHE_WRAPPERS_GRADLE, input)
+      val mustacheDataFiles = fetchMustacheDataFiles(input.parentFile)
+      inputsFiles.addAll(mustacheDataFiles)
+      inputs.files(inputsFiles)
       outputs.file(output)
+
       doLast {
         logger.lifecycle("Preparing for parsing of ${input.path} to ${output.path}")
-        val dataInputStreams = fetchMustacheFiles(input.parentFile).map {
+        val dataInputStreams = mustacheDataFiles.map {
           logger.info("Adding data source ${it.path}")
           FileInputStream(it)
         }
@@ -111,7 +116,7 @@ File(".").walkTopDown().forEach { input ->
   }
 }
 
-fun fetchMustacheFiles(_dir: File?) :List<File> {
+fun fetchMustacheDataFiles(_dir: File?) :List<File> {
   var dir = _dir
   var files = mutableListOf<File>()
   while (dir != null) {

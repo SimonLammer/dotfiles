@@ -499,7 +499,8 @@ sudo apt install -y \
   - Window snapping
   - Fix Airplane mode after suspend
     - https://www.reddit.com/r/archlinux/comments/62lk65/arch_gnome_stopped_suspend_now_how_do_i_prevent/
-- Templatize dotfiles with gradle (with kotlin?) & mustach
+- Templatize dotfiles with gradle (with kotlin) & mustach
+  - ?Use cowsay (https://github.com/ricksbrown/cowsay)
 - Anki
 - Firefox
   - Informative default page
