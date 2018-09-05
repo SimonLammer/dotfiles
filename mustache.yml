@@ -1,22 +1,21 @@
 vim-modes:
-  - name: normal
+  normal:
     color:
       console: 25
       hex:     "#076678"
-  - name: insert
+  insert:
     color:
       console: 71
       hex:     "#427b58"
-  - name: replace
+  replace:
     color:
       console: 124
       hex:     "#af3a03"
-  - &vim-mode-visual
-    name: visual
+  visual: &vim-mode-visual
     color:
       console: 214
       hex:     "#b57614"
-  - <<: *vim-mode-visual
-    name: visualline
-  - <<: *vim-mode-visual
-    name: visualblock
+  visualline:
+    <<: *vim-mode-visual
+  visualblock:
+    <<: *vim-mode-visual

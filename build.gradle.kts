@@ -23,8 +23,13 @@ buildscript {
   }
 }
 
+val MUSTACHE_WRAPPERS_GRADLE = File("gradle/external/mustache-wrappers.gradle.kts")
+val DATA_TRANSFORMERS_GRADLE = File("gradle/external/data-transformers.gradle.kts")
+
 apply {
-  from("gradle/external/mustache-wrappers.gradle.kts")
+  listOf(MUSTACHE_WRAPPERS_GRADLE, DATA_TRANSFORMERS_GRADLE).forEach {
+    from(it.path)
+  }
 }
 
 val MUSTACHE_DATA_FILENAME          = extra["mustacheDataFilename"]  as String
@@ -34,8 +39,9 @@ val MUSTACHE_PARTIAL_EXT            = extra["mustachePartialExt"]    as String
 val MUSTACHE_PARTIAL_PREFIX         = extra["mustachePartialPrefix"] as String
 val MUSTACHE_PARTIAL_SUFFIX         = extra["mustachePartialSuffix"] as String
 
+val transformData = extra["transform-data"] as (Iterable<Any>) -> Iterable<Any>
+
 val GRADLE_PROPERTIES = File("gradle.properties")
-val MUSTACHE_WRAPPERS_GRADLE = File("gradle/external/mustache-wrappers.gradle.kts")
 
 val YAML = Yaml()
 val MUSTACHE = "mustache"
@@ -90,7 +96,7 @@ File(".").walkTopDown().forEach { input ->
 
     val task = tasks.create(taskName) {
       group = "$MUSTACHE"
-      val inputsFiles = mutableListOf(GRADLE_PROPERTIES, MUSTACHE_WRAPPERS_GRADLE, input)
+      val inputsFiles = mutableListOf(GRADLE_PROPERTIES, MUSTACHE_WRAPPERS_GRADLE, DATA_TRANSFORMERS_GRADLE, input)
       val mustacheDataFiles = fetchMustacheDataFiles(input.parentFile)
       inputsFiles.addAll(mustacheDataFiles)
       inputs.files(inputsFiles)
@@ -109,9 +115,11 @@ File(".").walkTopDown().forEach { input ->
         logger.lifecycle("Loading data")
         val data = mutableListOf<Any>(MUSTACHE_WRAPPERS)
         data.addAll(
-          YAML.loadAll(
-            concatMustacheInputStreams(
-              dataInputStreams
+          transformData (
+            YAML.loadAll(
+              concatMustacheInputStreams(
+                dataInputStreams
+              )
             )
           )
         )
