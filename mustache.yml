@@ -19,3 +19,6 @@ vim-modes:
     <<: *vim-mode-visual
   visualblock:
     <<: *vim-mode-visual
+
+editor:
+  tabSize: 2
