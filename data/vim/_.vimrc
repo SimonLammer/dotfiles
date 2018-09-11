@@ -21,10 +21,10 @@ set relativenumber "Display relative numbers
 
 " Indenting
 set autoindent    " Enable autoindenting
-set tabstop=2     " Tabs display as 4 spaces
+set tabstop=2     " Tabs display as 2 spaces
 set expandtab     " Replace tabs with spaces
 set shiftwidth=4
-set softtabstop=2 " Indents use 4 columns
+set softtabstop=2 " Indents use 2 columns
 
 " Change working directory to currently opened file
 set autochdir
