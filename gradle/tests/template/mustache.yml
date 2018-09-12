@@ -23,3 +23,6 @@ nestedMap:
     level: 2
     map:
       level: 3
+
+base: &anchor
+  val: 4

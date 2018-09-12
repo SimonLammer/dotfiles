@@ -1,4 +1,4 @@
-gradle/external/tests/**/*.txt
+gradle/tests/**/*.txt
 
 # Created by https://www.gitignore.io/api/vim,git,gradle,kotlin,visualstudiocode
 
