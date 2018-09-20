@@ -1,0 +1,4 @@
+tmux:
+  status:
+    set-color: "#{?client_prefix,#[fg=colour25],#[fg=colour71]}"
+    set-active-color: "#{?client_prefix,#[fg=colour32],#[fg=colour76]}"

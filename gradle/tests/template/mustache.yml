@@ -1,0 +1,28 @@
+emptyArray: []
+singleItemArray:
+  - SingleItem
+multiItemArray:
+  - FirstItem
+  - SecondItem
+  - ThirdItem
+multiItemObjectArray:
+  - key: firstValue
+  - key: secondValue
+  - key: thirdValue
+
+emptyMap: {}
+singleItemMap:
+  singleKey: SingleValue
+multiItemMap:
+  firstKey:  FirstValue
+  secondKey: SecondValue
+  thirdKey:  ThirdValue
+nestedMap:
+  level: 1
+  map:
+    level: 2
+    map:
+      level: 3
+
+base: &anchor
+  val: 4

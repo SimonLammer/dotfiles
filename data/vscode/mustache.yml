@@ -1,0 +1,2 @@
+foo:
+  <<: *vim-mode-visual
