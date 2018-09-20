@@ -63,8 +63,6 @@ val testCleanTask = tasks.create("renderTemplatesTestClean") {
 }
 testTasks.forEach { it.configure { it.dependsOn(testCleanTask) } }
 val testTask = tasks.create("renderTemplatesTest") {
-  inputs.files(templateRenderTestDirectory)
-  outputs.files(listOf())
   dependsOn(testTasks)
   doLast {
     templateRenderTestDirectory
@@ -81,8 +79,6 @@ val testTask = tasks.create("renderTemplatesTest") {
 }
 tasks.named("test").configure { dependsOn(testTask) }
 val renderTask = tasks.create("renderTemplates") {
-  inputs.files(File("data"))
-  outputs.files(listOf())
   dependsOn(createTemplateRenderingTasks(File("data")))
   shouldRunAfter("test")
   doLast {
