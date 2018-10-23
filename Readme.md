@@ -159,6 +159,16 @@ wget -O- get.docker.com | bash
 ~~~shell
 sudo apt remove -y docker-compose # remove old version
 COMPOSE_VERSION=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep 'tag_name' | cut -d\" -f4)
+wget -O- get.docker.com | bash
+~~~
+
+## Install latest docker-compose
+
+[Reference](https://gist.github.com/deviantony/2b5078fe1675a5fedabf1de3d1f2652a)
+
+~~~shell
+sudo apt remove -y docker-compose # remove old version
+COMPOSE_VERSION=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep 'tag_name' | cut -d\" -f4)
 sudo sh -c "curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"
 sudo chmod +x /usr/local/bin/docker-compose
 sudo sh -c "curl -L https://raw.githubusercontent.com/docker/compose/${COMPOSE_VERSION}/contrib/completion/bash/docker-compose > /etc/bash_completion.d/docker-compose"
@@ -238,6 +248,14 @@ sudo apt-get install -y inkscape
 ~~~shell
 sudo apt install -y openjdk-8-jdk openjdk-8-doc
 ~~~
+
+# Latex
+
+[Reference](https://milq.github.io/install-latex-ubuntu-debian/)
+
+```
+sudo apt-get install texlive-full
+```
 
 # Lutris
 
@@ -333,6 +351,14 @@ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB8
 wget -O - https://get.rvm.io | bash -s stable
 source ~/.rvm/scripts/rvm
 rvm install ruby --default
+~~~
+
+# Sqlite Browser
+
+[Download Page](https://sqlitebrowser.org/)
+
+~~~shell
+sudo apt-get install sqlitebrowser
 ~~~
 
 # SSH
