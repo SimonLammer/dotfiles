@@ -479,6 +479,16 @@ mv ~/VirtualBox\ VMs .
 ln -s $(pwd)/VirtualBox\ VMs ~/.
 ~~~
 
+## Setup
+
+### Mac OS X
+
+[Reference](https://techsviewer.com/install-macos-high-sierra-virtualbox-windows/)
+
+### Windows 10
+
+[ISO Download page](https://www.microsoft.com/en-us/software-download/windows10ISO)
+
 # Visual Studio Code
 
 [Download page](https://code.visualstudio.com/download)
@@ -589,6 +599,8 @@ sudo apt install -y \
 - Tmux
   - Hide window name on current window if not named
   - Show git status in statusbar right if in git repo (Hide in zsh?)
+- Vim
+  - Clipboard interaction
 - ? Powerline font
   - Tmux powerline theme
 
