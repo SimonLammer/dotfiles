@@ -219,7 +219,7 @@ git clone git@github.com:SimonLammer/dotfiles.git
 ## Link [dotfiles]
 
 ~~~shell
-ln -isv ~/.dotfiles/git/.gitconfig ~/.
+ln -isv ~/.dotfiles/data/git/_.gitconfig ~/.gitconfig
 ~~~
 
 # [Gti](https://github.com/rwos/gti)
@@ -435,21 +435,29 @@ cd tmux-2.7.tar.gz
 sudo make install
 ~~~
 
-## [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm)
+## Plugins
+
+### [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm)
 
 ~~~shell
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ~~~
 
+#### Install Plugins
+
+Within tmux hit ```<prefix>-I```.
+
+### [Tmux-GitBar](https://github.com/arl/tmux-gitbar)
+
+~~~shell
+git clone https://github.com/arl/tmux-gitbar.git ~/.tmux-gitbar
+~~~
+
 ## Link [dotfiles]
 
 ~~~shell
-ln -isv ~/.dotfiles/tmux/.tmux.conf ~/.
+ln -isv ~/.dotfiles/data/tmux/_.tmux.conf ~/.tmux.conf
 ~~~
-
-## Install Plugins
-
-Within tmux hit ```<prefix>-I```.
 
 # VIM
 
@@ -464,7 +472,7 @@ The plugin manager will be installed automatically from the ```.vimrc```.
 ## Link [dotfiles]
 
 ~~~shell
-ln -isv ~/.dotfiles/vim/.vimrc ~/.
+ln -isv ~/.dotfiles/data/vim/_.vimrc ~/.vimrc
 ~~~
 
 # VirtualBox
@@ -496,8 +504,8 @@ ln -s $(pwd)/VirtualBox\ VMs ~/.
 ## Link [dotfiles]
 
 ~~~shell
-ln -isv ~/.dotfiles/vscode/settings.json ~/.config/Code/User/.
-ln -isv ~/.dotfiles/vscode/keybindings.json ~/.config/Code/User/.
+ln -isv ~/.dotfiles/data/vscode/settings.json ~/.config/Code/User/.
+ln -isv ~/.dotfiles/data/vscode/keybindings.json ~/.config/Code/User/.
 ~~~
 
 ## Install Extensions
@@ -541,7 +549,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 ## Link [dotfiles]:
 
 ~~~shell
-ln -isv ~/.dotfiles/zsh/.zshrc ~/.
+ln -isv ~/.dotfiles/data/zsh/_.zshrc ~/.zshrc
 ~~~
 
 ---
