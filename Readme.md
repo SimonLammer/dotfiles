@@ -93,6 +93,14 @@ sudo apt install -y unity-tweak-tool
 
 # Gnome shell
 
+## Lid closed action
+
+[Reference](http://tipsonubuntu.com/2018/04/28/change-lid-close-action-ubuntu-18-04-lts/)
+
+```
+sudo vim /etc/systemd/logind.conf
+```
+
 ## Specify different GTK_THEME for application
 
 [Reference](https://askubuntu.com/a/778388)
