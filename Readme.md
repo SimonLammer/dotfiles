@@ -101,6 +101,18 @@ sudo apt install -y unity-tweak-tool
 sudo vim /etc/systemd/logind.conf
 ```
 
+## PPPOE network connection
+
+`nmcli con edit type pppoe con-name "connection-name"`:
+
+```
+set pppoe.username username
+save
+quit
+```
+
+Network Settings > Wired > connection-name
+
 ## Specify different GTK_THEME for application
 
 [Reference](https://askubuntu.com/a/778388)
