@@ -58,6 +58,30 @@ mkdir -p $target
 sudo blkid | grep "^$dev" -m 1 | sed -E 's@.* UUID=\"([^"]+).* TYPE="([^"]+).*@# '$dev'\nUUID=\1 '$target' \2@' | sudo tee -a /etc/fstab
 ~~~
 
+## Bind mount home directories (Move home directories to other drive)
+
+[Reference 1](https://www.tecmint.com/move-home-directory-to-new-partition-disk-in-linux/)
+[Reference 2](https://askubuntu.com/questions/550348/how-to-make-mount-bind-permanent)
+
+Create a backup:
+```
+sudo mkdir /disks/main/home-backup
+sudo rsync -av /home/* /disks/main/home-backup
+```
+
+Move /home/* to /disks/main/home/*:
+```
+sudo mkdir /disks/main/home
+sudo rsync -av /disks/main/home-backup /disks/main/home
+sudo rm -Rf /home/*
+echo '/disks/main/home /home none bind 0 0' | sudo tee -a /etc/fstab
+```
+
+Remove backup **after making sure everything works**:
+```
+sudo rm -Rf /disks/main/home-backup
+```
+
 # Unity
 
 ## Tweak tool
