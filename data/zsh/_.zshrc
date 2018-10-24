@@ -16,7 +16,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/home/$(whoami)/.oh-my-zsh
+export ZSH=$(echo $HOME)/.oh-my-zsh
 
 # tmux
 ZSH_TMUX_AUTOSTART=false # will be started at the bottom
