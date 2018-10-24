@@ -45,7 +45,7 @@ set -g status-fg default
 set -g status-left-length 100
 set -g status-left "#[bold]{{{tmux.status.set-color}}}#S#[nobold]: "
 set -g status-right-length 100
-set -g status-right "{{{tmux.status.set-color}}}#{?#(expr #{window_panes} - 1),#{?window_zoomed_flag,■,◧}, } #(whoami)@#{?#(test -z $SSH_CLIENT),•,{{{tmux.status.set-ssh-color}}}#H{{{tmux.status.set-color}}}}#{pane_current_path}"
+set -g status-right "{{{tmux.status.set-color}}}#{?#(expr #{window_panes} - 1),#{?window_zoomed_flag,■,◧}, } #(whoami)#{?#(test -z $SSH_CLIENT && echo 0 || echo 1),@{{{tmux.status.set-ssh-color}}}#H{{{tmux.status.set-color}}},•}#{pane_current_path}"
 set -g window-status-format "{{{tmux.status.set-color}}}#I-#W"
 set -g window-status-current-format "{{{tmux.status.set-active-color}}}#I-#W #{?pane_in_mode,#[fg=colour214],}(#P: #{pane_current_command})"
 set -g window-status-current-attr bold
