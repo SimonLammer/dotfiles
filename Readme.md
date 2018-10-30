@@ -539,12 +539,18 @@ sudo apt install -y zsh
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 ~~~
 
+**Logout to update default shell**
+
 ### [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md)
 ~~~shell
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 ~~~
 
-**Logout to update default shell**
+### [ZSH Theme "nothing"](https://github.com/eendroroy/nothing)
+~~~shell
+git clone https://github.com/eendroroy/nothing.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/nothing
+ln -isv ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/nothing/nothing.zsh-theme ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/.
+~~~
 
 ## Link [dotfiles]:
 

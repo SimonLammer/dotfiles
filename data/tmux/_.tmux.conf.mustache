@@ -45,8 +45,7 @@ set -g status-fg default
 set -g status-left-length 100
 set -g status-left "#[bold]{{{tmux.status.set-color}}}#S#[nobold]: "
 set -g status-right-length 100
-{{! Change mustache delimiter temporarily }}
-{{=<% %>=}}
+{{! Change mustache delimiter temporarily }} {{=<% %>=}}
 set -g status-right "\
 <%&tmux.status.set-color%>\
 #{?#(expr #{window_panes} - 1),#{?window_zoomed_flag,■,◧}, } \
