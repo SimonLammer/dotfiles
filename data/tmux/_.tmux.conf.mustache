@@ -45,7 +45,7 @@ set -g status-fg default
 set -g status-left-length 100
 set -g status-left "#[bold]{{{tmux.status.set-color}}}#S#[nobold]: "
 set -g status-right-length 100
-set -g status-right "{{{tmux.status.set-color}}}#{?#(expr #{window_panes} - 1),#{?window_zoomed_flag,■,◧}, } #(whoami)#{?#(test -z $SSH_CLIENT && echo 0 || echo 1),@{{{tmux.status.set-ssh-color}}}#H{{{tmux.status.set-color}}},•}#{pane_current_path}"
+set -g status-right "{{{tmux.status.set-color}}}#{?#(expr #{window_panes} - 1),#{?window_zoomed_flag,■,◧}, } #U#{?#{pane_ssh_connected},@{{{tmux.status.set-ssh-color}}}#H{{{tmux.status.set-color}}},•#{pane_current_path}}"
 set -g window-status-format "{{{tmux.status.set-color}}}#I-#W"
 set -g window-status-current-format "{{{tmux.status.set-active-color}}}#I-#W #{?pane_in_mode,#[fg=colour214],}(#P: #{pane_current_command})"
 set -g window-status-current-attr bold
@@ -63,6 +63,7 @@ set -g message-fg colour208
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'tmux-plugins/tmux-pain-control'
+set -g @plugin 'soyuka/tmux-current-pane-hostname'
 #set -g @plugin 'tmux-plugins/tmux-battery'
 #set -g @plugin 'tmux-plugins/tmux-sidebar'
 #set -g @plugin 'obxhdx/tmux-ssh-status' # not working
@@ -72,3 +73,9 @@ set -g @plugin 'tmux-plugins/tmux-pain-control'
 
 # Initialize TMUX plugin Manager (keep this line at the very bottom)
 run '~/.tmux/plugins/tpm/tpm'
+
+# Refresh upon changing panes (overrides parts of the tmux-pain-control plugin configuration)
+bind -r k select-pane -U\; refresh-client -S
+bind -r j select-pane -D\; refresh-client -S
+bind -r l select-pane -R\; refresh-client -S
+bind -r h select-pane -L\; refresh-client -S
