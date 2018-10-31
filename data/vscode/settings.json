@@ -26,6 +26,12 @@
     "editor.smoothScrolling": true,
     "editor.lineNumbers": "relative",
     "workbench.activityBar.visible": false,
+    "files.associations": {
+        "*.json.mustache": "jsonc",
+        "*.yml.mustache": "yaml",
+        "*.yaml.mustache": "yaml",
+        "_.*": "properties",
+    },
 
     // __     ______   ____          _    __     _____ __  __ 
     // \ \   / / ___| / ___|___   __| | __\ \   / /_ _|  \/  |
