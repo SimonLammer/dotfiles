@@ -28,6 +28,7 @@
     "workbench.activityBar.visible": false,
     "files.associations": {
         "*.json.mustache": "jsonc",
+        "*.sh.mustache": "shellscript",
         "*.yml.mustache": "yaml",
         "*.yaml.mustache": "yaml",
         "_.*": "properties",

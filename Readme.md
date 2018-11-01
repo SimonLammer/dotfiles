@@ -617,6 +617,8 @@ sudo apt install -y \
   - Clipboard interaction
 - ? Powerline font
   - Tmux powerline theme
+- ? ENV Variable
+  - Dark/Light theme
 
 
 
