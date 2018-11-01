@@ -179,7 +179,9 @@ fun createTemplateRenderingTask(file: File, verbose: Boolean = false): Task {
       )
       logger.debug("Data: $data")
       val mustache = mustacheFactory.compile(InputStreamReader(FileInputStream(file), Charsets.UTF_8), file.absolutePath)
-      mustache.execute(FileWriter(output), data).flush()
+      val fw = FileWriter(output)
+      mustache.execute(fw, data).flush()
+      fw.close()
     }
   }
 }
