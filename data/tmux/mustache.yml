@@ -3,5 +3,13 @@ tmux:
     set-color: "#{?client_prefix,#[fg=colour25],#[fg=colour71]}"
     set-active-color: "#{?client_prefix,#[fg=colour32],#[fg=colour76]}"
     set-ssh-color: "#[fg=colour196]"
-  path-end-length: 50
+  path-length-limit: 50
   path-start-length: 5
+  git-flag-color:
+    ahead: 177
+    behind: 167
+    staged: 76
+    unstaged: 160
+    untracked: 195
+    unmerged: 196
+  git-branch-color: 220

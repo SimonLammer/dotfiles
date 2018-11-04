@@ -1,0 +1,10 @@
+path=${1:-$(pwd)}
+{{=<% %>=}}
+path=$(
+  echo $path | sed -E "\
+    s<^$HOME<~<;\
+    s<^(~?\/([^\/]{1,<%tmux.path-start-length%>}\/|[^\/]{<%&tmux.path-start-length%>}))[^\/].*(.{<%&tmux.path-length-limit%>})$<\1…\3<\
+  "
+)
+<%={{ }}=%>
+echo $path
