@@ -1,4 +1,5 @@
 vim-modes:
+  # console colors: https://superuser.com/questions/285381/how-does-the-tmux-color-palette-work/1104214#1104214
   normal:
     color:
       console: 25

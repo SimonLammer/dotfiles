@@ -457,6 +457,7 @@ git clone https://github.com/arl/tmux-gitbar.git ~/.tmux-gitbar
 
 ~~~shell
 ln -isv ~/.dotfiles/data/tmux/_.tmux.conf ~/.tmux.conf
+ln -isv ~/.dotfiles/data/tmux/scripts ~/.tmux/scripts
 ~~~
 
 # VIM
