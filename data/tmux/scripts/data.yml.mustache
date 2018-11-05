@@ -1,10 +1,10 @@
-path-length-limit: {{{tmux.path-length-limit}}}
-path-start-length: {{{tmux.path-start-length}}}
-set-default-color: "{{{tmux.status.set-color}}}"
+path-length-limit: {{{path-length-limit}}}
+path-start-length: {{{path-start-length}}}
+set-default-color: "{{{status.set-color}}}"
 set-git-flag-color:
-  {{#tmux.git-flag-colorArray}}
+  {{#git-flag-colorArray}}
   {{key}}: "#[fg=colour{{value}}]"
-  {{/tmux.git-flag-colorArray}}
+  {{/git-flag-colorArray}}
 git-flag-symbol:
   ahead: ↑
   behind: ↓
@@ -12,4 +12,4 @@ git-flag-symbol:
   unstaged: ●
   untracked: ●
   unmerged: ✕
-git-branch-color: "#[fg=colour{{tmux.git-branch-color}}]"
+git-branch-color: "#[fg=colour{{git-branch-color}}]"

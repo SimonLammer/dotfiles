@@ -143,9 +143,9 @@ fun createTemplateRenderingTask(file: File, verbose: Boolean = false): Task {
   val output = File(file.parentFile, file.name.substring(0, file.name.length - templateFileExtension.length))
   logger.info("Creating template rendering task for $file")
   return tasks.create(templateRenderingTaskName(file)) {
-    inputs.files(listOf(file))
     inputs.files(helperFiles)
     inputs.files(dataFiles)
+    inputs.files(listOf(file))
     outputs.file(output)
     shouldRunAfter("test")
 

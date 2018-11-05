@@ -43,38 +43,17 @@ set -g status-justify left
 set -g status-bg default # https://stackoverflow.com/questions/22303820/tmux-transparent-status-bar
 set -g status-fg default
 set -g status-left-length 100
-set -g status-left "#[bold]{{{tmux.status.set-color}}}#S#[nobold]: "
+set -g status-left "#[bold]{{{status.set-color}}}#S#[nobold]: "
 set -g status-right-length 100
-{{! Change mustache delimiter temporarily }} {{=<% %>=}}
 set -g status-right "\
-<%&tmux.status.set-color%>\
+{{{status.set-color}}}\
 #{?#(expr #{window_panes} - 1),#{?window_zoomed_flag,■,◧}, } \
 #U#{?#{pane_ssh_connected}\
-,@<%&tmux.status.set-ssh-color%>#H<%&tmux.status.set-color%>\
-,•#(python3 $HOME/.dotfiles/data/tmux/scripts/describe-directory/describe_directory.py #{pane_current_path})}\
-<%! git stuff
-#(cd #{pane_current_path}\
-; git rev-parse --is-inside-work-tree 2>/dev/null\
-    && echo -n \" (\"\
-    && git rev-parse --abbrev-ref HEAD\
-        | tr -d \"\\n\" \
-    && echo -n \" \"\
-    && git s --porcelain=2\
-                        | sed -E \"/^[^u?12].*/d ; s/^([u?]).*/\\1/ ; s/^. (..).*/X\\1/\"\
-                        | uniq\
-                        | sed -E \"s/^u/unmerged/\
-                                 ; s/^\\?/untracked/\
-                                 ; s/^X(D[\\.M]|[MARC][\\.MD])/staged/\
-                                 ; s/^X[\\.MARC][MD]/unstaged/\"\
-                        | xargs echo -n\
-                        | tr \"\\n\" \" \"\
-    && echo -n \")\"\
-)\
-%>"
-
-<%={{ }}=%>
-set -g window-status-format "{{{tmux.status.set-color}}}#I-#W"
-set -g window-status-current-format "{{{tmux.status.set-active-color}}}#I-#W #{?pane_in_mode,#[fg=colour214],}(#P: #{pane_current_command})"
+,@{{{status.set-ssh-color}}}#H{{{status.set-color}}}\
+,•#(python3 $HOME/.tmux/scripts/describe-directory/describe_directory.py #{pane_current_path})}\
+"
+set -g window-status-format "{{{status.set-color}}}#I-#W"
+set -g window-status-current-format "{{{status.set-active-color}}}#I-#W #{?pane_in_mode,#[fg=colour214],}(#P: #{pane_current_command})"
 set -g window-status-current-attr bold
 set -g set-titles-string "tmux: #I [ #W ]"
 set -g message-bg default

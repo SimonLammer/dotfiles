@@ -6,7 +6,7 @@ import re
 import subprocess
 import yaml
 
-@functools.lru_cache(0) # TODO: 0, 1 or None?
+@functools.lru_cache(1)
 def load_config():
   with open(os.path.normpath(f'{os.path.dirname(__file__)}/../data.yml'), 'r') as stream:
     try:
@@ -59,7 +59,9 @@ def git_description(path, config=load_config()):
           elif base == remote:
             flags['ahead'] = True
           else:
-            pass # local branch and remote branch have diverged
+            # local branch and remote branch have diverged
+            flags['ahead'] = True
+            flags['behind'] = True
       porcelain = subprocess.run(['git', 'status', '--porcelain=2'], cwd=path, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
       if porcelain.returncode == 0:
         porcelain = porcelain.stdout.decode('utf-8')
@@ -80,10 +82,12 @@ def git_description(path, config=load_config()):
       any_flag = False
       for flag, value in flags.items():
         if value:
-          any_flag = True
+          if not any_flag:
+            desc += " "
+            any_flag = True
           desc += config['set-git-flag-color'][flag] + config['git-flag-symbol'][flag]
       if any_flag:
-        desc += config['set-default-color']
+        desc += config['set-default-color'] + " "
       return desc
   return ""
 
