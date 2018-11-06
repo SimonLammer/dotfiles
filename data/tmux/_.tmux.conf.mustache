@@ -50,7 +50,7 @@ set -g status-right "\
 #{?#(expr #{window_panes} - 1),#{?window_zoomed_flag,■,◧}, } \
 #U#{?#{pane_ssh_connected}\
 ,@{{{status.set-ssh-color}}}#H{{{status.set-color}}}\
-,•#(python3 $HOME/.tmux/scripts/describe-directory/describe_directory.py #{pane_current_path})}\
+,•#(python3 $HOME/.tmux/scripts/describe-directory/describe_directory.py '#{pane_current_path}')}\
 "
 set -g window-status-format "{{{status.set-color}}}#I-#W"
 set -g window-status-current-format "{{{status.set-active-color}}}#I-#W #{?pane_in_mode,#[fg=colour214],}(#P: #{pane_current_command})"

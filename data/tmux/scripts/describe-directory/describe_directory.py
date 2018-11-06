@@ -86,8 +86,9 @@ def git_description(path, config=load_config()):
             desc += " "
             any_flag = True
           desc += config['set-git-flag-color'][flag] + config['git-flag-symbol'][flag]
+      desc += config['set-default-color']
       if any_flag:
-        desc += config['set-default-color'] + " "
+        desc += " "
       return desc
   return ""
 
