@@ -8,6 +8,16 @@ Below is a collection of wisdom, useful for setting up computers.
 
 ---
 
+# Grub
+
+[Reference](http://tipsonubuntu.com/2018/03/11/install-grub-customizer-ubuntu-18-04-lts/)
+
+~~~
+sudo add-apt-repository ppa:danielrichter2007/grub-customizer
+sudo apt-get update
+sudo apt-get install grub-customizer
+~~~
+
 # Hibernate
 
 [Reference](http://chriseiffel.com/uncategorized/step-by-step-how-to-get-hibernate-working-for-linux-ubuntu-11-04-mint-11/)
