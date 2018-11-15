@@ -48,6 +48,7 @@ set -g status-right-length 100
 set -g status-right "\
 {{{status.set-color}}}\
 #{?#(expr #{window_panes} - 1),#{?window_zoomed_flag,■,◧}, } \
+#{?#(echo $SSH_CONNECTION),{{{status.set-ssh-color}}}(ssh){{{status.set-color}}} ,}\
 #U#{?#{pane_ssh_connected}\
 ,@{{{status.set-ssh-color}}}#H{{{status.set-color}}}\
 ,•#(python3 $HOME/.tmux/scripts/describe-directory/describe_directory.py '#{pane_current_path}' || echo '#{pane_current_path}')}\
