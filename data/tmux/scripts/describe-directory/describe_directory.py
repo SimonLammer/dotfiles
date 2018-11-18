@@ -4,16 +4,12 @@ import functools
 import os
 import re
 import subprocess
-import yaml
+import json
 
 @functools.lru_cache(1)
 def load_config():
-  with open(os.path.normpath(f'{os.path.dirname(__file__)}/../data.yml'), 'r') as stream:
-    try:
-      return yaml.load(stream)
-    except yaml.YAMLError as err:
-      print(err, file=sys.stderr)
-      return {}
+  with open(os.path.normpath(os.path.dirname(__file__) + '/../data.json'), 'r') as stream:
+    return json.load(stream)
 
 def substitute_home(path):
   home = os.environ['HOME']
@@ -27,7 +23,7 @@ def limit_path_length(path, config=load_config()):
     if start == 0:
       start = path.find(os.sep, 0, 2) + config['path-start-length'] + 1
     end = len(path) - config['path-length-limit'] + 1 + start
-    path = f'{path[:start]}…{path[end:]}'
+    path = path[:start] + '…' + path[end:]
   return path
 
 def git_description(path, config=load_config()):
@@ -46,11 +42,11 @@ def git_description(path, config=load_config()):
       if head == "HEAD":
         head = subprocess.run(['git', 'rev-parse', 'HEAD'], cwd=path, stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout.decode('utf-8')[:7]
       else:
-        base = subprocess.run(['git', 'merge-base', head, f'origin/{head}'], cwd=path, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        base = subprocess.run(['git', 'merge-base', head, 'origin/' + head], cwd=path, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         if base.returncode == 0:
           base = base.stdout.decode('utf-8').splitlines()[0]
           local = subprocess.run(['git', 'rev-parse', '--verify', head], cwd=path, stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout.decode('utf-8').splitlines()[0]
-          remote = subprocess.run(['git', 'rev-parse', '--verify', f'origin/{head}'], cwd=path, stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout.decode('utf-8').splitlines()[0]
+          remote = subprocess.run(['git', 'rev-parse', '--verify', 'origin/' + head], cwd=path, stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout.decode('utf-8').splitlines()[0]
           if base == local:
             if local == remote:
               pass # local branch is up to date with remote branch
@@ -100,9 +96,9 @@ def describe(path):
 
   git = git_description(path, config=config)
   if git:
-    git = f' ({git})'
+    git = ' (' + git + ')'
 
-  return f"{short_path}{git}"
+  return short_path + git
 
 if __name__ == "__main__":
   import sys

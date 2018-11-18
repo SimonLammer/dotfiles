@@ -1,0 +1,22 @@
+{
+  "path-length-limit": 50,
+  "path-start-length": 5,
+  "set-default-color": "#{?client_prefix,#[fg=colour25],#[fg=colour71]}",
+  "set-git-flag-color": {
+    "ahead": "#[fg=colour177]",
+    "behind": "#[fg=colour167]",
+    "staged": "#[fg=colour76]",
+    "unstaged": "#[fg=colour160]",
+    "untracked": "#[fg=colour195]",
+    "unmerged": "#[fg=colour196]"
+  },
+  "git-flag-symbol": {
+    "ahead": "↑",
+    "behind": "↓",
+    "staged": "●",
+    "unstaged": "●",
+    "untracked": "●",
+    "unmerged": "✕"
+  },
+  "git-branch-color": "#[fg=colour220]"
+}
