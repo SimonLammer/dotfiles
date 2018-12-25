@@ -84,7 +84,7 @@ sudo rsync -av /home/* /disks/main/home-backup
 Move /home/* to /disks/main/home/*:
 ```
 sudo mkdir /disks/main/home
-sudo rsync -av /disks/main/home-backup /disks/main/home
+sudo rsync -ah --progress /disks/main/home-backup/* /disks/main/home
 sudo rm -Rf /home/*
 echo '/disks/main/home /home none bind 0 0' | sudo tee -a /etc/fstab
 ```
