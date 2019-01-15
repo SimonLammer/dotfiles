@@ -179,7 +179,7 @@ Network Settings > Wired > connection-name
 ### Firefox
 
 ~~~ shell
-sudo sed -Ei '/export MOZ_APP_LAUNCHER/a\\n# Use specific GTK_THEME instead of system default\nGTK_THEME=Adwaita:light\nexport GTK_THEME' /usr/lib/firefox/firefox.sh
+sudo sed -Ei '/export MOZ_APP_LAUNCHER/a\\n# Use specific GTK_THEME instead of system default\nGTK_THEME=Yaru\nexport GTK_THEME' /usr/lib/firefox/firefox.sh
 ~~~
 
 ## Create a .desktop file to launch an application
