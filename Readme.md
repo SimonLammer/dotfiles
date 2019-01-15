@@ -84,7 +84,7 @@ sudo rsync -av /home/* /disks/main/home-backup
 Move /home/* to /disks/main/home/*:
 ```
 sudo mkdir /disks/main/home
-sudo rsync -av /disks/main/home-backup /disks/main/home
+sudo rsync -ah --progress /disks/main/home-backup/* /disks/main/home
 sudo rm -Rf /home/*
 echo '/disks/main/home /home none bind 0 0' | sudo tee -a /etc/fstab
 ```
@@ -256,6 +256,17 @@ wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.0.de
 wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.0.deb.sha512
 shasum -a 512 -c elasticsearch-6.4.0.deb.sha512 && sudo dpkg -i elasticsearch-6.4.0.deb
 ~~~
+
+# Firefox
+
+## Add-ons
+
+- [Adblock Plus](https://addons.mozilla.org/en-US/firefox/addon/adblock-plus/)
+- [Cookie-Editor](https://addons.mozilla.org/en-US/firefox/addon/cookie-editor/)
+- [Reverse Image Search](https://addons.mozilla.org/en-US/firefox/addon/image-reverse-search/)
+- [Video DownloadHelper](https://addons.mozilla.org/en-US/firefox/addon/video-downloadhelper/)
+- [Vimium-FF](https://addons.mozilla.org/en-US/firefox/addon/vimium-ff/)
+- [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
 
 # Git
 
