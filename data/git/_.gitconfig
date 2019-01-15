@@ -16,28 +16,43 @@
 [core]
 	editor = vim
 [alias]
+	#    ____  _                _   _                     _     
+	#   / ___|| |__   ___  _ __| |_| |__   __ _ _ __   __| |___ 
+	#   \___ \| '_ \ / _ \| '__| __| '_ \ / _` | '_ \ / _` / __|
+	#    ___) | | | | (_) | |  | |_| | | | (_| | | | | (_| \__ \
+	#   |____/|_| |_|\___/|_|   \__|_| |_|\__,_|_| |_|\__,_|___/
+	#                                                           
 	s = status
-	lg = log --all --oneline --graph --decorate
+	a = add
+	ap = add -p
 	co = checkout
-	last = log HEAD -1 --decorate
-	ca = commit -a
-	cA = commit --amend
-	caA = commit -a --amend
+	cob = checkout -b
+	ca = commit --amend
 	cm = commit -m
 	cam = commit -am
 	d = diff
 	dc = diff --cached
-	a = add
+	last = log HEAD -1 --decorate
+	lg = log --all --oneline --graph --decorate
 	unstage = reset HEAD
 	u = reset HEAD
-	cc = !git clone $(xclip -o -selection c)
-	ap = add -p
-	pushu = !$(git push 2>&1 | grep git)
-	cob = checkout -b
 
-  # Create an ignored folder
+	#     ____                                          _     
+	#    / ___|___  _ __ ___  _ __ ___   __ _ _ __   __| |___ 
+	#   | |   / _ \| '_ ` _ \| '_ ` _ \ / _` | '_ \ / _` / __|
+	#   | |__| (_) | | | | | | | | | | | (_| | | | | (_| \__ \
+	#    \____\___/|_| |_| |_|_| |_| |_|\__,_|_| |_|\__,_|___/
+	#                                                         
+
+	# Push new branch
+	pushu = !$(git push 2>&1 | grep 'git push')
+
+	# Clone repo from clipboard
+	cc = !git clone $(xclip -o -selection c)
+
+	# Create an ignored folder
 	mkdiri = !"if [ \"$1\" = \"\" ]; then dir='_ignored'; else dir=$1; fi; mkdir -v $dir" && bash -c 'echo -e \"\\\\u2a\"' > "$dir/.gitignore" "#"
 
 	# Quote / unquote a sh command, converting it to / from a git alias string
-  # https://stackoverflow.com/a/39616600/2808520
+	# https://stackoverflow.com/a/39616600/2808520
 	quote-string = "!read -r l; printf \\\"!; printf %s \"$l\" | sed 's/\\([\\\"]\\)/\\\\\\1/g'; printf \" #\\\"\\n\" #"
