@@ -1,4 +1,4 @@
-import java.util.function.Function
+import java.util.function.Consumer
 import java.util.*
 import java.nio.charset.*
 import java.nio.file.Files
@@ -16,6 +16,15 @@ buildscript {
   }
 }
 
+val commands = mutableMapOf<String, (Map<String, *>) -> Unit>()
+extra["action-commands"] = commands
+val helperFiles = File("gradle/tasks/action/commands").listFiles { f: File -> f.isFile() && f.name.endsWith(".gradle.kts") }
+apply {
+  helperFiles.forEach {
+    from(it)
+  }
+}
+logger.info("Available action commands: $commands")
 val yaml = Yaml()
 
 tasks {
@@ -37,51 +46,55 @@ fun findActionsFiles(dir: File): List<File> {
   return listOf(File("gradle/tests/action/actions.yml"))
 }
 
-fun createActionsTasks(dir: File, taskNamePrefix: String = "actions"): Iterable<Task> {
+fun createActionsTasks(dir: File, taskNamePrefix: String = "actions"/*, commands: Map<String, (Map<String, *>) -> Unit>*/): Iterable<Task> {
   logger.info("Creating tasks actions under $dir")
-  return findActionsFiles(dir).flatMap {
-    val taskNameMiddle = it.parentFile
+  return findActionsFiles(dir).flatMap { file ->
+    val taskNameMiddle = file.parentFile
       .toRelativeString(dir)
       .replace("/", "-")
-    val yamlData = yaml.load(FileInputStream(it)) as Map<*, *>
-    logger.info("\t$it")
+    val yamlData = yaml.load(FileInputStream(file)) as Map<*, *>
+    logger.info("\t$file")
 
     return yamlData.map { (key, raw_actions) ->
-      lateinit var taskNameSuffix : String
+      lateinit var actionCommand : String
       lateinit var args : Map<String, *>
       if (key is Map<*,*>) {
         val entry = key.entries.single()
-        taskNameSuffix = entry.key as String
+        actionCommand = entry.key as String
         args = entry.value as Map<String, *>
       } else if (key is String) {
-        taskNameSuffix = key
+        actionCommand = key
         args = mapOf()
       }
-      lateinit var actions : Iterable<Map<*, *>>
+      lateinit var actions : Iterable<Map<String, *>>
       if (raw_actions is Iterable<*>) {
-        actions = raw_actions as Iterable<Map<*, *>>
+        actions = raw_actions as Iterable<Map<String, *>>
       } else if (raw_actions is Map<*, *>) {
-        actions = listOf(raw_actions)
+        actions = listOf(raw_actions as Map<String, *>)
       }
 
-      logger.info("\t\t$taskNameSuffix")
+      logger.info("\t\t$actionCommand")
 
       val enabled = args.get("enabled") // TODO: extract "enabled"?
       if (enabled == null || enabled == true) {
-        createActionsTask(it, "$taskNamePrefix-$taskNameMiddle-$taskNameSuffix", args, actions)
+        tasks.create("$taskNamePrefix-$taskNameMiddle-$actionCommand") {
+          inputs.file(file)
+
+          doLast {
+            actions.forEach {
+              val command = commands.get(actionCommand)
+              if (command != null) {
+                command(it)
+              } else {
+                throw GradleException("Unknown action '$actionCommand' in '$file'.")
+              }
+            }
+          }
+        }
       } else {
+        logger.info("\t\t\tThis task is not enabled.")
         null
       }
     }.toList().filterNotNull()
   }.toList()
-}
-
-fun createActionsTask(file: File, taskName: String, args: Map<String, *>, actions: Iterable<Map<*, *>>): Task {
-  return tasks.create(taskName) {
-    inputs.file(file)
-
-    doLast {
-      println("$taskName: $actions")
-    }
-  }
 }

@@ -30,7 +30,7 @@
   link_name: link.txt
 
 ? "exec":
-    enabled: true
+    enabled: false
     depedencies:
       - renderTemplate#gradle,tests,template,override,test.txt.mustache
 :
