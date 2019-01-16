@@ -26,8 +26,9 @@
 # only certain names get grouped: link, apt-install, ...
 "link":
   action: link
-  resource: resource.txt
-  link_name: link.txt
+  existing: resource.txt
+  link: link.txt
+  override: true
 
 ? "exec":
     enabled: false

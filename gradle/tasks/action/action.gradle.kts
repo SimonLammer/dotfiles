@@ -16,7 +16,7 @@ buildscript {
   }
 }
 
-val commands = mutableMapOf<String, (Map<String, *>) -> Unit>()
+val commands = mutableMapOf<String, (File, Map<String, *>) -> Unit>()
 extra["action-commands"] = commands
 val helperFiles = File("gradle/tasks/action/commands").listFiles { f: File -> f.isFile() && f.name.endsWith(".gradle.kts") }
 apply {
@@ -46,7 +46,7 @@ fun findActionsFiles(dir: File): List<File> {
   return listOf(File("gradle/tests/action/actions.yml"))
 }
 
-fun createActionsTasks(dir: File, taskNamePrefix: String = "actions"/*, commands: Map<String, (Map<String, *>) -> Unit>*/): Iterable<Task> {
+fun createActionsTasks(dir: File, taskNamePrefix: String = "actions"): Iterable<Task> {
   logger.info("Creating tasks actions under $dir")
   return findActionsFiles(dir).flatMap { file ->
     val taskNameMiddle = file.parentFile
@@ -83,11 +83,10 @@ fun createActionsTasks(dir: File, taskNamePrefix: String = "actions"/*, commands
           doLast {
             actions.forEach {
               val command = commands.get(actionCommand)
-              if (command != null) {
-                command(it)
-              } else {
-                throw GradleException("Unknown action '$actionCommand' in '$file'.")
+              if (command == null) {
+                throw RuntimeException("Unknown action '$actionCommand' in '$file'.")
               }
+              command(file, it)
             }
           }
         }
