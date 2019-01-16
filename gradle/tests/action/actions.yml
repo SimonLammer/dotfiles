@@ -1,0 +1,45 @@
+# Symlink resource
+#- - action: symlink # mandatory
+#    enabled: true   # mandatory
+#    os: linux # ubuntu?, windows? - optional / mandatory(with "any" option)
+#    resource: resource.txt
+#    link: link.txt
+
+# Execute system command
+#- - action: command
+#    enabled: true
+#    command: echo
+#    args:
+#    - "Hello world!"
+#    - ">command.txt"
+
+# Download file
+# https://github.com/michel-kraemer/gradle-download-task
+#- - action: downloadFile
+#    enabled: true
+#    src: https://example.com
+#    dest: ./example_com.html
+#    overwrite: true
+#    onlyIfModified: false
+#
+# run by (gradlew) link, tests-action-link
+# only certain names get grouped: link, apt-install, ...
+"link":
+  - action: link
+    resource: resource.txt
+    link_name: link.txt
+
+? "exec":
+    depedencies:
+      - renderTemplate#gradle,tests,template,override,test.txt.mustache
+:
+  - action: command
+    command: echo
+    args:
+      - "hello"
+      - "world"
+  - action: command
+    command: echo
+    args:
+      - "once"
+      - "more"
