@@ -19,8 +19,8 @@ buildscript {
 val yaml = Yaml()
 
 tasks {
-  val testTask = create("test-actions") {
-    val tasks = createActionsTasks(File("gradle/tests/action"))
+  val testTask = create("actionsTest") {
+    val tasks = createActionsTasks(File("gradle/tests/action"), "actionsTest")
     dependsOn(tasks)
     mustRunAfter(tasks)
 
@@ -38,15 +38,15 @@ fun findActionsFiles(dir: File): List<File> {
 }
 
 fun createActionsTasks(dir: File, taskNamePrefix: String = "actions"): Iterable<Task> {
-  logger.lifecycle("Creating tasks actions under $dir") // TODO: logger.debug
+  logger.info("Creating tasks actions under $dir")
   return findActionsFiles(dir).flatMap {
     val taskNameMiddle = it.parentFile
       .toRelativeString(dir)
       .replace("/", "-")
     val yamlData = yaml.load(FileInputStream(it)) as Map<*, *>
-    logger.lifecycle("\t$it") // TODO: logger.debug
+    logger.info("\t$it")
 
-    return yamlData.map { (key, value) ->
+    return yamlData.map { (key, raw_actions) ->
       lateinit var taskNameSuffix : String
       lateinit var args : Map<String, *>
       if (key is Map<*,*>) {
@@ -57,17 +57,31 @@ fun createActionsTasks(dir: File, taskNamePrefix: String = "actions"): Iterable<
         taskNameSuffix = key
         args = mapOf()
       }
-
-      tasks.create("$taskNamePrefix-$taskNameMiddle-$taskNameSuffix") {
-        logger.lifecycle("\t\t$taskNameSuffix [$args]: $value") // TODO: logger.debug
-
-        inputs.file(it)
-
-        doLast {
-          println("test")
-        }
+      lateinit var actions : Iterable<Map<*, *>>
+      if (raw_actions is Iterable<*>) {
+        actions = raw_actions as Iterable<Map<*, *>>
+      } else if (raw_actions is Map<*, *>) {
+        actions = listOf(raw_actions)
       }
 
-    }.toList()
+      logger.info("\t\t$taskNameSuffix")
+
+      val enabled = args.get("enabled") // TODO: extract "enabled"?
+      if (enabled == null || enabled == true) {
+        createActionsTask(it, "$taskNamePrefix-$taskNameMiddle-$taskNameSuffix", args, actions)
+      } else {
+        null
+      }
+    }.toList().filterNotNull()
   }.toList()
+}
+
+fun createActionsTask(file: File, taskName: String, args: Map<String, *>, actions: Iterable<Map<*, *>>): Task {
+  return tasks.create(taskName) {
+    inputs.file(file)
+
+    doLast {
+      println("$taskName: $actions")
+    }
+  }
 }
