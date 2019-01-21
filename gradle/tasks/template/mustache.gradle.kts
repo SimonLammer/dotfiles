@@ -81,6 +81,7 @@ tasks.named("test").configure { dependsOn(testTask) }
 val renderTask = tasks.create("renderTemplates") {
   dependsOn(createTemplateRenderingTasks(File("data"), verbose=true))
   shouldRunAfter("test")
+  group = "Dotfiles"
   doLast {
     println(Cowsay.say(arrayOf("-f", "default", "I've successfully rendered all of your mustache templates.")))
   }
@@ -169,7 +170,7 @@ fun createTemplateRenderingTask(file: File, verbose: Boolean = false): Task {
       }
       val data = mutableListOf<Any>(mustacheWrappers)
       data.addAll(
-        transformData (
+        transformData(
           yaml.loadAll(
             concatTemplateDataFileInputStreams(
               dataFiles.map { FileInputStream(it) }

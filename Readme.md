@@ -589,6 +589,7 @@ for ext in \
   'ms-python.python'\
   'ms-vscode.cpptools'\
   'vscodevim.vim'\
+  'mathiasfrohlich.Kotlin'\
 ;do code --install-extension $ext; done
 ~~~
 
@@ -664,6 +665,7 @@ sudo apt install -y \
   - Fix Airplane mode after suspend
     - https://www.reddit.com/r/archlinux/comments/62lk65/arch_gnome_stopped_suspend_now_how_do_i_prevent/
 - Anki
+- Entr
 - Firefox
   - Informative default page
 - Latex

@@ -14,13 +14,23 @@ Arguments:
  */
 
 (extra["action-commands"] as MutableMap<String,Any?>).put("link", fun(file: File, args: Map<String, *>) {
-  val existing = File(file.parentFile, args.get("existing") as String)
+  val relativeLink = File(args.get("link") as String)
+  val link = resolveRelative(file, relativeLink)
+
+  val foo = File(args.get("existing") as String)
+  println("FOO: $foo = " + Files.exists(foo.toPath()).toString())
+  val existing = resolveRelative(file, foo)
+  val relativeExisting = 
+    if (existing.isAbsolute() || existing.toString().startsWith("~")) {
+      existing
+    } else {
+      link.parentFile.toPath().relativize(existing.toPath()).toFile()
+    }
   if (!existing.exists()) {
     throw RuntimeException("\"existing\" file '$existing' does not exist!")
   }
-  val link = File(file.parentFile, args.get("link") as String)
 
-  logger.lifecycle("Linking $link -> $existing")
+  logger.lifecycle("Linking '$link' -> '$existing' (via '$relativeExisting')")
 
   val overwrite = args.get("override") as Boolean?
   if (Files.isSymbolicLink(link.getAbsoluteFile().toPath())) {
@@ -34,6 +44,16 @@ Arguments:
 
   val symbolic = args.get("symbolic") as Boolean?
   if (symbolic == null || symbolic) {
-    Files.createSymbolicLink(link.toPath(), existing.getAbsoluteFile().toPath())
+    Files.createSymbolicLink(link.toPath(), relativeExisting.toPath())
+  } else {
+    Files.createLink(link.toPath(), existing.getAbsoluteFile().toPath()) // TODO
   }
 })
+
+fun resolveRelative(file: File, relativeFile: File): File =
+  file
+    .parentFile
+    .toPath()
+    .resolve(relativeFile.toPath())
+    .normalize()
+    .toFile()

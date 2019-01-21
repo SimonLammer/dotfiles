@@ -1,0 +1,9 @@
+"relative-existing-up":
+  action: link
+  existing: ../resource.txt
+  link: relative-existing.txt
+
+"relative-link-up":
+  action: link
+  existing: resource.txt
+  link: ../relative-link.txt
