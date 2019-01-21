@@ -22,10 +22,10 @@
   existing: resource.txt
   link: relative/relative-link.txt
 
-"foo":
+"home":
   action: link
   existing: ~/.dotfiles/Readme.md
-  link: relative/Readme.md
+  link: home.md
 
 "hard":
   action: link

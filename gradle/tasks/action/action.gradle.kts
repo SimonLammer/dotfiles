@@ -17,7 +17,7 @@ buildscript {
   }
 }
 
-val commands = mutableMapOf<String, (File, Map<String, *>) -> Unit>()
+val commands = mutableMapOf<String, (File, Map<String, *>, Boolean) -> Unit>()
 extra["action-commands"] = commands
 val helperFiles = File("gradle/tasks/action/commands").listFiles { f: File -> f.isFile() && f.name.endsWith(".gradle.kts") }
 apply {
@@ -29,13 +29,13 @@ logger.info("Available action commands: $commands")
 val yaml = Yaml()
 
 tasks {
-  val testTasks = createActionsTasks(File("gradle/tests/action"), "actionsTest")
+  val testTasks = createActionsTasks(File("gradle/tests/action"), "actionsTest", false)
   val testTask = create("actionsTest") {
     dependsOn(testTasks)
     mustRunAfter(testTasks)
 
     doLast {
-      logger.lifecycle("Ran actions tests")
+      println(Cowsay.say(arrayOf("-f", "default", "Actions tests have succeeded.")))
     }
   }
 
@@ -48,6 +48,7 @@ tasks {
         listOf(
           "simple.txt",
           "hard.txt",
+          "home.md",
           "override.txt",
           "relative-link.txt",
           "relative-existing.txt",
@@ -66,7 +67,7 @@ tasks {
   val cleanTask = createActionsTestCleanTask("")
   testTask.dependsOn(cleanTask)
   testTasks.forEach { it.dependsOn(cleanTask) }
-  val postRunCleanTask = create("asdf") {doLast{println("PostRun cleaning disabled")}} // TODO: createActionsTestCleanTask("PostRun") 
+  val postRunCleanTask = createActionsTestCleanTask("PostRun") 
   testTask.finalizedBy(postRunCleanTask)
   postRunCleanTask.dependsOn(create("actionsTestAssert") {
     doLast {
@@ -100,6 +101,7 @@ tasks {
         "relative-existing.txt",
         "relative-link.txt"
       ), File("gradle/tests/action/link/relative/resource.txt"))
+      assertLinks(listOf("home.md"), File("Readme.md"))
       check(
         Files.readAllLines(Paths.get("gradle/tests/action/link/resource.txt"))
           .equals(Files.readAllLines(Paths.get("gradle/tests/action/link/hard.txt"))),
@@ -116,7 +118,7 @@ fun findActionsFiles(dir: File): List<File> {
     .toList()
 }
 
-fun createActionsTasks(dir: File, taskNamePrefix: String = "actions"): Iterable<Task> {
+fun createActionsTasks(dir: File, taskNamePrefix: String = "actions", verbose: Boolean): Iterable<Task> {
   logger.info("Creating action tasks under $dir")
   return findActionsFiles(dir).flatMap { file ->
     val taskNameMiddle = file.parentFile
@@ -160,7 +162,7 @@ fun createActionsTasks(dir: File, taskNamePrefix: String = "actions"): Iterable<
               if (command == null) {
                 throw RuntimeException("Unknown command '$command' in action '$actionName' in '$file'.")
               }
-              command(file, it)
+              command(file, it, verbose)
             }
           }
         }
