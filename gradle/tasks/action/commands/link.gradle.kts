@@ -22,13 +22,10 @@ Arguments:
     }
   }
 
-  val relativeLink = File(args.get("link") as String)
+  val relativeLink = File(stringToPath(args.get("link") as String))
   val link = resolveRelative(file, relativeLink)
 
-  var existingStr = args.get("existing") as String
-  if (existingStr.startsWith("~")) {
-    existingStr = existingStr.replace("~", System.getProperty("user.home"))
-  }
+  var existingStr = stringToPath(args.get("existing") as String)
   val existing = resolveRelative(file, File(existingStr))
   if (!existing.exists()) {
     throw RuntimeException("\"existing\" file '$existing' does not exist!")
@@ -53,6 +50,14 @@ Arguments:
     Files.createLink(link.toPath(), existing.absoluteFile.toPath())
   }
 })
+
+fun stringToPath(str: String): String {
+  var text = str
+  if (text.startsWith("~")) {
+    text = text.replace("~", System.getProperty("user.home"))
+  }
+  return text
+}
 
 fun resolveRelative(file: File, relativeFile: File): File =
   file

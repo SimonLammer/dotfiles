@@ -39,6 +39,12 @@ tasks {
     }
   }
 
+  val realTasks = createActionsTasks(File("data"), "actions", true)
+  realTasks.forEach {
+    it.dependsOn(testTask)
+    it.group = "Actions"
+  }
+
   tasks.named("test").configure{ dependsOn(testTask) }
 
   fun createActionsTestCleanTask(taskNameSuffix: String): Task {
