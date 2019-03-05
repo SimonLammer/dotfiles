@@ -24,6 +24,7 @@
 	#                                                           
 	s = status
 	a = add
+	aa = add -A
 	ap = add -p
 	co = checkout
 	cob = checkout -b

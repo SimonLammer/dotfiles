@@ -204,6 +204,12 @@ Categories=
 sudo apt-get install -y silversearcher-ag
 ~~~
 
+# [autojump](https://github.com/wting/autojump)
+
+~~~shell
+sudo apt-get install -y autojump
+~~~
+
 # Docker
 
 [Reference](https://docs.docker.com/install/linux/docker-ce/ubuntu/#upgrade-docker-ce-1)
@@ -634,6 +640,7 @@ ln -isv ~/.dotfiles/data/zsh/_.zshrc ~/.zshrc
 
 ~~~shell
 sudo apt install -y \
+  autojump\
   curl\
   git\
   gparted\
