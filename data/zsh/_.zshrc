@@ -89,7 +89,6 @@ plugins=(
   tmux
   zsh-autosuggestions
 )
-
 # Remove tmux plugin if tmux is not installed
 which tmux >/dev/null 2>&1
 if [ $? -ne 0 ]; then
@@ -99,6 +98,9 @@ fi
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+# Load aliases
+[[ -e ~/.dotfiles/data/shell/alias.sh ]] && emulate sh -c 'source ~/.dotfiles/data/shell/alias.sh'
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
