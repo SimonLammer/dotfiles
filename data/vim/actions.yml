@@ -1,0 +1,5 @@
+link:
+  action: link
+  existing: _.vimrc
+  link: ~/.vimrc
+  override: true

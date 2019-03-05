@@ -289,7 +289,17 @@ git clone https://github.com/SimonLammer/dotfiles ~/.dotfiles
 
 SSH:
 ~~~shell
-git clone git@github.com:SimonLammer/dotfiles.git
+git clone git@github.com:SimonLammer/dotfiles.git ~/.dotfiles
+~~~
+
+Create symlinks:
+~~~shell
+~/.dotfiles/gradlew \
+  actions-git-link\
+  actions-tmux-link\
+  actions-vim-link\
+  actions-vscode-link\
+  actions-zsh-link
 ~~~
 
 ## Link [dotfiles]

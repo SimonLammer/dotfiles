@@ -1,0 +1,9 @@
+link:
+- action: link
+  existing: keybindings.json
+  link: ~/.config/Code/User/keybindings.json
+  override: true
+- action: link
+  existing: settings.json
+  link: ~/.config/Code/User/settings.json
+  override: true

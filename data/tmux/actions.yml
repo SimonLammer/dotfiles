@@ -1,0 +1,9 @@
+link:
+- action: link
+  existing: _.tmux.conf
+  link: ~/.tmux.conf
+  override: true
+- action: link
+  existing: scripts
+  link: ~/.tmux/scripts
+  override: true
