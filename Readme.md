@@ -381,6 +381,12 @@ ln -s $(pwd)/PlayOnLinux ~/.PlayOnLinux
 
 ## Steam (within POL)
 
+### No voices
+
+[Reference](https://www.reddit.com/r/linux_gaming/comments/99i4se/skyrim_on_linux_steam_play_no_voiceno_music_audio/)
+
+In the wine `Libraries` tab create overrides for the properties `xaudio2_6` and `xaudio2_7`, setting both to `native`.
+
 ### Error: Content Servers Unreachable
 
 [Reference](https://www.reddit.com/r/wine_gaming/comments/8r0gh6/steam_in_winedevel_content_servers_unreachable/)
