@@ -132,6 +132,9 @@ gnome-shell-extension-installer 15 1160 1236 1267 8 352 906 1112 826 --restart-s
 ### Configuring extensions
 
 ~~~
+# Night light color temperature
+gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 4800
+
 # Dash-to-Panel
 gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel panel-position 'TOP'
 gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel panel-size 24
