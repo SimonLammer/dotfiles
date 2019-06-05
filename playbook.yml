@@ -1,0 +1,9 @@
+---
+
+- name: run the playbook tasks on the localhost
+  hosts: local
+  tasks:
+
+  - name: play sound
+    raw:  aplay /usr/share/sounds/alsa/Front_Center.wav
+
