@@ -7,7 +7,6 @@
 #  _ | (___) |___) (___   | |   | (____/\| (___) || )  \  || )      ___) (___| (___) |
 # (_)(_______)\_______/   )_(   (_______/(_______)|/    )_)|/       \_______/(_______)
 #                                                                                     
-
 [user]
 	email = lammer.simon@gmail.com
 	name = Simon Lammer
@@ -28,11 +27,15 @@
 	ap = add -p
 	co = checkout
 	cob = checkout -b
-	ca = commit --amend
+	ca = commit -a
 	cm = commit -m
 	cam = commit -am
 	d = diff
 	dc = diff --cached
+
+  # https://stackoverflow.com/questions/3231759/how-can-i-visualize-per-character-differences-in-a-unified-diff-file/25634420#25634420
+	ds = diff --color-words="[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+" # --word-diff=plain
+
 	last = log HEAD -1 --decorate
 	lg = log --all --oneline --graph --decorate
 	unstage = reset HEAD

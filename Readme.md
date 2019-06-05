@@ -502,6 +502,12 @@ To fix this, create the folder mentioned:
 mkdir ~/.steam/ubuntu12_32/steam-runtime
 ~~~
 
+# SVN
+
+~~~
+sudo apt install subversion
+~~~
+
 # Tmux 
 ~~~shell
 sudo apt install -y tmux xclip

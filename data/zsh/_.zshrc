@@ -129,6 +129,8 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias cdl="source ~/.dotfiles/data/zsh/cdl.sh $@"
+alias jl="source ~/.dotfiles/data/zsh/jl.sh $@"
 
 # tmux
 which tmux >/dev/null 2>&1

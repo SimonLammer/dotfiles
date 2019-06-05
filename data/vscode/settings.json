@@ -110,4 +110,6 @@
         "statusBar.noFolderBackground": "#076678",
         "statusBar.debuggingBackground": "#076678"
     },
+    "window.titleBarStyle": "native",
+    "editor.quickSuggestionsDelay": 20,
 }
