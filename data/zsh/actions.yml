@@ -1,5 +1,0 @@
-link:
-  action: link
-  existing: _.zshrc
-  link: ~/.zshrc
-  override: true

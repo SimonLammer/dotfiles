@@ -6,9 +6,9 @@
     "ahead": "#[fg=colour177]",
     "behind": "#[fg=colour167]",
     "staged": "#[fg=colour76]",
+    "unmerged": "#[fg=colour196]",
     "unstaged": "#[fg=colour160]",
-    "untracked": "#[fg=colour195]",
-    "unmerged": "#[fg=colour196]"
+    "untracked": "#[fg=colour195]"
   },
   "git-flag-symbol": {
     "ahead": "↑",

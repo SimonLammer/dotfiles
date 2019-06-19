@@ -1,9 +1,25 @@
 ---
-
-- name: run the playbook tasks on the localhost
+- name: dotfiles
   hosts: local
+  vars_files:
+  - data/vars.yml
   tasks:
 
-  - name: play sound
-    raw:  aplay /usr/share/sounds/alsa/Front_Center.wav
+  - import_tasks: tasks/load_variables.yml
 
+  - import_tasks: tasks/render_templates.yml
+
+  - name: include subtasks from data directory
+    include_tasks: '{{ data_dir }}'
+    vars:
+      data_dirname: '{{ data_dir.split("/")[1] }}'
+    with_items: '{{ "data/**/tasks.yml" | fileglob }}'
+    loop_control:
+      loop_var: data_dir
+  
+  - name: create symlinks
+    file:
+      src: '~/.dotfiles/data/{{ item.src }}'
+      dest: '{{ item.dest }}'
+      state: link
+    with_items: '{{ symlinks }}'

@@ -1,5 +1,0 @@
-link:
-  action: link
-  existing: _.gitconfig
-  link: ~/.gitconfig
-  override: true

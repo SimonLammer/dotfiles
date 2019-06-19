@@ -1,0 +1,11 @@
+---
+- name: render variable templates
+  template:
+    src: '{{ item }}'
+    dest: '{{ item | splitext | first }}'
+  with_items: '{{ "data/**/vars.yml.j2" | fileglob }}' 
+
+- name: include variables
+  include_vars:
+    file: '{{ item }}'
+  loop: '{{ "data/**/vars.yml" | fileglob }}'

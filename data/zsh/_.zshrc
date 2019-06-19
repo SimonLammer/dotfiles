@@ -154,7 +154,14 @@ if [ $? -eq 0 ] && [ -z "$TMUX" ]; then
   fi
 fi
 
+# Spark
+if [ -d "/opt/spark" ]; then
+  export SPARK_HOME=/opt/spark
+  export PATH="$PATH:$SPARK_HOME/bin"
+fi
+
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 if [ -d "$HOME/.rvm/bin" ]; then
   export PATH="$PATH:$HOME/.rvm/bin"
 fi
+

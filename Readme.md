@@ -6,6 +6,20 @@ ASCII art fonts were created using:
 
 Below is a collection of wisdom, useful for setting up computers.
 
+# Usage
+
+1. Install git and clone repo:
+
+    ~~~
+    sudo apt install -y git && git clone git@github.com:SimonLammer/dotfiles.git ~/.dotfiles
+    ~~~
+
+2. Perform ansible magic:
+
+    ~~~
+    ansible-playbook playbook.yml -e 'ansible_python_interpreter=/usr/bin/python3'
+    ~~~
+
 ---
 
 # Grub
