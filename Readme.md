@@ -12,6 +12,55 @@ Below is a collection of wisdom, useful for setting up computers.
 
 [Partition based LUKS encryption](https://medium.com/@chrishantha/encrypting-disks-on-ubuntu-19-04-b50bfc65182a)
 
+1. Wipe partition (named `crypt`) to use as encrypted physical LVM host
+
+    ~~~
+    sudo cryptsetup open --type plain -d /dev/urandom /dev/sda5 crypt
+    sudo dd if=/dev/zero of=/dev/mapper/crypt status=progress
+    sudo cryptsetup close crypt
+    ~~~
+
+2. Create physical volume:
+
+    ~~~
+    sudo pvcreate /dev/sdX#
+    ~~~
+
+3. Create volume group:
+
+    ~~~
+    sudo vgcreate vg /dev/sdX#
+    ~~~
+
+4. Create logical volumes:
+
+    ~~~
+    sudo lvcreate -L 16GiB -n cryptswap vg
+    sudo lvcreate -L 30GiB -n cryptroot vg
+    ~~~
+
+5. Setup LUKS header on volumes:
+
+    ~~~
+    sudo cryptsetup luksFormat /dev/vg/cryptswap -s 512 -h sha512
+    sudo cryptsetup luksFormat /dev/vg/cryptroot -s 512 -h sha512
+    ~~~
+
+6. Open volumes:
+
+    ~~~
+    sudo cryptsetup open /dev/vg/cryptswap cryptswap
+    sudo cryptsetup open /dev/vg/cryptswap cryptroot
+    ~~~
+    *Provide the passphrase(s) from step 5.*
+
+7. Format volumes:
+
+    ~~~
+    sudo mkswap /dev/mapper/cryptswap
+    sudo mkfs.ext4 /dev/mapper/cryptroot
+    ~~~
+
 # Grub
 
 [Reference](http://tipsonubuntu.com/2018/03/11/install-grub-customizer-ubuntu-18-04-lts/)
