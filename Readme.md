@@ -62,6 +62,9 @@ Below is a collection of wisdom, useful for setting up computers.
     ~~~
 
 8. Install OS on `/dev/mapper/cryptroot`
+
+    *Make sure to use a separate (non-encrypted) partition for `/boot`.*
+
 9. Load encrypted partitions at startup:
 
     `chroot`:
