@@ -15,7 +15,7 @@ Below is a collection of wisdom, useful for setting up computers.
 1. Wipe partition (named `crypt`) to use as encrypted physical LVM host
 
     ~~~
-    sudo cryptsetup open --type plain -d /dev/urandom /dev/sda5 crypt
+    sudo cryptsetup open --type plain -d /dev/urandom /dev/sdaX# crypt
     sudo dd if=/dev/zero of=/dev/mapper/crypt status=progress
     sudo cryptsetup close crypt
     ~~~
@@ -59,6 +59,37 @@ Below is a collection of wisdom, useful for setting up computers.
     ~~~
     sudo mkswap /dev/mapper/cryptswap
     sudo mkfs.ext4 /dev/mapper/cryptroot
+    ~~~
+
+8. Install OS on `/dev/mapper/cryptroot`
+9. Load encrypted partitions at startup:
+
+    `chroot`:
+    
+    ~~~
+    sudo mount /dev/mapper/cryptroot /mnt
+    sudo mount /dev/sdX# /mnt/boot
+    sudo mount --bind /dev /mnt/dev
+    sudo chroot /mnt
+    mount -t proc proc /proc
+    mount -t sysfs sys /sys
+    mount -t devpts devpts /dev/pts
+    ~~~
+    
+    Add devices to `/etc/crypttab`:
+    
+    ~~~
+    # <target name> <source device> <key file> <options>
+    cryptroot UUID=<cryptroot UUID> none luks,discard
+    cryptswap UUID=<cryptswap UUID> none luks,discard
+    ~~~
+    
+    *Obtain UUIDs via `sudo blkid /dev/vg/cryptroot`.*
+    
+    Update initramfs:
+    
+    ~~~
+    update-initramfs -k all -c
     ~~~
 
 # Grub
