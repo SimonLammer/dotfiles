@@ -83,8 +83,8 @@ Below is a collection of wisdom, useful for setting up computers.
     
     ~~~
     # <target name> <source device> <key file> <options>
-    cryptroot UUID=<cryptroot UUID> none luks,discard
-    cryptswap UUID=<cryptswap UUID> none luks,discard
+    cryptroot UUID=<UUID of /dev/vg/cryptroot> none luks,discard
+    cryptswap UUID=<UUID of /dev/vg/cryptswap> none luks,discard
     ~~~
     
     *Obtain UUIDs via `sudo blkid /dev/vg/cryptroot`.*
@@ -97,10 +97,29 @@ Below is a collection of wisdom, useful for setting up computers.
 
 ## Use the same passphrase for multiple LUKS encrypted volumes
 
-~~~
-sudo lvcreate -l 5 -n dont_name_keys vg
-sudo cryptsetup luksFormat /dev/vg/dont_name_keys -s 512 -h sha512
-~~~
+1. Terminal magic
+
+    ~~~
+    sudo lvcreate -l 5 -n dont_name_keys vg
+    sudo cryptsetup luksFormat /dev/vg/dont_name_keys -s 512 -h sha512
+    sudo cryptsetup open /dev/vg/dont_name_keys keys
+    sudo mkfs.ext4 /dev/mapper/keys
+    sudo mount /dev/mapper/keys /mnt
+    sudo dd if=/dev/urandom of=/mnt/dont_name_keyfile bs=1024 count=4
+    sudo chmod 0400 /mnt/dont_name_keyfile
+    sudo cryptsetup luksAddKey /dev/vg/cryptswap dont_name_keyfile
+    sudo cryptsetup luksAddKey /dev/vg/cryptroot dont_name_keyfile
+    sudo mkdir -p /disks/dont_name_keys
+    ~~~
+
+2. Edit `/etc/fstab`
+
+    - Add `dev/mapper/dont_name_keys /disks/dont_name_keys ext4 errors=remount-ro 0 1`.
+
+3. Edit `/etc/crypttab`
+
+    - Add `dont_name_keys UUID=<UUID of /dev/vg/dont_name_keys> none luks,discard`.
+    - Edit the other lines to use the keyfile `/disks/dont_name_keys/dont_name_keyfile` instead of `none`.
 
 A size of 5 extents was the lowest I could go without getting these messages:
 
