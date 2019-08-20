@@ -1,5 +1,5 @@
 ---
-- name: dotfiles
+- name: dotfiles - Setup
   hosts: local
   vars_files:
   - data/vars.yml
@@ -7,7 +7,27 @@
 
   - import_tasks: tasks/load_variables.yml
 
-  - import_tasks: tasks/render_templates.yml
+  - name: install git
+    package:
+      name: git
+      state: present
+    become: yes
+    
+  - name: clone dotfiles
+    git:
+      repo: https://github.com/SimonLammer/dotfiles.git
+      dest: ~/.dotfiles
+      force: no
+      update: no
+
+  - debug: var=packages
+
+  - name: install packages
+    package:
+      name: '{{ item }}'
+      state: present
+    with_items: '{{ packages }}'
+    become: yes
 
   - name: include subtasks from data directory
     include_tasks: '{{ data_dir }}'

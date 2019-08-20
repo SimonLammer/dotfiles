@@ -1,0 +1,10 @@
+---
+- name: install vsc
+  include_role:
+    name: gantsign.visual-studio-code
+  vars:
+    visual_studio_code_build: stable
+    users:
+    - username: '{{ ansible_user_id }}'
+      visual_studio_code_extensions: '{{ vsc_extensions }}'
+

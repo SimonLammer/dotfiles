@@ -17,7 +17,8 @@ Below is a collection of wisdom, useful for setting up computers.
 2. Perform ansible magic:
 
     ~~~
-    ansible-playbook playbook.yml -e 'ansible_python_interpreter=/usr/bin/python3'
+    ansible-galaxy install -r requirements.yml
+    ansible-playbook playbook.yml -e 'ansible_python_interpreter=/usr/bin/python3' -u slammer
     ~~~
 
 ---

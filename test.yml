@@ -1,0 +1,12 @@
+---
+- name: dotfiles - Gnome
+  hosts: local
+  vars_files:
+  - data/vars.yml
+  tasks:
+  - import_tasks: tasks/load_variables.yml
+  - name: customize gnome
+    include_role:
+      name: SimonLammer.customize-gnome
+    vars:
+      gnome_user: '{{ ansible_user_id }}'

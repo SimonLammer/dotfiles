@@ -1,0 +1,8 @@
+vsc_extensions:
+- coenraads.bracket-pair-colorizer
+- Gruntfuggly.activitusbar
+- kenhowardpdx.vscode-gist
+- ms-python.python
+- ms-vscode.cpptools
+- vscodevim.vim
+

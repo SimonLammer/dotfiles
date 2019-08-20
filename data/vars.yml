@@ -12,6 +12,71 @@ symlinks:
 - src: zsh/_.zshrc
   dest: ~/.zshrc
 
+packages:
+- autojump
+- cmatrix
+- cowsay
+- curl
+- firefox
+- gparted
+- htop
+- inkscape
+- openjdk-8-doc
+- openjdk-8-jdk
+- playonlinux
+- python3
+- ranger
+- silversearcher-ag
+- sqlitebrowser
+- ssh
+- steam
+- texlive-full
+- tmux
+- vim
+- vlc
+- winetricks
+- xclip
+- zsh
+
+gnome_extensions:
+- id: 15
+- id: 1160
+- id: 1236
+- id: 1267
+- id: 8
+- id: 352
+- id: 906
+- id: 1112
+- id: 826
+
+gnome_settings:
+- schema: org.gnome.settings-daemon.plugins.color
+  key: night-light-temperature
+  value: 4800
+- schema: org.gnome.shell.extensions.dash-to-panel
+  key: panel-position
+  value: TOP
+
+# Dash-to-Panel
+# gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel panel-position 'TOP'
+# gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel panel-size 24
+# gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel appicon-padding 0
+# gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel appicon-margin 0
+# gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel taskbar-position 'CENTEREDMONITOR'
+# gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel show-activities-button true
+# gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel isolate-workspaces true
+
+# NoTitlebar
+# gsettings --schemadir ~/.local/share/gnome-shell/extensions/no-title-bar@franglais125.gmail.com/schemas set org.gnome.shell.extensions.no-title-bar only-main-monitor false
+
+# Middleclickclose (Quit Close in Overview)
+# gsettings --schemadir ~/.local/share/gnome-shell/extensions/middleclickclose@paolo.tranquilli.gmail.com/schemas set org.gnome.shell.extensions.middleclickclose rearrange-delay 200
+
+# Screenshot Tool
+# gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot '' # default: 'Print'
+# gsettings --schemadir ~/.local/share/gnome-shell/extensions/gnome-shell-screenshot@ttll.de/schemas set org.gnome.shell.extensions.screenshot shortcut-select-desktop "['Print']"
+
+
 vimmodes:
   # console colors: https://superuser.com/questions/285381/how-does-the-tmux-color-palette-work/1104214#1104214
   normal:
