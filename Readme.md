@@ -95,6 +95,31 @@ Below is a collection of wisdom, useful for setting up computers.
     update-initramfs -k all -c
     ~~~
 
+## Use the same passphrase for multiple LUKS encrypted volumes
+
+~~~
+sudo lvcreate -l 5 -n dont_name_keys vg
+sudo cryptsetup luksFormat /dev/vg/dont_name_keys -s 512 -h sha512
+~~~
+
+A size of 5 extents was the lowest I could go without getting these messages:
+
+- `cryptsetup luksFormat ...`:
+
+    ~~~
+    WARNING: Data offset is outside of currently available data device.
+    Device wipe error, offset 8388608.
+    Cannot wipe header on device /dev/vg/keys.
+    ~~~
+
+- `cryptsetup open ...`
+
+    ~~~
+    Requested offset is beyond real size of device /dev/vg/_.
+    ~~~
+
+[Similar solution](https://eve.gd/2012/11/02/luks-encrypting-multiple-partitions-on-debianubuntu-with-a-single-passphrase/)
+
 # Grub
 
 [Reference](http://tipsonubuntu.com/2018/03/11/install-grub-customizer-ubuntu-18-04-lts/)
