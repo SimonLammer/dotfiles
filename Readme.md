@@ -8,6 +8,10 @@ Below is a collection of wisdom, useful for setting up computers.
 
 ---
 
+# Encryption
+
+[Partition based LUKS encryption](https://medium.com/@chrishantha/encrypting-disks-on-ubuntu-19-04-b50bfc65182a)
+
 # Grub
 
 [Reference](http://tipsonubuntu.com/2018/03/11/install-grub-customizer-ubuntu-18-04-lts/)
