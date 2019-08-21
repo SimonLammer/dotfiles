@@ -10,6 +10,8 @@ Below is a collection of wisdom, useful for setting up computers.
 
 # Encryption
 
+## Disk encryption (excluding /boot)
+
 [Partition based LUKS encryption](https://medium.com/@chrishantha/encrypting-disks-on-ubuntu-19-04-b50bfc65182a)
 
 ~~~
@@ -122,49 +124,20 @@ sudo lvcreate -L 35G -n root $volume_group
     update-initramfs -k all -c
     ~~~
 
-## Use the same passphrase for multiple LUKS encrypted volumes
+## eCryptfs
 
-1. Terminal magic
+- Encrypt existing home directory
 
+    *Run this as another user*
     ~~~
-    sudo lvcreate -l 5 -n dont_name_keys vg
-    sudo cryptsetup luksFormat /dev/vg/dont_name_keys -s 512 -h sha512
-    sudo cryptsetup open /dev/vg/dont_name_keys keys
-    sudo mkfs.ext4 /dev/mapper/keys
-    sudo mount /dev/mapper/keys /mnt
-    sudo dd if=/dev/urandom of=/mnt/dont_name_keyfile bs=1024 count=4
-    sudo chmod 0400 /mnt/dont_name_keyfile
-    sudo cryptsetup luksAddKey /dev/vg/cryptswap dont_name_keyfile
-    sudo cryptsetup luksAddKey /dev/vg/cryptroot dont_name_keyfile
-    sudo mkdir -p /disks/dont_name_keys
+    ecryptfs-migrate-home -u user_to_migrate
     ~~~
 
-2. Edit `/etc/fstab`
-
-    - Add `dev/mapper/dont_name_keys /disks/dont_name_keys ext4 errors=remount-ro 0 1`.
-
-3. Edit `/etc/crypttab`
-
-    - Add `dont_name_keys UUID=<UUID of /dev/vg/dont_name_keys> none luks,discard`.
-    - Edit the other lines to use the keyfile `/disks/dont_name_keys/dont_name_keyfile` instead of `none`.
-
-A size of 5 extents was the lowest I could go without getting these messages:
-
-- `cryptsetup luksFormat ...`:
+- Manually decrypt directory
 
     ~~~
-    WARNING: Data offset is outside of currently available data device.
-    Device wipe error, offset 8388608.
-    Cannot wipe header on device /dev/vg/keys.
+    ecryptfs-recover-private path/to/.Private
     ~~~
-
-- `cryptsetup open ...`
-
-    ~~~
-    Requested offset is beyond real size of device /dev/vg/_.
-    ~~~
-
-[Similar solution](https://eve.gd/2012/11/02/luks-encrypting-multiple-partitions-on-debianubuntu-with-a-single-passphrase/)
 
 # Grub
 
