@@ -95,6 +95,35 @@ Below is a collection of wisdom, useful for setting up computers.
     update-initramfs -k all -c
     ~~~
 
+# LVM2 Snapshots
+
+*(run as root)*
+~~~
+lvcreate -L 100M -n original vg
+mkfs.ext4 /dev/vg/original
+mkdir /mnt/original
+mount /dev/vg/original /mnt/original
+echo "This is the content of a file." > /mnt/original/file.txt
+
+lvcreate -L 12M -s /dev/vg/original -n snap vg
+mkdir /mnt/snapshot
+mount /dev/vg/snap /mnt/snapshot
+cat /mnt/snapshot/file.txt # This is the content of a file.
+
+echo "With a 2nd line." >> /mnt/original/file.txt
+diff /mnt/original/file.txt /mnt/snapshot/file.txt
+# 2d1
+# < With a 2nd line.
+
+umount /mnt/original /mnt/snapshot
+
+lvconvert --merge /dev/vg/snap
+# Merging of volume vg/snap started.
+# vg/original: Merged: 100,00%
+~~~
+
+[Reference](https://www.theurbanpenguin.com/maning-lvm-snapshots/)
+
 # Grub
 
 [Reference](http://tipsonubuntu.com/2018/03/11/install-grub-customizer-ubuntu-18-04-lts/)
