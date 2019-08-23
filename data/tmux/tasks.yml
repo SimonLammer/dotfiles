@@ -5,5 +5,5 @@
     state: directory
 
 - name: install tmux-tpm
-  include_role:
+  import_role:
     name: suzuki-shunsuke.tmux-tpm

@@ -1,6 +1,6 @@
 ---
 - name: install vsc
-  include_role:
+  import_role:
     name: gantsign.visual-studio-code
   vars:
     visual_studio_code_build: stable

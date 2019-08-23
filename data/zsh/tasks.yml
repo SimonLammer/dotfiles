@@ -1,6 +1,6 @@
 ---
 - name: install zsh & oh-my-zsh
-  include_role:
+  import_role:
     name: gantsign.oh-my-zsh
   vars:
     users:
