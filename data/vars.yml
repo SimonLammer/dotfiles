@@ -46,6 +46,9 @@ gnome_gsettings:
 - schema: org.gnome.desktop.wm.preferences
   key: "button-layout"
   value: "close,minimize,maximize:"
+- schema: org.gnome.mutter
+  key: "workspaces-only-on-primary"
+  value: "false"
 - schema: org.gnome.shell.extensions.dash-to-panel
   schemadir: ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas
   key: "panel-position"

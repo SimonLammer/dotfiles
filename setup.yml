@@ -18,8 +18,6 @@
       force: no
       update: no
 
-  - debug: var=packages
-
   - name: install packages
     package:
       name: '{{ item }}'
@@ -34,10 +32,11 @@
     with_items: '{{ "data/**/tasks.yml" | fileglob }}'
     loop_control:
       loop_var: data_dir
-  
+
   - name: create symlinks
     file:
       src: '~/.dotfiles/data/{{ item.src }}'
       dest: '{{ item.dest }}'
       state: link
+      force: yes
     with_items: '{{ symlinks }}'

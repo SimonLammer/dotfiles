@@ -3,6 +3,8 @@ symlinks:
   dest: ~/.gitconfig
 - src: tmux/_.tmux.conf
   dest: ~/.tmux.conf
+- src: tmux/scripts
+  dest: ~/.tmux/scripts
 - src: vim/_.vimrc
   dest: ~/.vimrc
 - src: vscode/keybindings.json
@@ -36,7 +38,7 @@ packages:
 - vlc
 - winetricks
 - xclip
-- zsh
+# - zsh # will be installed in data/zsh/tasks.yml
 
 gnome_extensions_j2:
 - id: 15

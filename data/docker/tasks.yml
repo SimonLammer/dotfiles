@@ -1,0 +1,11 @@
+---
+- name: install docker
+  include_role:
+    name: geerlingguy.docker
+  become: yes
+
+- name: clone SimonLammer/services
+  git:
+    repo: https://github.com/SimonLammer/services.git
+    dest: /services
+  become: yes
