@@ -1,0 +1,17 @@
+gnome_extensions:
+{% for ext in gnome_extensions_j2 %}
+- id: {{ ext.id }}
+  enable: yes
+{% endfor %}
+
+gnome_gsettings:
+{% for i in gnome_gsettings_j2 %}
+{% for k, v in i.settings.items() %}
+- schema: {{ i.schema }}
+{% if 'schemadir' in i %}
+  schemadir: {{ i.schemadir }}
+{% endif %}
+  key: {{ k | to_json }}
+  value: {{ v | to_json }}
+{% endfor %}
+{% endfor %}

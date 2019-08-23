@@ -1,8 +1,6 @@
 ---
 - name: dotfiles
   hosts: local
-  vars_files:
-  - data/vars.yml
   tasks:
   - import_tasks: tasks/load_variables.yml
   - import_tasks: tasks/render_templates.yml

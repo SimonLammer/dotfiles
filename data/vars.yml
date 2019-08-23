@@ -1,104 +1,104 @@
-symlinks:
-- src: git/_.gitconfig
-  dest: ~/.gitconfig
-- src: tmux/_.tmux.conf
-  dest: ~/.tmux.conf
-- src: vim/_.vimrc
-  dest: ~/.vimrc
-- src: vscode/keybindings.json
-  dest: ~/.config/Code/User/keybindings.json
-- src: vscode/settings.json
-  dest: ~/.config/Code/User/settings.json
-- src: zsh/_.zshrc
-  dest: ~/.zshrc
-
-packages:
-- autojump
-- cmatrix
-- cowsay
-- curl
-- firefox
-- gparted
-- htop
-- inkscape
-- openjdk-8-doc
-- openjdk-8-jdk
-- playonlinux
-- python3
-- ranger
-- silversearcher-ag
-- sqlitebrowser
-- ssh
-- steam
-- texlive-full
-- tmux
-- vim
-- vlc
-- winetricks
-- xclip
-- zsh
-
 gnome_extensions:
 - id: 15
+  enable: yes
 - id: 1160
+  enable: yes
 - id: 1236
+  enable: yes
 - id: 1267
+  enable: yes
 - id: 8
+  enable: yes
 - id: 352
+  enable: yes
 - id: 906
+  enable: yes
 - id: 1112
+  enable: yes
 - id: 826
+  enable: yes
 
-gnome_settings:
+gnome_gsettings:
 - schema: org.gnome.settings-daemon.plugins.color
-  key: night-light-temperature
+  key: "night-light-temperature"
   value: 4800
+- schema: org.gnome.settings-daemon.plugins.color
+  key: "night-light-enabled"
+  value: "true"
+- schema: org.gnome.settings-daemon.plugins.color
+  key: "night-light-schedule-automatic"
+  value: "true"
+- schema: org.gnome.settings-daemon.plugins.media-keys
+  key: "screenshot"
+  value: "''"
+- schema: org.gnome.desktop.interface
+  key: "gtk-theme"
+  value: "Yaru-dark"
+- schema: org.gnome.desktop.interface
+  key: "clock-show-seconds"
+  value: "false"
+- schema: org.gnome.desktop.interface
+  key: "clock-show-weekday"
+  value: "true"
+- schema: org.gnome.desktop.interface
+  key: "clock-show-date"
+  value: "true"
+- schema: org.gnome.desktop.wm.preferences
+  key: "button-layout"
+  value: "close,minimize,maximize:"
 - schema: org.gnome.shell.extensions.dash-to-panel
-  key: panel-position
-  value: TOP
-
-# Dash-to-Panel
-# gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel panel-position 'TOP'
-# gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel panel-size 24
-# gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel appicon-padding 0
-# gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel appicon-margin 0
-# gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel taskbar-position 'CENTEREDMONITOR'
-# gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel show-activities-button true
-# gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel isolate-workspaces true
-
-# NoTitlebar
-# gsettings --schemadir ~/.local/share/gnome-shell/extensions/no-title-bar@franglais125.gmail.com/schemas set org.gnome.shell.extensions.no-title-bar only-main-monitor false
-
-# Middleclickclose (Quit Close in Overview)
-# gsettings --schemadir ~/.local/share/gnome-shell/extensions/middleclickclose@paolo.tranquilli.gmail.com/schemas set org.gnome.shell.extensions.middleclickclose rearrange-delay 200
-
-# Screenshot Tool
-# gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot '' # default: 'Print'
-# gsettings --schemadir ~/.local/share/gnome-shell/extensions/gnome-shell-screenshot@ttll.de/schemas set org.gnome.shell.extensions.screenshot shortcut-select-desktop "['Print']"
-
-
-vimmodes:
-  # console colors: https://superuser.com/questions/285381/how-does-the-tmux-color-palette-work/1104214#1104214
-  normal:
-    color:
-      console: 25
-      hex:     "#076678"
-  insert:
-    color:
-      console: 71
-      hex:     "#427b58"
-  replace:
-    color:
-      console: 124
-      hex:     "#af3a03"
-  visual: &vim-mode-visual
-    color:
-      console: 214
-      hex:     "#b57614"
-  visualline:
-    <<: *vim-mode-visual
-  visualblock:
-    <<: *vim-mode-visual
-
-editor:
-  tabSize: 2
+  schemadir: ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas
+  key: "panel-position"
+  value: "TOP"
+- schema: org.gnome.shell.extensions.dash-to-panel
+  schemadir: ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas
+  key: "panel-size"
+  value: 24
+- schema: org.gnome.shell.extensions.dash-to-panel
+  schemadir: ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas
+  key: "appicon-padding"
+  value: 2
+- schema: org.gnome.shell.extensions.dash-to-panel
+  schemadir: ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas
+  key: "appicon-margin"
+  value: 0
+- schema: org.gnome.shell.extensions.dash-to-panel
+  schemadir: ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas
+  key: "taskbar-position"
+  value: "CENTEREDMONITOR"
+- schema: org.gnome.shell.extensions.dash-to-panel
+  schemadir: ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas
+  key: "show-activities-button"
+  value: "true"
+- schema: org.gnome.shell.extensions.dash-to-panel
+  schemadir: ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas
+  key: "isolate-workspaces"
+  value: "true"
+- schema: org.gnome.shell.extensions.dash-to-panel
+  schemadir: ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas
+  key: "dot-style-unfocused"
+  value: "DOTS"
+- schema: org.gnome.shell.extensions.dash-to-panel
+  schemadir: ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas
+  key: "dot-position"
+  value: "TOP"
+- schema: org.gnome.shell.extensions.dash-to-panel
+  schemadir: ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas
+  key: "dot-size"
+  value: 3
+- schema: org.gnome.shell.extensions.dash-to-panel
+  schemadir: ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas
+  key: "show-showdesktop-button"
+  value: "false"
+- schema: org.gnome.shell.extensions.middleclickclose
+  schemadir: ~/.local/share/gnome-shell/extensions/middleclickclose@paolo.tranquilli.gmail.com/schemas
+  key: "rearrange-delay"
+  value: 200
+- schema: org.gnome.shell.extensions.no-title-bar
+  schemadir: ~/.local/share/gnome-shell/extensions/no-title-bar@franglais125.gmail.com/schemas
+  key: "only-main-monitor"
+  value: "false"
+- schema: org.gnome.shell.extensions.screenshot
+  schemadir: ~/.local/share/gnome-shell/extensions/gnome-shell-screenshot@ttll.de/schemas
+  key: "shortcut-select-desktop"
+  value: "\"['Print']\""
