@@ -1,0 +1,4 @@
+---
+- name: install veracrypt
+  include_role:
+    name: rodrigorega.veracrypt
