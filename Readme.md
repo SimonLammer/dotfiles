@@ -210,6 +210,17 @@ Remove backup **after making sure everything works**:
 sudo rm -Rf /disks/main/home-backup
 ```
 
+# Systemd
+
+## Speed up boot by disabling services
+
+[Reference](https://www.maketecheasier.com/make-linux-boot-faster/)
+
+~~~
+systemd-analyze blame
+systemd-analyze critical-chain
+~~~
+
 # Unity
 
 ## Tweak tool
