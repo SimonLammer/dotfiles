@@ -605,6 +605,18 @@ ln -s $(pwd)/VirtualBox\ VMs ~/.
 
 [ISO Download page](https://www.microsoft.com/en-us/software-download/windows10ISO)
 
+## USB Passthrough
+
+### No devices available
+
+Add the user to the `vboxusers` group.
+
+~~~
+sudo adduser $USER vboxusers
+~~~
+
+[Reference](https://superuser.com/a/957636)
+
 # Visual Studio Code
 
 [Download page](https://code.visualstudio.com/download)
