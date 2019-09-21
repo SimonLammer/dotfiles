@@ -8,6 +8,74 @@ Below is a collection of wisdom, useful for setting up computers.
 
 ---
 
+# System setup
+
+## Partitioning
+
+| Partition | Name | Size |
+|:----------|:----:|-----:|
+| /dev/sda1 | EFI  | 500 MiB |
+| /dev/sda2 | luksboot | 500 MiB |
+| /dev/sda3 | luks | \<rest\> |
+
+*I used a seperate luks device for /boot, because grub doesn't support luks2 yet](https://wiki.archlinux.org/index.php/GRUB#Encrypted_/boot), but I still want to use where possible*
+
+### Setting up LUKS devices
+
+~~~
+cryptsetup luksFormat /dev/sda2 --type luks1
+cryptsetup luksFormat /dev/sda3
+
+cryptsetup open /dev/sda2 luksboot
+cryptsetup open /dev/sda3 luks
+~~~
+
+#### Format luksboot
+
+~~~
+mkfs.ext4 /dev/mapper/luksboot
+~~~
+
+#### Setting up LVM on LUKS
+
+~~~
+pvcreate /dev/mapper/luks
+vgcreate luks /dev/mapper/luks
+lvcreate -n swap -L 20G luks
+lvcreate -n root -L 35G luks
+lvcreate -n data -L 1.7T luks
+~~~
+
+## Install OS (ubuntu)
+
+~~~
+apt install -y ubiquity # updating the installer won't hurt
+ubiquity -b # install without bootloader
+~~~
+
+## Install bootloader
+
+### Chroot into new installation
+
+~~~
+mount /dev/luks/root /mnt
+mound /dev/sda1 /mnt/boot/efi
+for fs in proc sys dev dev/pts run etc/resolv.conf; do mount --bind /$fs /target/$fs; done
+chroot /mnt
+~~~
+
+### Add LUKS support during grub boot
+
+Add the following lines modifications to `/etc/default/grub`:
+~~~
+GRUB_ENABLE_CRYPTODISK="y"
+GRUB_CMDLINE_LINUX="cryptodevice=/dev/sda2:luksboot"
+~~~
+
+~~~
+update-grub
+~~~
+
 # Encryption
 
 ## Disk encryption (excluding /boot)
