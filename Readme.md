@@ -8,92 +8,141 @@ Below is a collection of wisdom, useful for setting up computers.
 
 ---
 
-# Encryption
+# System setup
 
-[Partition based LUKS encryption](https://medium.com/@chrishantha/encrypting-disks-on-ubuntu-19-04-b50bfc65182a)
+## Partitioning
 
-1. Wipe partition (named `crypt`) to use as encrypted physical LVM host
+~~~
++---------------+ +----------------+ +--------------------------------------------------------+
+| EFI partition | | Boot partition | | Logical volume 1 | Logical volume 2 | Logical volume 3 |
+|               | |                | |                  |                  |                  |
+| [EFI]         | | /boot          | | [SWAP]           | /                | /disks/main      |
+|               | |                | |                  |                  |                  |
+| fat32         | | ext4           | | [swap]           | ext4             | ext4             |
+|               | |                | |                  |                  |                  |
+| 500 MiB       | | 500 MiB        | |  20 GiB          | 35 GiB           | <Rest>           |
+|               | |                | |                  |                  |                  |
+|               | |                | | /dev/luks/swap   | /dev/luks/root   | /dev/luks/data   |
+|               | |                | +------------------+------------------+------------------+
+|               | |                | |             LUKS2 encrypted partition                  |
+| /dev/sda1     | | /dev/sda2      | |                    /dev/sda3                           |
++---------------+ +----------------+ +--------------------------------------------------------+
+~~~
 
-    ~~~
-    sudo cryptsetup open --type plain -d /dev/urandom /dev/sdaX# crypt
-    sudo dd if=/dev/zero of=/dev/mapper/crypt status=progress
-    sudo cryptsetup close crypt
-    ~~~
+### LUKS setup
 
-2. Create physical volume:
+~~~
+cryptsetup luksFormat /dev/sda3
+cryptsetup open /dev/sda3 luks
+~~~
 
-    ~~~
-    sudo pvcreate /dev/sdX#
-    ~~~
+#### Wipe partition
 
-3. Create volume group:
+~~~
+sudo cryptsetup open --type plain -d /dev/urandom /dev/sda3 luks
+sudo dd if=/dev/zero of=/dev/mapper/luks status=progress
+sudo cryptsetup close luks
+~~~
 
-    ~~~
-    sudo vgcreate vg /dev/sdX#
-    ~~~
+#### LVM (on LUKS) setup
 
-4. Create logical volumes:
+~~~
+pvcreate /dev/mapper/luks
+vgcreate luks /dev/mapper/luks
+lvcreate -n swap -L 20G luks
+lvcreate -n root -L 35G luks
+lvcreate -n data -L 1.7T luks
+~~~
 
-    ~~~
-    sudo lvcreate -L 16GiB -n cryptswap vg
-    sudo lvcreate -L 30GiB -n cryptroot vg
-    ~~~
+## Install OS
 
-5. Setup LUKS header on volumes:
+| Device                | Usage | Filesystem |
+|:----------------------|:------|:----------:|
+| /dev/sda1             | EFI   | fat32      |
+| /dev/sda2             | /boot | ext4       |
+| /dev/mapper/luks-root | /     | ext4       |
+| /dev/mapper/luks-swap | swap  | swap       |
 
-    ~~~
-    sudo cryptsetup luksFormat /dev/vg/cryptswap -s 512 -h sha512
-    sudo cryptsetup luksFormat /dev/vg/cryptroot -s 512 -h sha512
-    ~~~
 
-6. Open volumes:
+## Configure GRUB
 
-    ~~~
-    sudo cryptsetup open /dev/vg/cryptswap cryptswap
-    sudo cryptsetup open /dev/vg/cryptswap cryptroot
-    ~~~
-    *Provide the passphrase(s) from step 5.*
+### Chroot into new installation
 
-7. Format volumes:
+~~~
+mount /dev/luks/root /mnt
+mount /dev/sda2 /mnt/boot
+mound /dev/sda1 /mnt/boot/efi
+for fs in proc sys dev dev/pts run etc/resolv.conf; do mount --bind /$fs /mnt/$fs; done
+chroot /mnt
+~~~
 
-    ~~~
-    sudo mkswap /dev/mapper/cryptswap
-    sudo mkfs.ext4 /dev/mapper/cryptroot
-    ~~~
+### Edit `/etc/default/grub`:
+~~~
+GRUB_CMDLINE_LINUX="cryptdevice=UUID=<UUID of /dev/sda3>"
+~~~
 
-8. Install OS on `/dev/mapper/cryptroot`
+~~~
+update-grub
+~~~
 
-    *Make sure to use a separate (non-encrypted) partition for `/boot`.*
+### Edit `/etc/crypttab`:
 
-9. Load encrypted partitions at startup:
+~~~
+# <target name> <source device> <key file> <options>
+luks UUID=<UUID of /dev/sda3> none luks,discard
+~~~
 
-    `chroot`:
-    
-    ~~~
-    sudo mount /dev/mapper/cryptroot /mnt
-    sudo mount /dev/sdX# /mnt/boot
-    sudo mount --bind /dev /mnt/dev
-    sudo chroot /mnt
-    mount -t proc proc /proc
-    mount -t sysfs sys /sys
-    mount -t devpts devpts /dev/pts
-    ~~~
-    
-    Add devices to `/etc/crypttab`:
-    
-    ~~~
-    # <target name> <source device> <key file> <options>
-    cryptroot UUID=<cryptroot UUID> none luks,discard
-    cryptswap UUID=<cryptswap UUID> none luks,discard
-    ~~~
-    
-    *Obtain UUIDs via `sudo blkid /dev/vg/cryptroot`.*
-    
-    Update initramfs:
-    
-    ~~~
-    update-initramfs -k all -c
-    ~~~
+~~~
+update-initramfs -ck all
+~~~
+
+*Obtain UUIDs via `sudo blkid`.*
+
+## eCryptfs
+
+*Not necessary with FDE.*
+
+### Encrypt existing home directory
+
+*Run this as another user*
+~~~
+ecryptfs-migrate-home -u user_to_migrate
+~~~
+
+### Manually decrypt directory
+
+~~~
+ecryptfs-recover-private path/to/.Private
+~~~
+
+# LVM2 Snapshots
+
+*(run as root)*
+~~~
+lvcreate -L 100M -n original vg
+mkfs.ext4 /dev/vg/original
+mkdir /mnt/original
+mount /dev/vg/original /mnt/original
+echo "This is the content of a file." > /mnt/original/file.txt
+
+lvcreate -L 12M -s /dev/vg/original -n snap vg
+mkdir /mnt/snapshot
+mount /dev/vg/snap /mnt/snapshot
+cat /mnt/snapshot/file.txt # This is the content of a file.
+
+echo "With a 2nd line." >> /mnt/original/file.txt
+diff /mnt/original/file.txt /mnt/snapshot/file.txt
+# 2d1
+# < With a 2nd line.
+
+umount /mnt/original /mnt/snapshot
+
+lvconvert --merge /dev/vg/snap
+# Merging of volume vg/snap started.
+# vg/original: Merged: 100,00%
+~~~
+
+[Reference](https://www.theurbanpenguin.com/maning-lvm-snapshots/)
 
 # LVM2 Snapshots
 
