@@ -12,31 +12,39 @@ Below is a collection of wisdom, useful for setting up computers.
 
 ## Partitioning
 
-| Partition | Name | Size |
-|:----------|:----:|-----:|
-| /dev/sda1 | EFI  | 500 MiB |
-| /dev/sda2 | luksboot | 500 MiB |
-| /dev/sda3 | luks | \<rest\> |
+~~~
++---------------+ +----------------+ +--------------------------------------------------------+
+| EFI partition | | Boot partition | | Logical volume 1 | Logical volume 2 | Logical volume 3 |
+|               | |                | |                  |                  |                  |
+| [EFI]         | | /boot          | | [SWAP]           | /                | /disks/main      |
+|               | |                | |                  |                  |                  |
+| fat32         | | ext4           | | [swap]           | ext4             | ext4             |
+|               | |                | |                  |                  |                  |
+| 500 MiB       | | 500 MiB        | |  20 GiB          | 35 GiB           | <Rest>           |
+|               | |                | |                  |                  |                  |
+|               | |                | | /dev/luks/swap   | /dev/luks/root   | /dev/luks/data   |
+|               | |                | +------------------+------------------+------------------+
+|               | |                | |             LUKS2 encrypted partition                  |
+| /dev/sda1     | | /dev/sda2      | |                    /dev/sda3                           |
++---------------+ +----------------+ +--------------------------------------------------------+
+~~~
 
-*I used a seperate luks device for /boot, because grub doesn't support luks2 yet](https://wiki.archlinux.org/index.php/GRUB#Encrypted_/boot), but I still want to use where possible*
-
-### Setting up LUKS devices
+### LUKS setup
 
 ~~~
-cryptsetup luksFormat /dev/sda2 --type luks1
 cryptsetup luksFormat /dev/sda3
-
-cryptsetup open /dev/sda2 luksboot
 cryptsetup open /dev/sda3 luks
 ~~~
 
-#### Format luksboot
+#### Wipe partition
 
 ~~~
-mkfs.ext4 /dev/mapper/luksboot
+sudo cryptsetup open --type plain -d /dev/urandom /dev/sda3 luks
+sudo dd if=/dev/zero of=/dev/mapper/luks status=progress
+sudo cryptsetup close luks
 ~~~
 
-#### Setting up LVM on LUKS
+#### LVM (on LUKS) setup
 
 ~~~
 pvcreate /dev/mapper/luks
@@ -46,166 +54,66 @@ lvcreate -n root -L 35G luks
 lvcreate -n data -L 1.7T luks
 ~~~
 
-## Install OS (ubuntu)
+## Install OS
 
-~~~
-apt install -y ubiquity # updating the installer won't hurt
-ubiquity -b # install without bootloader
-~~~
+| Device                | Usage | Filesystem |
+|:----------------------|:------|:----------:|
+| /dev/sda1             | EFI   | fat32      |
+| /dev/sda2             | /boot | ext4       |
+| /dev/mapper/luks-root | /     | ext4       |
+| /dev/mapper/luks-swap | swap  | swap       |
 
-## Install bootloader
+
+## Configure GRUB
 
 ### Chroot into new installation
 
 ~~~
 mount /dev/luks/root /mnt
+mount /dev/sda2 /mnt/boot
 mound /dev/sda1 /mnt/boot/efi
 for fs in proc sys dev dev/pts run etc/resolv.conf; do mount --bind /$fs /target/$fs; done
 chroot /mnt
 ~~~
 
-### Add LUKS support during grub boot
-
-Add the following lines modifications to `/etc/default/grub`:
+### Edit `/etc/default/grub`:
 ~~~
-GRUB_ENABLE_CRYPTODISK="y"
-GRUB_CMDLINE_LINUX="cryptodevice=/dev/sda2:luksboot"
+GRUB_CMDLINE_LINUX="cryptdevice=UUID=<UUID of /dev/sda3>"
 ~~~
 
 ~~~
 update-grub
 ~~~
 
-# Encryption
-
-## Disk encryption (excluding /boot)
-
-[Partition based LUKS encryption](https://medium.com/@chrishantha/encrypting-disks-on-ubuntu-19-04-b50bfc65182a)
+### Edit `/etc/crypttab`:
 
 ~~~
-# Setup variables
-physical_partition=/dev/sdX#
-mapped_partition_name=luks
-volume_group=main
-
-
-# Wipe partition
-
-
-# Encrypt partition with LUKS
-sudo cryptsetup luksFormat $physical_partition
-
-# Open encrypted partition
-sudo cryptsetup open $physical_partition $mapped_partition_name
-
-# Setup LVM
-sudo pvcreate /dev/mapper/$mapped_partition_name
-sudo vgcreate $volume_group /dev/mapper/$mapped_partition_name
+# <target name> <source device> <key file> <options>
+luks UUID=<UUID of /dev/sda3> none luks,discard
 ~~~
 
-create logical volumes:
 ~~~
-sudo lvcreate -L 20G -n swap $volume_group
-sudo lvcreate -L 35G -n root $volume_group
+update-initramfs -ck all
 ~~~
 
-1. Wipe partition:
-
-   ~~~
-   sudo cryptsetup open --type plain -d /dev/urandom /dev/sda5 luks
-   sudo dd if=/dev/zero of=/dev/mapper/luks status=progress
-   sudo cryptsetup close luks
-   ~~~
-
-2. Encrypt partition:
-
-    ~~~
-    
-    ~~~
-
-3. Create volume group:
-
-    ~~~
-    sudo vgcreate vg /dev/sdX#
-    ~~~
-
-4. Create logical volumes:
-
-    ~~~
-    sudo lvcreate -L 16GiB -n cryptswap vg
-    sudo lvcreate -L 30GiB -n cryptroot vg
-    ~~~
-
-5. Setup LUKS header on volumes:
-
-    ~~~
-    sudo cryptsetup luksFormat /dev/vg/cryptswap -s 512 -h sha512
-    sudo cryptsetup luksFormat /dev/vg/cryptroot -s 512 -h sha512
-    ~~~
-
-6. Open volumes:
-
-    ~~~
-    sudo cryptsetup open /dev/vg/cryptswap cryptswap
-    sudo cryptsetup open /dev/vg/cryptswap cryptroot
-    ~~~
-    *Provide the passphrase(s) from step 5.*
-
-7. Format volumes:
-
-    ~~~
-    sudo mkswap /dev/mapper/cryptswap
-    sudo mkfs.ext4 /dev/mapper/cryptroot
-    ~~~
-
-8. Install OS on `/dev/mapper/cryptroot`
-
-    *Make sure to use a separate (non-encrypted) partition for `/boot`.*
-
-9. Load encrypted partitions at startup:
-
-    `chroot`:
-    
-    ~~~
-    sudo mount /dev/mapper/cryptroot /mnt
-    sudo mount /dev/sdX# /mnt/boot
-    sudo mount --bind /dev /mnt/dev
-    sudo chroot /mnt
-    mount -t proc proc /proc
-    mount -t sysfs sys /sys
-    mount -t devpts devpts /dev/pts
-    ~~~
-    
-    Add devices to `/etc/crypttab`:
-    
-    ~~~
-    # <target name> <source device> <key file> <options>
-    cryptroot UUID=<UUID of /dev/vg/cryptroot> none luks,discard
-    cryptswap UUID=<UUID of /dev/vg/cryptswap> none luks,discard
-    ~~~
-    
-    *Obtain UUIDs via `sudo blkid /dev/vg/cryptroot`.*
-    
-    Update initramfs:
-    
-    ~~~
-    update-initramfs -k all -c
-    ~~~
+*Obtain UUIDs via `sudo blkid`.*
 
 ## eCryptfs
 
-- Encrypt existing home directory
+*Not necessary with FDE.*
 
-    *Run this as another user*
-    ~~~
-    ecryptfs-migrate-home -u user_to_migrate
-    ~~~
+### Encrypt existing home directory
 
-- Manually decrypt directory
+*Run this as another user*
+~~~
+ecryptfs-migrate-home -u user_to_migrate
+~~~
 
-    ~~~
-    ecryptfs-recover-private path/to/.Private
-    ~~~
+### Manually decrypt directory
+
+~~~
+ecryptfs-recover-private path/to/.Private
+~~~
 
 # Grub
 
