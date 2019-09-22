@@ -72,7 +72,7 @@ lvcreate -n data -L 1.7T luks
 mount /dev/luks/root /mnt
 mount /dev/sda2 /mnt/boot
 mound /dev/sda1 /mnt/boot/efi
-for fs in proc sys dev dev/pts run etc/resolv.conf; do mount --bind /$fs /target/$fs; done
+for fs in proc sys dev dev/pts run etc/resolv.conf; do mount --bind /$fs /mnt/$fs; done
 chroot /mnt
 ~~~
 
@@ -114,6 +114,35 @@ ecryptfs-migrate-home -u user_to_migrate
 ~~~
 ecryptfs-recover-private path/to/.Private
 ~~~
+
+# LVM2 Snapshots
+
+*(run as root)*
+~~~
+lvcreate -L 100M -n original vg
+mkfs.ext4 /dev/vg/original
+mkdir /mnt/original
+mount /dev/vg/original /mnt/original
+echo "This is the content of a file." > /mnt/original/file.txt
+
+lvcreate -L 12M -s /dev/vg/original -n snap vg
+mkdir /mnt/snapshot
+mount /dev/vg/snap /mnt/snapshot
+cat /mnt/snapshot/file.txt # This is the content of a file.
+
+echo "With a 2nd line." >> /mnt/original/file.txt
+diff /mnt/original/file.txt /mnt/snapshot/file.txt
+# 2d1
+# < With a 2nd line.
+
+umount /mnt/original /mnt/snapshot
+
+lvconvert --merge /dev/vg/snap
+# Merging of volume vg/snap started.
+# vg/original: Merged: 100,00%
+~~~
+
+[Reference](https://www.theurbanpenguin.com/maning-lvm-snapshots/)
 
 # Grub
 
