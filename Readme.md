@@ -366,6 +366,9 @@ sudo apt-get install -y autojump
 ~~~shell
 wget -O- get.docker.com | bash
 ~~~
+~~~shell
+curl -fsSL http://get.docker.com/ | sh
+~~~
 
 ## Install latest docker-compose
 
