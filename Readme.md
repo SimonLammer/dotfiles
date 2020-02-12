@@ -651,6 +651,12 @@ To fix this, create the folder mentioned:
 mkdir ~/.steam/ubuntu12_32/steam-runtime
 ~~~
 
+# Thunderbird
+
+## Change date format
+
+[Reference](http://kb.mozillazine.org/Change_the_Date_Format)
+
 # Tmux 
 ~~~shell
 sudo apt install -y tmux xclip
