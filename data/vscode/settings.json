@@ -23,7 +23,7 @@
     "editor.mouseWheelZoom": true,
     "editor.quickSuggestionsDelay": 20,
     "editor.renderWhitespace": "boundary",
-    "editor.rulers": [80],
+    "editor.rulers": [80, 100],
     "editor.smoothScrolling": true,
     "editor.showFoldingControls": "always",
     "editor.tabSize": 2,
@@ -108,8 +108,10 @@
     // Stuff below will changed dynamically
     "window.zoomLevel": 0,
     "workbench.colorCustomizations": {
-        "statusBar.background": "#076678",
-        "statusBar.noFolderBackground": "#076678",
-        "statusBar.debuggingBackground": "#076678"
+        "statusBar.background": "#427b58",
+        "statusBar.noFolderBackground": "#427b58",
+        "statusBar.debuggingBackground": "#427b58"
     },
+    "editor.autoClosingQuotes": "never",
+    "editor.autoClosingBrackets": "never",
 }

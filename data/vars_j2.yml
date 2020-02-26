@@ -21,13 +21,15 @@ packages:
 - curl
 - firefox
 - gparted
+- gimp
 - htop
 - inkscape
-- openjdk-8-doc
-- openjdk-8-jdk
+- openjdk-11-doc
+- openjdk-11-jdk
 - playonlinux
 - python3
-- ranger
+- qbittorrent
+#- ranger
 - silversearcher-ag
 - sqlitebrowser
 - ssh
@@ -50,6 +52,7 @@ gnome_extensions_j2:
 - id: 906
 - id: 1112
 - id: 826
+- id: 120
 
 gnome_gsettings_j2:
 - schema: org.gnome.settings-daemon.plugins.color
@@ -59,7 +62,7 @@ gnome_gsettings_j2:
     night-light-schedule-automatic: 'true'
 - schema: org.gnome.settings-daemon.plugins.media-keys
   settings:
-    screenshot: "''"
+    screenshot: "[]"
 - schema: org.gnome.desktop.interface
   settings:
     gtk-theme: Yaru-dark

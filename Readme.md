@@ -181,6 +181,7 @@ sudo vim /etc/systemd/logind.conf
 
 ```
 set pppoe.username username
+set connection.autoconnect no
 save
 quit
 ```
