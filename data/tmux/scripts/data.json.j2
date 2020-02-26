@@ -1,0 +1,23 @@
+{
+  "path-length-limit": {{path_length_limit}},
+  "path-start-length": {{path_start_length}},
+  "set-default-color": "{{tmux_status.set_color}}",
+  "set-git-flag-color": {
+{% for key, value in git_flag_color.items() | sort %}
+    "{{key}}": "#[fg=colour{{value}}]"
+{%- if not loop.last -%}
+,
+{% endif %}
+{% endfor %}
+
+  },
+  "git-flag-symbol": {
+    "ahead": "↑",
+    "behind": "↓",
+    "staged": "●",
+    "unstaged": "●",
+    "untracked": "●",
+    "unmerged": "✕"
+  },
+  "git-branch-color": "#[fg=colour{{git_branch_color}}]"
+}

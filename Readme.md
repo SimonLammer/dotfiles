@@ -6,6 +6,21 @@ ASCII art fonts were created using:
 
 Below is a collection of wisdom, useful for setting up computers.
 
+# Usage
+
+1. Install git and clone repo:
+
+    ~~~
+    sudo apt install -y git && git clone git@github.com:SimonLammer/dotfiles.git ~/.dotfiles
+    ~~~
+
+2. Perform ansible magic:
+
+    ~~~
+    ansible-galaxy install -r requirements.yml
+    ansible-playbook playbook.yml -e 'ansible_python_interpreter=/usr/bin/python3' -u slammer
+    ~~~
+
 ---
 
 # System setup
@@ -316,6 +331,7 @@ sudo vim /etc/systemd/logind.conf
 
 ```
 set pppoe.username username
+set connection.autoconnect no
 save
 quit
 ```
@@ -442,7 +458,17 @@ git clone https://github.com/SimonLammer/dotfiles ~/.dotfiles
 
 SSH:
 ~~~shell
-git clone git@github.com:SimonLammer/dotfiles.git
+git clone git@github.com:SimonLammer/dotfiles.git ~/.dotfiles
+~~~
+
+Create symlinks:
+~~~shell
+~/.dotfiles/gradlew \
+  actions-git-link\
+  actions-tmux-link\
+  actions-vim-link\
+  actions-vscode-link\
+  actions-zsh-link
 ~~~
 
 ## Link [dotfiles]
@@ -657,7 +683,14 @@ mkdir ~/.steam/ubuntu12_32/steam-runtime
 
 [Reference](http://kb.mozillazine.org/Change_the_Date_Format)
 
+# Subversion (SVN)
+
+~~~
+sudo apt install subversion
+~~~
+
 # Tmux 
+
 ~~~shell
 sudo apt install -y tmux xclip
 ~~~
@@ -739,6 +772,18 @@ ln -s $(pwd)/VirtualBox\ VMs ~/.
 
 [ISO Download page](https://www.microsoft.com/en-us/software-download/windows10ISO)
 
+## USB Passthrough
+
+### No devices available
+
+Add the user to the `vboxusers` group.
+
+~~~
+sudo adduser $USER vboxusers
+~~~
+
+[Reference](https://superuser.com/a/957636)
+
 # Visual Studio Code
 
 [Download page](https://code.visualstudio.com/download)
@@ -760,6 +805,7 @@ for ext in \
   'ms-python.python'\
   'ms-vscode.cpptools'\
   'vscodevim.vim'\
+  'mathiasfrohlich.Kotlin'\
 ;do code --install-extension $ext; done
 ~~~
 
@@ -836,6 +882,7 @@ sudo apt install -y \
   - Fix Airplane mode after suspend
     - https://www.reddit.com/r/archlinux/comments/62lk65/arch_gnome_stopped_suspend_now_how_do_i_prevent/
 - Anki
+- Entr
 - Firefox
   - Informative default page
 - Latex

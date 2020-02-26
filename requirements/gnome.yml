@@ -1,0 +1,4 @@
+- src: https://github.com/SimonLammer/ansible-role-customize-gnome.git
+  version: commulative-changes
+  name: PeterMosmans.customize-gnome
+

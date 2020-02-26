@@ -14,6 +14,12 @@
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+export PATH=/usr/local/cuda-10.0/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64:$LD_LIBRARY_PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=$(echo $HOME)/.oh-my-zsh
@@ -129,6 +135,8 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias cdl="source ~/.dotfiles/data/zsh/cdl.sh $@"
+alias jl="source ~/.dotfiles/data/zsh/jl.sh $@"
 
 # tmux
 which tmux >/dev/null 2>&1
@@ -152,7 +160,14 @@ if [ $? -eq 0 ] && [ -z "$TMUX" ]; then
   fi
 fi
 
+# Spark
+if [ -d "/opt/spark" ]; then
+  export SPARK_HOME=/opt/spark
+  export PATH="$PATH:$SPARK_HOME/bin"
+fi
+
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 if [ -d "$HOME/.rvm/bin" ]; then
   export PATH="$PATH:$HOME/.rvm/bin"
 fi
+

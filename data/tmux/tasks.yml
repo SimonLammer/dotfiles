@@ -1,0 +1,9 @@
+---
+- name: create .tmux directory
+  file:
+    path: ~/.tmux
+    state: directory
+
+- name: install tmux-tpm
+  import_role:
+    name: suzuki-shunsuke.tmux-tpm

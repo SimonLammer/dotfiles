@@ -1,0 +1,42 @@
+---
+- name: dotfiles - Setup
+  hosts: local
+  tasks:
+
+  - import_tasks: tasks/load_variables.yml
+
+  - name: install git
+    package:
+      name: git
+      state: present
+    become: yes
+    
+  - name: clone dotfiles
+    git:
+      repo: https://github.com/SimonLammer/dotfiles.git
+      dest: ~/.dotfiles
+      force: no
+      update: no
+
+  - name: install packages
+    package:
+      name: '{{ item }}'
+      state: present
+    with_items: '{{ packages }}'
+    become: yes
+
+  - name: include subtasks from data directory
+    include_tasks: '{{ data_dir }}'
+    vars:
+      data_dirname: '{{ data_dir.split("/")[1] }}'
+    with_items: '{{ "data/**/tasks.yml" | fileglob }}'
+    loop_control:
+      loop_var: data_dir
+
+  - name: create symlinks
+    file:
+      src: '~/.dotfiles/data/{{ item.src }}'
+      dest: '{{ item.dest }}'
+      state: link
+      force: yes
+    with_items: '{{ symlinks }}'

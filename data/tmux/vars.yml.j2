@@ -1,0 +1,16 @@
+tmux_status:
+  set_color: "#{?client_prefix,#[fg=colour{{vimmodes.normal.color.console}}],#[fg=colour{{vimmodes.insert.color.console}}]}"
+  set_active_color: "#{?client_prefix,#[fg=colour32],#[fg=colour76]}"
+  set_ssh_color: "#[fg=colour196]"
+path_length_limit: 50
+path_start_length: 5
+
+# Colors: https://superuser.com/questions/285381/how-does-the-tmux-color-palette-work/1104214#1104214
+git_flag_color:
+  ahead: 177
+  behind: 167
+  staged: 76
+  unstaged: 160
+  untracked: 195
+  unmerged: 196
+git_branch_color: 220

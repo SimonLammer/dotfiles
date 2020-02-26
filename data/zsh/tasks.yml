@@ -1,0 +1,23 @@
+---
+- name: install zsh & oh-my-zsh
+  import_role:
+    name: gantsign.oh-my-zsh
+  vars:
+    users:
+    - username: '{{ ansible_user_id }}'
+
+- name: install zsh-autosuggestions
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions
+    dest: '{{ ansible_env.ZSH_CUSTOM | default( "~/.oh-my-zsh/custom" ) }}/plugins/zsh-autosuggestions'
+
+- name: install theme 'nothing'
+  git:
+    repo: https://github.com/eendroroy/nothing.git
+    dest: '{{ ansible_env.ZSH_CUSTOM | default( "~/.oh-my-zsh/custom" ) }}/plugins/nothing'
+
+- name: link theme 'nothing'
+  file:
+    src: '{{ ansible_env.ZSH_CUSTOM | default( "~/.oh-my-zsh/custom" ) }}/plugins/nothing/nothing.zsh-theme'
+    dest: '{{ ansible_env.ZSH_CUSTOM | default( "~/.oh-my-zsh/custom" ) }}/themes/nothing.zsh-theme'
+    state: link

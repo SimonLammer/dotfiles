@@ -23,15 +23,19 @@
     "editor.mouseWheelZoom": true,
     "editor.quickSuggestionsDelay": 20,
     "editor.renderWhitespace": "boundary",
-    "editor.rulers": [80, 100],
+    "editor.rulers": [80],
     "editor.smoothScrolling": true,
     "editor.showFoldingControls": "always",
-    "editor.tabSize": 2,
+    "editor.tabSize": {{editor.tabSize}},
     "files.associations": {
         "_.*": "properties",
-        "*.json.j2": "jsonc",
-        "*.sh.j2": "shellscript",
-        "*.yml.j2": "yaml",
+{% for ext, lang in {
+    "json": "jsonc",
+    "sh"  : "shellscript",
+    "yml" : "yaml",
+}.items() %}
+        "*.{{ ext }}.j2": "{{ lang }}",
+{% endfor %}
         "*.vimrc": "plaintext"
     },
     "latex-workshop.view.pdf.viewer": "tab",
@@ -49,12 +53,13 @@
     "vim.easymotionKeys": "hklyuiopnm,qwertzxcvbasdgjf", // Removed: ;
     "vim.statusBarColorControl": true,
     "vim.statusBarColors": { // color palette: https://camo.githubusercontent.com/a5a278806880562d3d205ac224103b55e8ae36d9/687474703a2f2f692e696d6775722e636f6d2f3439714b7959572e706e67
-        "insert": "#427b58",
-        "normal": "#076678",
-        "replace": "#af3a03",
-        "visual": "#b57614",
-        "visualblock": "#b57614",
-        "visualline": "#b57614"
+{% for key, value in vimmodes.items() | sort %}
+        "{{key}}": "{{value.color.hex}}"
+{%- if not loop.last %}
+,
+{% endif %}
+{% endfor %}
+
     },
     "vim.useSystemClipboard": true,
     "vim.insertModeKeyBindings": [
@@ -108,10 +113,8 @@
     // Stuff below will changed dynamically
     "window.zoomLevel": 0,
     "workbench.colorCustomizations": {
-        "statusBar.background": "#427b58",
-        "statusBar.noFolderBackground": "#427b58",
-        "statusBar.debuggingBackground": "#427b58"
+        "statusBar.background": "{{ vimmodes.normal.color.hex }}",
+        "statusBar.noFolderBackground": "{{ vimmodes.normal.color.hex }}",
+        "statusBar.debuggingBackground": "{{ vimmodes.normal.color.hex }}"
     },
-    "editor.autoClosingQuotes": "never",
-    "editor.autoClosingBrackets": "never",
 }
