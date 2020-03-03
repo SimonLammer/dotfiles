@@ -245,6 +245,10 @@ Remove backup **after making sure everything works**:
 sudo rm -Rf /disks/main/home-backup
 ```
 
+# SSD
+
+[Increase Performance and lifespan of SSDs & SD Cards](https://haydenjames.io/increase-performance-lifespan-ssds-sd-cards/)
+
 # Systemd
 
 ## Speed up boot by disabling services
