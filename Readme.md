@@ -447,6 +447,17 @@ shasum -a 512 -c elasticsearch-6.4.0.deb.sha512 && sudo dpkg -i elasticsearch-6.
 - [Vimium-FF](https://addons.mozilla.org/en-US/firefox/addon/vimium-ff/)
 - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
 
+# GCC / G++
+
+[Reference](https://askubuntu.com/a/1149383/776650)
+
+~~~shell
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+sudo apt update
+sudo apt install gcc-9 g++-9
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 60 --slave /usr/bin/g++ g++ /usr/bin/g++-9
+~~~
+
 # Git
 
 ~~~shell
