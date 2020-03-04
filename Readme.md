@@ -195,6 +195,12 @@ echo -e '\n[Re-enable hibernate for multiple users by default in logind]\nIdenti
 
 ## [Gnome extension](https://extensions.gnome.org/extension/755/hibernate-status-button/)
 
+# KDE
+
+## Linux Mint 19.3
+
+[Reddit installation thread](https://www.reddit.com/r/linuxmint/comments/eq9hr7/unable_to_install_kde_plamsa_on_mint_cinnamon/)
+
 # Limit ```/var/log/journal``` size
 
 [Reference](https://bbs.archlinux.org/viewtopic.php?id=172399)
