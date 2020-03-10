@@ -386,6 +386,14 @@ sudo apt-get install -y silversearcher-ag
 sudo apt-get install -y autojump
 ~~~
 
+# clang-format
+
+## Update default clang-format version
+~~~shell
+sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-9 1000 
+~~~
+[Reference](https://bugs.launchpad.net/ubuntu/+source/llvm-defaults/+bug/1769737)
+
 # Docker
 
 [Reference](https://docs.docker.com/install/linux/docker-ce/ubuntu/#upgrade-docker-ce-1)
