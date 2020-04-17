@@ -350,6 +350,12 @@ Network Settings > Wired > connection-name
 
 ## Specify different GTK_THEME for application
 
+### .desktop file
+
+```
+env GTK2_RC_FILES= GTK_DATA_PREFIX= GTK_THEME=Adwaita /usr/bin/the_usual_executable 
+```
+
 [Reference](https://askubuntu.com/a/778388)
 
 ### Firefox
