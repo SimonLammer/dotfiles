@@ -666,6 +666,9 @@ sudo apt install -y ssh
 ## [Generate a SSH key](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#generating-a-new-ssh-key)
 
 ~~~shell
+ssh-keygen -o -a 100 -t ed25519 -C "lammer.simon@gmail.com"
+~~~
+~~~shell
 ssh-keygen -t rsa -b 4096 -C "lammer.simon@gmail.com"
 ~~~
 
