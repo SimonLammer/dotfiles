@@ -386,6 +386,25 @@ Categories=
 sudo apt-get install -y silversearcher-ag
 ~~~
 
+# Anki
+
+## Desktop addons (for Anki 2.1)
+
+|     ID     | Name |
+|:----------:|:-----:|
+| 1421528223 | [Deck Stats](https://ankiweb.net/shared/info/1421528223) |
+| 2091361802 | [Progress Bar](https://ankiweb.net/shared/info/2091361802) |
+|  594329229 | [Hierarchical Tags 2](https://ankiweb.net/shared/info/594329229) |
+| 1374772155 | [Image Occlusion Enhanced for Anki 2.1 (alpha)](https://ankiweb.net/shared/info/1374772155) |
+| 2084557901 | [LPCG (Lyrics/Poetry Cloze Generator)](https://ankiweb.net/shared/info/2084557901) |
+|  516643804 | [Frozen Fields](https://ankiweb.net/shared/info/516643804) |
+|  291119185 | [Batch Editing](https://ankiweb.net/shared/info/291119185) |
+|  613684242 | [True Retention](https://ankiweb.net/shared/info/613684242) |
+|  323586997 | [ReMemorize: Rescheduler with sibling and logging (v1.4.0)](https://ankiweb.net/shared/info/323586997) |
+
+Maybe:
+- https://ankiweb.net/shared/info/817108664
+
 # [autojump](https://github.com/wting/autojump)
 
 ~~~shell
