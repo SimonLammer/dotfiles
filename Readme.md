@@ -388,7 +388,9 @@ sudo apt-get install -y silversearcher-ag
 
 # Anki
 
-## Desktop addons (for Anki 2.1)
+## Desktop
+
+### Addons (for Anki 2.1)
 
 |     ID     | Name |
 |:----------:|:-----:|
@@ -404,6 +406,37 @@ sudo apt-get install -y silversearcher-ag
 
 Maybe:
 - https://ankiweb.net/shared/info/817108664
+
+### Errors
+
+#### `Anki requires a UTF-8 locale`
+```
+/opt/anki-2.1.22-linux-amd64$ ./bin/anki
+Traceback (most recent call last):
+  File "runanki", line 3, in <module>
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "/home/dae/Local/py514/lib/python3.8/site-packages/PyInstaller-4.0.dev0+g2886519-py3.8.egg/PyInst
+  File "aqt/__init__.py", line 15, in <module>
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "/home/dae/Local/py514/lib/python3.8/site-packages/PyInstaller-4.0.dev0+g2886519-py3.8.egg/PyInst
+  File "anki/__init__.py", line 13, in <module>
+Exception: Anki requires a UTF-8 locale.
+[5926] Failed to execute script runanki
+```
+
+#### Solution
+
+```shell
+export LC_CTYPE=en_CA.UTF-8
+```
+
+References:
+- https://anki.tenderapp.com/discussions/ankidesktop/36650-error-message-exception-anki-requires-a-utf-8-locale
+
 
 # [autojump](https://github.com/wting/autojump)
 
