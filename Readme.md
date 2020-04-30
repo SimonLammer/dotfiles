@@ -351,7 +351,7 @@ Network Settings > Wired > connection-name
 ## Specify different GTK_THEME for application
 
 ### .desktop file
-
+https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-ubuntu
 ```
 env GTK2_RC_FILES= GTK_DATA_PREFIX= GTK_THEME=Adwaita /usr/bin/the_usual_executable 
 ```
@@ -437,6 +437,11 @@ export LC_CTYPE=en_CA.UTF-8
 References:
 - https://anki.tenderapp.com/discussions/ankidesktop/36650-error-message-exception-anki-requires-a-utf-8-locale
 
+
+# ansible
+
+References:
+- https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-ubuntu
 
 # [autojump](https://github.com/wting/autojump)
 
