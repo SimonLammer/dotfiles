@@ -403,6 +403,7 @@ sudo apt-get install -y silversearcher-ag
 |  291119185 | [Batch Editing](https://ankiweb.net/shared/info/291119185) |
 |  613684242 | [True Retention](https://ankiweb.net/shared/info/613684242) |
 |  323586997 | [ReMemorize: Rescheduler with sibling and logging (v1.4.0)](https://ankiweb.net/shared/info/323586997) |
+|  295889520 | [Mini Format Pack](https://ankiweb.net/shared/info/295889520) |
 
 Maybe:
 - https://ankiweb.net/shared/info/817108664
