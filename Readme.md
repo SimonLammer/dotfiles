@@ -672,6 +672,19 @@ sed -iE "$(grep -nm 1 CM "Program Files/Steam/config/config.vdf" | cut -d: -f 1)
 
 Install Steam as listed in POL. (update wine version afterwards)
 
+# Prolog
+
+## SWI-Prolog
+
+~~~shell
+sudo apt-get install software-properties-common
+sudo apt-add-repository ppa:swi-prolog/stable
+sudo apt-get update
+sudo apt-get install swi-prolog
+~~~
+
+References:
+- https://www.swi-prolog.org/build/PPA.html
 
 # Python
 
@@ -773,17 +786,17 @@ To fix this, create the folder mentioned:
 mkdir ~/.steam/ubuntu12_32/steam-runtime
 ~~~
 
-# Thunderbird
-
-## Change date format
-
-[Reference](http://kb.mozillazine.org/Change_the_Date_Format)
-
 # Subversion (SVN)
 
 ~~~
 sudo apt install subversion
 ~~~
+
+# Thunderbird
+
+## Change date format
+
+[Reference](http://kb.mozillazine.org/Change_the_Date_Format)
 
 # Tmux 
 
