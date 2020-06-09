@@ -1,7 +1,7 @@
 ---
 - name: find templates
   find:
-    paths: ~/.dotfiles/data
+    paths: .
     patterns: "*.j2"
     recurse: true
     excludes:

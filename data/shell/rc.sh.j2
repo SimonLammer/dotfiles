@@ -1,0 +1,11 @@
+# This will be sourced from `~/.profile` as well as shells rc files (e.g. `~/.bashrc`)
+
+export DOTFILES_HOME="{{dotfiles_home}}"
+
+{% for key, value in aliases.items() %}
+alias {{key}}='{{value}}'
+{% endfor %}
+
+if [ -f "$DOTFILES_HOME/data/shell/rc-local.sh" ]; then
+    . "$DOTFILES_HOME/data/shell/rc-local.sh"
+fi

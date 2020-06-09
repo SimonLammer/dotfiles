@@ -3,40 +3,55 @@
   hosts: local
   tasks:
 
-  - import_tasks: tasks/load_variables.yml
+ # - import_tasks: tasks/load_variables.yml
+  - include_vars: vars/main.yml
 
-  - name: install git
-    package:
-      name: git
-      state: present
-    become: yes
+  - name: set environment defaults
+    set_fact:
+      "{{item.env}}": "{{ lookup('env', item.env) | default(item.default, true) }}"
+    with_items:
+      - env: XDG_CONFIG_HOME
+        default: "{{ XDG_CONFIG_HOME_DEFAULT }}"
+      - env: XDG_CACHE_HOME
+        default: "{{ XDG_CACHE_HOME_DEFAULT }}"
+      - env: XDG_DATA_HOME
+        default: "{{ XDG_DATA_HOME_DEFAULT }}"
+
+  # - name: install git
+  #   package:
+  #     name: git
+  #     state: present
+  #   become: yes
     
   - name: clone dotfiles
     git:
-      repo: https://github.com/SimonLammer/dotfiles.git
-      dest: ~/.dotfiles
+      repo: '{{ dotfiles_repo }}'
+      dest: '{{ dotfiles_home }}'
       force: no
       update: no
 
-  - name: install packages
-    package:
-      name: '{{ item }}'
-      state: present
-    with_items: '{{ packages }}'
-    become: yes
+  - name: install programs
+    import_tasks: tasks/programs.yml
 
-  - name: include subtasks from data directory
-    include_tasks: '{{ data_dir }}'
-    vars:
-      data_dirname: '{{ data_dir.split("/")[1] }}'
-    with_items: '{{ "data/**/tasks.yml" | fileglob }}'
-    loop_control:
-      loop_var: data_dir
+  # - name: install packages
+  #   package:
+  #     name: '{{ item }}'
+  #     state: present
+  #   with_items: '{{ packages }}'
+  #   become: yes
 
-  - name: create symlinks
-    file:
-      src: '~/.dotfiles/data/{{ item.src }}'
-      dest: '{{ item.dest }}'
-      state: link
-      force: yes
-    with_items: '{{ symlinks }}'
+  # - name: include subtasks from data directory
+  #   include_tasks: '{{ data_dir }}'
+  #   vars:
+  #     data_dirname: '{{ data_dir.split("/")[1] }}'
+  #   with_items: '{{ "data/**/tasks.yml" | fileglob }}'
+  #   loop_control:
+  #     loop_var: data_dir
+
+  # - name: create symlinks
+  #   file:
+  #     src: '~/.dotfiles/data/{{ item.src }}'
+  #     dest: '{{ item.dest }}'
+  #     state: link
+  #     force: yes
+  #   with_items: '{{ symlinks }}'

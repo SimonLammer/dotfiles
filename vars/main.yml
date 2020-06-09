@@ -1,46 +1,44 @@
-symlinks:
-- src: git/_.gitconfig
-  dest: ~/.gitconfig
-- src: tmux/_.tmux.conf
-  dest: ~/.tmux.conf
-- src: tmux/scripts
-  dest: ~/.tmux/scripts
-- src: vim/_.vimrc
-  dest: ~/.vimrc
-- src: vscode/keybindings.json
-  dest: ~/.config/Code/User/keybindings.json
-- src: vscode/settings.json
-  dest: ~/.config/Code/User/settings.json
-- src: zsh/_.zshrc
-  dest: ~/.zshrc
+dotfiles_home: ~/.config/dotfiles
+dotfiles_repo: https://github.com/SimonLammer/dotfiles.git
 
-packages:
-- autojump
-- cmatrix
-- cowsay
-- curl
-- firefox
-- gparted
-- gimp
-- htop
-- inkscape
-- openjdk-11-doc
-- openjdk-11-jdk
-- playonlinux
-- python3
-- qbittorrent
-#- ranger
-- silversearcher-ag
-- sqlitebrowser
-- ssh
-- steam
-- texlive-full
-- tmux
-- vim
-- vlc
-- winetricks
-- xclip
-# - zsh # will be installed in data/zsh/tasks.yml
+# https://wiki.archlinux.org/index.php/XDG_Base_Directory
+XDG_CONFIG_HOME_DEFAULT: ~/.config
+XDG_CACHE_HOME_DEFAULT: ~/.cache
+XDG_DATA_HOME_DEFAULT: ~/.local/share
+
+programs:
+  packages:
+  - autojump
+  - cmatrix
+  - cowsay
+  - curl
+  - firefox
+  - gparted
+  - gimp
+  - htop
+  - inkscape
+  - openjdk-8-doc
+  - openjdk-8-jdk
+  - openjdk-11-doc
+  - openjdk-11-jdk
+  # - playonlinux
+  # - python3
+  # - qbittorrent
+  # - ranger
+  # - silversearcher-ag
+  # - sqlitebrowser
+  # - ssh
+  # - steam
+  # - texlive-full
+  # - tmux
+  # - vim
+  # - vlc
+  # - winetricks
+  # - xclip
+  custom:
+    - docker
+    - zsh
+
 
 gnome_extensions_j2:
 - id: 15
@@ -101,29 +99,3 @@ gnome_gsettings_j2:
   schemadir: ~/.local/share/gnome-shell/extensions/gnome-shell-screenshot@ttll.de/schemas
   settings:
     shortcut-select-desktop: "\"['Print']\""
-
-vimmodes:
-  # console colors: https://superuser.com/questions/285381/how-does-the-tmux-color-palette-work/1104214#1104214
-  normal:
-    color:
-      console: 25
-      hex:     "#076678"
-  insert:
-    color:
-      console: 71
-      hex:     "#427b58"
-  replace:
-    color:
-      console: 124
-      hex:     "#af3a03"
-  visual: &vim-mode-visual
-    color:
-      console: 214
-      hex:     "#b57614"
-  visualline:
-    <<: *vim-mode-visual
-  visualblock:
-    <<: *vim-mode-visual
-
-editor:
-  tabSize: 2

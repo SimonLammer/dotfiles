@@ -1,0 +1,7 @@
+# This will be sourced at the end of `rc.sh`
+# Use this for setup-specific configurations
+
+# Example:
+# if [ -d "/opt/myprogram/bin" ] ; then
+#     PATH="/opt/myprogram/bin:$PATH"
+# fi

@@ -7,5 +7,5 @@
 - name: clone SimonLammer/services
   git:
     repo: https://github.com/SimonLammer/services.git
-    dest: /services
+    dest: /opt/services
   become: yes
