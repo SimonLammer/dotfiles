@@ -1,6 +1,12 @@
 aliases:
-  #rm: rm -I
   gits: git status
   gdiff: git diff --no-index
   gds: git diff --no-index --color-words="[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+" --word-diff=plain
-  tmux: tmux -f "$XDG_CONFIG_HOME/tmux/tmux.conf"
+
+  ll: ls -alF
+  la: ls -A
+  l: ls -CF
+
+  #rm: rm -I
+
+  tmux: tmux -f "${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf"

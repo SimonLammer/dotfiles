@@ -1,10 +1,10 @@
-dotfiles_home: ~/.config/dotfiles
+dotfiles_home: $HOME/.config/dotfiles
 dotfiles_repo: https://github.com/SimonLammer/dotfiles.git
 
 # https://wiki.archlinux.org/index.php/XDG_Base_Directory
-XDG_CONFIG_HOME_DEFAULT: ~/.config
-XDG_CACHE_HOME_DEFAULT: ~/.cache
-XDG_DATA_HOME_DEFAULT: ~/.local/share
+XDG_CONFIG_HOME_DEFAULT: $HOME/.config
+XDG_CACHE_HOME_DEFAULT: $HOME/.cache
+XDG_DATA_HOME_DEFAULT: $HOME/.local/share
 
 programs:
   packages:
