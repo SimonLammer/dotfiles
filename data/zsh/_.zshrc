@@ -138,28 +138,6 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 alias cdl="source ~/.dotfiles/data/zsh/cdl.sh $@"
 alias jl="source ~/.dotfiles/data/zsh/jl.sh $@"
 
-# tmux
-which tmux >/dev/null 2>&1
-if [ $? -eq 0 ] && [ -z "$TMUX" ]; then
-	start_tmux=true
-	if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-		echo "Do you want to create a tmux session. (This will clear the screen!)"
-		read "choice?(Y/n)? " 
-    case "$choice" in
-      n|N ) start_tmux=false
-      # * ) echo "y";;
-    esac
-  fi
-  if [ $start_tmux = true ]; then
-    t=$(tmux new)
-    if [ $t = '[exited]' ]; then
-      exit
-    else
-      echo $t
-    fi
-  fi
-fi
-
 # Spark
 if [ -d "/opt/spark" ]; then
   export SPARK_HOME=/opt/spark

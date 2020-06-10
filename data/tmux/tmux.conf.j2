@@ -58,6 +58,7 @@ set -g window-status-current-format "#{?client_prefix,#[fg=colour32],#[fg=colour
 set -g set-titles-string "tmux: #I [ #W ]"
 
 # Version dependent styles:
+# https://stackoverflow.com/a/40902312/2808520
 
 run-shell 'tmux setenv -g TMUX_VERSION $(tmux -V | \
         sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'

@@ -115,3 +115,9 @@ if [ -d "$HOME/.config/dotfiles" ]; then
   . "$HOME/.config/dotfiles/data/shell/rc.sh"
 fi
 
+if [ -f "$DOTFILES_HOME/data/tmux/start.sh" ]; then
+    "$DOTFILES_HOME/data/tmux/start.sh"
+    if [ $? != 0 ]; then
+        exit
+    fi
+fi

@@ -115,3 +115,9 @@ if [ -d "{{dotfiles_home}}" ]; then
   . "{{dotfiles_home}}/data/shell/rc.sh"
 fi
 
+if [ -f "$DOTFILES_HOME/data/tmux/start.sh" ]; then
+    "$DOTFILES_HOME/data/tmux/start.sh"
+    if [ $? != 0 ]; then
+        exit
+    fi
+fi
