@@ -85,6 +85,7 @@ if-shell -b '[ "$(echo "$TMUX_VERSION >= 2.9" | bc)" = 1 ]' "\
 # |_|   |_|\__,_|\__, |_|_| |_|___/
 #                |___/             
 #                                  
+set-environment -g TMUX_PLUGIN_MANAGER_PATH "$DOTFILES_HOME/data/tmux/plugins/"
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'tmux-plugins/tmux-pain-control'
