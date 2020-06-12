@@ -368,14 +368,16 @@ sudo sed -Ei '/export MOZ_APP_LAUNCHER/a\\n# Use specific GTK_THEME instead of s
 
 [Reference](https://askubuntu.com/questions/418407/how-do-i-create-a-desktop-file-to-launch-eclipse)
 
+`/usr/share/applications/eclipse.desktop`:
 ~~~
+[Desktop Entry]
 Name=Eclipse
 Comment=Eclipse
 Exec=/home/user/eclipse/eclipse
 Icon=/home/user/eclipse/icon.xpm
 Terminal=false
 Type=Application
-Categories=
+Categories=Development;IDE
 ~~~
 
 ---
