@@ -1,15 +1,13 @@
 #!/usr/bin/python3
 
-import functools
 import os
 import re
 import subprocess
-import json
 
-@functools.lru_cache(1)
+from data import CONFIG
+
 def load_config():
-  with open(os.path.normpath(os.path.dirname(__file__) + '/../data.json'), 'r') as stream:
-    return json.load(stream)
+  return CONFIG
 
 def substitute_home(path):
   home = os.environ['HOME']
@@ -18,11 +16,11 @@ def substitute_home(path):
   return path
 
 def limit_path_length(path, config=load_config()):
-  if len(path) > config['path-length-limit']:
-    start = path.find(os.sep, 2, 2 + config['path-start-length']) + 1
+  if len(path) > config['path_length_limit']:
+    start = path.find(os.sep, 2, 2 + config['path_start_length']) + 1
     if start == 0:
-      start = path.find(os.sep, 0, 2) + config['path-start-length'] + 1
-    end = len(path) - config['path-length-limit'] + 1 + start
+      start = path.find(os.sep, 0, 2) + config['path_start_length'] + 1
+    end = len(path) - config['path_length_limit'] + 1 + start
     path = path[:start] + '…' + path[end:]
   return path
 
@@ -74,15 +72,15 @@ def git_description(path, config=load_config()):
               flags['staged'] = True
             elif not flags['unstaged'] and unstaged_regex.fullmatch(xy):
               flags['unstaged'] = True
-      desc = config['git-branch-color'] + head
+      desc = config['git_branch_color'] + head
       any_flag = False
       for flag, value in flags.items():
         if value:
           if not any_flag:
             desc += " "
             any_flag = True
-          desc += config['set-git-flag-color'][flag] + config['git-flag-symbol'][flag]
-      desc += config['set-default-color']
+          desc += config['set_git_flag_color'][flag] + config['git_flag_symbol'][flag]
+      desc += config['set_default_color']
       if any_flag:
         desc += " "
       return desc

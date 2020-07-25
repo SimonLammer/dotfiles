@@ -14,3 +14,10 @@ git_flag_color:
   untracked: 195
   unmerged: 196
 git_branch_color: 220
+git_flag_symbol:
+  "ahead": "↑"
+  "behind": "↓"
+  "staged": "●"
+  "unstaged": "●"
+  "untracked": "●"
+  "unmerged": "✕"
