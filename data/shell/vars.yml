@@ -10,3 +10,6 @@ aliases:
   #rm: rm -I
 
   tmux: tmux -f "${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf"
+
+path_additions:
+- /opt/anki/bin

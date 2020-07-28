@@ -6,6 +6,12 @@ export DOTFILES_HOME="{{dotfiles_home}}"
 alias {{key}}='{{value}}'
 {% endfor %}
 
+{% for dir in path_additions %}
+if [ -d "{{ dir }}" ] ; then
+    PATH="{{ dir }}:$PATH"
+fi
+{% endfor %}
+
 if [ -f "$DOTFILES_HOME/data/shell/rc-local.sh" ]; then
     . "$DOTFILES_HOME/data/shell/rc-local.sh"
 fi
