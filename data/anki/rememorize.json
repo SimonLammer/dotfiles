@@ -1,0 +1,24 @@
+{
+  "automatic_mode": false,
+  "browser": {
+      "replace_brower_reposition": false,
+      "replace_brower_reschedule": false,
+      "skip_new_card_types_on_reposition": false
+  },
+  "bury_siblings": false,
+  "change_due_grad_new_card": true,
+  "default_days_on_ask": 7,
+  "ef_hotkey": "Ctrl+Shift+M",
+  "fg_hotkey": null,
+  "forget_siblings": false,
+  "fuzz_days": true,
+  "fuzz_dues": false,
+  "hotkey": "Ctrl+M",
+  "menu_name": "&Study",
+  "reschedule_sibling": false,
+  "reschedule_siblings_on_again": true,
+  "revlog_rescheduled": true,
+  "sibling_boundary": 365,
+  "sibling_days_max": 20,
+  "sibling_days_min": 7
+}
