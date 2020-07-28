@@ -22,14 +22,14 @@ gnome_extensions:
 
 gnome_gsettings:
 - schema: org.gnome.settings-daemon.plugins.color
-  key: "night-light-schedule-automatic"
-  value: "true"
+  key: "night-light-temperature"
+  value: 4800
 - schema: org.gnome.settings-daemon.plugins.color
   key: "night-light-enabled"
   value: "true"
 - schema: org.gnome.settings-daemon.plugins.color
-  key: "night-light-temperature"
-  value: 4800
+  key: "night-light-schedule-automatic"
+  value: "true"
 - schema: org.gnome.settings-daemon.plugins.media-keys
   key: "screenshot"
   value: "[]"
@@ -37,11 +37,11 @@ gnome_gsettings:
   key: "gtk-theme"
   value: "Yaru-dark"
 - schema: org.gnome.desktop.interface
-  key: "clock-show-weekday"
-  value: "true"
-- schema: org.gnome.desktop.interface
   key: "clock-show-seconds"
   value: "false"
+- schema: org.gnome.desktop.interface
+  key: "clock-show-weekday"
+  value: "true"
 - schema: org.gnome.desktop.interface
   key: "clock-show-date"
   value: "true"
@@ -53,48 +53,48 @@ gnome_gsettings:
   value: "false"
 - schema: org.gnome.shell.extensions.dash-to-panel
   schemadir: ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas
-  key: "dot-style-unfocused"
-  value: "DOTS"
+  key: "panel-position"
+  value: "TOP"
 - schema: org.gnome.shell.extensions.dash-to-panel
   schemadir: ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas
   key: "panel-size"
   value: 24
 - schema: org.gnome.shell.extensions.dash-to-panel
   schemadir: ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas
-  key: "appicon-margin"
-  value: 0
-- schema: org.gnome.shell.extensions.dash-to-panel
-  schemadir: ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas
-  key: "show-activities-button"
-  value: "true"
-- schema: org.gnome.shell.extensions.dash-to-panel
-  schemadir: ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas
   key: "appicon-padding"
   value: 2
+- schema: org.gnome.shell.extensions.dash-to-panel
+  schemadir: ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas
+  key: "appicon-margin"
+  value: 0
 - schema: org.gnome.shell.extensions.dash-to-panel
   schemadir: ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas
   key: "taskbar-position"
   value: "CENTEREDMONITOR"
 - schema: org.gnome.shell.extensions.dash-to-panel
   schemadir: ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas
-  key: "dot-size"
-  value: 3
+  key: "show-activities-button"
+  value: "true"
 - schema: org.gnome.shell.extensions.dash-to-panel
   schemadir: ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas
   key: "isolate-workspaces"
   value: "true"
 - schema: org.gnome.shell.extensions.dash-to-panel
   schemadir: ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas
-  key: "panel-position"
-  value: "TOP"
-- schema: org.gnome.shell.extensions.dash-to-panel
-  schemadir: ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas
-  key: "show-showdesktop-button"
-  value: "false"
+  key: "dot-style-unfocused"
+  value: "DOTS"
 - schema: org.gnome.shell.extensions.dash-to-panel
   schemadir: ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas
   key: "dot-position"
   value: "TOP"
+- schema: org.gnome.shell.extensions.dash-to-panel
+  schemadir: ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas
+  key: "dot-size"
+  value: 3
+- schema: org.gnome.shell.extensions.dash-to-panel
+  schemadir: ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas
+  key: "show-showdesktop-button"
+  value: "false"
 - schema: org.gnome.shell.extensions.middleclickclose
   schemadir: ~/.local/share/gnome-shell/extensions/middleclickclose@paolo.tranquilli.gmail.com/schemas
   key: "rearrange-delay"
