@@ -1,6 +1,9 @@
 dotfiles_home: $HOME/.config/dotfiles
 dotfiles_repo: https://github.com/SimonLammer/dotfiles.git
 
+services_home: /opt/services
+services_repo: https://github.com/SimonLammer/services.git
+
 # https://wiki.archlinux.org/index.php/XDG_Base_Directory
 XDG_CONFIG_HOME_DEFAULT: $HOME/.config
 XDG_CACHE_HOME_DEFAULT: $HOME/.cache
@@ -21,23 +24,25 @@ programs:
   - openjdk-8-jdk
   - openjdk-11-doc
   - openjdk-11-jdk
-  # - playonlinux
-  # - python3
-  # - qbittorrent
-  # - ranger
-  # - silversearcher-ag
-  # - sqlitebrowser
-  # - ssh
-  # - steam
-  # - texlive-full
-  # - tmux
-  # - vim
-  # - vlc
-  # - winetricks
-  # - xclip
+  - playonlinux
+  - python3
+  - qbittorrent
+  - ranger
+  - silversearcher-ag
+  - sqlitebrowser
+  - ssh
+  - steam
+  - texlive-full
+  - tmux
+  - vim
+  - vlc
+  - winetricks
+  - xclip
   custom:
-    - docker
-    - zsh
+  # - docker
+  #- veracrypt
+  # - vscode
+  - zsh
 
 
 gnome_extensions_j2:

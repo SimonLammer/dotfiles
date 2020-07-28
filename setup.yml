@@ -17,11 +17,11 @@
       - env: XDG_DATA_HOME
         default: "{{ XDG_DATA_HOME_DEFAULT }}"
 
-  # - name: install git
-  #   package:
-  #     name: git
-  #     state: present
-  #   become: yes
+  - name: install git
+    package:
+      name: git
+      state: present
+    become: yes
     
   - name: clone dotfiles
     git:

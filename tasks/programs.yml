@@ -18,9 +18,20 @@
 
 - name: install custom programs
   include_tasks:
-    file: "tasks/programs/{{ item }}.yml"
+    file: "tasks/programs/{{ program }}.yml"
   with_items: "{{ programs.custom }}"
   when: programs.custom
+  loop_control:
+    loop_var: program
+
+# - name: backup existing config files
+#   shell: '[ -f "{{ item }}" ] && echo hi # mv "{{ item }}" "{{ item }}.old"'
+#   register: _bu
+#   with_items:
+#     - "~/.bashrc"
+#     - "~/.profile"
+
+# - debug: {msg: "{{ _bu }}"}
 
 - name: symlink config files
   file:
@@ -35,6 +46,12 @@
       dest: "{{ XDG_CONFIG_HOME }}/tmux"
     - src: data/vim
       dest: "{{ XDG_CONFIG_HOME }}/vim"
+    - src: data/vscode/keybindings.json
+      dest: "{{ XDG_CONFIG_HOME }}/Code/User/keybindings.json"
+    - src: data/vscode/settings.json
+      dest: "{{ XDG_CONFIG_HOME }}/Code/User/settings.json"
+    - src: data/bash/bashrc
+      dest: "~/.bashrc"
     - src: data/shell/profile
       dest: "~/.profile"
 
@@ -52,5 +69,16 @@
 #   async: 60
 #   poll: 0
 
+- file:
+    path: '{{ services_home }}'
+    state: directory
+    mode: '755'
+  become: yes
 
-- debug: {msg: "hi"}
+- name: clone services
+  git:
+    repo: '{{ services_repo }}'
+    dest: '{{ services_home }}'
+    force: no
+    update: no
+  become: yes

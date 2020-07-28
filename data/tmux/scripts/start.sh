@@ -15,7 +15,7 @@ if [ $? -eq 0 ] && [ -z "$TMUX" ]; then
     esac
   fi
   if [ $start_tmux = true ]; then
-    t=$(tmux new)
+    t=$(tmux new -f "${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf")
     if [ "$t" = "[exited]" ]; then
       exit 1
     fi
