@@ -392,6 +392,19 @@ sudo apt-get install -y silversearcher-ag
 
 ## Desktop
 
+### .desktop file
+
+~~~
+[Desktop Entry]
+Name=Anki
+Comment=Flashcard SRS
+Exec=/opt/anki/bin/anki
+Icon=anki.svg
+Type=Application
+Categories=Education;
+Terminal=true
+~~~
+
 ### Addons (for Anki 2.1)
 
 |     ID     | Name |
