@@ -586,6 +586,18 @@ Create symlinks:
 ln -isv ~/.dotfiles/data/git/_.gitconfig ~/.gitconfig
 ~~~
 
+# Gnucash
+
+The apt version is behind (as of 2020-08-02).
+~~~shell
+flatpack install flathub org.gnucash.GnuCash
+sudo flatpak override --filesystem=host org.gnucash.GnuCash
+~~~
+
+References:
+- https://unix.stackexchange.com/a/525104/367736
+
+
 # [Gti](https://github.com/rwos/gti)
 
 ~~~shell
