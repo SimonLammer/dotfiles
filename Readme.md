@@ -195,6 +195,12 @@ echo -e '\n[Re-enable hibernate for multiple users by default in logind]\nIdenti
 
 ## [Gnome extension](https://extensions.gnome.org/extension/755/hibernate-status-button/)
 
+# KDE
+
+## Linux Mint 19.3
+
+[Reddit installation thread](https://www.reddit.com/r/linuxmint/comments/eq9hr7/unable_to_install_kde_plamsa_on_mint_cinnamon/)
+
 # Limit ```/var/log/journal``` size
 
 [Reference](https://bbs.archlinux.org/viewtopic.php?id=172399)
@@ -244,6 +250,10 @@ Remove backup **after making sure everything works**:
 ```
 sudo rm -Rf /disks/main/home-backup
 ```
+
+# SSD
+
+[Increase Performance and lifespan of SSDs & SD Cards](https://haydenjames.io/increase-performance-lifespan-ssds-sd-cards/)
 
 # Systemd
 
@@ -340,6 +350,12 @@ Network Settings > Wired > connection-name
 
 ## Specify different GTK_THEME for application
 
+### .desktop file
+https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-ubuntu
+```
+env GTK2_RC_FILES= GTK_DATA_PREFIX= GTK_THEME=Adwaita /usr/bin/the_usual_executable 
+```
+
 [Reference](https://askubuntu.com/a/778388)
 
 ### Firefox
@@ -352,14 +368,16 @@ sudo sed -Ei '/export MOZ_APP_LAUNCHER/a\\n# Use specific GTK_THEME instead of s
 
 [Reference](https://askubuntu.com/questions/418407/how-do-i-create-a-desktop-file-to-launch-eclipse)
 
+`/usr/share/applications/eclipse.desktop`:
 ~~~
+[Desktop Entry]
 Name=Eclipse
 Comment=Eclipse
 Exec=/home/user/eclipse/eclipse
 Icon=/home/user/eclipse/icon.xpm
 Terminal=false
 Type=Application
-Categories=
+Categories=Development;IDE
 ~~~
 
 ---
@@ -370,11 +388,91 @@ Categories=
 sudo apt-get install -y silversearcher-ag
 ~~~
 
+# Anki
+
+## Desktop
+
+### .desktop file
+
+~~~
+[Desktop Entry]
+Name=Anki
+Comment=Flashcard SRS
+Exec=/opt/anki/bin/anki
+Icon=anki.svg
+Type=Application
+Categories=Education;
+Terminal=true
+~~~
+
+### Addons (for Anki 2.1)
+
+|     ID     | Name |
+|:----------:|:-----:|
+| 1421528223 | [Deck Stats](https://ankiweb.net/shared/info/1421528223) |
+| 2091361802 | [Progress Bar](https://ankiweb.net/shared/info/2091361802) |
+|  594329229 | [Hierarchical Tags 2](https://ankiweb.net/shared/info/594329229) |
+| 1374772155 | [Image Occlusion Enhanced for Anki 2.1 (alpha)](https://ankiweb.net/shared/info/1374772155) |
+| 2084557901 | [LPCG (Lyrics/Poetry Cloze Generator)](https://ankiweb.net/shared/info/2084557901) |
+|  516643804 | [Frozen Fields](https://ankiweb.net/shared/info/516643804) |
+|  291119185 | [Batch Editing](https://ankiweb.net/shared/info/291119185) |
+|  613684242 | [True Retention](https://ankiweb.net/shared/info/613684242) |
+|  323586997 | [ReMemorize: Rescheduler with sibling and logging (v1.4.0)](https://ankiweb.net/shared/info/323586997) |
+|  295889520 | [Mini Format Pack](https://ankiweb.net/shared/info/295889520) |
+|   24411424 | [Customize Keyboard Shortcuts](https://ankiweb.net/shared/info/24411424) |
+
+Maybe:
+- https://ankiweb.net/shared/info/817108664
+
+### Errors
+
+#### `Anki requires a UTF-8 locale`
+```
+/opt/anki-2.1.22-linux-amd64$ ./bin/anki
+Traceback (most recent call last):
+  File "runanki", line 3, in <module>
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "/home/dae/Local/py514/lib/python3.8/site-packages/PyInstaller-4.0.dev0+g2886519-py3.8.egg/PyInst
+  File "aqt/__init__.py", line 15, in <module>
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "/home/dae/Local/py514/lib/python3.8/site-packages/PyInstaller-4.0.dev0+g2886519-py3.8.egg/PyInst
+  File "anki/__init__.py", line 13, in <module>
+Exception: Anki requires a UTF-8 locale.
+[5926] Failed to execute script runanki
+```
+
+#### Solution
+
+```shell
+export LC_CTYPE=en_CA.UTF-8
+```
+
+References:
+- https://anki.tenderapp.com/discussions/ankidesktop/36650-error-message-exception-anki-requires-a-utf-8-locale
+
+
+# ansible
+
+References:
+- https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-ubuntu
+
 # [autojump](https://github.com/wting/autojump)
 
 ~~~shell
 sudo apt-get install -y autojump
 ~~~
+
+# clang-format
+
+## Update default clang-format version
+~~~shell
+sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-9 1000 
+~~~
+[Reference](https://bugs.launchpad.net/ubuntu/+source/llvm-defaults/+bug/1769737)
 
 # Docker
 
@@ -443,6 +541,17 @@ shasum -a 512 -c elasticsearch-6.4.0.deb.sha512 && sudo dpkg -i elasticsearch-6.
 - [Vimium-FF](https://addons.mozilla.org/en-US/firefox/addon/vimium-ff/)
 - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
 
+# GCC / G++
+
+[Reference](https://askubuntu.com/a/1149383/776650)
+
+~~~shell
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+sudo apt update
+sudo apt install gcc-9 g++-9
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 60 --slave /usr/bin/g++ g++ /usr/bin/g++-9
+~~~
+
 # Git
 
 ~~~shell
@@ -476,6 +585,18 @@ Create symlinks:
 ~~~shell
 ln -isv ~/.dotfiles/data/git/_.gitconfig ~/.gitconfig
 ~~~
+
+# Gnucash
+
+The apt version is behind (as of 2020-08-02).
+~~~shell
+flatpack install flathub org.gnucash.GnuCash
+sudo flatpak override --filesystem=host org.gnucash.GnuCash
+~~~
+
+References:
+- https://unix.stackexchange.com/a/525104/367736
+
 
 # [Gti](https://github.com/rwos/gti)
 
@@ -579,6 +700,19 @@ sed -iE "$(grep -nm 1 CM "Program Files/Steam/config/config.vdf" | cut -d: -f 1)
 
 Install Steam as listed in POL. (update wine version afterwards)
 
+# Prolog
+
+## SWI-Prolog
+
+~~~shell
+sudo apt-get install software-properties-common
+sudo apt-add-repository ppa:swi-prolog/stable
+sudo apt-get update
+sudo apt-get install swi-prolog
+~~~
+
+References:
+- https://www.swi-prolog.org/build/PPA.html
 
 # Python
 
@@ -631,6 +765,9 @@ sudo apt install -y ssh
 ## [Generate a SSH key](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#generating-a-new-ssh-key)
 
 ~~~shell
+ssh-keygen -o -a 100 -t ed25519 -C "lammer.simon@gmail.com"
+~~~
+~~~shell
 ssh-keygen -t rsa -b 4096 -C "lammer.simon@gmail.com"
 ~~~
 
@@ -677,17 +814,17 @@ To fix this, create the folder mentioned:
 mkdir ~/.steam/ubuntu12_32/steam-runtime
 ~~~
 
-# Thunderbird
-
-## Change date format
-
-[Reference](http://kb.mozillazine.org/Change_the_Date_Format)
-
 # Subversion (SVN)
 
 ~~~
 sudo apt install subversion
 ~~~
+
+# Thunderbird
+
+## Change date format
+
+[Reference](http://kb.mozillazine.org/Change_the_Date_Format)
 
 # Tmux 
 
