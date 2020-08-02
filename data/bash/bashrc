@@ -56,11 +56,11 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
+# if [ "$color_prompt" = yes ]; then
+#     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+# else
+#     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+# fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
@@ -122,3 +122,18 @@ if [ -f "$DOTFILES_HOME/data/tmux/scripts/start.sh" ]; then
     fi
 fi
 PROMPT_COMMAND="$DOTFILES_HOME/data/tmux/scripts/shell-post-command.sh;$PROMPT_COMMAND"
+
+function __minimalist_prompt_command() {
+    local _last_exit="$?"
+    PS1=""
+    if [ $_last_exit != 0 ]; then
+        PS1+="\[\e[0;31m\]⮜ $_last_exit ⮞ "
+    fi
+    if [ "$UID" -eq "0" ]; then
+        PS1+="\[\e[0;33m\]ROOT "
+    fi
+    PS1+="\[\e[32m\]🡲 \[\e[0m\]"
+}
+if [ -n "$TMUX" ]; then
+    PROMPT_COMMAND="__minimalist_prompt_command;$PROMPT_COMMAND"
+fi
