@@ -60,3 +60,5 @@
 	# Quote / unquote a sh command, converting it to / from a git alias string
 	# https://stackoverflow.com/a/39616600/2808520
 	quote-string = "!read -r l; printf \\\"!; printf %s \"$l\" | sed 's/\\([\\\"]\\)/\\\\\\1/g'; printf \" #\\\"\\n\" #"
+[log]
+	date = iso
