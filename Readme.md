@@ -445,14 +445,24 @@ Exception: Anki requires a UTF-8 locale.
 [5926] Failed to execute script runanki
 ```
 
-#### Solution
+**Solution**
 
 ```shell
 export LC_CTYPE=en_CA.UTF-8
 ```
 
+#### `mpv not found`
+
+**Solution**
+
+```
+sudo add-apt-repository ppa:mc3man/mpv-tests
+sudo apt-get install mpv
+```
+
 References:
 - https://anki.tenderapp.com/discussions/ankidesktop/36650-error-message-exception-anki-requires-a-utf-8-locale
+- https://www.reddit.com/r/Anki/comments/e2zbcl/mpv_not_found/
 
 
 # ansible
