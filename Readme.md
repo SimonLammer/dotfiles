@@ -420,6 +420,7 @@ Terminal=true
 |  323586997 | [ReMemorize: Rescheduler with sibling and logging (v1.4.0)](https://ankiweb.net/shared/info/323586997) |
 |  295889520 | [Mini Format Pack](https://ankiweb.net/shared/info/295889520) |
 |   24411424 | [Customize Keyboard Shortcuts](https://ankiweb.net/shared/info/24411424) |
+| 1084228676 | [Color Confirmation](https://ankiweb.net/shared/info/1084228676) |
 
 Maybe:
 - https://ankiweb.net/shared/info/817108664
