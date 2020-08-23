@@ -388,6 +388,13 @@ Categories=Development;IDE
 sudo apt-get install -y silversearcher-ag
 ~~~
 
+# Android Studio
+
+~~~shell
+flatpak install flathub com.google.AndroidStudio
+sudo flatpak override --filesystem=host com.google.AndroidStudio
+~~~
+
 # Anki
 
 ## Desktop
