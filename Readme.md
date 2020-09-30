@@ -380,6 +380,16 @@ Type=Application
 Categories=Development;IDE
 ~~~
 
+# Miscellanious errors
+
+## `apt upgrade`: `mkinitramfs failure cpio`, `cannot write compressed block`
+
+`/boot` has probably filled up, free some space with `sudo apt pure linux-image-5.0.0-36-generic` (adapted to the kernel you want to remove).
+
+References:
+- https://askubuntu.com/questions/1207958/error-24-write-error-cannot-write-compressed-block
+
+
 ---
 
 # ag [The Silver Searcher](https://github.com/ggreer/the_silver_searcher)
