@@ -617,6 +617,11 @@ sudo flatpak override --filesystem=host org.gnucash.GnuCash
 References:
 - https://unix.stackexchange.com/a/525104/367736
 
+# gscan2pdf
+
+~~~shell
+sudo apt install gscan2pdf tesseract-ocr-deu
+~~~
 
 # [Gti](https://github.com/rwos/gti)
 
