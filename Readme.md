@@ -756,6 +756,15 @@ sudo apt install -y python3-pip build-essential libssl-dev libffi-dev python-dev
 pip3 install --user pipenv
 ~~~
 
+### Stuck in 'Locking ...'
+
+Either: Wait for a bit
+
+Or: `pipenv lock --clear && pipenv install`
+
+References:
+- https://stackoverflow.com/a/56440091/2808520
+
 # [Ranger](https://github.com/ranger/ranger)
 
 ~~~shell
