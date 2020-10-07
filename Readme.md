@@ -380,6 +380,17 @@ Type=Application
 Categories=Development;IDE
 ~~~
 
+# Graphic Tablets
+
+## Restrict graphic tablet to one display
+
+`xinput`: ` HUION H420 Pen (0)                        id=23   [slave  pointer  (2)]`
+`xrandr`: `eDP-1-1 connected 1920x1080+485+1440 (normal left inverted right x axis y axis) 344mm x 193mm`
+
+~~~shell
+xinput map-to-output 23 eDP-1-1
+~~~
+
 # Miscellanious errors
 
 ## `apt upgrade`: `mkinitramfs failure cpio`, `cannot write compressed block`
