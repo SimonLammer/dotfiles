@@ -426,18 +426,23 @@ Terminal=true
 
 |     ID     | Name |
 |:----------:|:-----:|
-| 1421528223 | [Deck Stats](https://ankiweb.net/shared/info/1421528223) |
-| 2091361802 | [Progress Bar](https://ankiweb.net/shared/info/2091361802) |
-|  594329229 | [Hierarchical Tags 2](https://ankiweb.net/shared/info/594329229) |
-| 1374772155 | [Image Occlusion Enhanced for Anki 2.1 (alpha)](https://ankiweb.net/shared/info/1374772155) |
-| 2084557901 | [LPCG (Lyrics/Poetry Cloze Generator)](https://ankiweb.net/shared/info/2084557901) |
-|  516643804 | [Frozen Fields](https://ankiweb.net/shared/info/516643804) |
 |  291119185 | [Batch Editing](https://ankiweb.net/shared/info/291119185) |
-|  613684242 | [True Retention](https://ankiweb.net/shared/info/613684242) |
-|  323586997 | [ReMemorize: Rescheduler with sibling and logging (v1.4.0)](https://ankiweb.net/shared/info/323586997) |
-|  295889520 | [Mini Format Pack](https://ankiweb.net/shared/info/295889520) |
+| 2179254157 | [Card Info During Review](https://ankiweb.net/shared/info/2179254157) |
 |   24411424 | [Customize Keyboard Shortcuts](https://ankiweb.net/shared/info/24411424) |
 | 1084228676 | [Color Confirmation](https://ankiweb.net/shared/info/1084228676) |
+| 1421528223 | [Deck Stats](https://ankiweb.net/shared/info/1421528223) |
+|  516643804 | [Frozen Fields](https://ankiweb.net/shared/info/516643804) |
+|  594329229 | [Hierarchical Tags 2](https://ankiweb.net/shared/info/594329229) |
+| 1374772155 | [Image Occlusion Enhanced for Anki 2.1 (alpha)](https://ankiweb.net/shared/info/1374772155) |
+| 1949865265 | [Learning Step and Review Interval Retention](https://ankiweb.net/shared/info/1949865265) |
+| 2084557901 | [LPCG (Lyrics/Poetry Cloze Generator)](https://ankiweb.net/shared/info/2084557901) |
+|  295889520 | [Mini Format Pack](https://ankiweb.net/shared/info/295889520) |
+|  738807903 | [More Overview Stats 2.1](https://ankiweb.net/shared/info/738807903) |
+| 2091361802 | [Progress Bar](https://ankiweb.net/shared/info/2091361802) |
+|  323586997 | [ReMemorize: Rescheduler with sibling and logging (v1.4.0)](https://ankiweb.net/shared/info/323586997) |
+| 1828603731 | [Stats Overview Pie Graph with Distinct 'Learning' and-or 'Relearning' Sections](https://ankiweb.net/shared/info/1828603731) |
+|  613684242 | [True Retention](https://ankiweb.net/shared/info/613684242) |
+
 
 Maybe:
 - https://ankiweb.net/shared/info/817108664
