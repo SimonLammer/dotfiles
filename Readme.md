@@ -442,6 +442,7 @@ Terminal=true
 |   24411424 | [Customize Keyboard Shortcuts](https://ankiweb.net/shared/info/24411424) |
 | 1084228676 | [Color Confirmation](https://ankiweb.net/shared/info/1084228676) |
 | 1421528223 | [Deck Stats](https://ankiweb.net/shared/info/1421528223) |
+|  877182321 | [Enhance main window](https://ankiweb.net/shared/info/877182321) |
 |  516643804 | [Frozen Fields](https://ankiweb.net/shared/info/516643804) |
 |  594329229 | [Hierarchical Tags 2](https://ankiweb.net/shared/info/594329229) |
 | 1374772155 | [Image Occlusion Enhanced for Anki 2.1 (alpha)](https://ankiweb.net/shared/info/1374772155) |
