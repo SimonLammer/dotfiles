@@ -497,6 +497,17 @@ References:
 References:
 - https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-ubuntu
 
+# AnyDesk
+
+## Disable autostart
+
+~~~shell
+sudo systemctl disable anydesk
+~~~
+
+References:
+- https://www.reddit.com/r/AnyDesk/comments/g49lqo/anydesk_runs_wild_upon_booting_into_linux_how_to/
+
 # [autojump](https://github.com/wting/autojump)
 
 ~~~shell
