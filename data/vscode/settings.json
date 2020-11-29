@@ -18,7 +18,7 @@
     "terminal.integrated.fontSize": 15,
     "editor.acceptSuggestionOnEnter": "off",
     "editor.find.autoFindInSelection": true,
-    "editor.fontSize": 15,
+    "editor.fontSize": 16,
     "editor.lineNumbers": "relative",
     "editor.mouseWheelZoom": true,
     "editor.quickSuggestionsDelay": 20,
@@ -112,4 +112,9 @@
         "statusBar.noFolderBackground": "#076678",
         "statusBar.debuggingBackground": "#076678"
     },
+    "terminal.integrated.shell.linux": "/bin/bash",
+    "editor.fontFamily": "'CodeNewRoman Nerd Font', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.lineHeight": 19,
+    "editor.wrappingIndent": "indent",
+    "extensions.ignoreRecommendations": false,
 }

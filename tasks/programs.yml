@@ -50,6 +50,8 @@
       dest: "{{ XDG_CONFIG_HOME }}/Code/User/keybindings.json"
     - src: data/vscode/settings.json
       dest: "{{ XDG_CONFIG_HOME }}/Code/User/settings.json"
+    - src: data/starship/starship.toml
+      dest: "{{ XDG_CONFIG_HOME }}/starship.toml"
     - src: data/bash/bashrc
       dest: "~/.bashrc"
     - src: data/shell/profile

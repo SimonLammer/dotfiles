@@ -130,6 +130,26 @@ ecryptfs-migrate-home -u user_to_migrate
 ecryptfs-recover-private path/to/.Private
 ~~~
 
+# Fonts
+
+## Installation
+
+Copy the font files to `/usr/share/fonts/<some-awesome-font>/*.otf`
+
+## [NerdFonts](https://www.nerdfonts.com/#home)
+
+[CodeNewRoman Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CodeNewRoman.zip)
+
+Other candidates I liked:
+- FantasqueSansMono Nerd Font
+- FiraMono Nerd Font
+- Hasklug Nerd Font
+- Hurmit Nerd Font
+- Monoid Nerd Font
+- Mononoki Nerd Font
+- RobotoMono Nerd Font
+- Sauce Code Pro Nerd Font
+
 # LVM2 Snapshots
 
 *(run as root)*
