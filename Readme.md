@@ -532,6 +532,27 @@ wget -O- get.docker.com | bash
 curl -fsSL http://get.docker.com/ | sh
 ~~~
 
+## Move data directory
+
+1. `sudo service docker stop`
+2. Add the following to `/etc/docker/daemon.json`
+
+    ```
+    {
+        "data-root": "/path/to/your/docker"
+    }
+    ```
+
+3. `sudo rsync -aP /var/lib/docker/ /path/to/your/docker
+4. `sudo mv /var/lib/docker /var/lib/docker.old`
+5. `sudo service docker start
+6. Test if your docker containers still work!
+6. `sudo rm -rf /var/lib/docker.old`
+
+
+References:
+- https://www.guguweb.com/2019/02/07/how-to-move-docker-data-directory-to-another-location-on-ubuntu/
+
 ## Install latest docker-compose
 
 [Reference](https://gist.github.com/deviantony/2b5078fe1675a5fedabf1de3d1f2652a)
