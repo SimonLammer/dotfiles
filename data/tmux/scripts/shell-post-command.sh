@@ -12,13 +12,9 @@ if [ \
     PANE_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/tmux/panes/${TMUX_PANE#*%}"
     mkdir -p "$PANE_CACHE_DIR"
 
-    # python3 $DOTFILES_HOME/data/tmux/scripts/describe-directory/describe_directory.py "`pwd`" > "$PANE_CACHE_DIR/directory_description.txt"
     starship prompt\
-        | sed -E 's,\x1b\[0m,#[default],g ; s,\x1b\[1m,#[bold],g ; s,\x1b\[1;3([0-9])m,#[fg=colour\1],g'\
+        | perl -n $DOTFILES_HOME/data/tmux/scripts/ansi-colors-to-tmux.pl \
         > "$PANE_CACHE_DIR/starship.txt"
-    # starship prompt | sed -E 's,\x1b\[38;5;([0-9]+)m,#[fg=colour\1],g'|sed -E 's,\x1b\[1m,#[bold],g'|sed -E 's,\x1b\[0m,#[default],g' > "$PANE_CACHE_DIR/starship.txt"
-
-    # TODO: refresh tmux ?
 
     tmux refresh-client
 
