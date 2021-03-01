@@ -450,11 +450,10 @@ Terminal=true
 | 2084557901 | [LPCG (Lyrics/Poetry Cloze Generator)](https://ankiweb.net/shared/info/2084557901) |
 |  295889520 | [Mini Format Pack](https://ankiweb.net/shared/info/295889520) |
 |  738807903 | [More Overview Stats 2.1](https://ankiweb.net/shared/info/738807903) |
-| 2091361802 | [Progress Bar](https://ankiweb.net/shared/info/2091361802) |
+| 1508357010 | [Remaining time (for Anki 2.1)](https://ankiweb.net/shared/info/1508357010) |
 |  323586997 | [ReMemorize: Rescheduler with sibling and logging (v1.4.0)](https://ankiweb.net/shared/info/323586997) |
 | 1828603731 | [Stats Overview Pie Graph with Distinct 'Learning' and-or 'Relearning' Sections](https://ankiweb.net/shared/info/1828603731) |
 |  613684242 | [True Retention](https://ankiweb.net/shared/info/613684242) |
-
 
 Maybe:
 - https://ankiweb.net/shared/info/817108664
