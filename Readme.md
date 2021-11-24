@@ -523,6 +523,28 @@ sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/c
 ~~~
 [Reference](https://bugs.launchpad.net/ubuntu/+source/llvm-defaults/+bug/1769737)
 
+# DaVinci Resolve
+
+Download: [https://www.blackmagicdesign.com/products/davinciresolve/](https://www.blackmagicdesign.com/products/davinciresolve/)
+
+## Import mp4 in DaVinci Resolve
+
+### mjpeg
+
+```
+ffmpeg -i input_file.mp4 -vcodec mjpeg -q:v 2 -acodec pcm_s16be -q:a 0 -f mov output_file.mov
+```
+
+batch:
+```
+for f in *.mp4; do ffmpeg -i "$f" -hide_banner -vcodec mjpeg -q:v 2 -acodec pcm_s16be -q:a 0 -f mov "$f.mov"; done
+```
+
+References:
+- https://brushlesswhoop.com/converting-fpv-footage-for-davinci-resolve/
+- https://superuser.com/a/1273941
+
+
 # Docker
 
 [Reference](https://docs.docker.com/install/linux/docker-ce/ubuntu/#upgrade-docker-ce-1)
