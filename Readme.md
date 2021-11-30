@@ -627,7 +627,13 @@ shasum -a 512 -c elasticsearch-6.4.0.deb.sha512 && sudo dpkg -i elasticsearch-6.
 ## Add-ons
 
 - [Adblock Plus](https://addons.mozilla.org/en-US/firefox/addon/adblock-plus/)
+- [Bupass Paywalls Clean](https://addons.mozilla.org/en-US/firefox/addon/bypass-paywalls-clean/)
+- [Chessvision.ai](https://addons.mozilla.org/en-CA/firefox/addon/chessvision-ai-for-firefox/)
 - [Cookie-Editor](https://addons.mozilla.org/en-US/firefox/addon/cookie-editor/)
+- [Netflix 1080p](https://addons.mozilla.org/en-US/firefox/addon/netflix-1080p-firefox/)
+- [Save Page WE](https://addons.mozilla.org/en-CA/firefox/addon/save-page-we/)
+- [Tabliss](https://addons.mozilla.org/en-US/firefox/addon/tabliss/)
+- [uBlock Origin](https://addons.mozilla.org/en-CA/firefox/addon/ublock-origin)
 - [Reverse Image Search](https://addons.mozilla.org/en-US/firefox/addon/image-reverse-search/)
 - [Video DownloadHelper](https://addons.mozilla.org/en-US/firefox/addon/video-downloadhelper/)
 - [Vimium-FF](https://addons.mozilla.org/en-US/firefox/addon/vimium-ff/)
