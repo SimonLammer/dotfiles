@@ -86,7 +86,7 @@ lvcreate -n data -L 1.7T luks
 ~~~
 mount /dev/luks/root /mnt
 mount /dev/sda2 /mnt/boot
-mound /dev/sda1 /mnt/boot/efi
+mount /dev/sda1 /mnt/boot/efi
 for fs in proc sys dev dev/pts run etc/resolv.conf; do mount --bind /$fs /mnt/$fs; done
 chroot /mnt
 ~~~
@@ -390,6 +390,11 @@ Categories=Development;IDE
 ~~~shell
 xinput map-to-output 23 eDP-1-1
 ~~~
+
+# Touchpad
+
+Enable: `sh -c "xinput list | grep 'SynPS/2 Synaptics TouchPad' | sed -E 's/.*id=([0-9]+).*/set-prop \1 \"Device Enabled\" 1/g' | xargs xinput"`
+Disable: `sh -c "xinput list | grep 'SynPS/2 Synaptics TouchPad' | sed -E 's/.*id=([0-9]+).*/set-prop \1 \"Device Enabled\" 0/g' | xargs xinput"`
 
 # Miscellanious errors
 
