@@ -438,7 +438,7 @@ Categories=Education;
 Terminal=true
 ~~~
 
-### Addons (for Anki 2.1)
+### Addons (for Anki 2.1.44)
 
 |     ID     | Name |
 |:----------:|:-----:|
@@ -488,7 +488,7 @@ Exception: Anki requires a UTF-8 locale.
 [5926] Failed to execute script runanki
 ```
 
-#### Solution
+##### Solution
 
 ```shell
 export LC_CTYPE=en_CA.UTF-8
@@ -497,6 +497,9 @@ export LC_CTYPE=en_CA.UTF-8
 References:
 - https://anki.tenderapp.com/discussions/ankidesktop/36650-error-message-exception-anki-requires-a-utf-8-locale
 
+#### Blurry text
+
+Start anki with `ANKI_WEBSCALE=1 ANKI_NOHIGHDPI=1` environment variables.
 
 # ansible
 
