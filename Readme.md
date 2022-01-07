@@ -500,6 +500,7 @@ References:
 #### Blurry text
 
 Start anki with `ANKI_WEBSCALE=1 ANKI_NOHIGHDPI=1` environment variables.
+I.e. `env ANKI_WEBSCALE=1 ANKI_NOHIGHDPI=1 anki` for a XFCE launcher.
 
 # ansible
 
