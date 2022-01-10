@@ -1,0 +1,24 @@
+CONFIG = {
+  "path_length_limit": {{path_length_limit}},
+  "path_start_length": {{path_start_length}},
+  "set_default_color": "{{tmux_status.set_color}}",
+  "set_git_flag_color": {
+{% for key, value in git_flag_color.items() | sort %}
+    "{{key}}": "#[fg=colour{{value}}]"
+{%- if not loop.last -%}
+,
+{% endif %}
+{% endfor %}
+
+  },
+  "git_flag_symbol": {
+{% for key, value in git_flag_symbol.items() | sort %}
+    "{{key}}": "{{value}}"
+{%- if not loop.last -%}
+,
+{% endif %}
+{% endfor %}
+
+  },
+  "git_branch_color": "#[fg=colour{{git_branch_color}}]"
+}

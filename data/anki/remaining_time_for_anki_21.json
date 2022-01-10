@@ -1,0 +1,7 @@
+{
+  "barCSS": "",
+  "debug": false,
+  "messageFormat": "%(elapsedTime) / %(totalTime) @ %(CPM)cpm",
+  "runOnMobile": false,
+  "showAtBottom": false
+}

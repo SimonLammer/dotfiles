@@ -1,0 +1,28 @@
+# This will be sourced from `~/.profile` as well as shells rc files (e.g. `~/.bashrc`)
+
+export DOTFILES_HOME="{{dotfiles_home}}"
+
+{% for key, value in aliases.items() %}
+alias {{key}}='{{value}}'
+{% endfor %}
+
+{% for dir in path_additions %}
+if [ -d "{{ dir }}" ] ; then
+    PATH="{{ dir }}:$PATH"
+fi
+{% endfor %}
+
+which pyenv >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
+
+which autojump >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+    . /usr/share/autojump/autojump.sh
+fi
+
+if [ -f "$DOTFILES_HOME/data/shell/rc-local.sh" ]; then
+    . "$DOTFILES_HOME/data/shell/rc-local.sh"
+fi

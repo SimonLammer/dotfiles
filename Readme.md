@@ -17,8 +17,14 @@ Below is a collection of wisdom, useful for setting up computers.
 2. Perform ansible magic:
 
     ~~~
+    make setup
+    ~~~
+
+    or
+
+    ~~~
     ansible-galaxy install -r requirements.yml
-    ansible-playbook playbook.yml -e 'ansible_python_interpreter=/usr/bin/python3' -u slammer
+    ansible-playbook setup.yml -e 'ansible_python_interpreter=/usr/bin/python3' -u slammer
     ~~~
 
 ---
@@ -129,6 +135,26 @@ ecryptfs-migrate-home -u user_to_migrate
 ~~~
 ecryptfs-recover-private path/to/.Private
 ~~~
+
+# Fonts
+
+## Installation
+
+Copy the font files to `/usr/share/fonts/<some-awesome-font>/*.otf`
+
+## [NerdFonts](https://www.nerdfonts.com/#home)
+
+[CodeNewRoman Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CodeNewRoman.zip)
+
+Other candidates I liked:
+- FantasqueSansMono Nerd Font
+- FiraMono Nerd Font
+- Hasklug Nerd Font
+- Hurmit Nerd Font
+- Monoid Nerd Font
+- Mononoki Nerd Font
+- RobotoMono Nerd Font
+- Sauce Code Pro Nerd Font
 
 # LVM2 Snapshots
 
@@ -494,14 +520,24 @@ Exception: Anki requires a UTF-8 locale.
 [5926] Failed to execute script runanki
 ```
 
-##### Solution
+**Solution**
 
 ```shell
 export LC_CTYPE=en_CA.UTF-8
 ```
 
+#### `mpv not found`
+
+**Solution**
+
+```
+sudo add-apt-repository ppa:mc3man/mpv-tests
+sudo apt-get install mpv
+```
+
 References:
 - https://anki.tenderapp.com/discussions/ankidesktop/36650-error-message-exception-anki-requires-a-utf-8-locale
+- https://www.reddit.com/r/Anki/comments/e2zbcl/mpv_not_found/
 
 #### Blurry text
 

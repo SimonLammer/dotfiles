@@ -1,0 +1,5 @@
+---
+- name: dotfiles - XFCE
+  hosts: local
+  tasks:
+  - import_tasks: tasks/xfce.yml

@@ -1,0 +1,89 @@
+---
+- name: install packages
+  package:
+    name: "{{ programs.packages }}"
+    state: present
+  become: yes
+  
+- name: find post-package hooks
+  stat:
+    path: "tasks/programs/post-{{ item }}.yml"
+  with_items: "{{ programs.packages }}"
+  register: _program_stat
+
+- name: run post-package hooks
+  include_tasks: "tasks/programs/post-{{ item.item }}.yml"
+  when: item.stat.exists
+  with_items: "{{ _program_stat.results }}"
+
+- name: install custom programs
+  include_tasks:
+    file: "tasks/programs/{{ program }}.yml"
+  with_items: "{{ programs.custom }}"
+  when: programs.custom
+  loop_control:
+    loop_var: program
+
+# - name: backup existing config files
+#   shell: '[ -f "{{ item }}" ] && echo hi # mv "{{ item }}" "{{ item }}.old"'
+#   register: _bu
+#   with_items:
+#     - "~/.bashrc"
+#     - "~/.profile"
+
+# - debug: {msg: "{{ _bu }}"}
+
+- name: symlink config files
+  file:
+    src: "{{ dotfiles_home }}/{{ item.src }}"
+    dest: "{{ item.dest }}"
+    state: link
+  when: ('when' not in item or item.when)
+  with_items:
+    - src: data/git
+      dest: "{{ XDG_CONFIG_HOME }}/git"
+    - src: data/tmux
+      dest: "{{ XDG_CONFIG_HOME }}/tmux"
+    - src: data/vim
+      dest: "{{ XDG_CONFIG_HOME }}/vim"
+    - src: data/nvim
+      dest: "{{ XDG_CONFIG_HOME }}/nvim"
+   #- src: data/vscode/keybindings.json
+   #  dest: "{{ XDG_CONFIG_HOME }}/Code/User/keybindings.json"
+   #- src: data/vscode/settings.json
+   #  dest: "{{ XDG_CONFIG_HOME }}/Code/User/settings.json"
+    - src: data/starship/starship.toml
+      dest: "{{ XDG_CONFIG_HOME }}/starship.toml"
+    - src: data/bash/bashrc
+      dest: "~/.bashrc"
+    - src: data/shell/profile
+      dest: "~/.profile"
+
+# - async_status:
+#     jid: "{{ item.ansible_job_id }}"
+#   register: _jobs
+#   until: _jobs.finished
+#   delay: 5
+#   retries: 10
+#   with_items: "{{ _create_instances.results }}"
+
+# - stat:
+#     path: tasks/programs/{{ item }}.yml
+#   with_items: programs
+#   async: 60
+#   poll: 0
+
+- file:
+    path: '{{ services_home }}'
+    state: directory
+    mode: '755'
+  become: yes
+
+- name: clone services
+  git:
+    repo: '{{ services_repo }}'
+    dest: '{{ services_home }}'
+    force: no
+    update: no
+  become: yes
+

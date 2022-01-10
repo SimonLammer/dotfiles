@@ -1,24 +1,16 @@
 ---
 - name: include variables I
   include_vars:
-    file: 'data/vars_j2.yml'
-
-- name: render variable template I
-  template:
-    src: 'data/vars.yml.j2'
-    dest: 'data/vars.yml'
-
-- name: include variables II
-  include_vars:
     file: 'data/vars.yml'
 
-- name: render variable templates II
+- name: render variable templates I
   template:
     src: '{{ item }}'
     dest: '{{ item | splitext | first }}'
-  with_items: '{{ ( "data/**/vars.yml.j2" | fileglob ) }}' 
+  with_items: '{{ ( "data/**/vars.yml.j2" | fileglob ) }}'
 
-- name: include variables III
+- name: include variables II
   include_vars:
     file: '{{ item }}'
   loop: '{{ "data/**/vars.yml" | fileglob }}'
+

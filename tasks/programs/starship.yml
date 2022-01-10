@@ -1,0 +1,5 @@
+---
+- name: install starship
+  import_role:
+    name: andrewrothstein.starship
+
