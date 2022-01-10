@@ -16,6 +16,9 @@ fi
 if [ -d "/opt/flutter/bin" ] ; then
     PATH="/opt/flutter/bin:$PATH"
 fi
+if [ -d "/opt/borg" ] ; then
+    PATH="/opt/borg:$PATH"
+fi
 if [ -d "/home/slammer/.pyenv/bin" ] ; then
     PATH="/home/slammer/.pyenv/bin:$PATH"
 fi
@@ -24,6 +27,11 @@ which pyenv >/dev/null 2>&1
 if [ $? -eq 0 ]; then
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
+fi
+
+which autojump >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+    . /usr/share/autojump/autojump.sh
 fi
 
 if [ -f "$DOTFILES_HOME/data/shell/rc-local.sh" ]; then
