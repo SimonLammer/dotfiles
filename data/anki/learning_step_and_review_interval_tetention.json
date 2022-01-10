@@ -1,0 +1,9 @@
+{
+  "advanced_mode": false,
+  "hide_learn": false,
+  "hide_review_day": false,
+  "hide_review_week": false,
+  "max_ivl": 364,
+  "max_step_reps": 4,
+  "min_revs": 30
+}

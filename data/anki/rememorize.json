@@ -8,7 +8,7 @@
   "bury_siblings": false,
   "change_due_grad_new_card": true,
   "default_days_on_ask": "25",
-  "ef_hotkey": "Alt+t",
+  "ef_hotkey": "Shift+t",
   "fg_hotkey": null,
   "forget_siblings": false,
   "fuzz_days": true,

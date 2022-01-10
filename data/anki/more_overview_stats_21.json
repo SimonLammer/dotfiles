@@ -1,0 +1,23 @@
+{
+  "Date Format": "eu",
+  "Note Correction Factors": {
+      "Spanish": 1,
+      "Turkish::Word Pool": 1
+  },
+  "Show table for finished decks": true,
+  "Stat Colors": {
+      "Days until done": "#ddd",
+      "Done on Date": "#ddd",
+      "Learned": "#080",
+      "Learning": "#a00",
+      "Mature": "#0051ff",
+      "New": "#0051ff",
+      "Percent": "#888",
+      "Review": "#080",
+      "Suspended": "#e7a100",
+      "Total": "#ddd",
+      "Unseen": "#a00",
+      "Young": "#0051ff"
+  },
+  "date_format": "%Y-%m-%d"
+}
