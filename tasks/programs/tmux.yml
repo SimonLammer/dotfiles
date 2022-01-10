@@ -2,8 +2,8 @@
 
 # TODO: create role for tmux installation (https://github.com/SimonLammer/dotfiles/blob/master/Readme.md#install-other-version)
 
-# - name: install tmux-tpm
-#   import_role:
-#     name: suzuki-shunsuke.tmux-tpm
-#   vars:
-#     tmux_tpm_plugins_path: "{{ XDG_DATA_HOME }}/tmux/plugins"
+- name: install tmux-tpm
+  import_role:
+    name: suzuki-shunsuke.tmux-tpm
+  vars:
+    tmux_tpm_plugins_path: "{{ XDG_DATA_HOME }}/tmux/plugins"

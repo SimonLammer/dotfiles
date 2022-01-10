@@ -2,8 +2,7 @@
 - name: dotfiles - Setup
   hosts: local
   tasks:
-
- # - import_tasks: tasks/load_variables.yml
+  - import_tasks: tasks/load_variables.yml
   - include_vars: vars/main.yml
 
   - name: set environment defaults
@@ -55,3 +54,4 @@
   #     state: link
   #     force: yes
   #   with_items: '{{ symlinks }}'
+

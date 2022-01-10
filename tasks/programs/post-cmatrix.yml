@@ -1,5 +1,0 @@
----
-- command: whoami
-  register: whoami
-  become: yes
-- debug: {msg: "post-cmatrix - whoami: {{ whoami }}"}

@@ -20,13 +20,13 @@ programs:
   - gimp
   - htop
   - inkscape
-  - openjdk-8-doc
-  - openjdk-8-jdk
+ #- openjdk-8-doc
+ #- openjdk-8-jdk
   - openjdk-11-doc
   - openjdk-11-jdk
-  - playonlinux
+ #- playonlinux
   - python3
-  - qbittorrent
+ #- qbittorrent
   - ranger
   - silversearcher-ag
   - sqlitebrowser
@@ -34,15 +34,17 @@ programs:
   - steam
   - texlive-full
   - tmux
-  - vim
+ #- vim
+  - neovim
   - vlc
   - winetricks
   - xclip
-  custom:
-  # - docker
-  #- veracrypt
-  # - vscode
-  - zsh
+  - screenfetch
+  custom: #[]
+  - docker
+ #- veracrypt
+ #- vscode
+ #- zsh
 
 
 gnome_extensions_j2:

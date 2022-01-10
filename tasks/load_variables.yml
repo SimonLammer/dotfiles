@@ -13,3 +13,4 @@
   include_vars:
     file: '{{ item }}'
   loop: '{{ "data/**/vars.yml" | fileglob }}'
+

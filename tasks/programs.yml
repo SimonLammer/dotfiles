@@ -46,10 +46,12 @@
       dest: "{{ XDG_CONFIG_HOME }}/tmux"
     - src: data/vim
       dest: "{{ XDG_CONFIG_HOME }}/vim"
-    - src: data/vscode/keybindings.json
-      dest: "{{ XDG_CONFIG_HOME }}/Code/User/keybindings.json"
-    - src: data/vscode/settings.json
-      dest: "{{ XDG_CONFIG_HOME }}/Code/User/settings.json"
+    - src: data/nvim
+      dest: "{{ XDG_CONFIG_HOME }}/nvim"
+   #- src: data/vscode/keybindings.json
+   #  dest: "{{ XDG_CONFIG_HOME }}/Code/User/keybindings.json"
+   #- src: data/vscode/settings.json
+   #  dest: "{{ XDG_CONFIG_HOME }}/Code/User/settings.json"
     - src: data/starship/starship.toml
       dest: "{{ XDG_CONFIG_HOME }}/starship.toml"
     - src: data/bash/bashrc
@@ -84,3 +86,4 @@
     force: no
     update: no
   become: yes
+
