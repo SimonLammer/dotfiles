@@ -86,7 +86,7 @@ lvcreate -n data -L 1.7T luks
 ~~~
 mount /dev/luks/root /mnt
 mount /dev/sda2 /mnt/boot
-mound /dev/sda1 /mnt/boot/efi
+mount /dev/sda1 /mnt/boot/efi
 for fs in proc sys dev dev/pts run etc/resolv.conf; do mount --bind /$fs /mnt/$fs; done
 chroot /mnt
 ~~~
@@ -400,12 +400,45 @@ Type=Application
 Categories=Development;IDE
 ~~~
 
+# Graphic Tablets
+
+## Restrict graphic tablet to one display
+
+`xinput`: ` HUION H420 Pen (0)                        id=23   [slave  pointer  (2)]`
+`xrandr`: `eDP-1-1 connected 1920x1080+485+1440 (normal left inverted right x axis y axis) 344mm x 193mm`
+
+~~~shell
+xinput map-to-output 23 eDP-1-1
+~~~
+
+# Touchpad
+
+Enable: `sh -c "xinput list | grep 'SynPS/2 Synaptics TouchPad' | sed -E 's/.*id=([0-9]+).*/set-prop \1 \"Device Enabled\" 1/g' | xargs xinput"`
+Disable: `sh -c "xinput list | grep 'SynPS/2 Synaptics TouchPad' | sed -E 's/.*id=([0-9]+).*/set-prop \1 \"Device Enabled\" 0/g' | xargs xinput"`
+
+# Miscellanious errors
+
+## `apt upgrade`: `mkinitramfs failure cpio`, `cannot write compressed block`
+
+`/boot` has probably filled up, free some space with `sudo apt pure linux-image-5.0.0-36-generic` (adapted to the kernel you want to remove).
+
+References:
+- https://askubuntu.com/questions/1207958/error-24-write-error-cannot-write-compressed-block
+
+
 ---
 
 # ag [The Silver Searcher](https://github.com/ggreer/the_silver_searcher)
 
 ~~~shell
 sudo apt-get install -y silversearcher-ag
+~~~
+
+# Android Studio
+
+~~~shell
+flatpak install flathub com.google.AndroidStudio
+sudo flatpak override --filesystem=host com.google.AndroidStudio
 ~~~
 
 # Anki
@@ -429,20 +462,36 @@ Terminal=true
 
 |     ID     | Name |
 |:----------:|:-----:|
-| 1421528223 | [Deck Stats](https://ankiweb.net/shared/info/1421528223) |
-| 2091361802 | [Progress Bar](https://ankiweb.net/shared/info/2091361802) |
+| 2179254157 | [Card Info During Review](https://ankiweb.net/shared/info/2179254157) |
+| 1084228676 | [Color Confirmation](https://ankiweb.net/shared/info/1084228676) |
+|   24411424 | [Customize Keyboard Shortcuts](https://ankiweb.net/shared/info/24411424) |
+|  877182321 | [Enhance main window](https://ankiweb.net/shared/info/877182321) |
+|  516643804 | [Frozen Fields](https://ankiweb.net/shared/info/516643804) |
 |  594329229 | [Hierarchical Tags 2](https://ankiweb.net/shared/info/594329229) |
 | 1374772155 | [Image Occlusion Enhanced for Anki 2.1 (alpha)](https://ankiweb.net/shared/info/1374772155) |
+| 1949865265 | [Learning Step and Review Interval Retention](https://ankiweb.net/shared/info/1949865265) |
 | 2084557901 | [LPCG (Lyrics/Poetry Cloze Generator)](https://ankiweb.net/shared/info/2084557901) |
-|  516643804 | [Frozen Fields](https://ankiweb.net/shared/info/516643804) |
-|  291119185 | [Batch Editing](https://ankiweb.net/shared/info/291119185) |
+|  738807903 | [More Overview Stats 2.1](https://ankiweb.net/shared/info/738807903) |
+| 1508357010 | [Remaining time (for Anki 2.1)](https://ankiweb.net/shared/info/1508357010) |
+| 1828603731 | [Stats Overview Pie Graph with Distinct 'Learning' and-or 'Relearning' Sections](https://ankiweb.net/shared/info/1828603731) |
 |  613684242 | [True Retention](https://ankiweb.net/shared/info/613684242) |
-|  323586997 | [ReMemorize: Rescheduler with sibling and logging (v1.4.0)](https://ankiweb.net/shared/info/323586997) |
-|  295889520 | [Mini Format Pack](https://ankiweb.net/shared/info/295889520) |
-|   24411424 | [Customize Keyboard Shortcuts](https://ankiweb.net/shared/info/24411424) |
 
 Maybe:
 - https://ankiweb.net/shared/info/817108664
+- https://ankiweb.net/shared/info/2616209911
+- https://ankiweb.net/shared/info/734898866
+- https://ankiweb.net/shared/info/1672712021
+- https://ankiweb.net/shared/info/1009670238
+
+#### Plugins not used anymore (since 2.1.45)
+
+|     ID     | Name |
+|:----------:|:-----:|
+| 291119185 | [Batch Editing](https://ankiweb.net/shared/info/291119185) |
+| 1421528223 | [Deck Stats](https://ankiweb.net/shared/info/1421528223) |
+|  295889520 | [Mini Format Pack](https://ankiweb.net/shared/info/295889520) |
+|  323586997 | [ReMemorize: Rescheduler with sibling and logging (v1.4.0)](https://ankiweb.net/shared/info/323586997) |
+
 
 ### Errors
 
@@ -484,11 +533,26 @@ References:
 - https://anki.tenderapp.com/discussions/ankidesktop/36650-error-message-exception-anki-requires-a-utf-8-locale
 - https://www.reddit.com/r/Anki/comments/e2zbcl/mpv_not_found/
 
+#### Blurry text
+
+Start anki with `ANKI_WEBSCALE=1 ANKI_NOHIGHDPI=1` environment variables.
+I.e. `env ANKI_WEBSCALE=1 ANKI_NOHIGHDPI=1 anki` for a XFCE launcher.
 
 # ansible
 
 References:
 - https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-ubuntu
+
+# AnyDesk
+
+## Disable autostart
+
+~~~shell
+sudo systemctl disable anydesk
+~~~
+
+References:
+- https://www.reddit.com/r/AnyDesk/comments/g49lqo/anydesk_runs_wild_upon_booting_into_linux_how_to/
 
 # [autojump](https://github.com/wting/autojump)
 
@@ -504,6 +568,28 @@ sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/c
 ~~~
 [Reference](https://bugs.launchpad.net/ubuntu/+source/llvm-defaults/+bug/1769737)
 
+# DaVinci Resolve
+
+Download: [https://www.blackmagicdesign.com/products/davinciresolve/](https://www.blackmagicdesign.com/products/davinciresolve/)
+
+## Import mp4 in DaVinci Resolve
+
+### mjpeg
+
+```
+ffmpeg -i input_file.mp4 -vcodec mjpeg -q:v 2 -acodec pcm_s16be -q:a 0 -f mov output_file.mov
+```
+
+batch:
+```
+for f in *.mp4; do ffmpeg -i "$f" -hide_banner -vcodec mjpeg -q:v 2 -acodec pcm_s16be -q:a 0 -f mov "$f.mov"; done
+```
+
+References:
+- https://brushlesswhoop.com/converting-fpv-footage-for-davinci-resolve/
+- https://superuser.com/a/1273941
+
+
 # Docker
 
 [Reference](https://docs.docker.com/install/linux/docker-ce/ubuntu/#upgrade-docker-ce-1)
@@ -513,6 +599,27 @@ wget -O- get.docker.com | bash
 ~~~shell
 curl -fsSL http://get.docker.com/ | sh
 ~~~
+
+## Move data directory
+
+1. `sudo service docker stop`
+2. Add the following to `/etc/docker/daemon.json`
+
+    ```
+    {
+        "data-root": "/path/to/your/docker"
+    }
+    ```
+
+3. `sudo rsync -aP /var/lib/docker/ /path/to/your/docker
+4. `sudo mv /var/lib/docker /var/lib/docker.old`
+5. `sudo service docker start
+6. Test if your docker containers still work!
+6. `sudo rm -rf /var/lib/docker.old`
+
+
+References:
+- https://www.guguweb.com/2019/02/07/how-to-move-docker-data-directory-to-another-location-on-ubuntu/
 
 ## Install latest docker-compose
 
@@ -565,7 +672,13 @@ shasum -a 512 -c elasticsearch-6.4.0.deb.sha512 && sudo dpkg -i elasticsearch-6.
 ## Add-ons
 
 - [Adblock Plus](https://addons.mozilla.org/en-US/firefox/addon/adblock-plus/)
+- [Bupass Paywalls Clean](https://addons.mozilla.org/en-US/firefox/addon/bypass-paywalls-clean/)
+- [Chessvision.ai](https://addons.mozilla.org/en-CA/firefox/addon/chessvision-ai-for-firefox/)
 - [Cookie-Editor](https://addons.mozilla.org/en-US/firefox/addon/cookie-editor/)
+- [Netflix 1080p](https://addons.mozilla.org/en-US/firefox/addon/netflix-1080p-firefox/)
+- [Save Page WE](https://addons.mozilla.org/en-CA/firefox/addon/save-page-we/)
+- [Tabliss](https://addons.mozilla.org/en-US/firefox/addon/tabliss/)
+- [uBlock Origin](https://addons.mozilla.org/en-CA/firefox/addon/ublock-origin)
 - [Reverse Image Search](https://addons.mozilla.org/en-US/firefox/addon/image-reverse-search/)
 - [Video DownloadHelper](https://addons.mozilla.org/en-US/firefox/addon/video-downloadhelper/)
 - [Vimium-FF](https://addons.mozilla.org/en-US/firefox/addon/vimium-ff/)
@@ -627,6 +740,11 @@ sudo flatpak override --filesystem=host org.gnucash.GnuCash
 References:
 - https://unix.stackexchange.com/a/525104/367736
 
+# gscan2pdf
+
+~~~shell
+sudo apt install gscan2pdf tesseract-ocr-deu
+~~~
 
 # [Gti](https://github.com/rwos/gti)
 
@@ -688,6 +806,15 @@ sudo apt-get install curl python-software-properties
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 sudo apt-get install nodejs
 ~~~
+
+# NoiseTorch
+
+[Download page](https://github.com/lawl/NoiseTorch)
+> NoiseTorch is an easy to use open source application for Linux with PulseAudio. It creates a virtual microphone that suppresses noise, in any application. Use whichever conferencing or VOIP application you like and simply select the NoiseTorch Virtual Microphone as input to torch the sound of your mechanical keyboard, computer fans, trains and the likes.
+
+## Autostart
+
+[Reference](https://github.com/lawl/NoiseTorch/wiki/Start-automatically-with-Systemd)
 
 # Play on Linux
 
@@ -760,6 +887,15 @@ sudo apt install -y python3-pip build-essential libssl-dev libffi-dev python-dev
 ~~~shell
 pip3 install --user pipenv
 ~~~
+
+### Stuck in 'Locking ...'
+
+Either: Wait for a bit
+
+Or: `pipenv lock --clear && pipenv install`
+
+References:
+- https://stackoverflow.com/a/56440091/2808520
 
 # [Ranger](https://github.com/ranger/ranger)
 
