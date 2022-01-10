@@ -1,8 +1,8 @@
-#- src: gantsign.oh-my-zsh
-#- src: gantsign.visual-studio-code
-- src: suzuki-shunsuke.tmux-tpm
 - src: geerlingguy.docker
-#- src: rodrigorega.veracrypt
-- src: oefenweb.virtualbox
+- src: suzuki-shunsuke.tmux-tpm
+#- src: gantsign.oh-my-zsh
 - src: andrewrothstein.starship
+- src: coglinev3.veracrypt
+#- src: oefenweb.virtualbox
+#- src: gantsign.visual-studio-code
 

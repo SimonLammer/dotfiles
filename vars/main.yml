@@ -20,6 +20,7 @@ programs:
   - gimp
   - htop
   - inkscape
+  - neovim
  #- openjdk-8-doc
  #- openjdk-8-jdk
   - openjdk-11-doc
@@ -28,6 +29,7 @@ programs:
   - python3
  #- qbittorrent
   - ranger
+  - screenfetch
   - silversearcher-ag
   - sqlitebrowser
   - ssh
@@ -35,14 +37,15 @@ programs:
   - texlive-full
   - tmux
  #- vim
-  - neovim
   - vlc
   - winetricks
   - xclip
-  - screenfetch
   custom: #[]
   - docker
- #- veracrypt
+  - starship
+  - tmux
+  - veracrypt
+ #- virtualbox
  #- vscode
  #- zsh
 

@@ -3,5 +3,5 @@ templates:
 
 setup:
 	ansible-galaxy install -r requirements/setup.yml
-	ANSIBLE_FORCE_COLOR=true ansible-playbook setup.yml -u slammer -K 2>&1 | tee log
+	ANSIBLE_COW_SELECTION=random ANSIBLE_FORCE_COLOR=true ansible-playbook setup.yml -u slammer -K 2>&1 | tee log
 

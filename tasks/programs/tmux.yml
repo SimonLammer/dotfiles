@@ -6,4 +6,4 @@
   import_role:
     name: suzuki-shunsuke.tmux-tpm
   vars:
-    tmux_tpm_plugins_path: "{{ XDG_DATA_HOME }}/tmux/plugins"
+    tmux_tpm_plugins_path: "{{ XDG_CONFIG_HOME }}/tmux/plugins"
