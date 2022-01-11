@@ -156,6 +156,15 @@ Other candidates I liked:
 - RobotoMono Nerd Font
 - Sauce Code Pro Nerd Font
 
+### Patch fonts
+
+~~~
+docker run -v `pwd`:/in -v `pwd`/patched:/out nerdfonts/patcher -c
+~~~
+
+References:
+- https://github.com/ryanoasis/nerd-fonts#font-patcher
+
 # LVM2 Snapshots
 
 *(run as root)*
