@@ -144,7 +144,7 @@ Copy the font files to `/usr/share/fonts/<some-awesome-font>/*.otf`
 
 ## [NerdFonts](https://www.nerdfonts.com/#home)
 
-[CodeNewRoman Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CodeNewRoman.zip)
+[Anonymous Pro](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/AnonymousPro/complete)
 
 Other candidates I liked:
 - FantasqueSansMono Nerd Font
@@ -155,6 +155,9 @@ Other candidates I liked:
 - Mononoki Nerd Font
 - RobotoMono Nerd Font
 - Sauce Code Pro Nerd Font
+
+Others I've used:
+- [CodeNewRoman Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CodeNewRoman.zip)
 
 ### Patch fonts
 
