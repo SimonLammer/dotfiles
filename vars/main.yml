@@ -15,6 +15,7 @@ programs:
   - cmatrix
   - cowsay
   - curl
+  - entr
   - firefox
   - gparted
   - gimp
