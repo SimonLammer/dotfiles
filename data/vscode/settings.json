@@ -97,39 +97,19 @@
         "<C-v>": false,
         "<C-w>": false,
     },
+
+    //  ____                              _      
+    // |  _ \ _   _ _ __   __ _ _ __ ___ (_) ___ 
+    // | | | | | | | '_ \ / _` | '_ ` _ \| |/ __|
+    // | |_| | |_| | | | | (_| | | | | | | | (__ 
+    // |____/ \__, |_| |_|\__,_|_| |_| |_|_|\___|
+    //        |___/                              
+    //                                           
+    // Stuff below will change dynamically
+    "window.zoomLevel": 0,
     "workbench.colorCustomizations": {
         "statusBar.background": "#076678",
         "statusBar.noFolderBackground": "#076678",
         "statusBar.debuggingBackground": "#076678"
     },
-    "terminal.integrated.shell.linux": "/bin/bash",
-    "editor.fontFamily": "'CodeNewRoman Nerd Font', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
-    "editor.lineHeight": 19,
-    "editor.wrappingIndent": "indent",
-    "extensions.ignoreRecommendations": false,
-    "workbench.editorAssociations": {
-        "*.ipynb": "jupyter-notebook"
-    },
-    "diffEditor.ignoreTrimWhitespace": false,
-    "editor.suggestSelection": "first",
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "java.project.importHint": false,
-    "editor.cursorStyle": "line",
-    "editor.insertSpaces": false,
-    "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
-    "editor.wordWrap": "off",
-    "notebook.cellToolbarLocation": {
-        "default": "right",
-        "jupyter-notebook": "left"
-    },
-    "files.exclude": {
-        "**/.classpath": true,
-        "**/.project": true,
-        "**/.settings": true,
-        "**/.factorypath": true
-    },
-    "editor.autoClosingDelete": "never",
-    "editor.autoClosingOvertype": "never",
-    "editor.autoClosingQuotes": "never",
-    "editor.autoClosingBrackets": "never",
 }
