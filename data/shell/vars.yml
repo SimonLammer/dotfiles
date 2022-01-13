@@ -13,5 +13,6 @@ aliases:
 
 path_additions:
 - /opt/anki/bin
+- /opt/borg
 - /opt/flutter/bin
 - /home/slammer/.pyenv/bin

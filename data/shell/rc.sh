@@ -13,11 +13,11 @@ alias tmux='tmux -f "${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf"'
 if [ -d "/opt/anki/bin" ] ; then
     PATH="/opt/anki/bin:$PATH"
 fi
-if [ -d "/opt/flutter/bin" ] ; then
-    PATH="/opt/flutter/bin:$PATH"
-fi
 if [ -d "/opt/borg" ] ; then
     PATH="/opt/borg:$PATH"
+fi
+if [ -d "/opt/flutter/bin" ] ; then
+    PATH="/opt/flutter/bin:$PATH"
 fi
 if [ -d "/home/slammer/.pyenv/bin" ] ; then
     PATH="/home/slammer/.pyenv/bin:$PATH"
