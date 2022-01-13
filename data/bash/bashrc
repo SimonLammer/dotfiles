@@ -121,6 +121,7 @@ if [ -f "$DOTFILES_HOME/data/tmux/scripts/start.sh" ]; then
         exit
     fi
 fi
+
 function __tmux_shell_post_command() {
     ($DOTFILES_HOME/data/tmux/scripts/shell-post-command.sh &)
 }

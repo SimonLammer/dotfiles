@@ -121,7 +121,18 @@ if [ -f "$DOTFILES_HOME/data/tmux/scripts/start.sh" ]; then
         exit
     fi
 fi
-PROMPT_COMMAND="$DOTFILES_HOME/data/tmux/scripts/shell-post-command.sh;$PROMPT_COMMAND"
+
+function __tmux_shell_post_command() {
+    ($DOTFILES_HOME/data/tmux/scripts/shell-post-command.sh &)
+}
+PROMPT_COMMAND="__tmux_shell_post_command;$PROMPT_COMMAND"
+
+function __print_separator() {
+    echo -ne '\x1b[0;48;5;237m\x1b[K\x1b[0m'
+}
+if [ -n "$TMUX" ]; then
+    PROMPT_COMMAND="__print_separator;$PROMPT_COMMAND"
+fi
 
 function __minimalist_prompt_command() {
     local _last_exit="$?"
