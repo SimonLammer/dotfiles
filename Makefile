@@ -1,9 +1,11 @@
+ANSIBLE = ANSIBLE_COW_SELECTION=random ANSIBLE_FORCE_COLOR=true ansible-playbook
+
 templates:
-	ANSIBLE_FORCE_COLOR=true ansible-playbook templates.yml -u slammer
+	${ANSIBLE} templates.yml -u slammer
 
 setup:
 	ansible-galaxy install -r requirements/setup.yml
-	ANSIBLE_COW_SELECTION=random ANSIBLE_FORCE_COLOR=true ansible-playbook setup.yml -u slammer -K 2>&1 | tee log
+	${ANSIBLE} setup.yml -u slammer -K 2>&1 | tee log
 
 git-ssh:
 	# Change origin to use ssh instead of https
