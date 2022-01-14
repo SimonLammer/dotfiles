@@ -1,32 +1,49 @@
-"    _  _        _            _________ _______  _______  _______ 
-"   / )( (    /|( \  |\     /|\__   __/(       )(  ____ )(  ____ \
-"  / / |  \  ( | \ \ | )   ( |   ) (   | () () || (    )|| (    \/
-" ( (  |   \ | |  ) )| |   | |   | |   | || || || (____)|| |      
-" | |  | (\ \) |  | |( (   ) )   | |   | |(_)| ||     __)| |      
-" ( (  | | \   |  ) ) \ \_/ /    | |   | |   | || (\ (   | |      
-" _\ \ | )  \  | / /   \   /  ___) (___| )   ( || ) \ \__| (____/\
-"(_)\_)|/    )_)(_/     \_/   \_______/|/     \||/   \__/(_______/
-"
-" Shared configuration for `vim` and `neovim`
+"    _  _        _           _________ _______ 
+"   / )( (    /|( \  \     /|\__   __/(       )
+"  / / |  \  ( | \ \  )   ( |   ) (   | () () |
+" ( (  |   \ | |  ) ) |   | |   | |   | || || |      ____             __ _       
+" | |  | (\ \) |  | | (   ) )   | |   | |(_)| |     / ___|___  _ __  / _(_) __ _ 
+" ( (  | | \   |  ) )\ \_/ /    | |   | |   | |    | |   / _ \| '_ \| |_| |/ _` |
+"  \ \ | )  \  | / /  \   /  ___) (___| )   ( |    | |__| (_) | | | |  _| | (_| |
+"   \_)|/    )_)(_/    \_/   \_______/|/     \|     \____\___/|_| |_|_| |_|\__, |
+"                                                                          |___/ 
+" Shared configuration for `vim` and `nvim`
 
 
 " Overall appearance
 colors desert        " Choose cholorscheme
 syntax on            " Enable syntax-highlighting
-set wrap             " Enable wrapping
-set nu               " Display line numbers
-set relativenumber   " Display relative numbers
+
+" Lines
+set cursorline
+"set number           " Display absolute line numbers
+set relativenumber   " Display relative line numbers
+set showmatch
+set wrap             " Enable wrapping 
 
 " Indenting
 set autoindent                     " Enable autoindenting
-set tabstop={{editor.tabSize}}     " Tabs display as {{editor.tabSize}} spaces
+set cc=80,100                      " Highlight far columns
 set expandtab                      " Replace tabs with spaces
-set shiftwidth=4
-set softtabstop={{editor.tabSize}} " Indents use {{editor.tabSize}} columns
+set shiftwidth={{editor.tabSize}}  " Width for autoindents
+set softtabstop={{editor.tabSize}} " See multiple spaces as tabstops so <BS> is sane
+set tabstop={{editor.tabSize}}     " Tabs display as {{editor.tabSize}} spaces
+filetype plugin indent on          " Allow auto-indenting depending on file type
 
-" Change working directory to currently opened file
-set autochdir
+" Searching
+set hlsearch
+set incsearch
 
+" Splits
+set splitright
+set splitbelow
+
+" Miscellaneous
+filetype plugin on
+set autochdir             " Change working directory to currently opened file
+set clipboard=unnamedplus " Use system clipboard
+set ignorecase
+set ttyfast               " Speed up scrolling in Vim
 
 "  __  __                   _                 
 " |  \/  | __ _ _ __  _ __ (_)_ __   __ _ ___ 
@@ -61,10 +78,13 @@ vno <leader> <Nop>
 " Quick pairs
 imap <leader>' ''<ESC>i
 imap <leader>" ""<ESC>i
-imap <leader>{ {}<ESC>i
+"imap <leader>{ {}<ESC>i
 imap <leader>[ []<ESC>i
 imap <leader>( ()<ESC>i
 imap <leader>< <><ESC>i
+
+" Curly braces
+imap <leader>{ {<CR>}<ESC>O
 
 " Replace word with true / false
 imap <leader>t ciwtrue<ESC>b
@@ -73,6 +93,13 @@ imap <leader>f ciwfalse<ESC>b
 " Insert space after cursor
 nmap <leader><Space> a <ESC>
 
-" Curly braces
-imap <leader>{ {<CR>}<ESC>O
+" Copy file / directory path to clipboard
+:nnoremap <silent> yc :let @+=expand('%:p')<CR>hhh
+:nnoremap <silent> yd :let @+=expand('%:p:h')<CR>h
+
+" Jump to the last position when reopening a file
+if has("autocmd")
+    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+      \| exe "normal! g'\"" | endif
+endif
 
