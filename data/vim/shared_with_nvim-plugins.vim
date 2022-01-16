@@ -1,11 +1,12 @@
 "    _  _        _            _________ _______ 
 "   / )( (    /|( \  |\     /|\__   __/(       )
-"  / / |  \  ( | \ \ | )   ( |   ) (   | () () |    ____  _             _           
-" ( (  |   \ | |  ) )| |   | |   | |   | || || |   |  _ \| |_   _  __ _(_)_ __  ___ 
-" | |  | (\ \) |  | |( (   ) )   | |   | |(_)| |   | |_) | | | | |/ _` | | '_ \/ __|
-" ( (  | | \   |  ) ) \ \_/ /    | |   | |   | |   |  __/| | |_| | (_| | | | | \__ \
-"  \ \ | )  \  | / /   \   /  ___) (___| )   ( |   |_|   |_|\__,_|\__, |_|_| |_|___/
-"   \_)|/    )_)(_/     \_/   \_______/|/     \|                  |___/             
+"  / / |  \  ( | \ \ | )   ( |   ) (   | () () |
+" ( (  |   \ | |  ) )| |   | |   | |   | || || |    ____  _             _           
+" | |  | (\ \) |  | |( (   ) )   | |   | |(_)| |   |  _ \| |_   _  __ _(_)_ __  ___ 
+" ( (  | | \   |  ) ) \ \_/ /    | |   | |   | |   | |_) | | | | |/ _` | | '_ \/ __|
+"  \ \ | )  \  | / /   \   /  ___) (___| )   ( |   |  __/| | |_| | (_| | | | | \__ \
+"   \_)|/    )_)(_/     \_/   \_______/|/     \|   |_|   |_|\__,_|\__, |_|_| |_|___/
+"                                                                 |___/             
 
 if has('nvim')
   let MYVIMDIR = "$HOME/.config/dotfiles/data/nvim"
@@ -21,15 +22,22 @@ endif
 call plug#begin()
 Plug 'tpope/vim-sensible'
 Plug 'vim-scripts/RltvNmbr.vim'
+Plug 'flazz/vim-colorschemes'
 if has('nvim')
   Plug 'rbgrouleff/bclose.vim' " Required for 'franoiscabrol/ranger.vim' in nvim
 endif
 Plug 'francoiscabrol/ranger.vim'
 call plug#end()
 
+" Other Plugins I might want to checkout sometime:
+" junegunn/fzf.vim
+" thaerkh/vim-workspace
+
+
 let g:enable_bold_font = 1
 set background=dark
 call RltvNmbr#RltvNmbrCtrl(1)
+colorscheme gruvbox
 
 
 "  __  __                   _                 

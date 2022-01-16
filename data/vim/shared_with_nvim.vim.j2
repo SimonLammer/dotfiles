@@ -19,7 +19,7 @@ set encoding=utf-8
 set fileencoding=utf-8
 set showtabline=2      " Always show tabs
 set t_Co=256
-colors desert          " Choose cholorscheme
+"colorscheme desert
 
 " Lines
 set number           " Display absolute line numbers
@@ -30,13 +30,16 @@ set wrap             " Enable wrapping
 " Highlight cursor
 set cursorline
 "set cursorcolumn
-highlight CursorLine cterm=None ctermbg=darkgrey
+highlight CursorLine cterm=None ctermbg=236 "rgb=48,48,48
 
 " Indenting
 set expandtab                      " Replace tabs with spaces
 set shiftwidth={{editor.tabSize}}  " Width for autoindents
 set softtabstop={{editor.tabSize}} " See multiple spaces as tabstops so <BS> is sane
 set tabstop={{editor.tabSize}}     " Tabs display as {{editor.tabSize}} spaces
+
+set colorcolumn=80,100    " Highlight far columns
+highlight ColorColumn ctermbg=236
 
 " Searching
 set hlsearch
@@ -48,7 +51,6 @@ set splitbelow
 " Miscellaneous
 filetype plugin on
 set autochdir             " Change working directory to currently opened file
-set cc=80,100             " Highlight far columns
 set clipboard=unnamedplus " Use system clipboard
 set ignorecase
 set ttyfast               " Speed up scrolling in Vim
