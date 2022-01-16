@@ -3,6 +3,9 @@ ANSIBLE = ANSIBLE_COW_SELECTION=random ANSIBLE_FORCE_COLOR=true ansible-playbook
 templates:
 	${ANSIBLE} templates.yml -u slammer
 
+watch-templates:
+	ls */**/*.j2 | entr make templates
+
 setup:
 	ansible-galaxy install -r requirements/setup.yml
 	${ANSIBLE} setup.yml -u slammer -K 2>&1 | tee log
