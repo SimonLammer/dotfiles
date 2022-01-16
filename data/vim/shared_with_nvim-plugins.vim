@@ -27,11 +27,14 @@ if has('nvim')
   Plug 'rbgrouleff/bclose.vim' " Required for 'franoiscabrol/ranger.vim' in nvim
 endif
 Plug 'francoiscabrol/ranger.vim'
+Plug 'haya14busa/incsearch.vim'
 call plug#end()
-
+    
 " Other Plugins I might want to checkout sometime:
 " junegunn/fzf.vim
 " thaerkh/vim-workspace
+" ms-jpq/coq-nvim
+" preservim/tagbar
 
 
 let g:enable_bold_font = 1

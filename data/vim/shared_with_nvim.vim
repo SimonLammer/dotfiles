@@ -30,7 +30,7 @@ set wrap             " Enable wrapping
 " Highlight cursor
 set cursorline
 "set cursorcolumn
-highlight CursorLine cterm=None ctermbg=236 "rgb=48,48,48
+highlight CursorLine cterm=None ctermbg=236 "rgb=48,48,48 https://vim.fandom.com/wiki/Xterm256_color_names_for_console_Vim
 
 " Indenting
 set expandtab                      " Replace tabs with spaces
