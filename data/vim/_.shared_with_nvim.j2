@@ -21,8 +21,8 @@ set t_Co=256
 colors desert          " Choose cholorscheme
 
 " Lines
-"set number           " Display absolute line numbers
-set relativenumber   " Display relative line numbers
+set number           " Display absolute line numbers
+"set relativenumber   " Display relative line numbers
 set showmatch
 set wrap             " Enable wrapping 
 
@@ -32,17 +32,13 @@ set cursorline
 highlight CursorLine cterm=None ctermbg=darkgrey
 
 " Indenting
-set autoindent                     " Enable autoindenting
 set expandtab                      " Replace tabs with spaces
 set shiftwidth={{editor.tabSize}}  " Width for autoindents
-set smarttab
 set softtabstop={{editor.tabSize}} " See multiple spaces as tabstops so <BS> is sane
 set tabstop={{editor.tabSize}}     " Tabs display as {{editor.tabSize}} spaces
-filetype plugin indent on          " Allow auto-indenting depending on file type
 
 " Searching
 set hlsearch
-set incsearch
 
 " Splits
 set splitright
@@ -54,8 +50,6 @@ set autochdir             " Change working directory to currently opened file
 set cc=80,100             " Highlight far columns
 set clipboard=unnamedplus " Use system clipboard
 set ignorecase
-set timeoutlen=500
-set ruler                 " Show cursor position
 set ttyfast               " Speed up scrolling in Vim
 
 "  __  __                   _                 
@@ -66,7 +60,7 @@ set ttyfast               " Speed up scrolling in Vim
 "              |_|   |_|            |___/     
 
 " Escape insert mode whilst avoiding carpal tunnel syndrome
-imap jj <ESC>
+imap kj <ESC>
 
 " Change leader
 let mapleader=","

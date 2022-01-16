@@ -9,5 +9,6 @@
 "                                                                 |___/ 
 "
 
+source $HOME/.config/dotfiles/data/nvim/plugins.vim
 source $HOME/.config/dotfiles/data/vim/_.shared_with_nvim
 

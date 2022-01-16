@@ -8,6 +8,6 @@
 " (_)\_/   \_______/|/     \||/   \__/(_______/
 "                                             
 
-source $HOME/.config/dotfiles/data/vim/_.shared_with_nvim
 source $HOME/.config/dotfiles/data/vim/_.vimrc-plugins
+source $HOME/.config/dotfiles/data/vim/_.shared_with_nvim
 
