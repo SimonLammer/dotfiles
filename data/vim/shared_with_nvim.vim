@@ -34,7 +34,8 @@ highlight CursorLine cterm=None ctermbg=236 "rgb=48,48,48 https://vim.fandom.com
 
 " Indenting
 set breakindent                             " Indent wrapped lines
-set breakindentopt=shift:2 " Add 2 spaces to wrapped line indentations
+"set breakindentopt=shift:2 " Add 2 spaces to wrapped line indentations
+set showbreak=↪                             " Display this character for all breaks
 set expandtab                               " Replace tabs with spaces
 set shiftwidth=2           " Width for autoindents
 set softtabstop=2          " See multiple spaces as tabstops so <BS> is sane
