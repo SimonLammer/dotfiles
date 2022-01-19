@@ -33,10 +33,12 @@ set cursorline
 highlight CursorLine cterm=None ctermbg=236 "rgb=48,48,48 https://vim.fandom.com/wiki/Xterm256_color_names_for_console_Vim
 
 " Indenting
-set expandtab                      " Replace tabs with spaces
-set shiftwidth=2  " Width for autoindents
-set softtabstop=2 " See multiple spaces as tabstops so <BS> is sane
-set tabstop=2     " Tabs display as 2 spaces
+set breakindent                             " Indent wrapped lines
+set breakindentopt=shift:2 " Add 2 spaces to wrapped line indentations
+set expandtab                               " Replace tabs with spaces
+set shiftwidth=2           " Width for autoindents
+set softtabstop=2          " See multiple spaces as tabstops so <BS> is sane
+set tabstop=2              " Tabs display as 2 spaces
 
 set colorcolumn=80,100    " Highlight far columns
 highlight ColorColumn ctermbg=236
