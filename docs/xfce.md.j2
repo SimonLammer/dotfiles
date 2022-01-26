@@ -1,0 +1,37 @@
+# XFCE setup
+
+## WM Themes
+
+Stored in `/usr/share/themes`.
+
+Current: https://www.xfce-look.org/p/1016457/
+
+## GTK Themes
+
+Stored in `/usr/share/themes`.
+
+Current: https://www.xfce-look.org/p/1214421/
+
+## Icons
+
+Stored in `/usr/share/icons`.
+
+Current: https://www.xfce-look.org/s/XFCE/p/1166289
+
+Others:
+- https://www.xfce-look.org/s/XFCE/p/1218961
+
+## Background images
+
+- https://wallhaven.cc/w/p8ek6p
+
+## Xfconf Settings
+
+| Channel | property | value |
+|--------:|:---------|:-----:|
+{% for channel, settings in xfconf_settings.items() %}
+{% for setting in settings %}
+| {{ channel }} | {{ setting.property }} | {{ setting.value }} |
+{% endfor %}
+{% endfor %}
+

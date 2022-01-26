@@ -1,7 +1,12 @@
 ---
   - import_tasks: tasks/load_variables.yml
-  - name: customize gnome
-    include_role:
-      name: PeterMosmans.customize-gnome
-    vars:
-      gnome_user: '{{ ansible_user_id }}'
+  - name: customize xfce
+    xfconf:
+      channel: '{{ item.0.key }}'
+      property: '{{ item.1.property }}'
+      value: '{{ item.1.value }}'
+      value_type: '{{ item.1.value_type }}'
+    with_subelements:
+    - '{{ xfconf_settings | dict2items }}'
+    - value
+

@@ -29,9 +29,8 @@ Others:
 
 | Channel | property | value |
 |--------:|:---------|:-----:|
-| pointers | /DisableTouchpadWhileTyping | true |
-| pointers | /SynPS2_Synaptics_Touchpad/ReverseScrolling | true |
-| xfce4-keyboard-shortcuts | /commands/custom/<Super>space | xfce4-popup-whiskermenu |
+| pointers | /DisableTouchpadWhileTyping | True |
+| pointers | /SynPS2_Synaptics_Touchpad/ReverseScrolling | True |
 | xfce4-keyboard-shortcuts | /xfwm4/custom/<Primary><Alt>Up | up_workspace_key |
 | xfce4-keyboard-shortcuts | /xfwm4/custom/<Primary><Alt>Left | left_workspace_key |
 | xfce4-keyboard-shortcuts | /xfwm4/custom/<Primary><Alt>Down | down_workspace_key |
@@ -52,5 +51,6 @@ Others:
 | xfce4-keyboard-shortcuts | /xfwm4/custom/<Super>Down | tile_down_key |
 | xfce4-keyboard-shortcuts | /xfwm4/custom/<Super>Right | tile_right_key |
 | xfce4-keyboard-shortcuts | /xfwm4/custom/<Super>Up | maximize_window_key |
-| xfce4-screensaver | saver/fullscreen-inhibit | true |
-| xfce4-screensaver | saver/idle-activation/delay | 10 |
+| xfce4-screensaver | /saver/fullscreen-inhibit | True |
+| xfce4-screensaver | /saver/idle-activation/delay | 10 |
+

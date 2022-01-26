@@ -1,7 +1,7 @@
 ---
 - name: include variables I
-  include_vars:
-    file: 'data/vars.yml'
+  include_vars: '{{ item }}'
+  with_items: '{{ ( "vars/*.yml" | fileglob + ["data/vars.yml"] ) }}'
 
 - name: render variable templates I
   template:
