@@ -47,6 +47,12 @@ highlight ColorColumn ctermbg=236
 " Searching
 set hlsearch
 
+" Drain regex' magic (https://unix.stackexchange.com/questions/23419/vim-regex-not-need-to-escape)
+nnoremap / /\v
+vnoremap / /\v
+nnoremap ? ?\v
+vnoremap ? ?\v
+
 " Splits
 set splitright
 set splitbelow
@@ -106,6 +112,7 @@ vnoremap > >gv
 
 " Alternate way to save
 noremap <C-s> :w<CR>
+inoremap <C-s> X<ESC>:w<CR>cl
 
 " Quick pairs
 imap <leader>' ''<ESC>i
