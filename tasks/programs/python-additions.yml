@@ -1,0 +1,21 @@
+---
+- name: install pyenv
+  import_role:
+    name: suzuki-shunsuke.pyenv
+  vars:
+    pyenv_root: '{{ pyenv_root }}'
+    pyenv_is_dependencies_installed: yes
+  become: yes
+
+- name: link pyenv executable
+  file:
+    src: '{{ pyenv_root }}/bin/pyenv'
+    dest: /usr/local/bin/pyenv
+    state: link
+  become: yes
+
+- name: install pipenv
+  pip:
+    name: pipenv
+    state: latest
+

@@ -9,6 +9,8 @@ XDG_CONFIG_HOME_DEFAULT: $HOME/.config
 XDG_CACHE_HOME_DEFAULT: $HOME/.cache
 XDG_DATA_HOME_DEFAULT: $HOME/.local/share
 
+pyenv_root: /opt/pyenv
+
 programs:
   packages:
   - autojump
@@ -44,6 +46,7 @@ programs:
   custom: #[]
   - docker
   - starship
+  - python-additions
   - tmux
   - veracrypt
  #- virtualbox
