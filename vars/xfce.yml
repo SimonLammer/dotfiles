@@ -48,6 +48,15 @@ xfconf_settings: # [channel: {property: ... , value: ...}, ...]
     value: "tile_right_key"
   - property: "/xfwm4/custom/<Super>Up"
     value: "maximize_window_key"
+  xfce4-panel:
+  - property: "/panels/panel-1/mode"
+    value: 0
+  - property: "/panels/panel-1/position"
+    value: "p=11;x=0;y=0"
+  - property: "/panels/panel-1/position-locked"
+    value: true
+  - property: "/panels/panel-1/size"
+    value: 24
   xfce4-screensaver:
   - property: "/saver/fullscreen-inhibit"
     value: true
