@@ -1,11 +1,26 @@
 ---
+# https://github.com/ansible-collections/community.general/issues/4089
+# - xfconf:
+#     channel: "xsettings"
+#     property: "/Gtk/DecorationLayout"
+#     value: 'close,minimize,maximize,menu:'
+#     value_type: string
+#     force_array: false
+# - fail: {}
   - import_tasks: tasks/load_variables.yml
   - name: customize xfce
     xfconf:
       channel: '{{ item.0.key }}'
+      force_array: '{{ item.1.force_array | default(false) }}'
       property: '{{ item.1.property }}'
       value: '{{ item.1.value }}'
-      value_type: '{{ item.1.value_type }}'
+      value_type: >-
+        {{ item.1.value_type |
+          default({
+            "AnsibleUnsafeText": "string",
+            "bool": "bool",
+            "int": "int",
+          }[item.1.value | type_debug]) }}
     with_subelements:
     - '{{ xfconf_settings | dict2items }}'
     - value

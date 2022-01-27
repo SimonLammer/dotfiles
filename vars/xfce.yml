@@ -3,78 +3,66 @@ xfconf_settings: # [channel: {property: ... , value: ...}, ...]
   pointers:
   - property: "/DisableTouchpadWhileTyping"
     value: true
-    value_type: bool
   - property: "/SynPS2_Synaptics_Touchpad/ReverseScrolling"
     value: true
-    value_type: bool
   xfce4-keyboard-shortcuts:
 # - property: "/commands/custom/<Super>space"
 #   value: "xfce4-popup-whiskermenu"
   - property: "/xfwm4/custom/<Primary><Alt>Up"
     value: "up_workspace_key"
-    value_type: string
   - property: "/xfwm4/custom/<Primary><Alt>Left"
     value: "left_workspace_key"
-    value_type: string
   - property: "/xfwm4/custom/<Primary><Alt>Down"
     value: "down_workspace_key"
-    value_type: string
   - property: "/xfwm4/custom/<Primary><Alt>Right"
     value: "right_workspace_key"
-    value_type: string
   - property: "/xfwm4/custom/<Primary><Alt><Super>Up"
     value: "move_window_up_workspace_key"
-    value_type: string
   - property: "/xfwm4/custom/<Primary><Alt><Super>Left"
     value: "move_window_left_workspace_key"
-    value_type: string
   - property: "/xfwm4/custom/<Primary><Alt><Super>Down"
     value: "move_window_down_workspace_key"
-    value_type: string
   - property: "/xfwm4/custom/<Primary><Alt><Super>Right"
     value: "move_window_right_workspace_key"
-    value_type: string
   - property: "/xfwm4/custom/<Primary><Shift><Alt>Up"
     value: "move_window_up_key"
-    value_type: string
   - property: "/xfwm4/custom/<Primary><Shift><Alt>Left"
     value: "move_window_left_key"
-    value_type: string
   - property: "/xfwm4/custom/<Primary><Shift><Alt>Down"
     value: "move_window_down_key"
-    value_type: string
   - property: "/xfwm4/custom/<Primary><Shift><Alt>Right"
     value: "move_window_right_key"
-    value_type: string
   - property: "/xfwm4/custom/<Primary><Super>Up"
     value: "tile_up_right_key"
-    value_type: string
   - property: "/xfwm4/custom/<Primary><Super>Left"
     value: "tile_up_left_key"
-    value_type: string
   - property: "/xfwm4/custom/<Primary><Super>Down"
     value: "tile_down_left_key"
-    value_type: string
   - property: "/xfwm4/custom/<Primary><Super>Right"
     value: "tile_down_right_key"
-    value_type: string
   - property: "/xfwm4/custom/<Super>Left"
     value: "tile_left_key"
-    value_type: string
   - property: "/xfwm4/custom/<Super>Down"
     value: "tile_down_key"
-    value_type: string
   - property: "/xfwm4/custom/<Super>Right"
     value: "tile_right_key"
-    value_type: string
   - property: "/xfwm4/custom/<Super>Up"
     value: "maximize_window_key"
-    value_type: string
   xfce4-screensaver:
   - property: "/saver/fullscreen-inhibit"
     value: true
-    value_type: bool
   - property: "/saver/idle-activation/delay"
     value: 10
-    value_type: int
+  xfwm4:
+  - property: "/general/snap_to_border"
+    value: true
+  - property: "/general/snap_to_windows"
+    value: true
+  - property: "/general/wrap_windows"
+    value: false
+  xsettings: []
+  # https://github.com/ansible-collections/community.general/issues/4089
+# - property: "/Gtk/DecorationLayout" # Can be set in Settings > Window Manager > Button layout
+#   value: 'close,minimize,maximize,menu:'
+#   force_array: false
 
