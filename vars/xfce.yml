@@ -1,5 +1,5 @@
 
-xfconf_settings: # [channel: {property: ... , value: ...}, ...]
+xfconf_settings: # [channel: {property: ... , value: ..., ...}, ...]
   pointers:
   - property: "/DisableTouchpadWhileTyping"
     value: true
@@ -69,9 +69,9 @@ xfconf_settings: # [channel: {property: ... , value: ...}, ...]
     value: true
   - property: "/general/wrap_windows"
     value: false
-  xsettings: []
+  xsettings: #[]
   # https://github.com/ansible-collections/community.general/issues/4089
-# - property: "/Gtk/DecorationLayout" # Can be set in Settings > Window Manager > Button layout
-#   value: 'close,minimize,maximize,menu:'
-#   force_array: false
+  - property: "/Gtk/DecorationLayout" # Can be set in Settings > Window Manager > Button layout
+    value: ['close,minimize,maximize,menu:']
+    value_type: string
 
