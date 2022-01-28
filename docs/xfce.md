@@ -18,7 +18,7 @@ Stored in `/usr/share/icons`.
 
 Current: https://www.xfce-look.org/s/XFCE/p/1166289
 
-Others: 
+Others:
 - https://www.xfce-look.org/s/XFCE/p/1218961
 
 ## Background images
@@ -51,6 +51,13 @@ Others:
 | xfce4-keyboard-shortcuts | /xfwm4/custom/<Super>Down | tile_down_key |
 | xfce4-keyboard-shortcuts | /xfwm4/custom/<Super>Right | tile_right_key |
 | xfce4-keyboard-shortcuts | /xfwm4/custom/<Super>Up | maximize_window_key |
+| xfce4-panel | /panels/panel-1/mode | 0 |
+| xfce4-panel | /panels/panel-1/position | p=11;x=0;y=0 |
+| xfce4-panel | /panels/panel-1/position-locked | True |
+| xfce4-panel | /panels/panel-1/size | 24 |
 | xfce4-screensaver | /saver/fullscreen-inhibit | True |
 | xfce4-screensaver | /saver/idle-activation/delay | 10 |
+| xfwm4 | /general/snap_to_border | True |
+| xfwm4 | /general/snap_to_windows | True |
+| xfwm4 | /general/wrap_windows | False |
 
