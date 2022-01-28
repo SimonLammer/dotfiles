@@ -1,6 +1,7 @@
 # This will be sourced from `~/.profile` as well as shells rc files (e.g. `~/.bashrc`)
 
 export DOTFILES_HOME="$HOME/.config/dotfiles"
+export PYENV_ROOT="${XDG_DATA_HOME:-$HOME/.local/share}/pyenv"
 
 alias gits='git status'
 alias gdiff='git diff --no-index'
@@ -26,7 +27,6 @@ fi
 which pyenv >/dev/null 2>&1
 if [ $? -eq 0 ]; then
     eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
 fi
 
 which autojump >/dev/null 2>&1

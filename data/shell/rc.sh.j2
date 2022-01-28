@@ -1,6 +1,8 @@
 # This will be sourced from `~/.profile` as well as shells rc files (e.g. `~/.bashrc`)
 
-export DOTFILES_HOME="{{dotfiles_home}}"
+{% for key, value in environment_variables.items() %}
+export {{key}}="{{value}}"
+{% endfor %}
 
 {% for key, value in aliases.items() %}
 alias {{key}}='{{value}}'
@@ -15,7 +17,6 @@ fi
 which pyenv >/dev/null 2>&1
 if [ $? -eq 0 ]; then
     eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
 fi
 
 which autojump >/dev/null 2>&1

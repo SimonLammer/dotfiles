@@ -9,7 +9,11 @@ XDG_CONFIG_HOME_DEFAULT: $HOME/.config
 XDG_CACHE_HOME_DEFAULT: $HOME/.cache
 XDG_DATA_HOME_DEFAULT: $HOME/.local/share
 
-pyenv_root: /opt/pyenv
+pyenv_install_dir: /opt/pyenv
+
+environment_variables:
+  DOTFILES_HOME: "{{ dotfiles_home }}"
+  PYENV_ROOT: "${XDG_DATA_HOME:-{{XDG_DATA_HOME_DEFAULT}}}/pyenv"
 
 programs:
   packages:
