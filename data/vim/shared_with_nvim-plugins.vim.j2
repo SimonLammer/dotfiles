@@ -28,6 +28,7 @@ if has('nvim')
 endif
 Plug 'francoiscabrol/ranger.vim'
 Plug 'haya14busa/incsearch.vim'
+Plug 'Glench/Vim-Jinja2-Syntax'
 call plug#end()
     
 " Other Plugins I might want to checkout sometime:
@@ -39,7 +40,7 @@ call plug#end()
 
 let g:enable_bold_font = 1
 set background=dark
-call RltvNmbr#RltvNmbrCtrl(1)
+"call RltvNmbr#RltvNmbrCtrl(1)
 colorscheme gruvbox
 
 

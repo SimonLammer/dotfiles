@@ -107,3 +107,4 @@ gnome_gsettings:
   schemadir: ~/.local/share/gnome-shell/extensions/gnome-shell-screenshot@ttll.de/schemas
   key: "shortcut-select-desktop"
   value: "\"['Print']\""
+

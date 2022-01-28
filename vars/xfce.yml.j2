@@ -1,0 +1,18 @@
+xfconf_settings:
+{% for channel, properties in xfconf_settings_j2.items()  %}
+{%   for property, data in properties.items()  %}
+- channel: '{{ channel }}'
+  property: '{{ property }}'
+{%     if data|type_debug == 'dict' %}
+{%       for k, v in data.items() %}
+  {{k}}: {{ v | to_json }}
+{%       endfor %}
+{%     else %}
+  value: {{ data | to_json }}
+  type: {{ ({
+      "AnsibleUnicode": "string",
+    }[data | type_debug]) | default(data|type_debug) }}
+{%     endif %}
+{%   endfor %}
+{% endfor %}
+

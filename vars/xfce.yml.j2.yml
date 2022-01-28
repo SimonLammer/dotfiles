@@ -1,0 +1,45 @@
+
+xfconf_settings_j2: # [channel: {property: ... , value: ..., ...}, ...]
+  pointers:
+    "/DisableTouchpadWhileTyping":                 true
+    "/SynPS2_Synaptics_Touchpad/ReverseScrolling": true
+  xfce4-keyboard-shortcuts:
+#   "/commands/custom/<Super>space":            "xfce4-popup-whiskermenu"
+    "/xfwm4/custom/<Primary><Alt>Up":           "up_workspace_key"
+    "/xfwm4/custom/<Primary><Alt>Left":         "left_workspace_key"
+    "/xfwm4/custom/<Primary><Alt>Down":         "down_workspace_key"
+    "/xfwm4/custom/<Primary><Alt>Right":        "right_workspace_key"
+    "/xfwm4/custom/<Primary><Alt><Super>Up":    "move_window_up_workspace_key"
+    "/xfwm4/custom/<Primary><Alt><Super>Left":  "move_window_left_workspace_key"
+    "/xfwm4/custom/<Primary><Alt><Super>Down":  "move_window_down_workspace_key"
+    "/xfwm4/custom/<Primary><Alt><Super>Right": "move_window_right_workspace_key"
+    "/xfwm4/custom/<Primary><Shift><Alt>Up":    "move_window_up_key"
+    "/xfwm4/custom/<Primary><Shift><Alt>Left":  "move_window_left_key"
+    "/xfwm4/custom/<Primary><Shift><Alt>Down":  "move_window_down_key"
+    "/xfwm4/custom/<Primary><Shift><Alt>Right": "move_window_right_key"
+    "/xfwm4/custom/<Primary><Super>Up":         "tile_up_right_key"
+    "/xfwm4/custom/<Primary><Super>Left":       "tile_up_left_key"
+    "/xfwm4/custom/<Primary><Super>Down":       "tile_down_left_key"
+    "/xfwm4/custom/<Primary><Super>Right":      "tile_down_right_key"
+    "/xfwm4/custom/<Super>Left":                "tile_left_key"
+    "/xfwm4/custom/<Super>Down":                "tile_down_key"
+    "/xfwm4/custom/<Super>Right":               "tile_right_key"
+    "/xfwm4/custom/<Super>Up":                  "maximize_window_key"
+  xfce4-panel:
+    "/panels/panel-1/mode":            0
+    "/panels/panel-1/position":        "p=11;x=0;y=0"
+    "/panels/panel-1/position-locked": true
+    "/panels/panel-1/size":            24
+  xfce4-screensaver:
+    "/saver/fullscreen-inhibit":    true
+    "/saver/idle-activation/delay": 10
+  xfwm4:
+    "/general/snap_to_border":  true
+    "/general/snap_to_windows": true
+    "/general/wrap_windows":    false
+  xsettings: #[]
+    "/Gtk/DecorationLayout": # Can be set in Settings > Window Manager > Button layout
+      # weird syntax because https://github.com/ansible-collections/community.general/issues/4089
+      value: ['close,minimize,maximize,menu:']
+      type: string
+

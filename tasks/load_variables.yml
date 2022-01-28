@@ -1,15 +1,27 @@
 ---
 - name: include variables I
+  failed_when: false # ignore files that can't be parsed (so invalid variable templates don't break the pipeline)
   include_vars: '{{ item }}'
-  with_items: '{{ ( "vars/*.yml" | fileglob + ["data/vars.yml"] ) }}'
+  with_items: '{{ ( "vars/*.yml" | fileglob ) }}'
 
 - name: render variable templates I
   template:
     src: '{{ item }}'
     dest: '{{ item | splitext | first }}'
-  with_items: '{{ ( "data/**/vars.yml.j2" | fileglob ) }}'
+  loop: '{{ ( "vars/*.yml.j2" | fileglob ) }}'
 
 - name: include variables II
+  include_vars:
+    file: '{{ item }}'
+  loop: '{{ "vars/*.yml" | fileglob  + ["data/vars.yml"] }}'
+
+- name: render variable templates II
+  template:
+    src: '{{ item }}'
+    dest: '{{ item | splitext | first }}'
+  loop: '{{ ( "data/**/vars.yml.j2" | fileglob ) }}'
+
+- name: include variables III
   include_vars:
     file: '{{ item }}'
   loop: '{{ "data/**/vars.yml" | fileglob }}'

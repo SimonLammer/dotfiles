@@ -1,5 +1,5 @@
 #ANSIBLE = ANSIBLE_COW_SELECTION=random ANSIBLE_FORCE_COLOR=true ansible-playbook
-ANSIBLE = ANSIBLE_COW_SELECTION=none ANSIBLE_FORCE_COLOR=true ansible-playbook
+ANSIBLE = ANSIBLE_COW_SELECTION=duck ANSIBLE_FORCE_COLOR=true ansible-playbook
 
 templates:
 	${ANSIBLE} templates.yml -u slammer
