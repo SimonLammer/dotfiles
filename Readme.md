@@ -586,6 +586,12 @@ sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/c
 ~~~
 [Reference](https://bugs.launchpad.net/ubuntu/+source/llvm-defaults/+bug/1769737)
 
+# cowsay
+
+## Show cows
+
+`for cow in `cowsay -l`; do cowsay -f $cow $cow; done`
+
 # DaVinci Resolve
 
 Download: [https://www.blackmagicdesign.com/products/davinciresolve/](https://www.blackmagicdesign.com/products/davinciresolve/)
