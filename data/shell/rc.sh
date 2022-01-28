@@ -1,7 +1,17 @@
 # This will be sourced from `~/.profile` as well as shells rc files (e.g. `~/.bashrc`)
 
+# See $DOTFILES_HOME/vars/main.yml
 export DOTFILES_HOME="$HOME/.config/dotfiles"
+export HISTFILE="${XDG_CACHE_HOME:-$HOME/.cache}/bash_history"
+export ICEAUTHORITY="${XDG_CACHE_HOME:-$HOME/.cache}/ICEauthority"
+export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/inputrc"
+export LESSHISTFILE="${XDG_CACHE_HOME:-$HOME/.cache}/less_history"
 export PYENV_ROOT="${XDG_DATA_HOME:-$HOME/.local/share}/pyenv"
+export PYTHONSTARTUP="$HOME/.config/dotfiles/data/python/pythonstartup.py"
+export WORKON_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/virtualenvs"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
 
 alias gits='git status'
 alias gdiff='git diff --no-index'

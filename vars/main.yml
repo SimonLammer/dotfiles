@@ -13,7 +13,17 @@ pyenv_install_dir: /opt/pyenv
 
 environment_variables:
   DOTFILES_HOME: "{{ dotfiles_home }}"
-  PYENV_ROOT: "${XDG_DATA_HOME:-{{XDG_DATA_HOME_DEFAULT}}}/pyenv"
+  HISTFILE: "${XDG_CACHE_HOME:-{{XDG_CACHE_HOME_DEFAULT}}}/bash_history" # otherwise ~/.bash_history
+  ICEAUTHORITY: "${XDG_CACHE_HOME:-{{XDG_CACHE_HOME_DEFAULT}}}/ICEauthority" # otherwise ~/.ICEauthority
+  INPUTRC: "${XDG_CONFIG_HOME:-{{XDG_CONFIG_HOME_DEFAULT}}}/inputrc" # otherwise ~/.inputrc
+  LESSHISTFILE: "${XDG_CACHE_HOME:-{{XDG_CACHE_HOME_DEFAULT}}}/less_history" # otherwise ~/.lesshst
+  PYENV_ROOT: "${XDG_DATA_HOME:-{{XDG_DATA_HOME_DEFAULT}}}/pyenv" # otherwise ~/.pyenv
+  PYTHONSTARTUP: "{{ dotfiles_home }}/data/python/pythonstartup.py"
+  WORKON_HOME: "${XDG_DATA_HOME:-{{XDG_DATA_HOME_DEFAULT}}}/virtualenvs" # otherwise ~/.virtualenvs
+  # The following 3 lines should not be necessary, but some programs improperly apply the XDG spec
+  XDG_CONFIG_HOME: "{{ XDG_CONFIG_HOME_DEFAULT }}"
+  XDG_CACHE_HOME: "{{ XDG_CACHE_HOME_DEFAULT }}"
+  XDG_DATA_HOME: "{{ XDG_DATA_HOME_DEFAULT }}"
 
 programs:
   packages:

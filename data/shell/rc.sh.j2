@@ -1,5 +1,6 @@
 # This will be sourced from `~/.profile` as well as shells rc files (e.g. `~/.bashrc`)
 
+# See $DOTFILES_HOME/vars/main.yml
 {% for key, value in environment_variables.items() %}
 export {{key}}="{{value}}"
 {% endfor %}
