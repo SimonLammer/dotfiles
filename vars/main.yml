@@ -16,6 +16,7 @@ environment_variables:
   HISTFILE: "${XDG_CACHE_HOME:-{{XDG_CACHE_HOME_DEFAULT}}}/bash_history" # otherwise ~/.bash_history
   ICEAUTHORITY: "${XDG_CACHE_HOME:-{{XDG_CACHE_HOME_DEFAULT}}}/ICEauthority" # otherwise ~/.ICEauthority
   INPUTRC: "${XDG_CONFIG_HOME:-{{XDG_CONFIG_HOME_DEFAULT}}}/inputrc" # otherwise ~/.inputrc
+  LC_TIME: en_CA.utf8
   LESSHISTFILE: "${XDG_CACHE_HOME:-{{XDG_CACHE_HOME_DEFAULT}}}/less_history" # otherwise ~/.lesshst
   PYENV_ROOT: "${XDG_DATA_HOME:-{{XDG_DATA_HOME_DEFAULT}}}/pyenv" # otherwise ~/.pyenv
   PYTHONSTARTUP: "{{ dotfiles_home }}/data/python/pythonstartup.py"
