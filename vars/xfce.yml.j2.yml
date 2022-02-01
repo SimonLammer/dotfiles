@@ -38,8 +38,5 @@ xfconf_settings_j2: # [channel: {property: ... , value: ..., ...}, ...]
     "/general/snap_to_windows": true
     "/general/wrap_windows":    false
   xsettings: #[]
-    "/Gtk/DecorationLayout": # Can be set in Settings > Window Manager > Button layout
-      # weird syntax because https://github.com/ansible-collections/community.general/issues/4089
-      value: ['close,minimize,maximize,menu:']
-      type: string
+    "/Gtk/DecorationLayout": 'close,minimize,maximize,menu:'
 

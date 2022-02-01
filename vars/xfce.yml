@@ -125,6 +125,6 @@ xfconf_settings:
   type: bool
 - channel: 'xsettings'
   property: '/Gtk/DecorationLayout'
-  value: ["close,minimize,maximize,menu:"]
-  type: "string"
+  value: "close,minimize,maximize,menu:"
+  type: string
 

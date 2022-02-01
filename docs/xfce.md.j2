@@ -29,9 +29,7 @@ Others:
 
 | Channel | property | value |
 |--------:|:---------|:-----:|
-{% for channel, settings in xfconf_settings.items() %}
-{% for setting in settings %}
-| {{ channel }} | {{ setting.property }} | {{ setting.value }} |
-{% endfor %}
+{% for setting in xfconf_settings %}
+| {{ setting.channel }} | {{ setting.property }} | {{ setting.value }} |
 {% endfor %}
 

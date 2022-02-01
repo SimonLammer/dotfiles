@@ -60,4 +60,5 @@ Others:
 | xfwm4 | /general/snap_to_border | True |
 | xfwm4 | /general/snap_to_windows | True |
 | xfwm4 | /general/wrap_windows | False |
+| xsettings | /Gtk/DecorationLayout | close,minimize,maximize,menu: |
 
