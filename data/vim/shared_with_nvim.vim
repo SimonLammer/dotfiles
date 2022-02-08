@@ -112,7 +112,7 @@ vnoremap > >gv
 
 " Alternate way to save
 noremap <C-s> :w<CR>
-inoremap <C-s> X<ESC>:w<CR>cl
+inoremap <C-s> <ESC>:w<CR>a
 
 " Quick pairs
 imap <leader>' ''<ESC>i
