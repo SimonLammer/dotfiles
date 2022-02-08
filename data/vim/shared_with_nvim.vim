@@ -125,10 +125,6 @@ imap <leader>< <><ESC>i
 " Curly braces
 imap <leader>{ {<CR>}<ESC>O
 
-" Replace word with true / false
-imap <leader>t ciwtrue<ESC>b
-imap <leader>f ciwfalse<ESC>b
-
 " Insert space after cursor
 nmap <leader><Space> a <ESC>
 
