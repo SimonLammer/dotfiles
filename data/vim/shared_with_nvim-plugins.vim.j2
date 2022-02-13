@@ -23,6 +23,7 @@ call plug#begin()
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-sleuth'
 Plug 'flazz/vim-colorschemes'
+Plug 'Yggdroot/indentLine'
 if has('nvim')
   Plug 'rbgrouleff/bclose.vim' " Required for 'franoiscabrol/ranger.vim' in nvim
 endif
@@ -41,6 +42,7 @@ call plug#end()
 let g:enable_bold_font = 1
 set background=dark
 colorscheme gruvbox
+let g:indentLine_char = '|'
 
 
 "  __  __                   _                 

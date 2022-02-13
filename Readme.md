@@ -1071,6 +1071,12 @@ sudo apt install -y vim
 
 The plugin manager will be installed automatically from the ```.vimrc```.
 
+### Install plugins
+
+```shell
+vim +PlugInstall +qall
+```
+
 ## Link [dotfiles]
 
 ~~~shell
