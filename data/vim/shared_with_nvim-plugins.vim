@@ -21,6 +21,7 @@ endif
 
 call plug#begin()
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-sleuth'
 Plug 'vim-scripts/RltvNmbr.vim'
 Plug 'flazz/vim-colorschemes'
 if has('nvim')
