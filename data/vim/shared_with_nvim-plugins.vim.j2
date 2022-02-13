@@ -22,7 +22,6 @@ endif
 call plug#begin()
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-sleuth'
-Plug 'vim-scripts/RltvNmbr.vim'
 Plug 'flazz/vim-colorschemes'
 if has('nvim')
   Plug 'rbgrouleff/bclose.vim' " Required for 'franoiscabrol/ranger.vim' in nvim
@@ -41,7 +40,6 @@ call plug#end()
 
 let g:enable_bold_font = 1
 set background=dark
-"call RltvNmbr#RltvNmbrCtrl(1)
 colorscheme gruvbox
 
 

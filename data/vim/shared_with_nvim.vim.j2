@@ -23,7 +23,7 @@ set t_Co=256
 
 " Lines
 set number           " Display absolute line numbers
-"set relativenumber   " Display relative line numbers
+set relativenumber   " Display relative line numbers (except for the current line when `number` is set)
 set showmatch
 set wrap             " Enable wrapping 
 
