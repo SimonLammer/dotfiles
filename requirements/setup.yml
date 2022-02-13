@@ -1,4 +1,5 @@
 - src: geerlingguy.docker
+- src: budimanjojo.neovim
 - src: suzuki-shunsuke.tmux-tpm
 #- src: gantsign.oh-my-zsh
 - src: suzuki-shunsuke.pyenv

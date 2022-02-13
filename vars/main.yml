@@ -26,6 +26,7 @@ environment_variables:
   XDG_CACHE_HOME: "{{ XDG_CACHE_HOME_DEFAULT }}"
   XDG_DATA_HOME: "{{ XDG_DATA_HOME_DEFAULT }}"
 
+# TODO: extract `programs` to `setup.yml`
 programs:
   packages:
   - autojump
@@ -38,7 +39,7 @@ programs:
   - gimp
   - htop
   - inkscape
-  - neovim
+ #- neovim
  #- openjdk-8-doc
  #- openjdk-8-jdk
   - openjdk-11-doc
@@ -60,6 +61,7 @@ programs:
   - xclip
   custom: #[]
   - docker
+  - neovim
   - starship
   - python-additions
   - tmux

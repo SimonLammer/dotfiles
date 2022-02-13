@@ -1,0 +1,6 @@
+---
+- name: install neovim
+  import_role:
+    name: budimanjojo.neovim
+  become: yes
+
