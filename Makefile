@@ -18,6 +18,10 @@ watch-templates:
 	ls */**/*.j2 | entr make templates
 
 setup:
+	if ! command -v ansible-galaxy -h &>/dev/null; then\
+		sudo apt-get -y install ansible;\
+	fi
+	ansible-galaxy collection install -r requirements/setup.yml
 	ansible-galaxy install -r requirements/setup.yml
 	${ANSIBLE} setup.yml -u slammer -K 2>&1 | tee log
 

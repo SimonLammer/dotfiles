@@ -14,6 +14,12 @@
     state: link
   become: yes
 
+- name: install pip
+  package:
+    name: python3-pip
+    state: present
+  become: yes
+
 - name: install pipenv
   pip:
     name: pipenv

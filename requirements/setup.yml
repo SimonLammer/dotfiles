@@ -1,3 +1,8 @@
+---
+collections:
+- name: community.general
+
+roles:
 - src: geerlingguy.docker
 - src: budimanjojo.neovim
 - src: suzuki-shunsuke.tmux-tpm
