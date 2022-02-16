@@ -461,6 +461,8 @@ sudo flatpak override --filesystem=host com.google.AndroidStudio
 
 # Anki
 
+Installation guide: https://docs.ankiweb.net/platform/linux/installing.html
+
 ## Desktop
 
 ### .desktop file
@@ -624,6 +626,23 @@ wget -O- get.docker.com | bash
 curl -fsSL http://get.docker.com/ | sh
 ~~~
 
+## Check if installation was successful
+
+```shell
+docker run --rm -i hello-world
+```
+
+## Use `docker` without `sudo`
+
+~~~shell
+sudo groupadd docker # create the docker group
+sudo usermod -aG docker $USER # add current user to the docker group
+newgrp docker # re-evaluate group membership
+~~~
+
+References:
+- https://docs.docker.com/engine/install/linux-postinstall/
+
 ## Move data directory
 
 1. `sudo service docker stop`
@@ -707,6 +726,13 @@ shasum -a 512 -c elasticsearch-6.4.0.deb.sha512 && sudo dpkg -i elasticsearch-6.
 - [Video DownloadHelper](https://addons.mozilla.org/en-US/firefox/addon/video-downloadhelper/)
 - [Vimium-FF](https://addons.mozilla.org/en-US/firefox/addon/vimium-ff/)
 - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
+
+## Settings
+
+| Name | Value |
+|-----:|:------|
+| Open previous windows and tabs | yes |
+| Ask to save logins and password for websites | no |
 
 # GCC / G++
 
@@ -1146,6 +1172,16 @@ for ext in \
 
 ~~~shell
 sudo apt install -y vlc
+~~~
+
+# xfce4-terminal
+
+## Color schemes
+
+### [gruvbox-dark](https://github.com/vifo/xfce4-terminal-colorschemes/blob/master/colorschemes/gruvbox-dark.theme)
+
+~~~shell
+curl --create-dirs -o "$HOME/.config/xfce4/terminal/colorschemes/gruvbox-dark.theme" "https://raw.githubusercontent.com/vifo/xfce4-terminal-colorschemes/master/colorschemes/gruvbox-dark.theme" && chmod 0644 "$HOME/.config/xfce4/terminal/colorschemes/gruvbox-dark.theme"
 ~~~
 
 # ZSH
