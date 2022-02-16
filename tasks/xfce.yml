@@ -3,9 +3,8 @@
   - name: customize xfce
     xfconf:
       channel: '{{ item.channel }}'
-      force_array: '{{ item.force_array | default(false) }}'
       property: '{{ item.property }}'
-      value: '{{ [(item.value|to_json),[item.value]][((item.value | type_debug) == "str") | int] }}' # weird syntax because https://github.com/ansible-collections/community.general/issues/4089
+      value: '{{ [(item.value |to_json),item.value][((item.value | type_debug) == "str") | int] }}' # '{{ [(item.value |to_json),[item.value]][((item.value | type_debug) == "str") | int] }}' # weird syntax because https://github.com/ansible-collections/community.general/issues/4089
       value_type: '{{ item.type }}'
     loop: '{{ xfconf_settings }}'
 

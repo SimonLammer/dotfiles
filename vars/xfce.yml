@@ -123,6 +123,10 @@ xfconf_settings:
   property: '/general/wrap_windows'
   value: false
   type: bool
+- channel: 'xfwm4'
+  property: '/general/button_layout'
+  value: "CHMO|"
+  type: string
 - channel: 'xsettings'
   property: '/Gtk/DecorationLayout'
   value: "close,minimize,maximize,menu:"

@@ -37,6 +37,7 @@ xfconf_settings_j2: # [channel: {property: ... , value: ..., ...}, ...]
     "/general/snap_to_border":  true
     "/general/snap_to_windows": true
     "/general/wrap_windows":    false
+    "/general/button_layout":   "CHMO|"
   xsettings: #[]
     "/Gtk/DecorationLayout": 'close,minimize,maximize,menu:'
 
