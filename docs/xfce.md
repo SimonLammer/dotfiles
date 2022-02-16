@@ -35,6 +35,7 @@ Others:
 |--------:|:---------|:-----:|
 | pointers | /DisableTouchpadWhileTyping | True |
 | pointers | /SynPS2_Synaptics_Touchpad/ReverseScrolling | True |
+| xfce4-keyboard-shortcuts | /commands/custom/<Super>space | xfce4-popup-whiskermenu |
 | xfce4-keyboard-shortcuts | /xfwm4/custom/<Primary><Alt>Up | up_workspace_key |
 | xfce4-keyboard-shortcuts | /xfwm4/custom/<Primary><Alt>Left | left_workspace_key |
 | xfce4-keyboard-shortcuts | /xfwm4/custom/<Primary><Alt>Down | down_workspace_key |
@@ -64,5 +65,6 @@ Others:
 | xfwm4 | /general/snap_to_border | True |
 | xfwm4 | /general/snap_to_windows | True |
 | xfwm4 | /general/wrap_windows | False |
+| xfwm4 | /general/button_layout | CHMO| |
 | xsettings | /Gtk/DecorationLayout | close,minimize,maximize,menu: |
 

@@ -8,6 +8,10 @@ xfconf_settings:
   value: true
   type: bool
 - channel: 'xfce4-keyboard-shortcuts'
+  property: '/commands/custom/<Super>space'
+  value: "xfce4-popup-whiskermenu"
+  type: string
+- channel: 'xfce4-keyboard-shortcuts'
   property: '/xfwm4/custom/<Primary><Alt>Up'
   value: "up_workspace_key"
   type: string
