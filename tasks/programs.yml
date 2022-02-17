@@ -1,37 +1,4 @@
 ---
-- name: install packages
-  package:
-    name: "{{ programs.packages }}"
-    state: present
-  become: yes
-  
-- name: find post-package hooks
-  stat:
-    path: "tasks/programs/post-{{ item }}.yml"
-  with_items: "{{ programs.packages }}"
-  register: _program_stat
-
-- name: run post-package hooks
-  include_tasks: "tasks/programs/post-{{ item.item }}.yml"
-  when: item.stat.exists
-  with_items: "{{ _program_stat.results }}"
-
-- name: install custom programs
-  include_tasks:
-    file: "tasks/programs/{{ program }}.yml"
-  with_items: "{{ programs.custom }}"
-  when: programs.custom
-  loop_control:
-    loop_var: program
-
-# - name: backup existing config files
-#   shell: '[ -f "{{ item }}" ] && echo hi # mv "{{ item }}" "{{ item }}.old"'
-#   register: _bu
-#   with_items:
-#     - "~/.bashrc"
-#     - "~/.profile"
-
-# - debug: {msg: "{{ _bu }}"}
 
 - name: symlink config files
   file:
@@ -58,20 +25,35 @@
       dest: "~/.bashrc"
     - src: data/shell/profile
       dest: "~/.profile"
+    - src: data/scripts/xinput-configure-pointer
+      dest: "~/.local/bin/xinput-configure-pointer"
+    - src: data/scripts/xinput-configure-pointer.desktop
+      dest: "~/.local/share/applications/xinput-configure-pointer.desktop"
 
-# - async_status:
-#     jid: "{{ item.ansible_job_id }}"
-#   register: _jobs
-#   until: _jobs.finished
-#   delay: 5
-#   retries: 10
-#   with_items: "{{ _create_instances.results }}"
+- name: install packages
+  package:
+    name: "{{ programs.packages }}"
+    state: present
+  become: yes
 
-# - stat:
-#     path: tasks/programs/{{ item }}.yml
-#   with_items: programs
-#   async: 60
-#   poll: 0
+- name: find post-package hooks
+  stat:
+    path: "tasks/programs/post-{{ item }}.yml"
+  with_items: "{{ programs.packages }}"
+  register: _program_stat
+
+- name: run post-package hooks
+  include_tasks: "tasks/programs/post-{{ item.item }}.yml"
+  when: item.stat.exists
+  with_items: "{{ _program_stat.results }}"
+
+- name: install custom programs
+  include_tasks:
+    file: "tasks/programs/{{ program }}.yml"
+  with_items: "{{ programs.custom }}"
+  when: programs.custom
+  loop_control:
+    loop_var: program
 
 - file:
     path: '{{ services_home }}'
