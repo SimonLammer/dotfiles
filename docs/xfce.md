@@ -25,6 +25,33 @@ Current: [Papirus](https://www.xfce-look.org/s/XFCE/p/1166289)
 Others:
 - [Ultimate Maia Icons](https://www.xfce-look.org/s/XFCE/p/1218961)
 
+## Panel Preferences
+
+### Items
+
+1. Whisker Menu
+2. Directory Menu
+3. Window Menu
+4. Window Buttons
+5. Separator
+6. Status Tray
+7. Notifications
+8. System Management Plugins
+9. System Load Monitor
+10. DateTime
+
+
+### Directory shortcuts
+
+```
+for d in ~/*; do ln -s "$d" "`basename "$d"`"; done
+```
+
+### Clock format
+
+`%Y%m%dT%H%M%S`
+
+
 ## Background images
 
 - https://wallhaven.cc/w/p8ek6p
