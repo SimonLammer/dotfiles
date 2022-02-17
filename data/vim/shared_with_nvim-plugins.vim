@@ -21,6 +21,7 @@ endif
 call plug#begin()
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-sleuth'
+Plug 'ntpeters/vim-better-whitespace'
 Plug 'flazz/vim-colorschemes'
 Plug 'Yggdroot/indentLine'
 if has('nvim')

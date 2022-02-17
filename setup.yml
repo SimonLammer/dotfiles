@@ -21,7 +21,7 @@
       name: git
       state: present
     become: yes
-    
+
   - name: clone dotfiles
     git:
       repo: '{{ dotfiles_repo }}'
