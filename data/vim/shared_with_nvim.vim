@@ -44,6 +44,11 @@ set tabstop=2              " Tabs display as 2 spaces
 set colorcolumn=80,100    " Highlight far columns
 highlight ColorColumn ctermbg=236
 
+" Highlight trailing whitespace
+" https://stackoverflow.com/questions/4617059/showing-trailing-spaces-in-vim
+highlight TrailingWhitespace ctermbg=red guibg=red
+call match("TrailingWhitespace", '\v\s+$')
+
 " Searching
 set hlsearch
 
