@@ -4,21 +4,29 @@
 ## WM Themes
 
 Stored in `/usr/share/themes`.
+```
+sudo tar -C /usr/share/themes -xvf theme.tar.gz
+```
 
 Current: [XFWM - Minimal-gtk](https://www.xfce-look.org/p/1016504)
-
 Others:
 - [prelude-dfr](https://www.xfce-look.org/p/1016457/)
 
 ## GTK Themes
 
 Stored in `/usr/share/themes`.
+```
+sudo tar -C /usr/share/themes -xJf theme.tar.xz
+```
 
 Current: [Snow](https://www.xfce-look.org/p/1214421/)
 
 ## Icons
 
 Stored in `/usr/share/icons`.
+```
+sudo tar -C /usr/share/icons -xJf theme.tar.xz
+```
 
 Current: [Papirus](https://www.xfce-look.org/s/XFCE/p/1166289)
 
