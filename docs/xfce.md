@@ -5,10 +5,11 @@
 
 Stored in `/usr/share/themes`.
 ```
-sudo tar -C /usr/share/themes -xvf theme.tar.gz
+sudo tar -C /usr/share/themes -xzf theme.tar.gz
 ```
 
 Current: [XFWM - Minimal-gtk](https://www.xfce-look.org/p/1016504)
+
 Others:
 - [prelude-dfr](https://www.xfce-look.org/p/1016457/)
 
@@ -48,7 +49,6 @@ Others:
 9. System Load Monitor
 10. DateTime
 
-
 ### Directory shortcuts
 
 ```
@@ -58,7 +58,6 @@ for d in ~/*; do ln -s "$d" "`basename "$d"`"; done
 ### Clock format
 
 `%Y%m%dT%H%M%S`
-
 
 ## Background images
 
