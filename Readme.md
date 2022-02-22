@@ -75,6 +75,15 @@ lvcreate -n root -L 35G luks
 lvcreate -n data -L 1.7T luks
 ~~~
 
+#### Backup LUKS header
+
+~~~shell
+sudo cryptsetup luksHeaderBackup /dev/sdaX --header-backup-file /path/to/new_backup_file
+~~~
+
+References:
+- https://www.cyberciti.biz/security/how-to-backup-and-restore-luks-header-on-linux/
+
 ## Install OS
 
 | Device                | Usage | Filesystem |
