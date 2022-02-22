@@ -1098,6 +1098,14 @@ ln -isv ~/.dotfiles/data/tmux/_.tmux.conf ~/.tmux.conf
 ln -isv ~/.dotfiles/data/tmux/scripts ~/.tmux/scripts
 ~~~
 
+# [VeraCrypt](https://www.veracrypt.fr/code/VeraCrypt/)
+
+## Settings
+
+| Location | Info |
+|:---------|:-----|
+| Security > Filesystem > Preserve modification timestamp of file containers | Disable to sync containers to cloud automatically |
+
 # VIM
 
 ~~~shell
