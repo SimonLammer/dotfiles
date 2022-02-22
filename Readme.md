@@ -289,6 +289,17 @@ Remove backup **after making sure everything works**:
 sudo rm -Rf /disks/main/home-backup
 ```
 
+# "Open Folder" uses wrong application
+
+Application:
+- System settings > MIME Type Editor
+- System settings > Default Applications
+
+Setting: `directory/inode`
+
+References:
+- https://superuser.com/questions/1512714/transmission-right-click-open-folder-opens-xfburn-instead-of-thunar
+
 # SSD
 
 [Increase Performance and lifespan of SSDs & SD Cards](https://haydenjames.io/increase-performance-lifespan-ssds-sd-cards/)
