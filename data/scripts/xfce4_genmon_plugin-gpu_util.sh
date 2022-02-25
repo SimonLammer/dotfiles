@@ -7,7 +7,7 @@ util=`nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits`
 
 ################################################################################
 
-$coloredbar $deg \
+$coloredbar $util \
   0 100 \
   0 30 100 \
   191 191 191 \
