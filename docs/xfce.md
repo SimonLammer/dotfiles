@@ -62,6 +62,7 @@ Others:
     | [Swap](../data/scripts/xfce4_genmon_plugin-memory.sh) | 30 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-memory.sh Swap` |
     | [CPU utilization](../data/scripts/xfce4_genmon_plugin-cpu_util.sh) | 10 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-cpu_util.sh` |
     | [CPU temperature](../data/scripts/xfce4_genmon_plugin-cpu_temp.sh) | 10 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-cpu_temp.sh` |
+    | [GPU memory](../data/scripts/xfce4_genmon_plugin-gpu_memory.sh) | 15 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-gpu_memory.sh` |
     | [GPU utilization](../data/scripts/xfce4_genmon_plugin-gpu_util.sh) | 10 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-gpu_util.sh` |
     | [GPU temperature](../data/scripts/xfce4_genmon_plugin-gpu_temp.sh) | 10 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-gpu_temp.sh` |
     | ['/' usage](../data/scripts/xfce4_genmon_plugin-filesystem.sh) | 300 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-filesystem.sh /` |
