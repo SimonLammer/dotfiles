@@ -49,14 +49,15 @@ Others:
 1. Whisker Menu
 2. Directory Menu
 3. Window Menu
-4. Window Buttons
-5. Separator
-6. Status Tray
-7. Notifications
-8. System Management Plugins
-9. xfce4-genmon-plugin indicators
+4. xfce-genmon-plugin window title (`sh -c "xdotool getactivewindow getwindowname | cut -c -65"`)
+5. Window Buttons
+6. Separator
+7. Status Tray
+8. Notifications
+9. System Management Plugins
+10. xfce4-genmon-plugin indicators
 
-    | Description | Period | Command |
+    | Description | Period [s] | Command |
     |:-----------:|-------:|:--------|
     | [Memory](../data/scripts/xfce4_genmon_plugin-memory.sh) | 15 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-memory.sh` |
     | [Swap](../data/scripts/xfce4_genmon_plugin-memory.sh) | 30 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-memory.sh Swap` |
@@ -68,7 +69,7 @@ Others:
     | ['/' usage](../data/scripts/xfce4_genmon_plugin-filesystem.sh) | 300 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-filesystem.sh /` |
     | ['/media/data' usage](../data/scripts/xfce4_genmon_plugin-filesystem.sh) | 300 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-filesystem.sh /media/data 90 93 97 99` |
 
-10. DateTime
+11. DateTime
 
 ### Directory shortcuts
 
