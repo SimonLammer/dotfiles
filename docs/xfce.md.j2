@@ -1,4 +1,3 @@
-
 # XFCE setup
 
 ## WM Themes
@@ -21,6 +20,15 @@ sudo tar -C /usr/share/themes -xJf theme.tar.xz
 ```
 
 Current: [Snow](https://www.xfce-look.org/p/1214421/)
+
+## Cursors
+
+Stored in `/usr/share/icons`.
+```
+sudo tar -C /usr/share/icons -xJf theme.tar.xz
+```
+
+Current: [Qogir cursors](https://www.xfce-look.org/p/1366182)
 
 ## Icons
 
@@ -58,6 +66,21 @@ for d in ~/*; do ln -s "$d" "`basename "$d"`"; done
 ### Clock format
 
 `%Y%m%dT%H%M%S`
+
+### Plugins
+
+#### [xfce4-genmon-plugin](https://gitlab.xfce.org/panel-plugins/xfce4-genmon-plugin)
+
+Use the git version, because `css` tags have not been released officially yet. - https://docs.xfce.org/panel-plugins/xfce4-genmon-plugin/start#usage
+
+```
+cd <repo_directory>
+git clone https://gitlab.xfce.org/panel-plugins/xfce4-genmon-plugin.git .
+./autogen.sh
+./configure --prefix=/usr
+make
+sudo make install
+```
 
 ## Background images
 
