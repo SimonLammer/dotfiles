@@ -54,7 +54,19 @@ Others:
 6. Status Tray
 7. Notifications
 8. System Management Plugins
-9. System Load Monitor
+9. xfce4-genmon-plugin indicators
+
+    | Description | Period | Command |
+    |:-----------:|-------:|:--------|
+    | [Memory](../data/scripts/xfce4_genmon_plugin-memory.sh) | 15 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-memory.sh` |
+    | [Swap](../data/scripts/xfce4_genmon_plugin-memory.sh) | 30 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-memory.sh Swap` |
+    | [CPU utilization](../data/scripts/xfce4_genmon_plugin-cpu_util.sh) | 10 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-cpu_util.sh` |
+    | [CPU temperature](../data/scripts/xfce4_genmon_plugin-cpu_temp.sh) | 10 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-cpu_temp.sh` |
+    | [GPU utilization](../data/scripts/xfce4_genmon_plugin-gpu_util.sh) | 10 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-gpu_util.sh` |
+    | [GPU temperature](../data/scripts/xfce4_genmon_plugin-gpu_temp.sh) | 10 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-gpu_temp.sh` |
+    | ['/' usage](../data/scripts/xfce4_genmon_plugin-filesystem.sh) | 300 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-filesystem.sh /` |
+    | ['/media/data' usage](../data/scripts/xfce4_genmon_plugin-filesystem.sh) | 300 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-filesystem.sh /media/data 90 93 97 99` |
+
 10. DateTime
 
 ### Directory shortcuts
