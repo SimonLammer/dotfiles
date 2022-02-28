@@ -49,7 +49,7 @@ Others:
 1. Whisker Menu
 2. Directory Menu
 3. Window Menu
-4. xfce-genmon-plugin window title (`sh -c "xdotool getactivewindow getwindowname | cut -c -65"`)
+4. xfce-genmon-plugin window title (`sh -c "printf '%-50s' \"$(xdotool getactivewindow getwindowname | cut -c -50)\""`)
 5. Window Buttons
 6. Separator
 7. Status Tray

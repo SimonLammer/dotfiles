@@ -77,6 +77,8 @@ else
   blue=`expr $b + \( $MID_COLOR_BLUE - $b \) \* $p / 100`
 fi
 
+# the css selector can be checked with GtkInspector `GTK_DEBUG=interactive xfce4-panel -r &` - https://docs.xfce.org/xfce/xfce4-panel/theming
 echo "<css>.genmon_progressbar progress {background-color: rgb($red, $green, $blue);} .genmon_value {color: rgb($red, $green, $blue);}</css>"
+
 echo "<bar>$value_percent</bar>"
 
