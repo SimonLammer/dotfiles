@@ -25,10 +25,12 @@
       dest: "~/.bashrc"
     - src: data/shell/profile
       dest: "~/.profile"
-    - src: data/scripts/xinput-configure-pointer
+    - src: data/xinput/scripts/configure_pointer.sh
       dest: "~/.local/bin/xinput-configure-pointer"
-    - src: data/scripts/xinput-configure-pointer.desktop
+    - src: data/xinput/scripts/configure_pointer.desktop
       dest: "~/.local/share/applications/xinput-configure-pointer.desktop"
+    - src: data/xinput/scripts/toggle.sh
+      dest: "~/.local/bin/xinput-toggle"
 
 - name: install packages
   package:
