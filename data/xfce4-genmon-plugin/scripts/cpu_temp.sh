@@ -1,6 +1,6 @@
 #!/bin/sh
 
-coloredbar="$DOTFILES_HOME/data/scripts/xfce4_genmon_plugin-coloredbar.sh"
+coloredbar="$DOTFILES_HOME/data/xfce4-genmon-plugin/scripts/coloredbar.sh"
 
 # https://phoenixnap.com/kb/linux-cpu-temp
 tempfile="/sys/class/thermal/thermal_zone2/temp"

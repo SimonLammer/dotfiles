@@ -11,7 +11,7 @@ LOW_UTIL=25
 MID_UTIL=75
 HIGH_UTIL=95
 
-coloredbar="$DOTFILES_HOME/data/scripts/xfce4_genmon_plugin-coloredbar.sh"
+coloredbar="$DOTFILES_HOME/data/xfce4-genmon-plugin/scripts/coloredbar.sh"
 
 if [ $# -ge 2 ]; then MIN_UTIL=$2; fi
 if [ $# -ge 3 ]; then LOW_UTIL=$3; fi

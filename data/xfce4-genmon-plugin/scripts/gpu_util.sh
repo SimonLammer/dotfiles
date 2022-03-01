@@ -1,6 +1,6 @@
 #!/bin/sh
 
-coloredbar="$DOTFILES_HOME/data/scripts/xfce4_genmon_plugin-coloredbar.sh"
+coloredbar="$DOTFILES_HOME/data/xfce4-genmon-plugin/scripts/coloredbar.sh"
 
 # https://unix.stackexchange.com/a/358990/367736
 util=`nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits`

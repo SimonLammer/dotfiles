@@ -50,6 +50,9 @@ Others:
 2. Directory Menu
 3. Window Menu
 4. xfce-genmon-plugin window title (`sh -c "printf '%-50s' \"$(xdotool getactivewindow getwindowname | cut -c -50)\""`)
+
+    Choose a monospaced font to preserve width.
+
 5. Window Buttons
 6. Separator
 7. Status Tray
@@ -60,15 +63,15 @@ Others:
 
     | Description | Period [s] | Command |
     |:-----------:|-------:|:--------|
-    | [Memory](../data/scripts/xfce4_genmon_plugin-memory.sh) | 15 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-memory.sh` |
-    | [Swap](../data/scripts/xfce4_genmon_plugin-memory.sh) | 15 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-memory.sh Swap` |
-    | [CPU utilization](../data/scripts/xfce4_genmon_plugin-cpu_util.sh) | 5 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-cpu_util.sh` |
-    | [CPU temperature](../data/scripts/xfce4_genmon_plugin-cpu_temp.sh) | 5 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-cpu_temp.sh` |
-    | [GPU memory](../data/scripts/xfce4_genmon_plugin-gpu_memory.sh) | 15 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-gpu_memory.sh` |
-    | [GPU utilization](../data/scripts/xfce4_genmon_plugin-gpu_util.sh) | 5 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-gpu_util.sh` |
-    | [GPU temperature](../data/scripts/xfce4_genmon_plugin-gpu_temp.sh) | 5 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-gpu_temp.sh` |
-    | ['/' usage](../data/scripts/xfce4_genmon_plugin-filesystem.sh) | 300 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-filesystem.sh /` |
-    | ['/media/data' usage](../data/scripts/xfce4_genmon_plugin-filesystem.sh) | 300 | `/home/slammer/.config/dotfiles/data/scripts/xfce4_genmon_plugin-filesystem.sh /media/data 90 93 97 99` |
+    |              [Memory](../data/xfce4-genmon-plugin/scripts/memory.sh)     |  15 | `sh -c "$DOTFILES_HOME/data/xfce4-genmon-plugin/scripts/memory.sh"` |
+    |                [Swap](../data/xfce4-genmon-plugin/scripts/memory.sh)     |  15 | `sh -c "$DOTFILES_HOME/data/xfce4-genmon-plugin/scripts/memory.sh Swap"` |
+    |     [CPU utilization](../data/xfce4-genmon-plugin/scripts/cpu_util.sh)   |   5 | `sh -c "$DOTFILES_HOME/data/xfce4-genmon-plugin/scripts/cpu_util.sh"` |
+    |     [CPU temperature](../data/xfce4-genmon-plugin/scripts/cpu_temp.sh)   |   5 | `sh -c "$DOTFILES_HOME/data/xfce4-genmon-plugin/scripts/cpu_temp.sh"` |
+    |          [GPU memory](../data/xfce4-genmon-plugin/scripts/gpu_memory.sh) |  15 | `sh -c "$DOTFILES_HOME/data/xfce4-genmon-plugin/scripts/gpu_memory.sh"` |
+    |     [GPU utilization](../data/xfce4-genmon-plugin/scripts/gpu_util.sh)   |   5 | `sh -c "$DOTFILES_HOME/data/xfce4-genmon-plugin/scripts/gpu_util.sh"` |
+    |     [GPU temperature](../data/xfce4-genmon-plugin/scripts/gpu_temp.sh)   |   5 | `sh -c "$DOTFILES_HOME/data/xfce4-genmon-plugin/scripts/gpu_temp.sh"` |
+    |           ['/' usage](../data/xfce4-genmon-plugin/scripts/filesystem.sh) | 300 | `sh -c "$DOTFILES_HOME/data/xfce4-genmon-plugin/scripts/filesystem.sh /"` |
+    | ['/media/data' usage](../data/xfce4-genmon-plugin/scripts/filesystem.sh) | 300 | `sh -c "$DOTFILES_HOME/data/xfce4-genmon-plugin/scripts/filesystem.sh /media/data 90 93 97 99"` |
 
 12. DateTime
 

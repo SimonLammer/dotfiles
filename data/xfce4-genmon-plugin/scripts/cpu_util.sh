@@ -1,6 +1,6 @@
 #!/bin/sh
 
-coloredbar="$DOTFILES_HOME/data/scripts/xfce4_genmon_plugin-coloredbar.sh"
+coloredbar="$DOTFILES_HOME/data/xfce4-genmon-plugin/scripts/coloredbar.sh"
 
 util=`awk -f $DOTFILES_HOME/data/scripts/cpu_utilization.awk`
 
