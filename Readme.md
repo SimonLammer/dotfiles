@@ -1068,6 +1068,13 @@ sudo apt install subversion
 sudo apt install -y tmux xclip
 ~~~
 
+## Per project configuration
+
+Some configurations are stored in [data/tmux/configurations](data/tmux/configurations).
+
+References:
+- https://spin.atomicobject.com/2015/03/08/dev-project-workspace-tmux/
+
 ## Install other version
 
 [Download the latest release from github](https://github.com/tmux/tmux/releases)
