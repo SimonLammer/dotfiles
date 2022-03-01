@@ -27,6 +27,12 @@ Below is a collection of wisdom, useful for setting up computers.
     ansible-playbook setup.yml -e 'ansible_python_interpreter=/usr/bin/python3' -u slammer
     ~~~
 
+3. Remaining setup
+
+    - Programs not yet installed automatically
+
+        - [Mega](#mega)
+
 ---
 
 # System setup
