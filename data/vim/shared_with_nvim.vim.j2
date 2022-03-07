@@ -14,7 +14,7 @@ source {{dotfiles_home}}/data/vim/shared_with_nvim-plugins.vim
 " Overall appearance
 syntax on              " Enable syntax-highlighting
 set background=dark
-set conceallevel=0     " Don't hide characters
+set conceallevel=0     " Don't hide characters (https://vi.stackexchange.com/a/7263/40980)
 set encoding=utf-8
 set fileencoding=utf-8
 set showtabline=2      " Always show tabs
@@ -25,7 +25,7 @@ set t_Co=256
 set number           " Display absolute line numbers
 set relativenumber   " Display relative line numbers (except for the current line when `number` is set)
 set showmatch
-set wrap             " Enable wrapping 
+set wrap             " Enable wrapping
 
 " Highlight cursor
 set cursorline
@@ -99,12 +99,6 @@ noremap <M-j> :resize -2<CR>
 noremap <M-k> :resize +2<CR>
 noremap <M-h> :vertical resize -2<CR>
 noremap <M-l> :vertical resize +2<CR>
-
-" Better window navigation
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>k
 
 " Better tabbing
 vnoremap < <gv
