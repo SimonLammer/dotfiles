@@ -606,6 +606,16 @@ References:
 sudo apt-get install -y autojump
 ~~~
 
+# AppImage
+
+## Extract `.desktop` file
+
+```shell
+myprogram.AppImage --appimage-extract
+cp  `find squashfs-root -name '*.desktop'` .
+rm -rf squashfs-root
+```
+
 # clang-format
 
 ## Update default clang-format version
@@ -710,6 +720,13 @@ COMPOSE_VERSION=$(curl -s https://api.github.com/repos/docker/compose/releases/l
 sudo sh -c "curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"
 sudo chmod +x /usr/local/bin/docker-compose
 sudo sh -c "curl -L https://raw.githubusercontent.com/docker/compose/${COMPOSE_VERSION}/contrib/completion/bash/docker-compose > /etc/bash_completion.d/docker-compose"
+~~~
+
+# [DrawIO](https://app.diagrams.net/)
+
+~~~shell
+sudo ln -s /media/data/storage/programs/drawio-x86_64-16.4.0.AppImage /usr/local/bin/drawio
+sudo cp $DOTFILES_HOME/data/drawio/drawio.desktop /usr/local/share/applications/
 ~~~
 
 # Eclipse
@@ -1223,6 +1240,13 @@ sudo apt install -y vlc
 
 ~~~shell
 curl --create-dirs -o "$HOME/.config/xfce4/terminal/colorschemes/gruvbox-dark.theme" "https://raw.githubusercontent.com/vifo/xfce4-terminal-colorschemes/master/colorschemes/gruvbox-dark.theme" && chmod 0644 "$HOME/.config/xfce4/terminal/colorschemes/gruvbox-dark.theme"
+~~~
+
+# [Xournal++](https://xournalpp.github.io/)
+
+~~~shell
+sudo ln -s /media/data/storage/programs/xournalpp-1.1.1-x86_64.AppImage /usr/local/bin/xournalpp
+sudo cp $DOTFILES_HOME/data/xournalpp/xournalpp.desktop /usr/local/share/applications/
 ~~~
 
 # ZSH
