@@ -49,7 +49,9 @@ Others:
 1. Whisker Menu
 2. Directory Menu
 3. Window Menu
-4. xfce-genmon-plugin window title (`sh -c "printf '%-50s' \"$(xdotool getactivewindow getwindowname | cut -c -50)\""`)
+4. (xfce-genmon-plugin window title)[../data/xfce4-genmon-plugin/scripts/window_title.sh]
+
+    `sh -c "$DOTFILES_HOME/data/xfce4-genmon-plugin/scripts/window_title.sh"`
 
     Choose a monospaced font to preserve width.
 
