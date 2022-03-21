@@ -43,6 +43,7 @@ let g:enable_bold_font = 1
 set background=dark
 colorscheme gruvbox
 let g:indentLine_char = '|'
+let g:indentLine_fileTypeExclude = ['markdown','json','yaml'] " https://vi.stackexchange.com/a/19229/40980
 
 
 "  __  __                   _                 

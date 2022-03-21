@@ -14,12 +14,13 @@ source $HOME/.config/dotfiles/data/vim/shared_with_nvim-plugins.vim
 " Overall appearance
 syntax on              " Enable syntax-highlighting
 set background=dark
-set conceallevel=0     " Don't hide characters (https://vi.stackexchange.com/a/7263/40980)
 set encoding=utf-8
+set conceallevel=0     " Don't hide characters (https://vi.stackexchange.com/a/7263/40980)
 set fileencoding=utf-8
 set showtabline=2      " Always show tabs
 set t_Co=256
 "colorscheme desert
+
 
 " Lines
 set number           " Display absolute line numbers
