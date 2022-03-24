@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Open-Video-Downloader
+Exec=open-video-downloader %U
+Terminal=false
+Type=Application
+Icon=youtube-dl-gui
+StartupWMClass=Open Video Downloader
+X-AppImage-Version=2.4.0
+Comment=Open Video Downloader
+Categories=X-utility;

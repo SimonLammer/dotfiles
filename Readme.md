@@ -909,6 +909,13 @@ sudo apt-get install nodejs
 
 [Reference](https://github.com/lawl/NoiseTorch/wiki/Start-automatically-with-Systemd)
 
+# [Open Video Downloader (youtube-dl-gui)](https://jely2002.github.io/youtube-dl-gui/)
+
+~~~shell
+sudo ln -s /media/data/storage/programs/Open-Video-Downloader-2.4.0.AppImage /usr/local/bin/open-video-downloader
+sudo cp $DOTFILES_HOME/data/open-video-downloader/open-video-downloader.desktop /usr/local/share/applications/
+~~~
+
 # Play on Linux
 
 ~~~shell
