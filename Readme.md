@@ -1256,6 +1256,24 @@ sudo ln -s /media/data/storage/programs/xournalpp-1.1.1-x86_64.AppImage /usr/loc
 sudo cp $DOTFILES_HOME/data/xournalpp/xournalpp.desktop /usr/local/share/applications/
 ~~~
 
+## LaTeX
+
+**Error**:
+
+> Global template file is not a regular file. Please check your settings.
+
+**Solution**:
+
+~~~shell
+sudo mkdir /usr/local/share/xournalpp
+sudo cp $DOTFILES_HOME/data/xournalpp/default_template.tex /usr/local/share/xournalpp
+~~~
+
+Select `/usr/local/share/xournalpp/default_template.tex` in the setting: Edit > Preferences > LaTeX > Global template file path
+
+References:
+- https://github.com/xournalpp/xournalpp.github.io/issues/33
+
 # ZSH
 
 ~~~shell
