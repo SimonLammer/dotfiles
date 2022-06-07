@@ -135,9 +135,8 @@ if [ -n "$TMUX" ]; then
 fi
 
 PROMPT_TIMESTAMP_FORMAT='%H:%M:%S' # argument for `date`
-PROMPT_TIMESTAMP_PRE="\x1b[0m\x1b[0;38;5;247m"
-PROMPT_TIMESTAMP_POST="\x1b[0m "
-
+PROMPT_TIMESTAMP_PRE="\[\x1b[0m\]\[\x1b[0;38;5;247m\]"
+PROMPT_TIMESTAMP_POST="\[\x1b[0m\] "
 function __my_prompt_command() {
     local _last_exit="$?"
     PS1=`echo -en "$PROMPT_TIMESTAMP_PRE"`
@@ -155,9 +154,10 @@ if [ -n "$TMUX" ]; then
     PROMPT_COMMAND="__my_prompt_command;$PROMPT_COMMAND"
 
     # Override timestamp of previous prompt before executing command
-    PS0=`echo -en "\x1b[1F"`
+    PS0=`echo -en "\[\x1b[1F\]"`
     PS0+=`echo -en "$PROMPT_TIMESTAMP_PRE"`
     PS0+='$(date +"$PROMPT_TIMESTAMP_FORMAT")'
     PS0+=`echo -en "$PROMPT_TIMESTAMP_POST"`
-    PS0+=`echo -en "\x1b[1E"`
+    PS0+=`echo -en "\[\x1b[1E\]"`
 fi
+
