@@ -648,6 +648,7 @@ for f in *.mp4; do ffmpeg -i "$f" -hide_banner -vcodec mjpeg -q:v 2 -acodec pcm_
 ```
 
 References:
+- https://www.youtube.com/watch?v=WLcW4UWPC5Y
 - https://brushlesswhoop.com/converting-fpv-footage-for-davinci-resolve/
 - https://superuser.com/a/1273941
 
