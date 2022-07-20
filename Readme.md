@@ -998,6 +998,31 @@ Or: `pipenv lock --clear && pipenv install`
 References:
 - https://stackoverflow.com/a/56440091/2808520
 
+# qpaeq / pulseaudio-equalizer
+
+~~~shell
+sudo apt install pulseaudio-equalizer
+~~~
+
+## Dbus module not loaded
+
+**Error**:
+~~~
+$ qpaeq
+qt5ct: using qt5ct plugin
+There was an error connecting to pulseaudio, please make sure you have the pulseaudio dbus module loaded, exiting...
+~~~
+
+**Solution**:
+Add the following lines to `/etc/pulse/default.pa`:
+~~~
+load-module module-equalizer-sink
+load-module module-dbus-protocol
+~~~
+
+References:
+- https://linuxhint.com/install-pulseaudio-equalizer-linux-mint/
+
 # [Ranger](https://github.com/ranger/ranger)
 
 ~~~shell
