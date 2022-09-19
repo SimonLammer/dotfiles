@@ -766,6 +766,7 @@ shasum -a 512 -c elasticsearch-6.4.0.deb.sha512 && sudo dpkg -i elasticsearch-6.
 - [Save Page WE](https://addons.mozilla.org/en-CA/firefox/addon/save-page-we/)
 - [Tabliss](https://addons.mozilla.org/en-US/firefox/addon/tabliss/)
 - [uBlock Origin](https://addons.mozilla.org/en-CA/firefox/addon/ublock-origin)
+- [Recommendation Tweaker for YouTube](https://addons.mozilla.org/en-US/firefox/addon/recommendation-tweaker-yt/)
 - [Reverse Image Search](https://addons.mozilla.org/en-US/firefox/addon/image-reverse-search/)
 - [Video DownloadHelper](https://addons.mozilla.org/en-US/firefox/addon/video-downloadhelper/)
 - [Vimium-FF](https://addons.mozilla.org/en-US/firefox/addon/vimium-ff/)
