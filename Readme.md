@@ -902,6 +902,47 @@ curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 sudo apt-get install nodejs
 ~~~
 
+## NPM
+
+### Permission denied when installing packages globally (`-g`)
+
+**Error:**
+~~~
+🡲 npm install -g github-app-installation-token
+npm ERR! code EACCES
+npm ERR! syscall mkdir
+npm ERR! path /usr/lib/node_modules/github-app-installation-token
+npm ERR! errno -13
+npm ERR! Error: EACCES: permission denied, mkdir '/usr/lib/node_modules/github-app-installation-token'
+npm ERR!  [Error: EACCES: permission denied, mkdir '/usr/lib/node_modules/github-app-installation-token'] {
+npm ERR!   errno: -13,
+npm ERR!   code: 'EACCES',
+npm ERR!   syscall: 'mkdir',
+npm ERR!   path: '/usr/lib/node_modules/github-app-installation-token'
+npm ERR! }
+npm ERR!
+npm ERR! The operation was rejected by your operating system.
+npm ERR! It is likely you do not have the permissions to access this file as the current user
+npm ERR!
+npm ERR! If you believe this might be a permissions issue, please double-check the
+npm ERR! permissions of the file and its containing directories, or try running
+npm ERR! the command again as root/Administrator.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /home/slammer/.npm/_logs/2022-10-20T12_52_46_296Z-debug-0.log
+~~~
+
+**Solution:**
+
+~~~shell
+folder="~/.local/share/npm"
+mkdir "$folder"
+npm config set prefix "$folder"
+~~~
+
+References:
+- https://www.youtube.com/watch?v=qlVciUJCgAo
+
 # NoiseTorch
 
 [Download page](https://github.com/lawl/NoiseTorch)
