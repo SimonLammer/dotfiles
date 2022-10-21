@@ -766,6 +766,7 @@ shasum -a 512 -c elasticsearch-6.4.0.deb.sha512 && sudo dpkg -i elasticsearch-6.
 - [Save Page WE](https://addons.mozilla.org/en-CA/firefox/addon/save-page-we/)
 - [Tabliss](https://addons.mozilla.org/en-US/firefox/addon/tabliss/)
 - [uBlock Origin](https://addons.mozilla.org/en-CA/firefox/addon/ublock-origin)
+- [Recommendation Tweaker for YouTube](https://addons.mozilla.org/en-US/firefox/addon/recommendation-tweaker-yt/)
 - [Reverse Image Search](https://addons.mozilla.org/en-US/firefox/addon/image-reverse-search/)
 - [Video DownloadHelper](https://addons.mozilla.org/en-US/firefox/addon/video-downloadhelper/)
 - [Vimium-FF](https://addons.mozilla.org/en-US/firefox/addon/vimium-ff/)
@@ -901,6 +902,47 @@ curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 sudo apt-get install nodejs
 ~~~
 
+## NPM
+
+### Permission denied when installing packages globally (`-g`)
+
+**Error:**
+~~~
+🡲 npm install -g github-app-installation-token
+npm ERR! code EACCES
+npm ERR! syscall mkdir
+npm ERR! path /usr/lib/node_modules/github-app-installation-token
+npm ERR! errno -13
+npm ERR! Error: EACCES: permission denied, mkdir '/usr/lib/node_modules/github-app-installation-token'
+npm ERR!  [Error: EACCES: permission denied, mkdir '/usr/lib/node_modules/github-app-installation-token'] {
+npm ERR!   errno: -13,
+npm ERR!   code: 'EACCES',
+npm ERR!   syscall: 'mkdir',
+npm ERR!   path: '/usr/lib/node_modules/github-app-installation-token'
+npm ERR! }
+npm ERR!
+npm ERR! The operation was rejected by your operating system.
+npm ERR! It is likely you do not have the permissions to access this file as the current user
+npm ERR!
+npm ERR! If you believe this might be a permissions issue, please double-check the
+npm ERR! permissions of the file and its containing directories, or try running
+npm ERR! the command again as root/Administrator.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /home/slammer/.npm/_logs/2022-10-20T12_52_46_296Z-debug-0.log
+~~~
+
+**Solution:**
+
+~~~shell
+folder="~/.local/share/npm"
+mkdir "$folder"
+npm config set prefix "$folder"
+~~~
+
+References:
+- https://www.youtube.com/watch?v=qlVciUJCgAo
+
 # NoiseTorch
 
 [Download page](https://github.com/lawl/NoiseTorch)
@@ -997,6 +1039,31 @@ Or: `pipenv lock --clear && pipenv install`
 
 References:
 - https://stackoverflow.com/a/56440091/2808520
+
+# qpaeq / pulseaudio-equalizer
+
+~~~shell
+sudo apt install pulseaudio-equalizer
+~~~
+
+## Dbus module not loaded
+
+**Error**:
+~~~
+$ qpaeq
+qt5ct: using qt5ct plugin
+There was an error connecting to pulseaudio, please make sure you have the pulseaudio dbus module loaded, exiting...
+~~~
+
+**Solution**:
+Add the following lines to `/etc/pulse/default.pa`:
+~~~
+load-module module-equalizer-sink
+load-module module-dbus-protocol
+~~~
+
+References:
+- https://linuxhint.com/install-pulseaudio-equalizer-linux-mint/
 
 # [Ranger](https://github.com/ranger/ranger)
 
