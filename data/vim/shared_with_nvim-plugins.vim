@@ -21,6 +21,7 @@ endif
 call plug#begin()
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-sleuth'
+Plug 'wincent/terminus'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'flazz/vim-colorschemes'
 Plug 'Yggdroot/indentLine'
@@ -43,7 +44,7 @@ let g:enable_bold_font = 1
 set background=dark
 colorscheme gruvbox
 let g:indentLine_char = '|'
-let g:indentLine_fileTypeExclude = ['markdown','json','yaml'] " https://vi.stackexchange.com/a/19229/40980
+let g:indentLine_fileTypeExclude = ['markdown','json','yaml', 'tex'] " https://vi.stackexchange.com/a/19229/40980
 
 
 "  __  __                   _                 
