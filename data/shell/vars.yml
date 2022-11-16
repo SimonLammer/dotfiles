@@ -12,6 +12,9 @@ shell_aliases:
 
   tmux: tmux -f "${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf"
 
+  xci: xclip -i -sel c
+  xco: xclip -o -sel c
+
 shell_path_additions:
 - /opt/anki/bin
 - /opt/borg
