@@ -111,9 +111,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
-if [ -d "{{dotfiles_home}}" ]; then
-  . "{{dotfiles_home}}/data/shell/rc.sh"
+{% for source in bash_sources %}
+if [ -f "{{ source }}" ] ; then
+    . "{{ source }}"
 fi
+{% endfor %}
 
 if [ -f "$DOTFILES_HOME/data/tmux/scripts/start.sh" ]; then
     "$DOTFILES_HOME/data/tmux/scripts/start.sh"

@@ -1,0 +1,3 @@
+bash_sources:
+- "{{ dotfiles_home }}/data/shell/rc.sh" # $DOTFILES_HOME is not set until sourcing this
+
