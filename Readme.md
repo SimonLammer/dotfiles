@@ -1226,6 +1226,12 @@ ln -isv ~/.dotfiles/data/tmux/scripts ~/.tmux/scripts
 sudo apt install -y vim
 ~~~
 
+## Cheatsheet
+
+| Action | Description | Reference |
+|:------:|:-----------:|:---------:|
+| `:cq` | Quit vim with an error code, disregarding changes in the file. | https://vimdoc.sourceforge.net/htmldoc/quickfix.html |
+
 ## [vim-plug](https://github.com/junegunn/vim-plug)
 
 The plugin manager will be installed automatically from the ```.vimrc```.
