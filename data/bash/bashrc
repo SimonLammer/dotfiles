@@ -16,8 +16,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=2500
+HISTFILESIZE=5000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -111,8 +111,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
-if [ -d "$HOME/.config/dotfiles" ]; then
-  . "$HOME/.config/dotfiles/data/shell/rc.sh"
+if [ -f "$HOME/.config/dotfiles/data/shell/rc.sh" ] ; then
+    . "$HOME/.config/dotfiles/data/shell/rc.sh"
+fi
+if [ -f "$DOTFILES_HOME/data/fzf/key-bindings.bash" ] ; then
+    . "$DOTFILES_HOME/data/fzf/key-bindings.bash"
 fi
 
 if [ -f "$DOTFILES_HOME/data/tmux/scripts/start.sh" ]; then

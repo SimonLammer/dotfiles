@@ -26,6 +26,8 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias tmux='tmux -f "${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf"'
+alias xci='xclip -i -sel c'
+alias xco='xclip -o -sel c'
 
 if [ -d "/opt/anki/bin" ] ; then
     PATH="/opt/anki/bin:$PATH"
@@ -36,8 +38,8 @@ fi
 if [ -d "/opt/flutter/bin" ] ; then
     PATH="/opt/flutter/bin:$PATH"
 fi
-if [ -d "/home/slammer/.pyenv/bin" ] ; then
-    PATH="/home/slammer/.pyenv/bin:$PATH"
+if [ -d "/home/$USER/.pyenv/bin" ] ; then
+    PATH="/home/$USER/.pyenv/bin:$PATH"
 fi
 
 which pyenv >/dev/null 2>&1
@@ -50,6 +52,7 @@ if [ $? -eq 0 ]; then
     . /usr/share/autojump/autojump.sh
 fi
 
-if [ -f "$DOTFILES_HOME/data/shell/rc-local.sh" ]; then
+if [ -f "$DOTFILES_HOME/data/shell/rc-local.sh" ] ; then
     . "$DOTFILES_HOME/data/shell/rc-local.sh"
 fi
+
