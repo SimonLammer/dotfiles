@@ -1,5 +1,10 @@
 # This will be sourced from `~/.profile` as well as shells rc files (e.g. `~/.bashrc`)
 
+if [ ! -z "$DOTFILES_SHELL_RAN_RC" ]; then
+    return
+fi
+export DOTFILES_SHELL_RAN_RC=y
+
 # See $DOTFILES_HOME/vars/main.yml
 export DOTFILES_HOME="$HOME/.config/dotfiles"
 export HISTFILE="${XDG_CACHE_HOME:-$HOME/.cache}/bash_history"
