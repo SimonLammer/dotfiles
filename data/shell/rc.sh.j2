@@ -5,11 +5,11 @@
 export {{key}}="{{value}}"
 {% endfor %}
 
-{% for key, value in aliases.items() %}
+{% for key, value in shell_aliases.items() %}
 alias {{key}}='{{value}}'
 {% endfor %}
 
-{% for dir in path_additions %}
+{% for dir in shell_path_additions %}
 if [ -d "{{ dir }}" ] ; then
     PATH="{{ dir }}:$PATH"
 fi
@@ -25,6 +25,9 @@ if [ $? -eq 0 ]; then
     . /usr/share/autojump/autojump.sh
 fi
 
-if [ -f "$DOTFILES_HOME/data/shell/rc-local.sh" ]; then
-    . "$DOTFILES_HOME/data/shell/rc-local.sh"
+{% for source in shell_sources %}
+if [ -f "{{ source }}" ] ; then
+    . "{{ source }}"
 fi
+{% endfor %}
+

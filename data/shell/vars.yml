@@ -1,4 +1,4 @@
-aliases:
+shell_aliases:
   gits: git status
   gdiff: git diff --no-index
   gds: git diff --no-index --color-words="[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+" --word-diff=plain
@@ -11,8 +11,12 @@ aliases:
 
   tmux: tmux -f "${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf"
 
-path_additions:
+shell_path_additions:
 - /opt/anki/bin
 - /opt/borg
 - /opt/flutter/bin
-- /home/slammer/.pyenv/bin
+- /home/$USER/.pyenv/bin
+
+shell_sources:
+- "$DOTFILES_HOME/data/shell/rc-local.sh"
+
