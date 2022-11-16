@@ -35,6 +35,7 @@ programs:
   - curl
   - entr
   - firefox
+  - fzf
   - gparted
   - gimp
   - htop
