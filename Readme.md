@@ -891,6 +891,29 @@ Settings > Advanced > Excluded file and folder names:
 - \*-local
 - \*-local.\*
 
+# Neovim
+
+## Installation
+
+~~~shell
+sudo su
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+chmod ugo+x nvim.appimage
+version=`./nvim.appimage --version | head -n 1 | sed -E -e 's/.*v(.*)/\1/' -e 's/\./_/g'`
+mv nvim.appimage /usr/local/bin/nvim_$version.appimage
+update-alternatives --install /usr/local/bin/nvim nvim /usr/local/bin/nvim_$version.appimage 100
+update-alternatives --config nvim
+~~~
+
+## Link `vim` to `nvim`
+
+~~~shell
+sudo su
+update-alternatives --install /usr/local/bin/vim vim /usr/local/bin/nvim 150
+update-alternatives --config vim
+~~~
+
+
 # NodeJS
 
 [Download page](https://nodejs.org/en/download/)
