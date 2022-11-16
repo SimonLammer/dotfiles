@@ -64,3 +64,6 @@
 	date = iso
 [pull]
 	rebase = false
+	ff = no
+[merge]
+	ff = no
