@@ -1,4 +1,3 @@
-shell_ran_rc_env: DOTFILES_SHELL_RAN_RC
 shell_aliases:
   gits: git status
   gdiff: git diff --no-index
