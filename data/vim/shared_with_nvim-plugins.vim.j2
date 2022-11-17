@@ -31,8 +31,11 @@ endif
 Plug 'francoiscabrol/ranger.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'Glench/Vim-Jinja2-Syntax'
+if has('nvim')
+  Plug 'rmagatti/auto-session'
+endif
 call plug#end()
-    
+
 " Other Plugins I might want to checkout sometime:
 " junegunn/fzf.vim
 " thaerkh/vim-workspace
