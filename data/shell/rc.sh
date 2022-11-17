@@ -2,6 +2,7 @@
 
 # See $DOTFILES_HOME/vars/main.yml
 export DOTFILES_HOME="$HOME/.config/dotfiles"
+export EDITOR="vim"
 export HISTFILE="${XDG_CACHE_HOME:-$HOME/.cache}/bash_history"
 export ICEAUTHORITY="${XDG_CACHE_HOME:-$HOME/.cache}/ICEauthority"
 export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/inputrc"

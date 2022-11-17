@@ -13,6 +13,7 @@ pyenv_install_dir: /opt/pyenv
 
 environment_variables:
   DOTFILES_HOME: "{{ dotfiles_home }}"
+  EDITOR: vim
   HISTFILE: "${XDG_CACHE_HOME:-{{XDG_CACHE_HOME_DEFAULT}}}/bash_history" # otherwise ~/.bash_history
   ICEAUTHORITY: "${XDG_CACHE_HOME:-{{XDG_CACHE_HOME_DEFAULT}}}/ICEauthority" # otherwise ~/.ICEauthority
   INPUTRC: "${XDG_CONFIG_HOME:-{{XDG_CONFIG_HOME_DEFAULT}}}/inputrc" # otherwise ~/.inputrc
