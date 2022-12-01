@@ -21,6 +21,8 @@ alias gds='git diff --no-index --color-words="[^[:space:]]|([[:alnum:]]|UTF_8_GU
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias lmk='latexmk -interaction=nonstopmode -pdf'
+alias lmkw='find . -name "*.tex" | entr latexmk -interaction=nonstopmode -pdf'
 alias tmux='tmux -f "${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf"'
 alias xci='xclip -i -sel c'
 alias xco='xclip -o -sel c'

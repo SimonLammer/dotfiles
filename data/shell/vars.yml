@@ -7,6 +7,9 @@ shell_aliases:
   la: ls -A
   l: ls -CF
 
+  lmk: latexmk -interaction=nonstopmode -pdf
+  lmkw: find . -name "*.tex" | entr latexmk -interaction=nonstopmode -pdf
+
   #rm: rm -I
 
   tmux: tmux -f "${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf"
