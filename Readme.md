@@ -762,12 +762,13 @@ shasum -a 512 -c elasticsearch-6.4.0.deb.sha512 && sudo dpkg -i elasticsearch-6.
 - [Bupass Paywalls Clean](https://addons.mozilla.org/en-US/firefox/addon/bypass-paywalls-clean/)
 - [Chessvision.ai](https://addons.mozilla.org/en-CA/firefox/addon/chessvision-ai-for-firefox/)
 - [Cookie-Editor](https://addons.mozilla.org/en-US/firefox/addon/cookie-editor/)
+- [Keepa.com - Amazon Price Tracker](https://addons.mozilla.org/en-GB/firefox/addon/keepa/)
 - [Netflix 1080p](https://addons.mozilla.org/en-US/firefox/addon/netflix-1080p-firefox/)
+- [Recommendation Tweaker for YouTube](https://addons.mozilla.org/en-US/firefox/addon/recommendation-tweaker-yt/)
+- [Reverse Image Search](https://addons.mozilla.org/en-US/firefox/addon/image-reverse-search/)
 - [Save Page WE](https://addons.mozilla.org/en-CA/firefox/addon/save-page-we/)
 - [Tabliss](https://addons.mozilla.org/en-US/firefox/addon/tabliss/)
 - [uBlock Origin](https://addons.mozilla.org/en-CA/firefox/addon/ublock-origin)
-- [Recommendation Tweaker for YouTube](https://addons.mozilla.org/en-US/firefox/addon/recommendation-tweaker-yt/)
-- [Reverse Image Search](https://addons.mozilla.org/en-US/firefox/addon/image-reverse-search/)
 - [Video DownloadHelper](https://addons.mozilla.org/en-US/firefox/addon/video-downloadhelper/)
 - [Vimium-FF](https://addons.mozilla.org/en-US/firefox/addon/vimium-ff/)
 - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
@@ -981,6 +982,10 @@ References:
 sudo ln -s /media/data/storage/programs/Open-Video-Downloader-2.4.0.AppImage /usr/local/bin/open-video-downloader
 sudo cp $DOTFILES_HOME/data/open-video-downloader/open-video-downloader.desktop /usr/local/share/applications/
 ~~~
+
+# Plantuml
+
+https://github.com/plantuml/plantuml
 
 # Play on Linux
 
