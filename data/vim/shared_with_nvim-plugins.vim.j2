@@ -31,22 +31,29 @@ endif
 Plug 'francoiscabrol/ranger.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'Glench/Vim-Jinja2-Syntax'
-if has('nvim')
-  Plug 'rmagatti/auto-session'
-endif
+Plug 'thaerkh/vim-workspace'
 call plug#end()
+
+"if has('nvim')
+  "Plug 'rmagatti/auto-session'
+"endif
 
 " Other Plugins I might want to checkout sometime:
 " junegunn/fzf.vim
 " thaerkh/vim-workspace
 " ms-jpq/coq-nvim
-" preservim/tagbar
 
+let g:workspace_autosave_untrailspaces = 0
+let g:workspace_autosave_untrailtabs = 0
+let g:workspace_session_directory = $XDG_DATA_HOME . '/vim/sessions/'
+if !isdirectory(g:workspace_session_directory)
+  call mkdir(g:workspace_session_directory, 'p')
+endif
 
 let g:enable_bold_font = 1
 set background=dark
 colorscheme gruvbox
-let g:indentLine_char = '|'
+let g:indentine_char = '|'
 let g:indentLine_fileTypeExclude = ['markdown','json','yaml', 'tex'] " https://vi.stackexchange.com/a/19229/40980
 
 
@@ -57,3 +64,7 @@ let g:indentLine_fileTypeExclude = ['markdown','json','yaml', 'tex'] " https://v
 " |_|  |_|\__,_| .__/| .__/|_|_| |_|\__, |___/
 "              |_|   |_|            |___/     
 
+" TODO: Figure out why <leader> doesn't map to the set leader here
+
+" vim-workspace
+nnoremap ,s :ToggleWorkspace<CR>
