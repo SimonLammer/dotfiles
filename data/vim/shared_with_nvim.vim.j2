@@ -9,6 +9,9 @@
 "                                                                           |___/ 
 " Shared configuration for `vim` and `nvim`
 
+" Change leader
+let mapleader=","
+
 source {{dotfiles_home}}/data/vim/shared_with_nvim-plugins.vim
 
 " Overall appearance
@@ -75,8 +78,6 @@ set ttyfast               " Speed up scrolling in Vim
 " Escape insert mode whilst avoiding carpal tunnel syndrome
 imap kj <ESC>
 
-" Change leader
-let mapleader=","
 no  <leader> <Nop>
 "ino <leader> <Nop>
 vno <leader> <Nop>
