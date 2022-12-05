@@ -48,6 +48,7 @@ let g:workspace_autosave_untrailspaces = 0
 let g:workspace_autosave_untrailtabs = 0
 let g:workspace_session_disable_on_args = 1
 let g:workspace_session_directory = $XDG_DATA_HOME . '/vim/sessions/'
+let g:workspace_undodir = $XDG_DATA_HOME . '/vim/undodir/'
 if !isdirectory(g:workspace_session_directory)
   call mkdir(g:workspace_session_directory, 'p')
 endif

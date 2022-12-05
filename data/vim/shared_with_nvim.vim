@@ -128,9 +128,14 @@ nmap <leader><Space> a <ESC>
 nnoremap <silent> yc :let @+=expand('%:p')<CR>
 nnoremap <silent> yd :let @+=expand('%:p:h')<CR>
 
+" Buffer management
+nnoremap <leader>bb :ls<CR>:b<space>
+nnoremap <leader>bh :bprevious<CR>
+nnoremap <leader>bl :bnext<CR>
+
 " Jump to the last position when reopening a file
-if has("autocmd")
-    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-      \| exe "normal! g'\"" | endif
-endif
+"if has("autocmd")
+"   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+"     \| exe "normal! g'\"" | endif
+"endif
 
