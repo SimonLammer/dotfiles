@@ -1276,6 +1276,15 @@ vim +PlugInstall +qall
 ln -isv ~/.dotfiles/data/vim/_.vimrc ~/.vimrc
 ~~~
 
+# Edit binary files
+
+`%!xxd` produces a hex-view of binary.
+
+`%!xxd -r` formats the hex-view to binary again.
+
+References:
+- https://vi.stackexchange.com/a/2234/40980
+
 # VirtualBox
 
 [Download page](https://www.virtualbox.org/wiki/Downloads)
