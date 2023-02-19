@@ -1099,6 +1099,34 @@ References:
 sudo apt install -y ranger
 ~~~
 
+# Redmine
+
+## Install
+
+https://github.com/SimonLammer/services/tree/master/docker-compose/redmine
+
+## Plugins
+
+| Name | Description | Link |
+|---|---|---|
+| Bestest Punch Clock for Redmine | This is an awesome punch clock/timer plugin for Redmine. It's great. It's the bestest. | https://github.com/LeviticusMB/bestest_timer |
+| Dashboard | Plugin adds an issues dashboard to the application  | https://github.com/akpaevj/Dashboard |
+| Kanban | Kanban plugin for redmine | https://github.com/happy-se-life/kanban |
+| Redmine Auto Resubmission plugin | This plugin provides a resubmission tool for issues | https://github.com/HugoHasenbein/redmine_auto_resubmission |
+| Redmine Checklists plugin (Light version) | This is a issue checklist plugin for Redmine | https://www.redmineup.com/pages/plugins/checklists |
+| Redmine Subtask List Accordion plugin | This plugin provide accordion to subtask list of issue. | https://github.com/GEROMAX/redmine_subtask_list_accordion |
+| Redmine view customize plugin | This a plugin allows you to customize the view for the Redmine. | https://github.com/onozaty/redmine-view-customize |
+
+### Other interesting Plugins
+
+| Name | Description | Link |
+|---|---|---|
+| issue_recurring | Redmine plugin: schedule Redmine issue recurrence based on multiple conditions. | https://github.com/cryptogopher/issue_recurring |
+| Issue View Columns | Redmine plugin to customize shown columns in subtasks and related issues on issue page | https://github.com/AlphaNodes/redmine_issue_view_columns/tree/2.0.0 |
+| Issue To-do Lists Plugin | Organize issues in to-do lists by manually ordering their priority | https://github.com/canidas/redmine_issue_todo_lists |
+
+
+
 # Ruby
 
 [Reference](https://www.digitalocean.com/community/tutorials/how-to-install-ruby-and-set-up-a-local-programming-environment-on-ubuntu-16-04)
