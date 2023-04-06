@@ -469,6 +469,16 @@ Disable: `sh -c "xinput list | grep 'SynPS/2 Synaptics TouchPad' | sed -E 's/.*i
 References:
 - https://askubuntu.com/questions/1207958/error-24-write-error-cannot-write-compressed-block
 
+# Virtual audio device
+
+~~~shell
+sudo modprobe snd-dummy
+~~~
+
+Creating a virtual audio device can be used to record audio whilst keeping speakers muted.
+
+References:
+- https://askubuntu.com/a/1223529/776650
 
 ---
 
