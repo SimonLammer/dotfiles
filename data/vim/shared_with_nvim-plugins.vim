@@ -28,6 +28,7 @@ Plug 'Yggdroot/indentLine'
 if has('nvim')
   Plug 'rbgrouleff/bclose.vim' " Required for 'franoiscabrol/ranger.vim' in nvim
 endif
+Plug 'Asheq/close-buffers.vim'
 Plug 'francoiscabrol/ranger.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'Glench/Vim-Jinja2-Syntax'
@@ -70,3 +71,7 @@ let g:indentLine_fileTypeExclude = ['markdown','json','yaml', 'tex'] " https://v
 
 " vim-workspace
 nnoremap <leader>s :ToggleWorkspace<CR>
+
+" close-buffers
+nnoremap <silent> Q :Bdelete menu<CR>
+
