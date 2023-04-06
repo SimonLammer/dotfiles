@@ -44,6 +44,7 @@ call plug#end()
 " ms-jpq/coq-nvim
 " https://github.com/DNLHC/glance.nvim
 
+let g:workspace_autosave = 0
 let g:workspace_autosave_untrailspaces = 0
 let g:workspace_autosave_untrailtabs = 0
 let g:workspace_session_disable_on_args = 1

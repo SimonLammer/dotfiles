@@ -63,7 +63,7 @@ set splitbelow
 
 " Miscellaneous
 filetype plugin on
-set autochdir             " Change working directory to currently opened file
+"set autochdir             " Change working directory to currently opened file
 set clipboard=unnamedplus " Use system clipboard
 set ignorecase
 set ttyfast               " Speed up scrolling in Vim
