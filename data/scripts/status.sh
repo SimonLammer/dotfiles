@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# This script can be used to copy the last /proc/<pid>/status file that contains 'VmHWP' (i.e. memory information) to a temporary file.
+# This script can be used to copy the last /proc/<pid>/status file that contains 'VmHWM' (i.e. memory information) to a temporary file.
 # The <`ps` identifier> is used to search for the target process in the last column of `ps x`.
 # It does not work for processes that terminate very fast (anything living longer than about 50ms works on my machine).
 # Adapt the penultimate line to print different information from /proc/<pid>/status.

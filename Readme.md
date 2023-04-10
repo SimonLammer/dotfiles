@@ -538,6 +538,7 @@ Maybe:
 - https://ankiweb.net/shared/info/734898866
 - https://ankiweb.net/shared/info/1672712021
 - https://ankiweb.net/shared/info/1009670238
+- https://ankiweb.net/shared/info/715575551 (Life Drain)
 
 #### Plugins not used anymore (since 2.1.45)
 
@@ -640,6 +641,17 @@ sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/c
 
 `for cow in `cowsay -l`; do cowsay -f $cow $cow; done`
 
+# datamash
+
+GNU datamash is a command-line program which performs basic numeric, textual and statistical operations on input textual data files. 
+
+~~~shell
+sudo apt install datamash
+~~~
+
+References:
+- https://www.gnu.org/software/datamash/
+
 # DaVinci Resolve
 
 Download: [https://www.blackmagicdesign.com/products/davinciresolve/](https://www.blackmagicdesign.com/products/davinciresolve/)
@@ -661,7 +673,6 @@ References:
 - https://www.youtube.com/watch?v=WLcW4UWPC5Y
 - https://brushlesswhoop.com/converting-fpv-footage-for-davinci-resolve/
 - https://superuser.com/a/1273941
-
 
 # Docker
 
