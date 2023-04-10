@@ -2,6 +2,8 @@
 
 # This should be executed after every command
 # via the shell's post command hook.
+# It will also be called from tmux' `run-shell` command
+# upon switching to a pane (via the `shell-post-command` tmux command alias).
 
 which tmux >/dev/null 2>&1
 if [ \
