@@ -36,7 +36,7 @@ ff=`mktemp`
 while [ `ps x | grep "[0-9] $psid" >/dev/null; printf $?` -ne 0 ]; do
   sleep .001
 done
-pid=`ps x | grep "[0-9] $psid" | sed -E "s/^[^0-9]+([0-9]+).*/\\1/"`
+pid=`ps x | grep "[0-9] $psid" | sed -E "s/^[^0-9]*([0-9]+).*/\\1/"`
 echo PID $pid
 while [ `cp /proc/$pid/status $ff 2>/dev/null; printf $?` -eq 0 ]; do
   if [ `grep "^VmHWM" $ff >/dev/null; printf $?` -ne 0 ]; then
