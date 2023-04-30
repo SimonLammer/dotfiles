@@ -635,6 +635,17 @@ sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/c
 ~~~
 [Reference](https://bugs.launchpad.net/ubuntu/+source/llvm-defaults/+bug/1769737)
 
+# cpupower
+
+## Set cpu frequency
+```	
+sudo cpupower -c all frequency-set -g performance
+sudo cpupower -c all frequency-set -d 3000000 -u 3000000 # set frequency to 3GHz
+```
+
+References:
+- https://wiki.archlinux.org/title/CPU_frequency_scaling#Setting_maximum_and_minimum_frequencies
+
 # cowsay
 
 ## Show cows
