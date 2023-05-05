@@ -1008,6 +1008,17 @@ References:
 
 [Reference](https://github.com/lawl/NoiseTorch/wiki/Start-automatically-with-Systemd)
 
+# Node Version Manager (NVM)
+
+~~~
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+~~~
+
+References:
+- https://github.com/nvm-sh/nvm#installing-and-updating
+
 # [Open Video Downloader (youtube-dl-gui)](https://jely2002.github.io/youtube-dl-gui/)
 
 ~~~shell
