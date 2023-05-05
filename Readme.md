@@ -635,6 +635,17 @@ sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/c
 ~~~
 [Reference](https://bugs.launchpad.net/ubuntu/+source/llvm-defaults/+bug/1769737)
 
+# cpupower
+
+## Set cpu frequency
+```	
+sudo cpupower -c all frequency-set -g performance
+sudo cpupower -c all frequency-set -d 3000000 -u 3000000 # set frequency to 3GHz
+```
+
+References:
+- https://wiki.archlinux.org/title/CPU_frequency_scaling#Setting_maximum_and_minimum_frequencies
+
 # cowsay
 
 ## Show cows
@@ -996,6 +1007,17 @@ References:
 ## Autostart
 
 [Reference](https://github.com/lawl/NoiseTorch/wiki/Start-automatically-with-Systemd)
+
+# Node Version Manager (NVM)
+
+~~~
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+~~~
+
+References:
+- https://github.com/nvm-sh/nvm#installing-and-updating
 
 # [Open Video Downloader (youtube-dl-gui)](https://jely2002.github.io/youtube-dl-gui/)
 
