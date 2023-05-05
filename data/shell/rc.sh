@@ -1,5 +1,11 @@
 # This will be sourced from `~/.profile` as well as shells rc files (e.g. `~/.bashrc`)
 
+# Don't run this twice
+if [ ! -z "$DOTFILES_SHELL_RC" ]; then
+    return
+fi
+export DOTFILES_SHELL_RC=y
+
 # See $DOTFILES_HOME/vars/main.yml
 export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
 export DOTFILES_HOME="$HOME/.config/dotfiles"
@@ -33,6 +39,21 @@ alias tmux='tmux -f "${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf"'
 alias xci='xclip -i -sel c'
 alias xco='xclip -o -sel c'
 
+if [ -d "$HOME/bin:$PATH" ] ; then
+    PATH="$HOME/bin:$PATH:$PATH"
+fi
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+if [ -d "$HOME/.pyenv/bin" ] ; then
+    PATH="$HOME/.pyenv/bin:$PATH"
+fi
+if [ -d "${XDG_DATA_HOME:-$HOME/.local/share}/npm/bin" ] ; then
+    PATH="${XDG_DATA_HOME:-$HOME/.local/share}/npm/bin:$PATH"
+fi
+if [ -d "$CARGO_HOME/bin" ] ; then
+    PATH="$CARGO_HOME/bin:$PATH"
+fi
 if [ -d "/opt/anki/bin" ] ; then
     PATH="/opt/anki/bin:$PATH"
 fi
@@ -41,9 +62,6 @@ if [ -d "/opt/borg" ] ; then
 fi
 if [ -d "/opt/flutter/bin" ] ; then
     PATH="/opt/flutter/bin:$PATH"
-fi
-if [ -d "/home/$USER/.pyenv/bin" ] ; then
-    PATH="/home/$USER/.pyenv/bin:$PATH"
 fi
 
 which pyenv >/dev/null 2>&1
@@ -58,5 +76,11 @@ fi
 
 if [ -f "$DOTFILES_HOME/data/shell/rc-local.sh" ] ; then
     . "$DOTFILES_HOME/data/shell/rc-local.sh"
+fi
+if [ -f "$NVM_DIR/nvm.sh" ] ; then
+    . "$NVM_DIR/nvm.sh"
+fi
+if [ -f "$CARGO_HOME/env" ] ; then
+    . "$CARGO_HOME/env"
 fi
 

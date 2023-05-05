@@ -18,11 +18,17 @@ shell_aliases:
   xco: xclip -o -sel c
 
 shell_path_additions:
+- $HOME/bin:$PATH
+- $HOME/.local/bin
+- $HOME/.pyenv/bin
+- "${XDG_DATA_HOME:-{{XDG_DATA_HOME_DEFAULT}}}/npm/bin"
+- $CARGO_HOME/bin
 - /opt/anki/bin
 - /opt/borg
 - /opt/flutter/bin
-- /home/$USER/.pyenv/bin
 
 shell_sources:
 - "$DOTFILES_HOME/data/shell/rc-local.sh"
+- "$NVM_DIR/nvm.sh" # This loads nvm
+- "$CARGO_HOME/env"
 

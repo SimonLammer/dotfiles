@@ -18,24 +18,4 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
-
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-
-# set PATH so it includes globally installed npm packages
-if [ -d "$HOME/.local/share/npm/bin" ] ; then
-    PATH="$HOME/.local/share/npm/bin:$PATH"
-fi
-
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-
-if [ -d "$CARGO_HOME" ] ; then
-    PATH="$CARGO_HOME/bin:$PATH"
-fi
 
