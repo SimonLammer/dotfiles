@@ -8,6 +8,7 @@ services_repo: https://github.com/SimonLammer/services.git
 XDG_CONFIG_HOME_DEFAULT: $HOME/.config
 XDG_CACHE_HOME_DEFAULT: $HOME/.cache
 XDG_DATA_HOME_DEFAULT: $HOME/.local/share
+XDG_RUNTIME_DIR_DEFAULT: /run/user/$UID
 
 pyenv_install_dir: /opt/pyenv
 
@@ -19,6 +20,10 @@ environment_variables:
   INPUTRC: "${XDG_CONFIG_HOME:-{{XDG_CONFIG_HOME_DEFAULT}}}/inputrc" # otherwise ~/.inputrc
   LC_TIME: en_CA.utf8
   LESSHISTFILE: "${XDG_CACHE_HOME:-{{XDG_CACHE_HOME_DEFAULT}}}/less_history" # otherwise ~/.lesshst
+  NPM_CONFIG_USERCONFIG: "${XDG_CONFIG_HOME:-{{XDG_CONFIG_HOME_DEFAULT}}}/npm/config" # otherwise ~/.npmconfig # https://github.com/npm/npm/issues/6675#issuecomment-251049832
+  NPM_CONFIG_CACHE: "${XDG_CACHE_HOME:-{{XDG_CACHE_HOME_DEFAULT}}}/npm" # https://github.com/npm/npm/issues/6675#issuecomment-251049832
+  NPM_CONFIG_TMP: "${XDG_RUNTIME_DIR:-{{XDG_RUNTIME_DIR_DEFAULT}}}/npm" # https://github.com/npm/npm/issues/6675#issuecomment-251049832
+  NVM_DIR: "${XDG_CONFIG_HOME:-{{XDG_CONFIG_HOME_DEFAULT}}}/nvm" # otherwise ~/.nvm
   PYENV_ROOT: "${XDG_DATA_HOME:-{{XDG_DATA_HOME_DEFAULT}}}/pyenv" # otherwise ~/.pyenv
   PYTHONSTARTUP: "{{ dotfiles_home }}/data/python/pythonstartup.py"
   WORKON_HOME: "${XDG_DATA_HOME:-{{XDG_DATA_HOME_DEFAULT}}}/virtualenvs" # otherwise ~/.virtualenvs

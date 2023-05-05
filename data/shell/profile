@@ -33,3 +33,5 @@ if [ -d "$HOME/.local/share/npm/bin" ] ; then
     PATH="$HOME/.local/share/npm/bin:$PATH"
 fi
 
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
