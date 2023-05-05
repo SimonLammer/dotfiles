@@ -13,6 +13,7 @@ XDG_RUNTIME_DIR_DEFAULT: /run/user/$UID
 pyenv_install_dir: /opt/pyenv
 
 environment_variables:
+  CARGO_HOME: "${XDG_DATA_HOME:-{{XDG_DATA_HOME_DEFAULT}}}/cargo" # otherwise ~/.cargo
   DOTFILES_HOME: "{{ dotfiles_home }}"
   EDITOR: vim
   HISTFILE: "${XDG_CACHE_HOME:-{{XDG_CACHE_HOME_DEFAULT}}}/bash_history" # otherwise ~/.bash_history
@@ -26,6 +27,7 @@ environment_variables:
   NVM_DIR: "${XDG_CONFIG_HOME:-{{XDG_CONFIG_HOME_DEFAULT}}}/nvm" # otherwise ~/.nvm
   PYENV_ROOT: "${XDG_DATA_HOME:-{{XDG_DATA_HOME_DEFAULT}}}/pyenv" # otherwise ~/.pyenv
   PYTHONSTARTUP: "{{ dotfiles_home }}/data/python/pythonstartup.py"
+  RUSTUP_HOME: "${XDG_DATA_HOME:-{{XDG_DATA_HOME_DEFAULT}}}/rustup" # otherwise ~/.rustup
   WORKON_HOME: "${XDG_DATA_HOME:-{{XDG_DATA_HOME_DEFAULT}}}/virtualenvs" # otherwise ~/.virtualenvs
   # The following 3 lines should not be necessary, but some programs improperly apply the XDG spec
   XDG_CONFIG_HOME: "{{ XDG_CONFIG_HOME_DEFAULT }}"

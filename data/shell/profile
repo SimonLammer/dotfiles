@@ -35,3 +35,7 @@ fi
 
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
+if [ -d "$CARGO_HOME" ] ; then
+    PATH="$CARGO_HOME/bin:$PATH"
+fi
+
