@@ -1,10 +1,5 @@
 # This will be sourced from `~/.profile` as well as shells rc files (e.g. `~/.bashrc`)
 
-# Don't run this twice
-if [ ! -z "$DOTFILES_SHELL_RC" ]; then
-    return
-fi
-export DOTFILES_SHELL_RC=y
 
 # See $DOTFILES_HOME/vars/main.yml
 export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
