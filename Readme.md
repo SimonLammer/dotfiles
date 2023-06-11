@@ -3,12 +3,11 @@ Below is a collection of wisdom (mostly useful as references for myself).
 
 Contents:
 - [Usage](#usage)
+- [Interesting websites](#interesting-websites)
 - [Programs](#ag-the-silver-searcher)
 - [System setup](#system-setup)
 
-ASCII art fonts were created using:
-- http://patorjk.com/software/taag/#p=display&f=Epic&t=github.com%2FSimonLammer%2Fdotfiles
-- http://patorjk.com/software/taag/#p=display&f=Ivrit&t=github.com%2FSimonLammer%2Fdotfiles
+
 
 
 # Usage
@@ -37,6 +36,27 @@ ASCII art fonts were created using:
     - Programs not yet installed automatically
 
         - [Mega](#mega)
+
+---
+
+# Interesting websites
+
+## [consensus.app](https://consensus.app)
+
+> Consensus is a search engine that uses AI to extract and
+distill findings directly from scientific research
+
+## [detexify.kirelabs.org](http://detexify.kirelabs.org/classify.html)
+
+Find LaTeX symbols by drawing them.
+
+## [patorjk.com/software/taag](http://patorjk.com/software/taag/)
+
+Text to ASCII Art Generator.
+
+ASCII art fonts in this repo were created using:
+- http://patorjk.com/software/taag/#p=display&f=Epic&t=github.com%2FSimonLammer%2Fdotfiles
+- http://patorjk.com/software/taag/#p=display&f=Ivrit&t=github.com%2FSimonLammer%2Fdotfiles
 
 ---
 
