@@ -39,3 +39,9 @@ if [ -f "{{ source }}" ] ; then
 fi
 {% endfor %}
 
+{% for command, script in shell_sources_lazy.items() %}
+if [ -f "{{script}}" ] ; then
+    alias {{command}}='unalias {{command}}; . {{script}}; {{command}}'
+fi
+{% endfor %}
+

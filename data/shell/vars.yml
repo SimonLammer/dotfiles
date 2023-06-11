@@ -29,6 +29,8 @@ shell_path_additions:
 
 shell_sources:
 - "$DOTFILES_HOME/data/shell/rc-local.sh"
-- "$NVM_DIR/nvm.sh" # This loads nvm
-- "$CARGO_HOME/env"
+
+shell_sources_lazy:
+  nvm: "$NVM_DIR/nvm.sh"
+  cargo: "$CARGO_HOME/env"
 

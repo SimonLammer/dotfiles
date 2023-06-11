@@ -72,10 +72,11 @@ fi
 if [ -f "$DOTFILES_HOME/data/shell/rc-local.sh" ] ; then
     . "$DOTFILES_HOME/data/shell/rc-local.sh"
 fi
+
 if [ -f "$NVM_DIR/nvm.sh" ] ; then
-    . "$NVM_DIR/nvm.sh"
+    alias nvm='unalias nvm; . $NVM_DIR/nvm.sh; nvm'
 fi
 if [ -f "$CARGO_HOME/env" ] ; then
-    . "$CARGO_HOME/env"
+    alias cargo='unalias cargo; . $CARGO_HOME/env; cargo'
 fi
 
