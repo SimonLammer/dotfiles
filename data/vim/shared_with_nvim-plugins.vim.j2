@@ -45,8 +45,8 @@ call plug#end()
 " ms-jpq/coq-nvim
 " https://github.com/DNLHC/glance.nvim
 
-let g:indentLine_concealcursor = ''
-let g:indentLine_setConceal = 0
+let g:json_syntax_conceal=0
+let g:markdown_syntax_conceal=0
 
 let g:workspace_autosave = 0
 let g:workspace_autosave_untrailspaces = 0
