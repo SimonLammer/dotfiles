@@ -1,10 +1,15 @@
 **This repo contains multiple settings and configuration files for several programs.**
+Below is a collection of wisdom (mostly useful as references for myself).
+
+Contents:
+- [Usage](#usage)
+- [Programs](#ag-the-silver-searcher)
+- [System setup](#system-setup)
 
 ASCII art fonts were created using:
 - http://patorjk.com/software/taag/#p=display&f=Epic&t=github.com%2FSimonLammer%2Fdotfiles
 - http://patorjk.com/software/taag/#p=display&f=Ivrit&t=github.com%2FSimonLammer%2Fdotfiles
 
-Below is a collection of wisdom, useful for setting up computers.
 
 # Usage
 
@@ -32,453 +37,6 @@ Below is a collection of wisdom, useful for setting up computers.
     - Programs not yet installed automatically
 
         - [Mega](#mega)
-
----
-
-# System setup
-
-## Partitioning
-
-~~~
-+---------------+ +----------------+ +--------------------------------------------------------+
-| EFI partition | | Boot partition | | Logical volume 1 | Logical volume 2 | Logical volume 3 |
-|               | |                | |                  |                  |                  |
-| [EFI]         | | /boot          | | [SWAP]           | /                | /disks/main      |
-|               | |                | |                  |                  |                  |
-| fat32         | | ext4           | | [swap]           | ext4             | ext4             |
-|               | |                | |                  |                  |                  |
-| 500 MiB       | | 500 MiB        | |  20 GiB          | 35 GiB           | <Rest>           |
-|               | |                | |                  |                  |                  |
-|               | |                | | /dev/luks/swap   | /dev/luks/root   | /dev/luks/data   |
-|               | |                | +------------------+------------------+------------------+
-|               | |                | |             LUKS2 encrypted partition                  |
-| /dev/sda1     | | /dev/sda2      | |                    /dev/sda3                           |
-+---------------+ +----------------+ +--------------------------------------------------------+
-~~~
-
-### LUKS setup
-
-~~~
-cryptsetup luksFormat /dev/sda3
-cryptsetup open /dev/sda3 luks
-~~~
-
-#### Wipe partition
-
-~~~
-sudo cryptsetup open --type plain -d /dev/urandom /dev/sda3 luks
-sudo dd if=/dev/zero of=/dev/mapper/luks status=progress
-sudo cryptsetup close luks
-~~~
-
-#### LVM (on LUKS) setup
-
-~~~
-pvcreate /dev/mapper/luks
-vgcreate luks /dev/mapper/luks
-lvcreate -n swap -L 20G luks
-lvcreate -n root -L 35G luks
-lvcreate -n data -L 1.7T luks
-~~~
-
-#### Backup LUKS header
-
-~~~shell
-sudo cryptsetup luksHeaderBackup /dev/sdaX --header-backup-file /path/to/new_backup_file
-~~~
-
-References:
-- https://www.cyberciti.biz/security/how-to-backup-and-restore-luks-header-on-linux/
-
-## Install OS
-
-| Device                | Usage | Filesystem |
-|:----------------------|:------|:----------:|
-| /dev/sda1             | EFI   | fat32      |
-| /dev/sda2             | /boot | ext4       |
-| /dev/mapper/luks-root | /     | ext4       |
-| /dev/mapper/luks-swap | swap  | swap       |
-
-
-## Configure GRUB
-
-### Chroot into new installation
-
-~~~
-mount /dev/luks/root /mnt
-mount /dev/sda2 /mnt/boot
-mount /dev/sda1 /mnt/boot/efi
-for fs in proc sys dev dev/pts run etc/resolv.conf; do mount --bind /$fs /mnt/$fs; done
-chroot /mnt
-~~~
-
-### Edit `/etc/default/grub`:
-~~~
-GRUB_CMDLINE_LINUX="cryptdevice=UUID=<UUID of /dev/sda3>"
-~~~
-
-~~~
-update-grub
-~~~
-
-### Edit `/etc/crypttab`:
-
-~~~
-# <target name> <source device> <key file> <options>
-luks UUID=<UUID of /dev/sda3> none luks,discard
-~~~
-
-~~~
-update-initramfs -ck all
-~~~
-
-*Obtain UUIDs via `sudo blkid`.*
-
-## eCryptfs
-
-*Not necessary with FDE.*
-
-### Encrypt existing home directory
-
-*Run this as another user*
-~~~
-ecryptfs-migrate-home -u user_to_migrate
-~~~
-
-### Manually decrypt directory
-
-~~~
-ecryptfs-recover-private path/to/.Private
-~~~
-
-# Fonts
-
-## Installation
-
-Copy the font files to `/usr/share/fonts/<some-awesome-font>/*.otf`
-
-## [NerdFonts](https://www.nerdfonts.com/#home)
-
-[Anonymous Pro](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/AnonymousPro/complete)
-
-Other candidates I liked:
-- FantasqueSansMono Nerd Font
-- FiraMono Nerd Font
-- Hasklug Nerd Font
-- Hurmit Nerd Font
-- Monoid Nerd Font
-- Mononoki Nerd Font
-- RobotoMono Nerd Font
-- Sauce Code Pro Nerd Font
-
-Others I've used:
-- [CodeNewRoman Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CodeNewRoman.zip)
-
-### Patch fonts
-
-~~~
-docker run -v `pwd`:/in -v `pwd`/patched:/out nerdfonts/patcher -c
-~~~
-
-References:
-- https://github.com/ryanoasis/nerd-fonts#font-patcher
-
-# LVM2 Snapshots
-
-*(run as root)*
-~~~
-lvcreate -L 100M -n original vg
-mkfs.ext4 /dev/vg/original
-mkdir /mnt/original
-mount /dev/vg/original /mnt/original
-echo "This is the content of a file." > /mnt/original/file.txt
-
-lvcreate -L 12M -s /dev/vg/original -n snap vg
-mkdir /mnt/snapshot
-mount /dev/vg/snap /mnt/snapshot
-cat /mnt/snapshot/file.txt # This is the content of a file.
-
-echo "With a 2nd line." >> /mnt/original/file.txt
-diff /mnt/original/file.txt /mnt/snapshot/file.txt
-# 2d1
-# < With a 2nd line.
-
-umount /mnt/original /mnt/snapshot
-
-lvconvert --merge /dev/vg/snap
-# Merging of volume vg/snap started.
-# vg/original: Merged: 100,00%
-~~~
-
-[Reference](https://www.theurbanpenguin.com/maning-lvm-snapshots/)
-
-# Grub
-
-[Reference](http://tipsonubuntu.com/2018/03/11/install-grub-customizer-ubuntu-18-04-lts/)
-
-~~~
-sudo add-apt-repository ppa:danielrichter2007/grub-customizer
-sudo apt-get update
-sudo apt-get install grub-customizer
-~~~
-
-# Hibernate
-
-[Reference](http://chriseiffel.com/uncategorized/step-by-step-how-to-get-hibernate-working-for-linux-ubuntu-11-04-mint-11/)
-[Reference 2](http://ubuntuhandbook.org/index.php/2017/10/enable-hibernate-ubuntu-17-10/)
-[Reference 3](https://ubuntuforums.org/showthread.php?t=2391841)
-
-Ensure there is enough swap space.
-~~~shell
-free -m
-~~~
-
-Add `resume=UUID=b59dd444-58f7-4fc9-90eb-eaa27dcec7e6` to `/etc/default/grub` in the line starting with `GRUB_CMDLINE_LINUX=` and run `sudo update-grub`
-
-~~~shell
-sudo apt install -y pm-utils
-~~~
-
-Use ```sudo pm-hibernate``` to hibernate. (Does not request password when resuming!)
-
-~~~shell
-sudo sed -Ei '/^\[Disable hibernate/,/^$/ {s/^\[Disable hibernate .* (in)/[Enable hibernate \1/; s/^(ResultActive=)no/\1yes/}' /var/lib/polkit-1/localauthority/10-vendor.d/com.ubuntu.desktop.pkla
-echo -e '\n[Re-enable hibernate for multiple users by default in logind]\nIdentity=unix-user:*\nAction=org.freedesktop.login1.hibernate-multiple-sessions\nResultActive=yes' | sudo tee -a /var/lib/polkit-1/localauthority/10-vendor.d/com.ubuntu.desktop.pkla
-~~~
-
-## [Gnome extension](https://extensions.gnome.org/extension/755/hibernate-status-button/)
-
-# KDE
-
-## Linux Mint 19.3
-
-[Reddit installation thread](https://www.reddit.com/r/linuxmint/comments/eq9hr7/unable_to_install_kde_plamsa_on_mint_cinnamon/)
-
-# Limit ```/var/log/journal``` size
-
-[Reference](https://bbs.archlinux.org/viewtopic.php?id=172399)
-
-Edit ```/etc/systemd/journald.conf``` like so:
-~~~
-[Journal]
-SystemMaxUse=500M
-RuntimeMaxUse=200M
-~~~
-
-# Mount disks
-
-~~~shell
-sudo mkdir /disks
-~~~
-
-~~~shell
-# find the device with 'sudo fdisk -l'
-dev=/dev/sda2
-target=/disks/main
-
-mkdir -p $target
-sudo blkid | grep "^$dev" -m 1 | sed -E 's@.* UUID=\"([^"]+).* TYPE="([^"]+).*@# '$dev'\nUUID=\1 '$target' \2@' | sudo tee -a /etc/fstab
-~~~
-
-## Bind mount home directories (Move home directories to other drive)
-
-[Reference 1](https://www.tecmint.com/move-home-directory-to-new-partition-disk-in-linux/)
-[Reference 2](https://askubuntu.com/questions/550348/how-to-make-mount-bind-permanent)
-
-Create a backup:
-```
-sudo mkdir /disks/main/home-backup
-sudo rsync -av /home/* /disks/main/home-backup
-```
-
-Move /home/* to /disks/main/home/*:
-```
-sudo mkdir /disks/main/home
-sudo rsync -ah --progress /disks/main/home-backup/* /disks/main/home
-sudo rm -Rf /home/*
-echo '/disks/main/home /home none bind 0 0' | sudo tee -a /etc/fstab
-```
-
-Remove backup **after making sure everything works**:
-```
-sudo rm -Rf /disks/main/home-backup
-```
-
-# "Open Folder" uses wrong application
-
-Application:
-- System settings > MIME Type Editor
-- System settings > Default Applications
-
-Setting: `directory/inode`
-
-References:
-- https://superuser.com/questions/1512714/transmission-right-click-open-folder-opens-xfburn-instead-of-thunar
-
-# SSD
-
-[Increase Performance and lifespan of SSDs & SD Cards](https://haydenjames.io/increase-performance-lifespan-ssds-sd-cards/)
-
-# Systemd
-
-## Speed up boot by disabling services
-
-[Reference](https://www.maketecheasier.com/make-linux-boot-faster/)
-
-~~~
-systemd-analyze blame
-systemd-analyze critical-chain
-~~~
-
-# Unity
-
-## Tweak tool
-
-[Reference](https://ubuntoid.com/install-unity-tweak-tool-ubuntu-16-04/)
-~~~shell
-sudo apt install -y unity-tweak-tool
-~~~
-
-# Gnome shell
-
-## Extensions
-
-### [gnome-shell-extension-installer](https://github.com/brunelli/gnome-shell-extension-installer)
-
-~~~
-wget -O gnome-shell-extension-installer "https://github.com/brunelli/gnome-shell-extension-installer/raw/master/gnome-shell-extension-installer"
-chmod +x gnome-shell-extension-installer
-mv gnome-shell-extension-installer /usr/bin/
-~~~
-
-~~~
-gnome-shell-extension-installer 15 1160 1236 1267 8 352 906 1112 826 --restart-shell
-~~~
-
-- [AlternateTab](https://extensions.gnome.org/extension/15/alternatetab/): `15`
-- [Dash to Panel](https://extensions.gnome.org/extension/1160/dash-to-panel/): `1160`
-- [NoAnnoyance](https://extensions.gnome.org/extension/1236/noannoyance/): `1236`
-- [No Title Bar](https://extensions.gnome.org/extension/1267/no-title-bar/): `1267`
-- [Places  Status Indicator](https://extensions.gnome.org/extension/8/places-status-indicator/): `8`
-- [Quick Close in Overview](https://extensions.gnome.org/extension/352/middle-click-to-close-in-overview/): `352`
-- [Sound Input & Output Device Chooser](https://extensions.gnome.org/extension/906/sound-output-device-chooser/): `906`
-- [Screenshot Tool](https://extensions.gnome.org/extension/1112/screenshot-tool/): `1112`
-- [Suspend Button](https://extensions.gnome.org/extension/826/suspend-button/): `826`
-
-### Configuring extensions
-
-~~~
-# Night light color temperature
-gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 4800
-
-# Dash-to-Panel
-gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel panel-position 'TOP'
-gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel panel-size 24
-gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel appicon-padding 0
-gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel appicon-margin 0
-gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel taskbar-position 'CENTEREDMONITOR'
-gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel show-activities-button true
-gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel isolate-workspaces true
-
-# NoTitlebar
-gsettings --schemadir ~/.local/share/gnome-shell/extensions/no-title-bar@franglais125.gmail.com/schemas set org.gnome.shell.extensions.no-title-bar only-main-monitor false
-
-# Middleclickclose (Quit Close in Overview)
-gsettings --schemadir ~/.local/share/gnome-shell/extensions/middleclickclose@paolo.tranquilli.gmail.com/schemas set org.gnome.shell.extensions.middleclickclose rearrange-delay 200
-
-# Screenshot Tool
-gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot '' # default: 'Print'
-gsettings --schemadir ~/.local/share/gnome-shell/extensions/gnome-shell-screenshot@ttll.de/schemas set org.gnome.shell.extensions.screenshot shortcut-select-desktop "['Print']"
-~~~
-
-## Lid closed action
-
-[Reference](http://tipsonubuntu.com/2018/04/28/change-lid-close-action-ubuntu-18-04-lts/)
-
-```
-sudo vim /etc/systemd/logind.conf
-```
-
-## PPPOE network connection
-
-`nmcli con edit type pppoe con-name "connection-name"`:
-
-```
-set pppoe.username username
-set connection.autoconnect no
-save
-quit
-```
-
-Network Settings > Wired > connection-name
-
-## Specify different GTK_THEME for application
-
-### .desktop file
-https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-ubuntu
-```
-env GTK2_RC_FILES= GTK_DATA_PREFIX= GTK_THEME=Adwaita /usr/bin/the_usual_executable 
-```
-
-[Reference](https://askubuntu.com/a/778388)
-
-### Firefox
-
-~~~ shell
-sudo sed -Ei '/export MOZ_APP_LAUNCHER/a\\n# Use specific GTK_THEME instead of system default\nGTK_THEME=Yaru\nexport GTK_THEME' /usr/lib/firefox/firefox.sh
-~~~
-
-## Create a .desktop file to launch an application
-
-[Reference](https://askubuntu.com/questions/418407/how-do-i-create-a-desktop-file-to-launch-eclipse)
-
-`/usr/share/applications/eclipse.desktop`:
-~~~
-[Desktop Entry]
-Name=Eclipse
-Comment=Eclipse
-Exec=/home/user/eclipse/eclipse
-Icon=/home/user/eclipse/icon.xpm
-Terminal=false
-Type=Application
-Categories=Development;IDE
-~~~
-
-# Graphic Tablets
-
-## Restrict graphic tablet to one display
-
-`xinput`: ` HUION H420 Pen (0)                        id=23   [slave  pointer  (2)]`
-`xrandr`: `eDP-1-1 connected 1920x1080+485+1440 (normal left inverted right x axis y axis) 344mm x 193mm`
-
-~~~shell
-xinput map-to-output 23 eDP-1-1
-~~~
-
-# Touchpad
-
-Enable: `sh -c "xinput list | grep 'SynPS/2 Synaptics TouchPad' | sed -E 's/.*id=([0-9]+).*/set-prop \1 \"Device Enabled\" 1/g' | xargs xinput"`
-Disable: `sh -c "xinput list | grep 'SynPS/2 Synaptics TouchPad' | sed -E 's/.*id=([0-9]+).*/set-prop \1 \"Device Enabled\" 0/g' | xargs xinput"`
-
-# Miscellanious errors
-
-## `apt upgrade`: `mkinitramfs failure cpio`, `cannot write compressed block`
-
-`/boot` has probably filled up, free some space with `sudo apt pure linux-image-5.0.0-36-generic` (adapted to the kernel you want to remove).
-
-References:
-- https://askubuntu.com/questions/1207958/error-24-write-error-cannot-write-compressed-block
-
-# Virtual audio device
-
-~~~shell
-sudo modprobe snd-dummy
-~~~
-
-Creating a virtual audio device can be used to record audio whilst keeping speakers muted.
-
-References:
-- https://askubuntu.com/a/1223529/776650
 
 ---
 
@@ -1489,29 +1047,452 @@ ln -isv ~/.dotfiles/data/zsh/_.zshrc ~/.zshrc
 
 ---
 
-~~~shell
-sudo apt install -y \
-  autojump\
-  curl\
-  git\
-  gparted\
-  htop\
-  openjdk-8-jdk openjdk-8-doc\
-  ssh\
-  tree\
-  tmux\
-  xclip\
-  vim\
-  zsh
+# System setup
+
+## Partitioning
+
+~~~
++---------------+ +----------------+ +--------------------------------------------------------+
+| EFI partition | | Boot partition | | Logical volume 1 | Logical volume 2 | Logical volume 3 |
+|               | |                | |                  |                  |                  |
+| [EFI]         | | /boot          | | [SWAP]           | /                | /disks/main      |
+|               | |                | |                  |                  |                  |
+| fat32         | | ext4           | | [swap]           | ext4             | ext4             |
+|               | |                | |                  |                  |                  |
+| 500 MiB       | | 500 MiB        | |  20 GiB          | 35 GiB           | <Rest>           |
+|               | |                | |                  |                  |                  |
+|               | |                | | /dev/luks/swap   | /dev/luks/root   | /dev/luks/data   |
+|               | |                | +------------------+------------------+------------------+
+|               | |                | |             LUKS2 encrypted partition                  |
+| /dev/sda1     | | /dev/sda2      | |                    /dev/sda3                           |
++---------------+ +----------------+ +--------------------------------------------------------+
 ~~~
 
-Fun additions:
-~~~shell
-sudo apt install -y \
-  cmatrix\
-  cowsay\
-  sl
+### LUKS setup
+
 ~~~
+cryptsetup luksFormat /dev/sda3
+cryptsetup open /dev/sda3 luks
+~~~
+
+#### Wipe partition
+
+~~~
+sudo cryptsetup open --type plain -d /dev/urandom /dev/sda3 luks
+sudo dd if=/dev/zero of=/dev/mapper/luks status=progress
+sudo cryptsetup close luks
+~~~
+
+#### LVM (on LUKS) setup
+
+~~~
+pvcreate /dev/mapper/luks
+vgcreate luks /dev/mapper/luks
+lvcreate -n swap -L 20G luks
+lvcreate -n root -L 35G luks
+lvcreate -n data -L 1.7T luks
+~~~
+
+#### Backup LUKS header
+
+~~~shell
+sudo cryptsetup luksHeaderBackup /dev/sdaX --header-backup-file /path/to/new_backup_file
+~~~
+
+References:
+- https://www.cyberciti.biz/security/how-to-backup-and-restore-luks-header-on-linux/
+
+## Install OS
+
+| Device                | Usage | Filesystem |
+|:----------------------|:------|:----------:|
+| /dev/sda1             | EFI   | fat32      |
+| /dev/sda2             | /boot | ext4       |
+| /dev/mapper/luks-root | /     | ext4       |
+| /dev/mapper/luks-swap | swap  | swap       |
+
+
+## Configure GRUB
+
+### Chroot into new installation
+
+~~~
+mount /dev/luks/root /mnt
+mount /dev/sda2 /mnt/boot
+mount /dev/sda1 /mnt/boot/efi
+for fs in proc sys dev dev/pts run etc/resolv.conf; do mount --bind /$fs /mnt/$fs; done
+chroot /mnt
+~~~
+
+### Edit `/etc/default/grub`:
+~~~
+GRUB_CMDLINE_LINUX="cryptdevice=UUID=<UUID of /dev/sda3>"
+~~~
+
+~~~
+update-grub
+~~~
+
+### Edit `/etc/crypttab`:
+
+~~~
+# <target name> <source device> <key file> <options>
+luks UUID=<UUID of /dev/sda3> none luks,discard
+~~~
+
+~~~
+update-initramfs -ck all
+~~~
+
+*Obtain UUIDs via `sudo blkid`.*
+
+## eCryptfs
+
+*Not necessary with FDE.*
+
+### Encrypt existing home directory
+
+*Run this as another user*
+~~~
+ecryptfs-migrate-home -u user_to_migrate
+~~~
+
+### Manually decrypt directory
+
+~~~
+ecryptfs-recover-private path/to/.Private
+~~~
+
+# Fonts
+
+## Installation
+
+Copy the font files to `/usr/share/fonts/<some-awesome-font>/*.otf`
+
+## [NerdFonts](https://www.nerdfonts.com/#home)
+
+[Anonymous Pro](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/AnonymousPro/complete)
+
+Other candidates I liked:
+- FantasqueSansMono Nerd Font
+- FiraMono Nerd Font
+- Hasklug Nerd Font
+- Hurmit Nerd Font
+- Monoid Nerd Font
+- Mononoki Nerd Font
+- RobotoMono Nerd Font
+- Sauce Code Pro Nerd Font
+
+Others I've used:
+- [CodeNewRoman Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CodeNewRoman.zip)
+
+### Patch fonts
+
+~~~
+docker run -v `pwd`:/in -v `pwd`/patched:/out nerdfonts/patcher -c
+~~~
+
+References:
+- https://github.com/ryanoasis/nerd-fonts#font-patcher
+
+# LVM2 Snapshots
+
+*(run as root)*
+~~~
+lvcreate -L 100M -n original vg
+mkfs.ext4 /dev/vg/original
+mkdir /mnt/original
+mount /dev/vg/original /mnt/original
+echo "This is the content of a file." > /mnt/original/file.txt
+
+lvcreate -L 12M -s /dev/vg/original -n snap vg
+mkdir /mnt/snapshot
+mount /dev/vg/snap /mnt/snapshot
+cat /mnt/snapshot/file.txt # This is the content of a file.
+
+echo "With a 2nd line." >> /mnt/original/file.txt
+diff /mnt/original/file.txt /mnt/snapshot/file.txt
+# 2d1
+# < With a 2nd line.
+
+umount /mnt/original /mnt/snapshot
+
+lvconvert --merge /dev/vg/snap
+# Merging of volume vg/snap started.
+# vg/original: Merged: 100,00%
+~~~
+
+[Reference](https://www.theurbanpenguin.com/maning-lvm-snapshots/)
+
+# Grub
+
+[Reference](http://tipsonubuntu.com/2018/03/11/install-grub-customizer-ubuntu-18-04-lts/)
+
+~~~
+sudo add-apt-repository ppa:danielrichter2007/grub-customizer
+sudo apt-get update
+sudo apt-get install grub-customizer
+~~~
+
+# Hibernate
+
+[Reference](http://chriseiffel.com/uncategorized/step-by-step-how-to-get-hibernate-working-for-linux-ubuntu-11-04-mint-11/)
+[Reference 2](http://ubuntuhandbook.org/index.php/2017/10/enable-hibernate-ubuntu-17-10/)
+[Reference 3](https://ubuntuforums.org/showthread.php?t=2391841)
+
+Ensure there is enough swap space.
+~~~shell
+free -m
+~~~
+
+Add `resume=UUID=b59dd444-58f7-4fc9-90eb-eaa27dcec7e6` to `/etc/default/grub` in the line starting with `GRUB_CMDLINE_LINUX=` and run `sudo update-grub`
+
+~~~shell
+sudo apt install -y pm-utils
+~~~
+
+Use ```sudo pm-hibernate``` to hibernate. (Does not request password when resuming!)
+
+~~~shell
+sudo sed -Ei '/^\[Disable hibernate/,/^$/ {s/^\[Disable hibernate .* (in)/[Enable hibernate \1/; s/^(ResultActive=)no/\1yes/}' /var/lib/polkit-1/localauthority/10-vendor.d/com.ubuntu.desktop.pkla
+echo -e '\n[Re-enable hibernate for multiple users by default in logind]\nIdentity=unix-user:*\nAction=org.freedesktop.login1.hibernate-multiple-sessions\nResultActive=yes' | sudo tee -a /var/lib/polkit-1/localauthority/10-vendor.d/com.ubuntu.desktop.pkla
+~~~
+
+## [Gnome extension](https://extensions.gnome.org/extension/755/hibernate-status-button/)
+
+# KDE
+
+## Linux Mint 19.3
+
+[Reddit installation thread](https://www.reddit.com/r/linuxmint/comments/eq9hr7/unable_to_install_kde_plamsa_on_mint_cinnamon/)
+
+# Limit ```/var/log/journal``` size
+
+[Reference](https://bbs.archlinux.org/viewtopic.php?id=172399)
+
+Edit ```/etc/systemd/journald.conf``` like so:
+~~~
+[Journal]
+SystemMaxUse=500M
+RuntimeMaxUse=200M
+~~~
+
+# Mount disks
+
+~~~shell
+sudo mkdir /disks
+~~~
+
+~~~shell
+# find the device with 'sudo fdisk -l'
+dev=/dev/sda2
+target=/disks/main
+
+mkdir -p $target
+sudo blkid | grep "^$dev" -m 1 | sed -E 's@.* UUID=\"([^"]+).* TYPE="([^"]+).*@# '$dev'\nUUID=\1 '$target' \2@' | sudo tee -a /etc/fstab
+~~~
+
+## Bind mount home directories (Move home directories to other drive)
+
+[Reference 1](https://www.tecmint.com/move-home-directory-to-new-partition-disk-in-linux/)
+[Reference 2](https://askubuntu.com/questions/550348/how-to-make-mount-bind-permanent)
+
+Create a backup:
+```
+sudo mkdir /disks/main/home-backup
+sudo rsync -av /home/* /disks/main/home-backup
+```
+
+Move /home/* to /disks/main/home/*:
+```
+sudo mkdir /disks/main/home
+sudo rsync -ah --progress /disks/main/home-backup/* /disks/main/home
+sudo rm -Rf /home/*
+echo '/disks/main/home /home none bind 0 0' | sudo tee -a /etc/fstab
+```
+
+Remove backup **after making sure everything works**:
+```
+sudo rm -Rf /disks/main/home-backup
+```
+
+# "Open Folder" uses wrong application
+
+Application:
+- System settings > MIME Type Editor
+- System settings > Default Applications
+
+Setting: `directory/inode`
+
+References:
+- https://superuser.com/questions/1512714/transmission-right-click-open-folder-opens-xfburn-instead-of-thunar
+
+# SSD
+
+[Increase Performance and lifespan of SSDs & SD Cards](https://haydenjames.io/increase-performance-lifespan-ssds-sd-cards/)
+
+# Systemd
+
+## Speed up boot by disabling services
+
+[Reference](https://www.maketecheasier.com/make-linux-boot-faster/)
+
+~~~
+systemd-analyze blame
+systemd-analyze critical-chain
+~~~
+
+# Unity
+
+## Tweak tool
+
+[Reference](https://ubuntoid.com/install-unity-tweak-tool-ubuntu-16-04/)
+~~~shell
+sudo apt install -y unity-tweak-tool
+~~~
+
+# Gnome shell
+
+## Extensions
+
+### [gnome-shell-extension-installer](https://github.com/brunelli/gnome-shell-extension-installer)
+
+~~~
+wget -O gnome-shell-extension-installer "https://github.com/brunelli/gnome-shell-extension-installer/raw/master/gnome-shell-extension-installer"
+chmod +x gnome-shell-extension-installer
+mv gnome-shell-extension-installer /usr/bin/
+~~~
+
+~~~
+gnome-shell-extension-installer 15 1160 1236 1267 8 352 906 1112 826 --restart-shell
+~~~
+
+- [AlternateTab](https://extensions.gnome.org/extension/15/alternatetab/): `15`
+- [Dash to Panel](https://extensions.gnome.org/extension/1160/dash-to-panel/): `1160`
+- [NoAnnoyance](https://extensions.gnome.org/extension/1236/noannoyance/): `1236`
+- [No Title Bar](https://extensions.gnome.org/extension/1267/no-title-bar/): `1267`
+- [Places  Status Indicator](https://extensions.gnome.org/extension/8/places-status-indicator/): `8`
+- [Quick Close in Overview](https://extensions.gnome.org/extension/352/middle-click-to-close-in-overview/): `352`
+- [Sound Input & Output Device Chooser](https://extensions.gnome.org/extension/906/sound-output-device-chooser/): `906`
+- [Screenshot Tool](https://extensions.gnome.org/extension/1112/screenshot-tool/): `1112`
+- [Suspend Button](https://extensions.gnome.org/extension/826/suspend-button/): `826`
+
+### Configuring extensions
+
+~~~
+# Night light color temperature
+gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 4800
+
+# Dash-to-Panel
+gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel panel-position 'TOP'
+gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel panel-size 24
+gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel appicon-padding 0
+gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel appicon-margin 0
+gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel taskbar-position 'CENTEREDMONITOR'
+gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel show-activities-button true
+gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/schemas set org.gnome.shell.extensions.dash-to-panel isolate-workspaces true
+
+# NoTitlebar
+gsettings --schemadir ~/.local/share/gnome-shell/extensions/no-title-bar@franglais125.gmail.com/schemas set org.gnome.shell.extensions.no-title-bar only-main-monitor false
+
+# Middleclickclose (Quit Close in Overview)
+gsettings --schemadir ~/.local/share/gnome-shell/extensions/middleclickclose@paolo.tranquilli.gmail.com/schemas set org.gnome.shell.extensions.middleclickclose rearrange-delay 200
+
+# Screenshot Tool
+gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot '' # default: 'Print'
+gsettings --schemadir ~/.local/share/gnome-shell/extensions/gnome-shell-screenshot@ttll.de/schemas set org.gnome.shell.extensions.screenshot shortcut-select-desktop "['Print']"
+~~~
+
+## Lid closed action
+
+[Reference](http://tipsonubuntu.com/2018/04/28/change-lid-close-action-ubuntu-18-04-lts/)
+
+```
+sudo vim /etc/systemd/logind.conf
+```
+
+## PPPOE network connection
+
+`nmcli con edit type pppoe con-name "connection-name"`:
+
+```
+set pppoe.username username
+set connection.autoconnect no
+save
+quit
+```
+
+Network Settings > Wired > connection-name
+
+## Specify different GTK_THEME for application
+
+### .desktop file
+https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-ubuntu
+```
+env GTK2_RC_FILES= GTK_DATA_PREFIX= GTK_THEME=Adwaita /usr/bin/the_usual_executable 
+```
+
+[Reference](https://askubuntu.com/a/778388)
+
+### Firefox
+
+~~~ shell
+sudo sed -Ei '/export MOZ_APP_LAUNCHER/a\\n# Use specific GTK_THEME instead of system default\nGTK_THEME=Yaru\nexport GTK_THEME' /usr/lib/firefox/firefox.sh
+~~~
+
+## Create a .desktop file to launch an application
+
+[Reference](https://askubuntu.com/questions/418407/how-do-i-create-a-desktop-file-to-launch-eclipse)
+
+`/usr/share/applications/eclipse.desktop`:
+~~~
+[Desktop Entry]
+Name=Eclipse
+Comment=Eclipse
+Exec=/home/user/eclipse/eclipse
+Icon=/home/user/eclipse/icon.xpm
+Terminal=false
+Type=Application
+Categories=Development;IDE
+~~~
+
+# Graphic Tablets
+
+## Restrict graphic tablet to one display
+
+`xinput`: ` HUION H420 Pen (0)                        id=23   [slave  pointer  (2)]`
+`xrandr`: `eDP-1-1 connected 1920x1080+485+1440 (normal left inverted right x axis y axis) 344mm x 193mm`
+
+~~~shell
+xinput map-to-output 23 eDP-1-1
+~~~
+
+# Touchpad
+
+Enable: `sh -c "xinput list | grep 'SynPS/2 Synaptics TouchPad' | sed -E 's/.*id=([0-9]+).*/set-prop \1 \"Device Enabled\" 1/g' | xargs xinput"`
+Disable: `sh -c "xinput list | grep 'SynPS/2 Synaptics TouchPad' | sed -E 's/.*id=([0-9]+).*/set-prop \1 \"Device Enabled\" 0/g' | xargs xinput"`
+
+# Miscellanious errors
+
+## `apt upgrade`: `mkinitramfs failure cpio`, `cannot write compressed block`
+
+`/boot` has probably filled up, free some space with `sudo apt pure linux-image-5.0.0-36-generic` (adapted to the kernel you want to remove).
+
+References:
+- https://askubuntu.com/questions/1207958/error-24-write-error-cannot-write-compressed-block
+
+# Virtual audio device
+
+~~~shell
+sudo modprobe snd-dummy
+~~~
+
+Creating a virtual audio device can be used to record audio whilst keeping speakers muted.
+
+References:
+- https://askubuntu.com/a/1223529/776650
+
+---
 
 [Ninite](https://ninite.com/)
 
