@@ -390,6 +390,19 @@ shasum -a 512 -c elasticsearch-6.4.0.deb.sha512 && sudo dpkg -i elasticsearch-6.
 | Open previous windows and tabs | yes |
 | Ask to save logins and password for websites | no |
 
+# Flatpak
+
+## Errors and Warnings
+
+**Warning: Wrong size for extra data ...**
+~~~
+sudo flatpak repair
+flatpak repair --user
+flatpak remove --unused
+flatpak update
+~~~
+https://www.reddit.com/r/pop_os/comments/s9zj32/beginner_question_wrong_size_for_extra_data_on/
+
 # GCC / G++
 
 [Reference](https://askubuntu.com/a/1149383/776650)
