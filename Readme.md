@@ -981,6 +981,17 @@ sudo adduser $USER vboxusers
 
 [Reference](https://superuser.com/a/957636)
 
+## Errors
+
+### NS_ERROR_FAILURE (0x80004005)
+
+~~~shell
+sudo apt install virtualbox-ext-pack
+~~~
+
+https://suay.site/?p=2873
+
+
 # Visual Studio Code
 
 [Download page](https://code.visualstudio.com/download)
