@@ -1,36 +1,9 @@
 ---
 
-- name: symlink config files
-  file:
-    src: "{{ dotfiles_home }}/{{ item.src }}"
-    dest: "{{ item.dest }}"
-    state: link
-  when: ('when' not in item or item.when)
-  with_items:
-    - src: data/git
-      dest: "{{ XDG_CONFIG_HOME }}/git"
-    - src: data/tmux
-      dest: "{{ XDG_CONFIG_HOME }}/tmux"
-    - src: data/vim
-      dest: "{{ XDG_CONFIG_HOME }}/vim"
-    - src: data/nvim
-      dest: "{{ XDG_CONFIG_HOME }}/nvim"
-   #- src: data/vscode/keybindings.json
-   #  dest: "{{ XDG_CONFIG_HOME }}/Code/User/keybindings.json"
-   #- src: data/vscode/settings.json
-   #  dest: "{{ XDG_CONFIG_HOME }}/Code/User/settings.json"
-    - src: data/starship/starship.toml
-      dest: "{{ XDG_CONFIG_HOME }}/starship.toml"
-    - src: data/bash/bashrc
-      dest: "~/.bashrc"
-    - src: data/shell/profile
-      dest: "~/.profile"
-    - src: data/xinput/scripts/configure_pointer.sh
-      dest: "~/.local/bin/xinput-configure-pointer"
-    - src: data/xinput/scripts/configure_pointer.desktop
-      dest: "~/.local/share/applications/xinput-configure-pointer.desktop"
-    - src: data/xinput/scripts/toggle.sh
-      dest: "~/.local/bin/xinput-toggle"
+- include_tasks:
+    file: tasks/symlinks.yml
+
+- fail: {msg:""}
 
 - name: install packages
   package:

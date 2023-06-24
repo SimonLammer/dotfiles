@@ -1,0 +1,47 @@
+---
+
+- name: stat sources
+  stat:
+    path: "{{ item.src }}"
+    follow: no
+    get_attributes: no
+    get_checksum: no
+    get_mime: no
+  register: stat_src
+  loop: "{{ config_file_symlinks }}"
+
+- name: create parent directories of symlinks
+  file:
+    path: "{{ item.item.dest | dirname }}"
+    state: directory
+  when: not item.stat.isdir
+  loop: "{{ stat_src.results }}"
+  loop_control:
+    label: "{{ item.item }}"
+
+- name: stat destinations
+  stat:
+    path: "{{ item.dest }}"
+    follow: no
+    get_attributes: no
+    get_checksum: no
+    get_mime: no
+  register: stat_src
+  loop: "{{ config_file_symlinks }}"
+
+- name: backup preexisting configurations
+  shell: "mv \"{{ item.stat.path }}\" \"{{ item.stat.path }}.old-{{ ansible_date_time.iso8601_basic_short }}\""
+  when: item.stat.isreg
+  register: backups
+  loop: "{{ stat_src.results }}"
+  loop_control:
+    label: "{{ item.stat.path }}"
+
+- name: symlink config files
+  file:
+    src: "{{ dotfiles_home }}/{{ item.src }}"
+    dest: "{{ item.dest }}"
+    state: link
+  when: ('when' not in item or item.when)
+  with_items: "{{ config_file_symlinks }}"
+

@@ -2,5 +2,4 @@
 - name: dotfiles - test
   hosts: local
   tasks:
-  - import_tasks: tasks/load_variables.yml
-  - import_tasks: data/virtualbox/tasks.yml
+  - import_tasks: foo.yml

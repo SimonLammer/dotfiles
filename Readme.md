@@ -12,6 +12,9 @@ Contents:
 
 # Usage
 
+TODO:
+`dnf install -y make`
+
 1. Install git and clone repo:
 
     ~~~
@@ -28,7 +31,7 @@ Contents:
 
     ~~~
     ansible-galaxy install -r requirements.yml
-    ansible-playbook setup.yml -e 'ansible_python_interpreter=/usr/bin/python3' -u slammer
+    ansible-playbook setup.yml -e 'ansible_python_interpreter=/usr/bin/python3' -u `whoami`
     ~~~
 
 3. Remaining setup
