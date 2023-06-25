@@ -2,4 +2,5 @@
 - name: dotfiles - test
   hosts: local
   tasks:
-  - import_tasks: foo.yml
+    - debug: {msg: "{{ ansible_distribution }}"}
+

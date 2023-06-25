@@ -49,29 +49,36 @@ programs:
   - gimp
   - htop
   - inkscape
- #- neovim
  #- openjdk-8-doc
  #- openjdk-8-jdk
  #- openjdk-11-doc
  #- openjdk-11-jdk
  #- playonlinux
+  - neovim:
+    - Fedora
   - python3
- #- qbittorrent
+  - qbittorrent
   - ranger
   - screenfetch
-  - silversearcher-ag
+  - silversearcher-ag:
+    - Linux Mint
   - sqlitebrowser
-  - ssh
+  - ssh:
+    - Linux Mint
  #- steam
  #- texlive-full
-  - tmux
+  - the_silver_searcher:
+    - Fedora
+  - tmux:
+    - Fedora
  #- vim
   - vlc
   - winetricks
   - xclip
   custom: #[]
   - docker
-  - neovim
+  - neovim:
+    - Linux Mint
   - starship
   - python-additions
   - tmux
@@ -81,6 +88,7 @@ programs:
  #- zsh
 
 
+# TODO: move below stuff to gnome-specific variable file
 gnome_extensions_j2:
 - id: 15
 - id: 1160

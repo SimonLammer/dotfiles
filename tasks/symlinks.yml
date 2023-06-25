@@ -26,16 +26,16 @@
     get_attributes: no
     get_checksum: no
     get_mime: no
-  register: stat_src
+  register: stat_dest
   loop: "{{ config_file_symlinks }}"
 
 - name: backup preexisting configurations
   shell: "mv \"{{ item.stat.path }}\" \"{{ item.stat.path }}.old-{{ ansible_date_time.iso8601_basic_short }}\""
-  when: item.stat.isreg
+  when: item.stat.exists and item.stat.isreg
   register: backups
-  loop: "{{ stat_src.results }}"
+  loop: "{{ stat_dest.results }}"
   loop_control:
-    label: "{{ item.stat.path }}"
+    label: "{{ item.invocation.module_args.path }}"
 
 - name: symlink config files
   file:
