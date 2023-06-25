@@ -12,4 +12,6 @@
   template:
     src: '{{ item.path }}'
     dest: '{{ item.path | splitext | first }}'
-  with_items: '{{ template_files.files }}'
+  loop: '{{ template_files.files }}'
+  loop_control:
+    label: '{{ item.path }}'

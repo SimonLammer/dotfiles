@@ -77,9 +77,7 @@ if-shell -b '[ "$(echo "$TMUX_VERSION < 2.1" | bc)" = 1 ]' "\
 
 if-shell -b '[ "$(echo "$TMUX_VERSION >= 2.9" | bc)" = 1 ]' "\
     set -g window-status-current-style\
-        bold,\
-        bg=default,\
-        fg=colour208;\
+        bold,bg=default,fg=colour208;\
 "
 
 #  ____  _             _           
