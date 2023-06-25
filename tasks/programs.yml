@@ -1,63 +1,61 @@
 ---
 
-- name: symlink config files
-  file:
-    src: "{{ dotfiles_home }}/{{ item.src }}"
-    dest: "{{ item.dest }}"
-    state: link
-  when: ('when' not in item or item.when)
-  with_items:
-    - src: data/git
-      dest: "{{ XDG_CONFIG_HOME }}/git"
-    - src: data/tmux
-      dest: "{{ XDG_CONFIG_HOME }}/tmux"
-    - src: data/vim
-      dest: "{{ XDG_CONFIG_HOME }}/vim"
-    - src: data/nvim
-      dest: "{{ XDG_CONFIG_HOME }}/nvim"
-   #- src: data/vscode/keybindings.json
-   #  dest: "{{ XDG_CONFIG_HOME }}/Code/User/keybindings.json"
-   #- src: data/vscode/settings.json
-   #  dest: "{{ XDG_CONFIG_HOME }}/Code/User/settings.json"
-    - src: data/starship/starship.toml
-      dest: "{{ XDG_CONFIG_HOME }}/starship.toml"
-    - src: data/bash/bashrc
-      dest: "~/.bashrc"
-    - src: data/shell/profile
-      dest: "~/.profile"
-    - src: data/xinput/scripts/configure_pointer.sh
-      dest: "~/.local/bin/xinput-configure-pointer"
-    - src: data/xinput/scripts/configure_pointer.desktop
-      dest: "~/.local/share/applications/xinput-configure-pointer.desktop"
-    - src: data/xinput/scripts/toggle.sh
-      dest: "~/.local/bin/xinput-toggle"
+- include_tasks:
+    file: tasks/symlinks.yml
+
+- name: initialize programs_packages_filtered
+  set_fact:
+    programs_packages_filtered: []
+
+- name: populate programs_packages_filtered
+  set_fact:
+    programs_packages_filtered: "{{ programs_packages_filtered + [item if item is string else (item.keys() | first)] }}"
+  when: item is string or ansible_distribution in (item.values() | flatten)
+  loop: "{{ programs.packages }}"
 
 - name: install packages
   package:
-    name: "{{ programs.packages }}"
+    name: "{{ programs_packages_filtered }}"
     state: present
   become: yes
 
 - name: find post-package hooks
   stat:
     path: "tasks/programs/post-{{ item }}.yml"
-  with_items: "{{ programs.packages }}"
+    get_attributes: no
+    get_checksum: no
+    get_mime: no
+  with_items: "{{ programs_packages_filtered }}"
   register: _program_stat
 
 - name: run post-package hooks
   include_tasks: "tasks/programs/post-{{ item.item }}.yml"
   when: item.stat.exists
-  with_items: "{{ _program_stat.results }}"
+  loop: "{{ _program_stat.results }}"
+  loop_control:
+    label: "{{ item.item }}"
+
+
+- name: initialize programs_custom_filtered
+  set_fact:
+    programs_custom_filtered: []
+
+- name: populate programs_custom_filtered
+  set_fact:
+    programs_custom_filtered: "{{ programs_custom_filtered + [item if item is string else (item.keys() | first)] }}"
+  when: item is string or ansible_distribution in (item.values() | flatten)
+  loop: "{{ programs.custom }}"
 
 - name: install custom programs
   include_tasks:
     file: "tasks/programs/{{ program }}.yml"
-  with_items: "{{ programs.custom }}"
-  when: programs.custom
+  with_items: "{{ programs_custom_filtered }}"
+  when: program not in programs_packages_filtered
   loop_control:
     loop_var: program
 
-- file:
+- name: "create {{ services_home }}"
+  file:
     path: '{{ services_home }}'
     state: directory
     mode: '755'

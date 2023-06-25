@@ -12,11 +12,20 @@ Contents:
 
 # Usage
 
+
 1. Install git and clone repo:
 
-    ~~~
-    sudo apt install -y git && git clone git@github.com:SimonLammer/dotfiles.git ~/.dotfiles
-    ~~~
+    - Debian:
+
+        ~~~
+        sudo apt install -y git && git clone git@github.com:SimonLammer/dotfiles.git ~/.dotfiles
+        ~~~
+
+    - Fedora:
+
+        ~~~
+        sudo dnf update -y && sudo dnf install -y make https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+        ~~~
 
 2. Perform ansible magic:
 
@@ -28,7 +37,7 @@ Contents:
 
     ~~~
     ansible-galaxy install -r requirements.yml
-    ansible-playbook setup.yml -e 'ansible_python_interpreter=/usr/bin/python3' -u slammer
+    ansible-playbook setup.yml -e 'ansible_python_interpreter=/usr/bin/python3' -u `whoami`
     ~~~
 
 3. Remaining setup

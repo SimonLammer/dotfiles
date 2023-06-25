@@ -20,6 +20,7 @@ environment_variables:
   ICEAUTHORITY: "${XDG_CACHE_HOME:-{{XDG_CACHE_HOME_DEFAULT}}}/ICEauthority" # otherwise ~/.ICEauthority
   INPUTRC: "${XDG_CONFIG_HOME:-{{XDG_CONFIG_HOME_DEFAULT}}}/inputrc" # otherwise ~/.inputrc
   LC_TIME: en_CA.utf8
+ #LC_NUMERIC: en_CA.utf8
   LESSHISTFILE: "${XDG_CACHE_HOME:-{{XDG_CACHE_HOME_DEFAULT}}}/less_history" # otherwise ~/.lesshst
   NPM_CONFIG_USERCONFIG: "${XDG_CONFIG_HOME:-{{XDG_CONFIG_HOME_DEFAULT}}}/npm/config" # otherwise ~/.npmconfig # https://github.com/npm/npm/issues/6675#issuecomment-251049832
   NPM_CONFIG_CACHE: "${XDG_CACHE_HOME:-{{XDG_CACHE_HOME_DEFAULT}}}/npm" # https://github.com/npm/npm/issues/6675#issuecomment-251049832
@@ -48,29 +49,36 @@ programs:
   - gimp
   - htop
   - inkscape
- #- neovim
  #- openjdk-8-doc
  #- openjdk-8-jdk
-  - openjdk-11-doc
-  - openjdk-11-jdk
+ #- openjdk-11-doc
+ #- openjdk-11-jdk
  #- playonlinux
+  - neovim:
+    - Fedora
   - python3
- #- qbittorrent
+  - qbittorrent
   - ranger
   - screenfetch
-  - silversearcher-ag
+  - silversearcher-ag:
+    - Linux Mint
   - sqlitebrowser
-  - ssh
-  - steam
-  - texlive-full
-  - tmux
+  - ssh:
+    - Linux Mint
+ #- steam
+ #- texlive-full
+  - the_silver_searcher:
+    - Fedora
+  - tmux:
+    - Fedora
  #- vim
   - vlc
   - winetricks
   - xclip
   custom: #[]
   - docker
-  - neovim
+  - neovim:
+    - Linux Mint
   - starship
   - python-additions
   - tmux
@@ -80,6 +88,7 @@ programs:
  #- zsh
 
 
+# TODO: move below stuff to gnome-specific variable file
 gnome_extensions_j2:
 - id: 15
 - id: 1160
