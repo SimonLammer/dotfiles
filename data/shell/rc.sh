@@ -66,7 +66,7 @@ fi
 
 which autojump >/dev/null 2>&1
 if [ $? -eq 0 ]; then
-    . /usr/share/autojump/autojump.sh
+    . $DOTFILES_HOME/data/autojump/source_scripts/autojump.sh
 fi
 
 if [ -f "$DOTFILES_HOME/data/shell/rc-local.sh" ] ; then

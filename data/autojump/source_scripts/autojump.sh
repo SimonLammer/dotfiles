@@ -23,4 +23,9 @@ elif [ -s ~/.autojump/share/autojump/autojump.${shell} ]; then
 # check global install
 elif [ -s /usr/local/share/autojump/autojump.${shell} ]; then
     source /usr/local/share/autojump/autojump.${shell}
+
+# check repo-imported scripts
+elif [ -s $DOTFILES_HOME/data/autojump/source_scripts/autojump.${shell} ]; then
+    source $DOTFILES_HOME/data/autojump/source_scripts/autojump.${shell}
 fi
+
