@@ -1,12 +1,28 @@
-ANSIBLE = ANSIBLE_COW_SELECTION=random ANSIBLE_FORCE_COLOR=true ansible-playbook
-#ANSIBLE = ANSIBLE_NOCOWS=true ANSIBLE_FORCE_COLOR=true ansible-playbook
+USER := $(shell whoami)
+ANSIBLE_PLAYBOOK_ENV = ANSIBLE_COW_SELECTION=random ANSIBLE_FORCE_COLOR=true
+#ANSIBLE_PLAYBOOK_ENV = ANSIBLE_NOCOWS=true ANSIBLE_FORCE_COLOR=true
 
-templates:
-	${ANSIBLE} templates.yml -u slammer
 
-templates-check:
-	#ANSIBLE_NOCOWS=true ansible-playbook templates.yml -u slammer --check | grep -i play\ recap -A1 | tail -n 1 | sed -E 's/.*changed=([0-9]+).*/\1/'
-	changes=`ANSIBLE_NOCOWS=true ansible-playbook templates.yml -u slammer --check | grep -i play\ recap -A1 | tail -n 1 | sed -E 's/.*changed=([0-9]+).*/\1/'`; \
+ifndef XDG_CONFIG_HOME
+	XDG_CONFIG_HOME := $(HOME)/.config
+endif
+ifndef XDG_CACHE_HOME
+	XDG_CACHE_HOME := $(HOME)/.cache
+endif
+
+# https://wiki.archlinux.org/title/XDG_Base_Directory
+ANSIBLE_XDG_ENV := ANSIBLE_HOME="$(XDG_CONFIG_HOME)/ansible" ANSIBLE_CONFIG="$(XDG_CONFIG_HOME)/ansible.cfg" ANSIBLE_GALAXY_CACHE_DIR="$(XDG_CACHE_HOME)/ansible/galaxy_cache"
+#ANSIBLE_LOCAL_TEMP="$(XDG_CACHE_HOME)/ansible/tmp"
+ANSIBLE-PLAYBOOK = env $(ANSIBLE_XDG_ENV) $(ANSIBLE_PLAYBOOK_ENV) ansible-playbook
+ANSIBLE-GALAXY = env $(ANSIBLE_XDG_ENV) $(ANSIBLE_PLAYBOOK_ENV) ansible-galaxy
+
+
+templates: install-ansible
+	$(ANSIBLE-PLAYBOOK) templates.yml -u ${USER}
+
+templates-check: install-ansible
+	#ANSIBLE_NOCOWS=true ansible-playbook templates.yml -u ${USER} --check | grep -i play\ recap -A1 | tail -n 1 | sed -E 's/.*changed=([0-9]+).*/\1/'
+	changes=`ANSIBLE_NOCOWS=true ansible-playbook templates.yml -u ${USER} --check | grep -i play\ recap -A1 | tail -n 1 | sed -E 's/.*changed=([0-9]+).*/\1/'`; \
 	if [ "$$changes" -eq "0" ]; then \
 		echo All templates rendered correctly. ; \
 	else \
@@ -17,16 +33,29 @@ templates-check:
 watch-templates:
 	ls */**/*.j2 | entr make templates
 
-setup:
-	if ! command -v ansible-galaxy -h &>/dev/null; then\
-		sudo apt-get -y install ansible;\
-	fi
-	ansible-galaxy collection install -r requirements/setup.yml
-	ansible-galaxy install -r requirements/setup.yml
-	${ANSIBLE} setup.yml -u slammer -K 2>&1 | tee log
+setup: install-ansible
+	$(ANSIBLE-GALAXY) collection install -r requirements/setup.yml
+	$(ANSIBLE-GALAXY) install -r requirements/setup.yml
+	$(ANSIBLE-PLAYBOOK) setup.yml -u ${USER} --ask-become-pass 2>&1 | tee log
 
-xfce:
-	${ANSIBLE} xfce.yml -u slammer
+test: install-ansible
+	$(ANSIBLE-PLAYBOOK) test.yml -u ${USER}
+
+xfce: install-ansible
+	${ANSIBLE-PLAYBOOK} xfce.yml -u ${USER}
+
+install-ansible:
+	if [ -z "`command -v ansible`" ]; then \
+		if [ -x "`command -v apt-get`" ]; then \
+			sudo apt-get -y install ansible; \
+		elif [ -x "`command -v dnf`" ]; then \
+			sudo dnf install -y ansible; \
+		elif [ -x "`command -v zypper`" ]; then \
+			sudo zypper install -y ansible; \
+		else \
+			exit 1; \
+		fi \
+	fi
 
 
 _git-hook-pre_push:
