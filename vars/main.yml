@@ -39,9 +39,16 @@ environment_variables:
 programs:
   packages:
   - autojump
-  - cmatrix
+  - cmatrix:
+    - Linux Mint
   - cowsay
   - curl
+  - docker:
+    - openSUSE Tumbleweed
+  - docker-compose:
+    - openSUSE Tumbleweed
+  - docker-compose-switch:
+    - openSUSE Tumbleweed
   - entr
   - firefox
   - fzf
@@ -56,6 +63,7 @@ programs:
  #- playonlinux
   - neovim:
     - Fedora
+    - openSUSE Tumbleweed
   - python3
   - qbittorrent
   - ranger
@@ -69,20 +77,26 @@ programs:
  #- texlive-full
   - the_silver_searcher:
     - Fedora
+    - openSUSE Tumbleweed
   - tmux:
     - Fedora
+    - openSUSE Tumbleweed
  #- vim
   - vlc
   - winetricks
   - xclip
   custom: #[]
-  - docker
+  - docker:
+    - Linux Mint
+    - Fedora
   - neovim:
     - Linux Mint
   - starship
   - python-additions
   - tmux
-  - veracrypt
+  - veracrypt:
+    - Linux Mint
+    - Fedora
  #- virtualbox
  #- vscode
  #- zsh
