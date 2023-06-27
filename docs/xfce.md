@@ -1,6 +1,6 @@
 # XFCE setup
 
- WM Themes
+## WM Themes
 
 Stored in `/usr/share/themes`.
 ```
