@@ -85,6 +85,8 @@ programs:
   - vlc
   - winetricks
   - xclip
+  - xinput:
+    - openSUSE Tumbleweed
   custom: #[]
   - docker:
     - Linux Mint
