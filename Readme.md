@@ -853,6 +853,24 @@ mkdir ~/.steam/ubuntu12_32/steam-runtime
 sudo apt install subversion
 ~~~
 
+# Thunar
+
+## Custom Actions
+
+### Remove!
+
+| Name | value |
+|-----:|:------|
+| Name | Remove! |
+| Description | rm -rf that shit |
+| Submenu | |
+| Command | `zenity --question --title "Are you sure?" --text "rm -rf %F" && rm -rf %F` |
+| Icon | edit-delete |
+| File Pattern | * |
+| Range | * |
+| Appears if selection contains | Select all checkboxes |
+
+
 # Thunderbird
 
 ## Change date format
@@ -1221,6 +1239,10 @@ ecryptfs-recover-private path/to/.Private
 ## Installation
 
 Copy the font files to `/usr/share/fonts/<some-awesome-font>/*.otf`
+
+~~~shell
+sudo fc-cache -fv
+~~~
 
 ## [NerdFonts](https://www.nerdfonts.com/#home)
 
