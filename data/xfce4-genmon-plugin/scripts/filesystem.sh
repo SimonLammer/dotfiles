@@ -32,5 +32,5 @@ $coloredbar $util \
   191 191 191 \
   240 240 0 \
   255 15 15
-  echo "<tool>'$mountpoint' is $util% full\n$used / $total\n$available available</tool>"
+  echo -e "<tool>'$mountpoint' is $util% full\n$used / $total\n$available available</tool>"
 

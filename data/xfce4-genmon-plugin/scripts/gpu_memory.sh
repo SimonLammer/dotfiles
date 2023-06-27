@@ -16,5 +16,5 @@ $coloredbar $util \
   191 191 191 \
   240 240 0 \
   255 15 15
-echo "<tool>$util% GPU memory usage\n${used}MiB / ${total}MiB</tool>"
+echo -e "<tool>$util% GPU memory usage\n${used}MiB / ${total}MiB</tool>"
 
