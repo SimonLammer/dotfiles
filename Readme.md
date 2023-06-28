@@ -55,9 +55,16 @@ Contents:
 > Consensus is a search engine that uses AI to extract and
 distill findings directly from scientific research
 
+## [browse.feddit.de](https://browse.feddit.de/)
+
+Find Lemmy communities across instances.
+
 ## [detexify.kirelabs.org](http://detexify.kirelabs.org/classify.html)
 
 Find LaTeX symbols by drawing them.
+
+## [Ninite](https://ninite.com/)
+> Install and Update All Your Programs at Once [on Windows]
 
 ## [patorjk.com/software/taag](http://patorjk.com/software/taag/)
 
@@ -1581,9 +1588,6 @@ Creating a virtual audio device can be used to record audio whilst keeping speak
 References:
 - https://askubuntu.com/a/1223529/776650
 
----
-
-[Ninite](https://ninite.com/)
 
 ---
 
