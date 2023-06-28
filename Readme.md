@@ -1299,6 +1299,20 @@ lvconvert --merge /dev/vg/snap
 
 [Reference](https://www.theurbanpenguin.com/maning-lvm-snapshots/)
 
+# Terminal
+
+Install color schemes from `https://gogh-co.github.io/Gogh/` by running `bash -c  "$(wget -qO- https://git.io/vQgMr)" `.
+Test: `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/gawin/bash-colors-256/master/colors)"`
+
+Nice color schemes:
+- Argonaut
+- Breath Darker
+- Dissonance
+- Gruvbox-Dark
+- Pro
+- Sundried
+- Symphonic
+
 # Grub
 
 [Reference](http://tipsonubuntu.com/2018/03/11/install-grub-customizer-ubuntu-18-04-lts/)
