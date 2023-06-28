@@ -23,6 +23,12 @@ if [ -d "{{ dir }}" ] ; then
 fi
 {% endfor %}
 
+{% for dir in shell_xdg_data_dirs_additions %}
+if [ -d "{{ dir }}" ] ; then
+    XDG_DATA_DIRS="{{ dir }}:$XDG_DATA_DIRS"
+fi
+{% endfor %}
+
 which pyenv >/dev/null 2>&1
 if [ $? -eq 0 ]; then
     eval "$(pyenv init -)"

@@ -27,6 +27,10 @@ shell_path_additions:
 - /opt/borg
 - /opt/flutter/bin
 
+shell_xdg_data_dirs_additions:
+- /var/lib/flatpak/exports/share
+- $HOME/.local/share/flatpak/exports/share
+
 shell_sources:
 - "$DOTFILES_HOME/data/shell/rc-local.sh"
 

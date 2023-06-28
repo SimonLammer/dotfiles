@@ -59,6 +59,13 @@ if [ -d "/opt/flutter/bin" ] ; then
     PATH="/opt/flutter/bin:$PATH"
 fi
 
+if [ -d "/var/lib/flatpak/exports/share" ] ; then
+    XDG_DATA_DIRS="/var/lib/flatpak/exports/share:$XDG_DATA_DIRS"
+fi
+if [ -d "$HOME/.local/share/flatpak/exports/share" ] ; then
+    XDG_DATA_DIRS="$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIRS"
+fi
+
 which pyenv >/dev/null 2>&1
 if [ $? -eq 0 ]; then
     eval "$(pyenv init -)"
