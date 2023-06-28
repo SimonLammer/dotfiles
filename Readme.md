@@ -1025,6 +1025,14 @@ sudo apt install virtualbox-ext-pack
 
 https://suay.site/?p=2873
 
+### Shared Folder: Permissions denied
+
+~~~shell
+sudo usermod --append --groups vboxsf $USER
+~~~
+
+https://stackoverflow.com/questions/26740113/virtualbox-shared-folder-permissions
+
 
 # Visual Studio Code
 
