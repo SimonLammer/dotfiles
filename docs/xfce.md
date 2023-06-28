@@ -151,3 +151,14 @@ sudo make install
 | xfwm4 | /general/button_layout | CHMO| |
 | xsettings | /Gtk/DecorationLayout | close,minimize,maximize,menu: |
 
+## Disable Hibernate/Suspend/... buttons in logout dialog
+
+~~~shell
+xfconf-query -c xfce4-session -np '/shutdown/ShowHibernate' -t 'bool' -s 'false'
+xfconf-query -c xfce4-session -np '/shutdown/ShowSuspend' -t 'bool' -s 'false'
+xfconf-query -c xfce4-session -np '/shutdown/ShowHybridSleep' -t 'bool' -s 'false'
+xfconf-query -c xfce4-session -np '/shutdown/ShowSwitchUser' -t 'bool' -s 'false'
+~~~
+
+References:
+- https://gist.github.com/wrzlbrmft/58bd36fa0afa30715459
