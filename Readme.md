@@ -860,6 +860,22 @@ mkdir ~/.steam/ubuntu12_32/steam-runtime
 sudo apt install subversion
 ~~~
 
+# Tectonic
+
+https://tectonic-typesetting.github.io/en-US/index.html
+
+## Errors
+
+### libssl.so.1.1
+
+**Error**: `tectonic: error while loading shared libraries: libssl.so.1.1: cannot open shared object file: No such file or directory`
+**Solution**: install libopenssl1_1
+
+### File *.sty not found
+
+**Error**: `LaTeX Error: File \`annotate-equations.sty' not found.`
+**Solution**: 
+
 # Thunar
 
 ## Custom Actions
@@ -1009,10 +1025,13 @@ ln -s $(pwd)/VirtualBox\ VMs ~/.
 
 Add the user to the `vboxusers` group.
 
-~~~
+~~~shell
 sudo adduser $USER vboxusers
 ~~~
-
+or
+~~~shell
+sudo usermod -aG vboxusers $USER
+~~~
 [Reference](https://superuser.com/a/957636)
 
 ## Errors
