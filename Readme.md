@@ -834,6 +834,16 @@ type %userprofile%\.ssh\id_rsa.pub | clip
 - [Gitlab](https://gitlab.com/profile/keys)\
   https://docs.gitlab.com/ee/user/gitlab_com/#ssh-host-keys-fingerprints
 
+## Errors
+
+### Bad owner or permissions on /home/$USER/.ssh/config
+
+~~~shell
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/*
+~~~
+https://superuser.com/a/1729534
+
 # Steam
 
 ## Can't launch
