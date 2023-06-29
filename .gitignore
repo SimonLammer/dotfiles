@@ -1,5 +1,6 @@
 **/__pycache__
 log
+logs
 
 # Created by https://www.gitignore.io/api/vim,git,ansible,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=vim,git,ansible,visualstudiocode
