@@ -1052,6 +1052,10 @@ sudo usermod --append --groups vboxsf $USER
 
 https://stackoverflow.com/questions/26740113/virtualbox-shared-folder-permissions
 
+### VBoxGuestAdditions During certificate downloading: Unknown reason
+
+Download iso manually from https://download.virtualbox.org/virtualbox
+
 
 # Visual Studio Code
 
