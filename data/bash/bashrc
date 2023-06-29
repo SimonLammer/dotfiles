@@ -2,6 +2,15 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# Don't run this twice
+if [ ! -z "$DOTFILES_BASHRC" ]; then
+    # $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell "bash/bashrc would've been ran twice; aborting 2nd run."
+    return
+fi
+export DOTFILES_BASHRC=y
+
+# $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell bash/bashrc start
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -163,4 +172,6 @@ if [ -n "$TMUX" ]; then
     PS0+=`echo -en "$PROMPT_TIMESTAMP_POST"`
     PS0+=`echo -en "\[\x1b[1E\]"`
 fi
+
+# $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell bash/bashrc end
 

@@ -1,12 +1,13 @@
 # This will be sourced from `~/.profile` as well as shells rc files (e.g. `~/.bashrc`)
 
-{#
 # Don't run this twice
 if [ ! -z "$DOTFILES_SHELL_RC" ]; then
-    return
+  {% if not log_shell_startup %}# {% endif %}{{ dotfiles_home }}/data/scripts/dotfiles_log.sh shell "shell/rc.sh would've been ran twice; aborting 2nd run."
+  return
 fi
 export DOTFILES_SHELL_RC=y
-#}
+
+{% if not log_shell_startup %}# {% endif %}{{ dotfiles_home }}/data/scripts/dotfiles_log.sh shell shell/rc.sh start
 
 # See $DOTFILES_HOME/vars/main.yml
 {% for key, value in environment_variables.items() %}
@@ -29,25 +30,37 @@ if [ -d "{{ dir }}" ] ; then
 fi
 {% endfor %}
 
-which pyenv >/dev/null 2>&1
-if [ $? -eq 0 ]; then
-    eval "$(pyenv init -)"
-fi
+{% if not log_shell_startup %}# {% endif %}{{ dotfiles_home }}/data/scripts/dotfiles_log.sh shell shell/rc.sh update environment vars
 
 which autojump >/dev/null 2>&1
 if [ $? -eq 0 ]; then
     . $DOTFILES_HOME/data/autojump/source_scripts/autojump.sh
 fi
+{% if not log_shell_startup %}# {% endif %}{{ dotfiles_home }}/data/scripts/dotfiles_log.sh shell shell/rc.sh initialized autojump
 
 {% for source in shell_sources %}
 if [ -f "{{ source }}" ] ; then
     . "{{ source }}"
 fi
 {% endfor %}
+{% if not log_shell_startup %}# {% endif %}{{ dotfiles_home }}/data/scripts/dotfiles_log.sh shell shell/rc.sh sourced {{ shell_sources }}
 
-{% for command, script in shell_sources_lazy.items() %}
-if [ -f "{{script}}" ] ; then
-    alias {{command}}='unalias {{command}}; . {{script}}; {{command}}'
-fi
+# Lazily initialize some commands.
+# Complex construction because some initialization commands execute the command(alias) themselves.
+# For example, the following pyenv alias would recursively call itself - freezing the terminal:
+#   alias pyenv='eval "$(pyenv init -)" && unalias pyenv && pyenv'
+#
+{% for command, init_command in shell_lazy_commands.items() %}
+_init_{{command}} () {
+  {{init_command}} || return $?
+  if [ "`alias {{command}}`" = "alias {{command}}='_init_{{command}}'" ]; then
+    unalias {{command}}
+  fi
+  {{command}} "$@"
+}
+alias {{command}}=_init_{{command}}
 {% endfor %}
+{% if not log_shell_startup %}# {% endif %}{{ dotfiles_home }}/data/scripts/dotfiles_log.sh shell shell/rc.sh setup lazy initialization of commands {{ shell_lazy_commands.keys() }}
+
+{% if not log_shell_startup %}# {% endif %}{{ dotfiles_home }}/data/scripts/dotfiles_log.sh shell shell/rc.sh end
 

@@ -1,5 +1,13 @@
 # This will be sourced from `~/.profile` as well as shells rc files (e.g. `~/.bashrc`)
 
+# Don't run this twice
+if [ ! -z "$DOTFILES_SHELL_RC" ]; then
+  # $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell "shell/rc.sh would've been ran twice; aborting 2nd run."
+  return
+fi
+export DOTFILES_SHELL_RC=y
+
+# $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell shell/rc.sh start
 
 # See $DOTFILES_HOME/vars/main.yml
 export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
@@ -66,24 +74,49 @@ if [ -d "$HOME/.local/share/flatpak/exports/share" ] ; then
     XDG_DATA_DIRS="$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIRS"
 fi
 
-which pyenv >/dev/null 2>&1
-if [ $? -eq 0 ]; then
-    eval "$(pyenv init -)"
-fi
+# $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell shell/rc.sh update environment vars
 
 which autojump >/dev/null 2>&1
 if [ $? -eq 0 ]; then
     . $DOTFILES_HOME/data/autojump/source_scripts/autojump.sh
 fi
+# $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell shell/rc.sh initialized autojump
 
 if [ -f "$DOTFILES_HOME/data/shell/rc-local.sh" ] ; then
     . "$DOTFILES_HOME/data/shell/rc-local.sh"
 fi
+# $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell shell/rc.sh sourced ['$DOTFILES_HOME/data/shell/rc-local.sh']
 
-if [ -f "$NVM_DIR/nvm.sh" ] ; then
-    alias nvm='unalias nvm; . $NVM_DIR/nvm.sh; nvm'
-fi
-if [ -f "$CARGO_HOME/env" ] ; then
-    alias cargo='unalias cargo; . $CARGO_HOME/env; cargo'
-fi
+# Lazily initialize some commands.
+# Complex construction because some initialization commands execute the command(alias) themselves.
+# For example, the following pyenv alias would recursively call itself - freezing the terminal:
+#   alias pyenv='eval "$(pyenv init -)" && unalias pyenv && pyenv'
+#
+_init_nvm () {
+  . $NVM_DIR/nvm.sh || return $?
+  if [ "`alias nvm`" = "alias nvm='_init_nvm'" ]; then
+    unalias nvm
+  fi
+  nvm "$@"
+}
+alias nvm=_init_nvm
+_init_cargo () {
+  . $CARGO_HOME/env || return $?
+  if [ "`alias cargo`" = "alias cargo='_init_cargo'" ]; then
+    unalias cargo
+  fi
+  cargo "$@"
+}
+alias cargo=_init_cargo
+_init_pyenv () {
+  eval "$(command pyenv init -)" || return $?
+  if [ "`alias pyenv`" = "alias pyenv='_init_pyenv'" ]; then
+    unalias pyenv
+  fi
+  pyenv "$@"
+}
+alias pyenv=_init_pyenv
+# $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell shell/rc.sh setup lazy initialization of commands ['nvm', 'cargo', 'pyenv']
+
+# $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell shell/rc.sh end
 

@@ -3,7 +3,7 @@
 # Start tmux if it isn't running already
 # exit with code 1 if the tmux session has been exited (but not when the user detached from it)
 
-# $DOTFILES_HOME/data/scripts/dotfiles_log.sh shell tmux/start.sh start
+{% if not log_shell_startup %}# {% endif %}$DOTFILES_HOME/data/scripts/dotfiles_log.sh shell tmux/start.sh start
 
 which tmux >/dev/null 2>&1
 if [ $? -eq 0 ] && [ -z "$TMUX" ]; then
@@ -19,10 +19,10 @@ if [ $? -eq 0 ] && [ -z "$TMUX" ]; then
   if [ $start_tmux = true ]; then
     t=$(tmux -f "${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf" new)
     if [ "$t" = "[exited]" ]; then
-      # $DOTFILES_HOME/data/scripts/dotfiles_log.sh shell tmux/start.sh exiting shell because tmux exited normally
+      {% if not log_shell_startup %}# {% endif %}$DOTFILES_HOME/data/scripts/dotfiles_log.sh shell tmux/start.sh exiting shell because tmux exited normally
       exit 1
     fi
   fi
 fi
 
-# $DOTFILES_HOME/data/scripts/dotfiles_log.sh shell tmux/start.sh end
+{% if not log_shell_startup %}# {% endif %}$DOTFILES_HOME/data/scripts/dotfiles_log.sh shell tmux/start.sh end
