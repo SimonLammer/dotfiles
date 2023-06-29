@@ -39,10 +39,12 @@ environment_variables:
 programs:
   packages:
   - autojump
+  - borgbackup
   - cmatrix:
     - Linux Mint
   - cowsay
   - curl
+  - discord
   - docker:
     - openSUSE Tumbleweed
   - docker-compose:
@@ -51,6 +53,7 @@ programs:
     - openSUSE Tumbleweed
   - entr
   - firefox
+  - flatpak
   - fzf
   - gparted
   - gimp
