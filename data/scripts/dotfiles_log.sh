@@ -3,7 +3,7 @@
 # Arguments: <application/tag> <message>
 
 MAX_LINES=1000
-LOGS_DIR="$DOTFILES_HOME/logs"
+LOGS_DIR="${DOTFILES_HOME:-$HOME/.config/dotfiles}/logs"
 
 tag="$1"
 shift

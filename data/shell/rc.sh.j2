@@ -1,13 +1,14 @@
 # This will be sourced from `~/.profile` as well as shells rc files (e.g. `~/.bashrc`)
 
 # Don't run this twice
-if [ ! -z "$DOTFILES_SHELL_RC" ]; then
-  {% if not log_shell_startup %}# {% endif %}{{ dotfiles_home }}/data/scripts/dotfiles_log.sh shell "shell/rc.sh would've been ran twice; aborting 2nd run."
+shellrc_guard=DOTFILES_SHELLRC_$$
+if [ ! -z "`eval echo \\$$shellrc_guard`" ]; then
+    {% if not log_shell_startup %}# {% endif %}{{ dotfiles_home }}/data/scripts/dotfiles_log.sh shell "shell/rc.sh would've been ran twice; aborting 2nd run. [`pstree -s -p $$`]"
   return
 fi
-export DOTFILES_SHELL_RC=y
+export $shellrc_guard=y
 
-{% if not log_shell_startup %}# {% endif %}{{ dotfiles_home }}/data/scripts/dotfiles_log.sh shell shell/rc.sh start
+{% if not log_shell_startup %}# {% endif %}{{ dotfiles_home }}/data/scripts/dotfiles_log.sh shell "shell/rc.sh start [`pstree -s -p $$`]"
 
 # See $DOTFILES_HOME/vars/main.yml
 {% for key, value in environment_variables.items() %}

@@ -1,18 +1,19 @@
 # This will be sourced from `~/.profile` as well as shells rc files (e.g. `~/.bashrc`)
 
 # Don't run this twice
-if [ ! -z "$DOTFILES_SHELL_RC" ]; then
-  # $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell "shell/rc.sh would've been ran twice; aborting 2nd run."
+shellrc_guard=DOTFILES_SHELLRC_$$
+if [ ! -z "`eval echo \\$$shellrc_guard`" ]; then
+# $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell "shell/rc.sh would've been ran twice; aborting 2nd run. [`pstree -s -p $$`]"
   return
 fi
-export DOTFILES_SHELL_RC=y
+export $shellrc_guard=y
 
-# $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell shell/rc.sh start
+# $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell "shell/rc.sh start [`pstree -s -p $$`]"
 
 # See $DOTFILES_HOME/vars/main.yml
 export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
 export DOTFILES_HOME="$HOME/.config/dotfiles"
-export EDITOR="vim"
+export EDITOR="nvim"
 export HISTFILE="${XDG_CACHE_HOME:-$HOME/.cache}/bash_history"
 export ICEAUTHORITY="${XDG_CACHE_HOME:-$HOME/.cache}/ICEauthority"
 export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/inputrc"
