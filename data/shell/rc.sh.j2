@@ -1,4 +1,5 @@
-# This will be sourced from `~/.profile` as well as shells rc files (e.g. `~/.bashrc`)
+# This will be sourced from `~/.profile` as well as shells rc files (e.g. `~/.bashrc`).
+# shell/environment.sh is to be sourced beforehand.
 
 # Don't run this twice
 shellrc_guard=DOTFILES_SHELLRC_$$
@@ -10,28 +11,11 @@ export $shellrc_guard=y
 
 {% if not log_shell_startup %}# {% endif %}{{ dotfiles_home }}/data/scripts/dotfiles_log.sh shell "shell/rc.sh start [`pstree -s -p $$`]"
 
-# See $DOTFILES_HOME/vars/main.yml
-{% for key, value in environment_variables.items() %}
-export {{key}}="{{value}}"
-{% endfor %}
-
 {% for key, value in shell_aliases.items() %}
 alias {{key}}='{{value}}'
 {% endfor %}
 
-{% for dir in shell_path_additions %}
-if [ -d "{{ dir }}" ] ; then
-    PATH="{{ dir }}:$PATH"
-fi
-{% endfor %}
-
-{% for dir in shell_xdg_data_dirs_additions %}
-if [ -d "{{ dir }}" ] ; then
-    XDG_DATA_DIRS="{{ dir }}:$XDG_DATA_DIRS"
-fi
-{% endfor %}
-
-{% if not log_shell_startup %}# {% endif %}{{ dotfiles_home }}/data/scripts/dotfiles_log.sh shell shell/rc.sh update environment vars
+{% if not log_shell_startup %}# {% endif %}{{ dotfiles_home }}/data/scripts/dotfiles_log.sh shell shell/rc.sh update aliases
 
 which autojump >/dev/null 2>&1
 if [ $? -eq 0 ]; then

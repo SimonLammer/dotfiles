@@ -1,0 +1,33 @@
+# This will be sourced from `~/.profile` as well as shells rc files (e.g. `~/.bashrc`).
+
+# Don't run this twice
+shellenv_guard=DOTFILES_SHELLENV_$$
+if [ ! -z "`eval echo \\$$shellenv_guard`" ]; then
+    {% if not log_shell_startup %}# {% endif %}{{ dotfiles_home }}/data/scripts/dotfiles_log.sh shell "shell/environment.sh would've been ran twice; aborting 2nd run. [`pstree -s -p $$`]"
+  return
+fi
+export $shellenv_guard=y
+
+{% if not log_shell_startup %}# {% endif %}{{ dotfiles_home }}/data/scripts/dotfiles_log.sh shell "shell/environment.sh start [`pstree -s -p $$`]"
+
+# See $DOTFILES_HOME/vars/main.yml
+{% for key, value in environment_variables.items() %}
+export {{key}}="{{value}}"
+{% endfor %}
+
+{% for dir in shell_path_additions %}
+if [ -d "{{ dir }}" ] ; then
+    PATH="{{ dir }}:$PATH"
+fi
+{% endfor %}
+
+{% for dir in shell_xdg_data_dirs_additions %}
+if [ -d "{{ dir }}" ] ; then
+    XDG_DATA_DIRS="{{ dir }}:$XDG_DATA_DIRS"
+fi
+{% endfor %}
+
+{% if not log_shell_startup %}# {% endif %}{{ dotfiles_home }}/data/scripts/dotfiles_log.sh shell shell/environment.sh update environment vars
+
+{% if not log_shell_startup %}# {% endif %}{{ dotfiles_home }}/data/scripts/dotfiles_log.sh shell shell/environment.sh end
+
