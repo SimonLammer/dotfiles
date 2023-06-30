@@ -5,7 +5,7 @@
 # Don't run this twice
 bashrc_guard=DOTFILES_BASHRC_$$
 if [ ! -z "`eval echo \\$$bashrc_guard`" ]; then
-# $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell "bash/bashrc would've been ran twice; aborting 2nd run. [`pstree -s -p $$`]"
+    # $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell "bash/bashrc would've been ran twice; aborting 2nd run. [`pstree -s -p $$`]"
     return
 fi
 export $bashrc_guard=y

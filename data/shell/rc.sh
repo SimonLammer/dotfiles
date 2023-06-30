@@ -3,7 +3,7 @@
 # Don't run this twice
 shellrc_guard=DOTFILES_SHELLRC_$$
 if [ ! -z "`eval echo \\$$shellrc_guard`" ]; then
-# $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell "shell/rc.sh would've been ran twice; aborting 2nd run. [`pstree -s -p $$`]"
+    # $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell "shell/rc.sh would've been ran twice; aborting 2nd run. [`pstree -s -p $$`]"
   return
 fi
 export $shellrc_guard=y

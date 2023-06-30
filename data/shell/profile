@@ -8,7 +8,7 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-# /home/slammer/.config/dotfiles/data/scripts/dotfiles_log.sh shell "shell/profile start [`pstree -s -p $$`]"
+# $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell "shell/profile start [`pstree -s -p $$`]"
 
 source "$HOME/.config/dotfiles/data/shell/rc.sh"
 
