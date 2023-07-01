@@ -10,6 +10,7 @@
 
 # $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell "shell/profile start [`pstree -s -p $$`]"
 
+source "$HOME/.config/dotfiles/data/shell/environment.sh"
 source "$HOME/.config/dotfiles/data/shell/rc.sh"
 
 # if running bash

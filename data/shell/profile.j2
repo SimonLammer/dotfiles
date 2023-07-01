@@ -10,6 +10,7 @@
 
 {% if not log_shell_startup %}# {% endif %}{{ dotfiles_home }}/data/scripts/dotfiles_log.sh shell "shell/profile start [`pstree -s -p $$`]"
 
+source "{{dotfiles_home}}/data/shell/environment.sh"
 source "{{dotfiles_home}}/data/shell/rc.sh"
 
 # if running bash
