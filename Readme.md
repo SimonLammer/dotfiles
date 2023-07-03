@@ -385,11 +385,11 @@ shasum -a 512 -c elasticsearch-6.4.0.deb.sha512 && sudo dpkg -i elasticsearch-6.
 ## Add-ons
 
 - [Adblock Plus](https://addons.mozilla.org/en-US/firefox/addon/adblock-plus/)
-- [Bupass Paywalls Clean](https://addons.mozilla.org/en-US/firefox/addon/bypass-paywalls-clean/)
+- [Bupass Paywalls Clean](https://addons.mozilla.org/en-US/firefox/addon/bypass-paywalls-clean/) ([alternate installation](https://gitlab.com/magnolia1234/bypass-paywalls-firefox-clean/-/releases))
 - [Chessvision.ai](https://addons.mozilla.org/en-CA/firefox/addon/chessvision-ai-for-firefox/)
 - [Cookie-Editor](https://addons.mozilla.org/en-US/firefox/addon/cookie-editor/)
 - [Keepa.com - Amazon Price Tracker](https://addons.mozilla.org/en-GB/firefox/addon/keepa/)
-- [Netflix 1080p](https://addons.mozilla.org/en-US/firefox/addon/netflix-1080p-firefox/)
+- [Netflix 1080p](https://addons.mozilla.org/en-US/firefox/addon/netflix-1080p-firefox/) ([alternate installation](https://github.com/vladikoff/netflix-1080p-firefox/issues/63#issuecomment-1470154520))
 - [Recommendation Tweaker for YouTube](https://addons.mozilla.org/en-US/firefox/addon/recommendation-tweaker-yt/)
 - [Reverse Image Search](https://addons.mozilla.org/en-US/firefox/addon/image-reverse-search/)
 - [Save Page WE](https://addons.mozilla.org/en-CA/firefox/addon/save-page-we/)
