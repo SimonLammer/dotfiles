@@ -1609,15 +1609,6 @@ xinput map-to-output 23 eDP-1-1
 Enable: `sh -c "xinput list | grep 'SynPS/2 Synaptics TouchPad' | sed -E 's/.*id=([0-9]+).*/set-prop \1 \"Device Enabled\" 1/g' | xargs xinput"`
 Disable: `sh -c "xinput list | grep 'SynPS/2 Synaptics TouchPad' | sed -E 's/.*id=([0-9]+).*/set-prop \1 \"Device Enabled\" 0/g' | xargs xinput"`
 
-# Miscellanious errors
-
-## `apt upgrade`: `mkinitramfs failure cpio`, `cannot write compressed block`
-
-`/boot` has probably filled up, free some space with `sudo apt pure linux-image-5.0.0-36-generic` (adapted to the kernel you want to remove).
-
-References:
-- https://askubuntu.com/questions/1207958/error-24-write-error-cannot-write-compressed-block
-
 # Virtual audio device
 
 ~~~shell
@@ -1629,6 +1620,25 @@ Creating a virtual audio device can be used to record audio whilst keeping speak
 References:
 - https://askubuntu.com/a/1223529/776650
 
+# Miscellanious errors
+
+## `apt upgrade`: `mkinitramfs failure cpio`, `cannot write compressed block`
+
+`/boot` has probably filled up, free some space with `sudo apt pure linux-image-5.0.0-36-generic` (adapted to the kernel you want to remove).
+
+References:
+- https://askubuntu.com/questions/1207958/error-24-write-error-cannot-write-compressed-block
+
+## `build-essentials` for openSUSE
+
+~~~shell
+zypper info -t pattern devel_basis # show packages
+sudo zypper install -t pattern devel_basis # install packages
+~~~
+
+References:
+- https://stackoverflow.com/questions/37477290/build-essential-for-opensuse
+- https://randomgeekery.org/post/2014/06/what-is-build-essentials-for-opensuse/
 
 ---
 
