@@ -517,6 +517,16 @@ sudo apt-get install -y inkscape
 sudo apt install -y openjdk-8-jdk openjdk-8-doc
 ~~~
 
+# KeePassXC
+
+> Let KeePassXC safely store your passwords and auto-fill them into your favorite apps, so you can forget all about them.
+Password manager
+
+~~~shell
+flatpak install org.keepassxc.KeePassXC
+~~~
+https://keepassxc.org/download/#linux
+
 # Latex
 
 [Reference](https://milq.github.io/install-latex-ubuntu-debian/)
