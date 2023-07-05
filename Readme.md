@@ -74,6 +74,10 @@ ASCII art fonts in this repo were created using:
 - http://patorjk.com/software/taag/#p=display&f=Epic&t=github.com%2FSimonLammer%2Fdotfiles
 - http://patorjk.com/software/taag/#p=display&f=Ivrit&t=github.com%2FSimonLammer%2Fdotfiles
 
+## [webhook.site](https://webhook.site)
+
+> Webhook.site lets you easily inspect, test and automate any incoming HTTP request or e-mail
+
 ---
 
 # ag [The Silver Searcher](https://github.com/ggreer/the_silver_searcher)
