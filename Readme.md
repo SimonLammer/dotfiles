@@ -722,6 +722,16 @@ Or: `pipenv lock --clear && pipenv install`
 References:
 - https://stackoverflow.com/a/56440091/2808520
 
+## pyenv
+
+### openSUSE
+
+~~~shell
+sudo zypper install gcc automake bzip2 libbz2-devel xz xz-devel openssl-devel ncurses-devel readline-devel zlib-devel tk-devel libffi-devel sqlite3-devel
+~~~
+References:
+- https://github.com/pyenv/pyenv/issues/1535
+
 # qpaeq / pulseaudio-equalizer
 
 ~~~shell
