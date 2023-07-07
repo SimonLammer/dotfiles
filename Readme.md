@@ -1649,6 +1649,58 @@ Creating a virtual audio device can be used to record audio whilst keeping speak
 References:
 - https://askubuntu.com/a/1223529/776650
 
+# Virtual Private Network (VPN)
+
+## OpenVPN
+
+Connect with:
+~~~shell
+openvpn --config myconfig.ovpn
+~~~
+
+### .ovpn Configuration
+
+#### Credentials
+
+Create a `credentials.pass` file alongside the `*.ovpn`:
+~~~
+username
+password
+~~~
+
+Add the following line to the `*.ovpn`:
+~~~
+auth-user-pass credentials.pass
+auth-nocache
+~~~
+
+References:
+- https://forums.openvpn.net/viewtopic.php?t=11342#p35155
+- https://unix.stackexchange.com/questions/307503/how-to-use-auth-nocache-with-correct-tun-tap-in-openvpn
+
+### openSUSE
+
+~~~shell
+sudo zypper in openvpn NetworkManager-openvpn
+~~~
+~~~shell
+sudo nmcli connection import type openvpn file MyVPNConfiguration.ovpn
+~~~
+
+References:
+- https://forums.opensuse.org/t/networkmanager-openvpn/134465/6
+- https://software.opensuse.org/package/NetworkManager-openvpn
+
+## WireGuard
+
+### openSUSE
+
+- https://www.wireguard.com/install/
+- https://techviewleo.com/install-configure-wireguard-vpn-on-opensuse/?expand_article=1
+- https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/issues/621
+- ? https://build.opensuse.org/package/show/network:vpn:wireguard/NetworkManager-wireguard
+- ? https://software.opensuse.org//download.html?project=network%3Avpn%3Awireguard&package=NetworkManager-wireguard
+
 # Miscellanious errors
 
 ## `apt upgrade`: `mkinitramfs failure cpio`, `cannot write compressed block`
