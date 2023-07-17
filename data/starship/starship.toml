@@ -1,5 +1,6 @@
 add_newline = false
 format = "${custom.directory} $all"
+command_timeout = 900
 
 [character]
 disabled = true
