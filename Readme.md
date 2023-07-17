@@ -715,10 +715,13 @@ References:
 
 [Download page](https://www.python.org/getit/)
 
-[Reference](https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-local-programming-environment-on-ubuntu-16-04)
 ~~~shell
 sudo apt install -y python3-pip build-essential libssl-dev libffi-dev python-dev
 ~~~
+
+References:
+- https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-local-programming-environment-on-ubuntu-16-04
+- https://stackoverflow.com/a/74314165/2808520
 
 ## pipenv
 
