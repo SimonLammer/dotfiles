@@ -529,11 +529,25 @@ https://keepassxc.org/download/#linux
 
 # Latex
 
-[Reference](https://milq.github.io/install-latex-ubuntu-debian/)
+## Install
 
+### Debian
 ```
 sudo apt-get install texlive-full
 ```
+
+References:
+- https://milq.github.io/install-latex-ubuntu-debian/
+
+### OpenSUSE
+```
+sudo zypper install texlive-latexmk-bin texlive-scheme-full texlive-collection-latex
+sudo zypper addlock texlive-*-doc
+```
+
+References:
+- https://forums.opensuse.org/t/opensuse-equivalent-of-texlive-full/110679/4
+- https://www.reddit.com/r/openSUSE/comments/if3zgs/that_insane_texlive_install_need_these_much_pkgs/
 
 # Lutris
 
