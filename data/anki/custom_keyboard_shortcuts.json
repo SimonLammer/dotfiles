@@ -54,7 +54,7 @@
         "reviewer choice 2": "8",
         "reviewer choice 3": "9",
         "reviewer choice 4": "0",
-        "reviewer edit current": "i",
+        "reviewer edit current": "Ctrl+e",
         "reviewer mark card": "o",
         "reviewer replay audio 1": "u",
         "reviewer suspend card": "p",
