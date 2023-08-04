@@ -77,4 +77,3 @@ nnoremap <leader>s :ToggleWorkspace<CR>
 
 " close-buffers
 nnoremap <silent> Q :Bdelete menu<CR>
-

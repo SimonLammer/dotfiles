@@ -22,4 +22,3 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 # $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell shell/profile end
-

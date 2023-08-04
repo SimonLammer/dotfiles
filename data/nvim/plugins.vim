@@ -15,4 +15,3 @@
 "                |___/             
 
 " Plugins in addition to ../vim/shared_with_nvim-plugins.vim
-

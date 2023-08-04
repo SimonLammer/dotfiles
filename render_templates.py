@@ -20,6 +20,7 @@ LOGGER.setLevel(level=os.getenv('LOGLEVEL', LOGLEVEL_DEFAULT).upper())
 
 # TODO:
 # - Cache file hashsums / modification timestamps & don't process unless changed
+# - Backup old template output before rendering
 
 def main(directory: str) -> None:
   LOGGER.info(f"Starting template renderer for directory {directory}")
@@ -31,39 +32,37 @@ def main(directory: str) -> None:
     ('data', 'vars.yml'),
   ):
     LOGGER.info(f"Loading simple variables in '{folder}'")
-
-    files = (
+    files = [
       f
       for pattern in (
         f'{folder}/{variable_file_pattern}',
         f'{folder}/**/{variable_file_pattern}',
       )
       for f in glob(pattern) if not os.path.isfile(f"{f}{TEMPLATE_EXTENSION}")
-    )
+    ]
     if files:
       variables = merge_dicts(
         variables,
         load_variables(files),
       )
 
-    LOGGER.info(f"Rendering templated variables in '{folder}'")
-    files = (
+    files = [
       f
       for pattern in (
         f'{folder}/{variable_file_pattern}{TEMPLATE_EXTENSION}',
         f'{folder}/**/{variable_file_pattern}{TEMPLATE_EXTENSION}',
       )
       for f in glob(pattern)
-    )
+    ]
     if files:
+      LOGGER.info(f"Rendering templated variables in '{folder}'")
       render_templates(environment, files, variables)
       LOGGER.info(f"Loading templated variables in '{folder}'")
       variables = merge_dicts(
         variables,
-        load_variables(f[:-len(TEMPLATE_EXTENSION)] for f in files),
+        load_variables([f[:-len(TEMPLATE_EXTENSION)] for f in files]),
       )
 
-  exit(1)
   LOGGER.info(f"Rendering templates")
   files = (f for f in glob(f'data/**/*{TEMPLATE_EXTENSION}') if not f.endswith(f'yml{TEMPLATE_EXTENSION}'))
   if files:
@@ -71,7 +70,7 @@ def main(directory: str) -> None:
 
 def create_template_environment(directory: str) -> Environment:
   return Environment(
-    #autoescape=False,
+    autoescape=False,
     extensions=[AnsibleCoreFiltersExtension],
     loader=FileSystemLoader(directory),
     trim_blocks=True,
@@ -108,6 +107,7 @@ def render_templates(environment: Environment, files: list[str], variables: dict
     files = list(files)
   LOGGER.info(f"Rendering templates {files}")
   for f in files:
+    LOGGER.debug(f"Rendering template '{f}'")
     environment \
       .get_template(f) \
       .stream(variables) \
