@@ -11,6 +11,7 @@ xfconf_settings:
   value: {{ data | to_json }}
   type: {{ ({
       "AnsibleUnicode": "string",
+      "str": "string",
     }[data | type_debug]) | default(data|type_debug) }}
 {%     endif %}
 {%   endfor %}
