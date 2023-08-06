@@ -1,5 +1,25 @@
 #!/bin/python3
 
+"""
+Renders jinja2 templates in the context of variables loaded from yaml files.
+It follows these steps:
+01. Load variable files <directory>/vars/*.yml
+02. Load variable files <directory>/vars/**/*.yml
+03. Render templated variable files <directory>/vars/*.yml.j2
+04. Render templated variable files <directory>/vars/**/*.yml.j2
+05. Load just rendered variable files
+06. Load variable files <directory>/data/vars.yml
+07. Load variable files <directory>/data/**/vars.yml
+08. Render templated variable files <directory>/data/vars.yml.j2
+09. Render templated variable files <directory>/data/**/vars.yml.j2
+10. Load just rendered variable files
+11. Render template files <directory>/data/**/*.j2 (excluding templated variable files).
+"""
+
+LOGLEVEL_DEFAULT = 'INFO' # can be overwritten via environment variable 'LOGLEVEL'
+TEMPLATE_EXTENSION = '.j2'
+
+
 import difflib
 import logging
 import os
@@ -10,20 +30,10 @@ from jinja2_ansible_filters import AnsibleCoreFiltersExtension
 from glob import glob
 from tempfile import TemporaryDirectory
 
-from pdb import set_trace as st
-
-
-LOGLEVEL_DEFAULT = 'INFO' # can be overwritten via environment variable 'LOGLEVEL'
-TEMPLATE_EXTENSION = '.j2'
-
 
 LOGGER = logging.getLogger(__name__)
 logging.basicConfig(format="[%(asctime)s %(levelname)8s] %(message)s   (L%(lineno)s)")
 LOGGER.setLevel(level=os.getenv('LOGLEVEL', LOGLEVEL_DEFAULT).upper())
-
-# TODO:
-# - Cache file hashsums / modification timestamps & don't process unless changed
-# - Backup old template output before rendering
 
 CONFIG = None
 
@@ -145,8 +155,9 @@ def render_templates(environment: Environment, files: list[str], variables: dict
 def parse_cli_config():
   import argparse
   parser = argparse.ArgumentParser(
-    "render_templates",
-    "Renders templated files (marked with '.j2' extension)",
+    description="Renders templated files (marked with '.j2' extension)",
+    epilog=__doc__,
+    formatter_class=argparse.RawTextHelpFormatter,
   )
   parser.add_argument(
     'directory',
@@ -161,7 +172,7 @@ def parse_cli_config():
   )
   parser.add_argument(
     '--dry-run',
-    help="Don't actually render the templates, only output diff to current state.",
+    help="Don't actually render the templates. (Useful in combination with --diff.)",
     action='store_true',
   )
   return parser.parse_args()
