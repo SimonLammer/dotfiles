@@ -9,4 +9,3 @@
 "                                             
 
 source $HOME/.config/dotfiles/data/vim/shared_with_nvim.vim
-

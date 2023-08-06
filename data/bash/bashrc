@@ -125,4 +125,3 @@ if [ -n "$TMUX" ]; then
 fi
 
 # $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell bash/bashrc end
-

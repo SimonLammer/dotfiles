@@ -70,4 +70,3 @@ alias pyenv=_init_pyenv
 # $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell shell/rc.sh setup lazy initialization of commands ['nvm', 'cargo', 'pyenv']
 
 # $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell shell/rc.sh end
-

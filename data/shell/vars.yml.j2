@@ -28,7 +28,7 @@ shell_path_additions:
 - $HOME/bin:$PATH
 - $HOME/.local/bin
 - $HOME/.pyenv/bin
-- "${XDG_DATA_HOME:-$HOME/.local/share}/npm/bin"
+- "${XDG_DATA_HOME:-{{XDG_DATA_HOME_DEFAULT}}}/npm/bin"
 - $CARGO_HOME/bin
 - /opt/anki/bin
 - /opt/borg
@@ -45,3 +45,4 @@ shell_lazy_commands:
   nvm: ". $NVM_DIR/nvm.sh"
   cargo: ". $CARGO_HOME/env"
   pyenv: 'eval "$(command pyenv init -)"'
+

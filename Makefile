@@ -2,6 +2,8 @@ USER := $(shell whoami)
 ANSIBLE_PLAYBOOK_ENV = ANSIBLE_COW_SELECTION=random ANSIBLE_FORCE_COLOR=true
 #ANSIBLE_PLAYBOOK_ENV = ANSIBLE_NOCOWS=true ANSIBLE_FORCE_COLOR=true
 
+PYTHON3 = python
+
 
 ifndef XDG_CONFIG_HOME
 	XDG_CONFIG_HOME := $(HOME)/.config
@@ -17,21 +19,30 @@ ANSIBLE-PLAYBOOK = env $(ANSIBLE_XDG_ENV) $(ANSIBLE_PLAYBOOK_ENV) ansible-playbo
 ANSIBLE-GALAXY = env $(ANSIBLE_XDG_ENV) $(ANSIBLE_PLAYBOOK_ENV) ansible-galaxy
 
 
-templates: install-ansible
-	$(ANSIBLE-PLAYBOOK) templates.yml -u ${USER}
+templates:
+	${PYTHON3} data/scripts/render_templates.py .
 
-templates-check: install-ansible
-	#ANSIBLE_NOCOWS=true ansible-playbook templates.yml -u ${USER} --check | grep -i play\ recap -A1 | tail -n 1 | sed -E 's/.*changed=([0-9]+).*/\1/'
-	changes=`ANSIBLE_NOCOWS=true ansible-playbook templates.yml -u ${USER} --check | grep -i play\ recap -A1 | tail -n 1 | sed -E 's/.*changed=([0-9]+).*/\1/'`; \
-	if [ "$$changes" -eq "0" ]; then \
+templates-check:
+	changes=`LOGLEVEL=WARNING ${PYTHON3} data/scripts/render_templates.py . --diff --dry-run`; \
+	if [ "$$changes" = "" ]; then \
 		echo All templates rendered correctly. ; \
 	else \
-		echo $$changes template\(s\) have not been rendered. \(Use \`make templates\` to render templates.\) ; \
-		exit $$changes; \
+		echo Template\(s\) have not been rendered. \(Use \`make templates\` to render templates.\) ; \
+		echo Changes:; \
+		echo "$$changes"; \
+		exit 1; \
 	fi
 
 watch-templates:
-	ls */**/*.j2 | entr make templates
+	find . \
+			-name '*j2*' -o \
+			-name 'vars/*.yml' -o \
+			-name 'vars/**/*.yml' -o \
+			-name 'data/vars.yml' -o \
+			-name 'data/**/vars.yml' -o \
+			-name 'render_templates.py' -o \
+			-name 'Makefile' \
+		| entr -c make templates
 
 setup: install-ansible
 	$(ANSIBLE-GALAXY) collection install -r requirements/setup.yml

@@ -45,7 +45,7 @@ _init_{{command}} () {
 }
 alias {{command}}=_init_{{command}}
 {% endfor %}
-{% if not log_shell_startup %}# {% endif %}{{ dotfiles_home }}/data/scripts/dotfiles_log.sh shell shell/rc.sh setup lazy initialization of commands {{ shell_lazy_commands.keys() }}
+{% if not log_shell_startup %}# {% endif %}{{ dotfiles_home }}/data/scripts/dotfiles_log.sh shell shell/rc.sh setup lazy initialization of commands {{ shell_lazy_commands.keys() | list }}
 
 {% if not log_shell_startup %}# {% endif %}{{ dotfiles_home }}/data/scripts/dotfiles_log.sh shell shell/rc.sh end
 

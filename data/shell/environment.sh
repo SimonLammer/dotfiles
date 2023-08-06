@@ -60,4 +60,3 @@ fi
 # $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell shell/environment.sh update environment vars
 
 # $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell shell/environment.sh end
-
