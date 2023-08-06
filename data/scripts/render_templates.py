@@ -148,7 +148,10 @@ def render_templates(environment: Environment, files: list[str], variables: dict
             )
             print(''.join(diff), end='')
       if not CONFIG.dry_run:
-        shutil.copystat(target, target_tmp)
+        try:
+          shutil.copystat(target, target_tmp)
+        except FileNotFoundError:
+          pass
         shutil.move(target_tmp, target)
 
 
