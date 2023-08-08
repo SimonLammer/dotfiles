@@ -27,6 +27,12 @@ alias xco='xclip -o -sel c'
 
 # $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell shell/rc.sh update aliases
 
+vpn () {
+  cmd="sudo openvpn --config `ls ~/Documents/VPN/*.ovpn | fzf --select-1 --query=$1`"
+  echo "$cmd"
+  $cmd
+}
+
 which autojump >/dev/null 2>&1
 if [ $? -eq 0 ]; then
     . $DOTFILES_HOME/data/autojump/source_scripts/autojump.sh
