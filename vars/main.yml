@@ -4,12 +4,6 @@ dotfiles_repo: https://github.com/SimonLammer/dotfiles.git
 services_home: /opt/services
 services_repo: https://github.com/SimonLammer/services.git
 
-# https://wiki.archlinux.org/index.php/XDG_Base_Directory
-XDG_CONFIG_HOME_DEFAULT: $HOME/.config
-XDG_CACHE_HOME_DEFAULT: $HOME/.cache
-XDG_DATA_HOME_DEFAULT: $HOME/.local/share
-XDG_RUNTIME_DIR_DEFAULT: /run/user/$UID
-
 pyenv_install_dir: /opt/pyenv
 
 # TODO: extract `programs` to `setup.yml`

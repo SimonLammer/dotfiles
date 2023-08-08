@@ -1,0 +1,25 @@
+config_file_symlinks:
+  - src: data/git
+    dest: "$HOME/.config/git"
+  - src: data/tmux
+    dest: "$HOME/.config/tmux"
+  - src: data/vim
+    dest: "$HOME/.config/vim"
+  - src: data/nvim
+    dest: "$HOME/.config/nvim"
+ #- src: data/vscode/keybindings.json
+ #  dest: "$HOME/.config/Code/User/keybindings.json"
+ #- src: data/vscode/settings.json
+ #  dest: "$HOME/.config/Code/User/settings.json"
+  - src: data/starship/starship.toml
+    dest: "$HOME/.config/starship.toml"
+  - src: data/bash/bashrc
+    dest: "~/.bashrc"
+  - src: data/shell/profile
+    dest: "~/.profile"
+  - src: data/xinput/scripts/configure_pointer.sh
+    dest: "~/.local/bin/xinput-configure-pointer"
+  - src: data/xinput/scripts/configure_pointer.desktop
+    dest: "~/.local/share/applications/xinput-configure-pointer.desktop"
+  - src: data/xinput/scripts/toggle.sh
+    dest: "~/.local/bin/xinput-toggle"
