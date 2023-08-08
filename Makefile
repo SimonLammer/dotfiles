@@ -44,6 +44,9 @@ watch-templates:
 			-name 'Makefile' \
 		| entr -c make templates
 
+symlinks: templates
+	data/scripts/symlink_dotfiles.sh
+
 setup: install-ansible
 	$(ANSIBLE-GALAXY) collection install -r requirements/setup.yml
 	$(ANSIBLE-GALAXY) install -r requirements/setup.yml

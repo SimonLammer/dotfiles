@@ -18,6 +18,8 @@ config_file_symlinks:
     dest: "$HOME/.bashrc"
   - src: data/shell/profile
     dest: "$HOME/.profile"
+  - src: data/scripts/sshfs_auto.sh
+    dest: "$HOME/.local/bin/sshfs-auto"
   - src: data/xinput/scripts/configure_pointer.sh
     dest: "$HOME/.local/bin/xinput-configure-pointer"
   - src: data/xinput/scripts/configure_pointer.desktop
