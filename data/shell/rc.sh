@@ -28,11 +28,12 @@ alias xco='xclip -o -sel c'
 # $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell shell/rc.sh update aliases
 
 vpn () {
-  file=`ls ~/Documents/VPN/*.ovpn | fzf --select-1 --query=$1`
+  local ovpn_configs_dir="$HOME/Documents/VPN"
+  local ovpn="sudo openvpn --config"
+  local file="$ovpn_configs_dir/`cd \"$ovpn_configs_dir\" && ls *.ovpn | fzf --select-1 --query=$1`"
   if [ $? -eq 0 ]; then
-    cmd="sudo openvpn --config \"$file\""
-    echo "$cmd"
-    $cmd
+    echo $ovpn \"$file\"
+    $ovpn "$file"
   fi
 }
 
