@@ -10,7 +10,7 @@ create_link () {
       echo "$backup"
       echo mv "$name" "$backup"
     fi
-    echo ln -fsT "$target" "$name"
+    mkdir -p "`dirname \"$name\"`"
     ln -fsT "$target" "$name"
   fi
 }
