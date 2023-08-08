@@ -1,3 +1,4 @@
+# Use $HOME instead of ~ (https://stackoverflow.com/questions/58124257/use-of-variable-in-mkdir-command)
 config_file_symlinks:
   - src: data/git
     dest: "$HOME/.config/git"
@@ -14,12 +15,12 @@ config_file_symlinks:
   - src: data/starship/starship.toml
     dest: "$HOME/.config/starship.toml"
   - src: data/bash/bashrc
-    dest: "~/.bashrc"
+    dest: "$HOME/.bashrc"
   - src: data/shell/profile
-    dest: "~/.profile"
+    dest: "$HOME/.profile"
   - src: data/xinput/scripts/configure_pointer.sh
-    dest: "~/.local/bin/xinput-configure-pointer"
+    dest: "$HOME/.local/bin/xinput-configure-pointer"
   - src: data/xinput/scripts/configure_pointer.desktop
-    dest: "~/.local/share/applications/xinput-configure-pointer.desktop"
+    dest: "$HOME/.local/share/applications/xinput-configure-pointer.desktop"
   - src: data/xinput/scripts/toggle.sh
-    dest: "~/.local/bin/xinput-toggle"
+    dest: "$HOME/.local/bin/xinput-toggle"
