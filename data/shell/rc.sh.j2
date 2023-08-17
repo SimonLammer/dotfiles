@@ -27,6 +27,16 @@ vpn () {
   fi
 }
 
+tmc () {
+  local tmux_conf_dir="$DOTFILES_HOME/data/tmux/configurations"
+  local file="$tmux_conf_dir/`cd \"$tmux_conf_dir\" && ls | fzf --select-1 --query=$1`"
+  case "$file" in
+    *.sh) "$file";;
+    *.conf) tmux source-file "$file";;
+    *) echo "Unrecognized configuration type '$file'" >&2 && return 1;;
+  esac
+}
+
 which autojump >/dev/null 2>&1
 if [ $? -eq 0 ]; then
     . $DOTFILES_HOME/data/autojump/source_scripts/autojump.sh
