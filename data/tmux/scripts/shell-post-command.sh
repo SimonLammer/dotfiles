@@ -13,10 +13,15 @@ if [ \
 ]; then
     PANE_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/tmux/panes/${TMUX_PANE#*%}"
     mkdir -p "$PANE_CACHE_DIR"
+    file="$PANE_CACHE_DIR/status.txt"
 
-    starship prompt\
-        | perl -n $DOTFILES_HOME/data/tmux/scripts/ansi-colors-to-tmux.pl \
-        > "$PANE_CACHE_DIR/starship.txt"
+    if [ -n "`which starship`" ]; then
+        starship prompt\
+           | perl -n $DOTFILES_HOME/data/tmux/scripts/ansi-colors-to-tmux.pl \
+           >"$file"
+    else
+        pwd >"$file"
+    fi
 
     tmux refresh-client
 
