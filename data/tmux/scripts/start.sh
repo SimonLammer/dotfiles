@@ -10,14 +10,14 @@ if [ $? -eq 0 ] && [ -z "$TMUX" ]; then
 	start_tmux=true
 	if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
 		echo "Do you want to create a tmux session. (This will clear the screen!)"
-		read "choice?(Y/n)? " 
+		read -p "choice?(Y/n)? " choice
     case "$choice" in
       n|N ) start_tmux=false
       # * ) echo "y";;
     esac
   fi
   if [ $start_tmux = true ]; then
-    t=$(tmux -f "${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf" new)
+    t=$(tmux -f "${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf" new -A -s $(id -un))
     if [ "$t" = "[exited]" ]; then
       # $DOTFILES_HOME/data/scripts/dotfiles_log.sh shell tmux/start.sh exiting shell because tmux exited normally
       exit 1

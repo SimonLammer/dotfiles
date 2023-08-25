@@ -53,7 +53,7 @@ def main(directory) -> None:
         f'{folder}/{variable_file_pattern}',
         f'{folder}/**/{variable_file_pattern}',
       )
-      for f in glob(pattern) if not os.path.isfile(f"{f}{TEMPLATE_EXTENSION}")
+      for f in glob(pattern, recursive=True) if not os.path.isfile(f"{f}{TEMPLATE_EXTENSION}")
     ]
     if files:
       variables = merge_dicts(
@@ -69,7 +69,7 @@ def main(directory) -> None:
         f'{folder}/{variable_file_pattern}{TEMPLATE_EXTENSION}',
         f'{folder}/**/{variable_file_pattern}{TEMPLATE_EXTENSION}',
       )
-      for f in glob(pattern)
+      for f in glob(pattern, recursive=True)
     ]
     if files:
       LOGGER.info(f"Rendering templated variable files in '{folder}'")
@@ -83,7 +83,10 @@ def main(directory) -> None:
       LOGGER.info(f"No templated variable files found in '{folder}'.")
 
   LOGGER.info(f"Rendering templates")
-  files = (f for f in glob(f'data/**/*{TEMPLATE_EXTENSION}') if not f.endswith(f'yml{TEMPLATE_EXTENSION}'))
+  files = (
+    f for f in glob(f'data/**/*{TEMPLATE_EXTENSION}', recursive=True)
+    if not f.endswith(f'yml{TEMPLATE_EXTENSION}')
+  )
   if files:
     render_templates(environment, files, variables)
 
@@ -120,7 +123,7 @@ def merge_dicts(*dicts: list[dict]) -> dict:
   elif len(dicts) == 1:
     return dicts[0]
   elif len(dicts) == 2:
-    return dict(**dicts[0], **dicts[1])
+    return dicts[0] | dicts[1]
   else:
     pivot = len(dicts) // 2
     return merge_dicts(merge_dicts(*dicts[:pivot]), merge_dicts(*dicts[pivot:]))
