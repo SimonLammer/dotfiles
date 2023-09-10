@@ -67,6 +67,10 @@ Find Lemmy communities across instances.
 
 Find LaTeX symbols by drawing them.
 
+## [imposeonline.com](http://www.imposeonline.com/faq.php)
+
+> Impose online is FREE service that enables you to impose your pdf documents without the high cost of specialised imposition software. Upload your pdf, configure your imposition, then download your new imposed file instantly!
+
 ## [Ninite](https://ninite.com/)
 > Install and Update All Your Programs at Once [on Windows]
 
