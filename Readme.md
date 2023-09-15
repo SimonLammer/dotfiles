@@ -396,6 +396,13 @@ shasum -a 512 -c elasticsearch-6.4.0.deb.sha512 && sudo dpkg -i elasticsearch-6.
 
 # Firefox
 
+## Settings
+
+| Name | Value |
+|-----:|:------|
+| Open previous windows and tabs | yes |
+| Ask to save logins and password for websites | no |
+
 ## Add-ons
 
 - [Adblock Plus](https://addons.mozilla.org/en-US/firefox/addon/adblock-plus/)
@@ -407,18 +414,16 @@ shasum -a 512 -c elasticsearch-6.4.0.deb.sha512 && sudo dpkg -i elasticsearch-6.
 - [Recommendation Tweaker for YouTube](https://addons.mozilla.org/en-US/firefox/addon/recommendation-tweaker-yt/)
 - [Reverse Image Search](https://addons.mozilla.org/en-US/firefox/addon/image-reverse-search/)
 - [Save Page WE](https://addons.mozilla.org/en-CA/firefox/addon/save-page-we/)
+- [Stylus](https://addons.mozilla.org/en-US/firefox/addon/styl-us/)
 - [Tabliss](https://addons.mozilla.org/en-US/firefox/addon/tabliss/)
 - [uBlock Origin](https://addons.mozilla.org/en-CA/firefox/addon/ublock-origin)
 - [Video DownloadHelper](https://addons.mozilla.org/en-US/firefox/addon/video-downloadhelper/)
 - [Vimium-FF](https://addons.mozilla.org/en-US/firefox/addon/vimium-ff/)
 - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
 
-## Settings
+### [Stylus](https://addons.mozilla.org/en-US/firefox/addon/styl-us/) styles
 
-| Name | Value |
-|-----:|:------|
-| Open previous windows and tabs | yes |
-| Ask to save logins and password for websites | no |
+- https://userstyles.world/user/SimonLammer
 
 # Flatpak
 
