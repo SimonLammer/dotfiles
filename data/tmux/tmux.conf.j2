@@ -123,6 +123,9 @@ set -s command-alias[100] 'shell-post-command=run-shell -b "cd #{pane_current_pa
 bind-key "\\" split-window -h -c "#{pane_current_path}"
 bind-key "|" split-window -fh -c "#{pane_current_path}"
 
+bind-key g run-shell "$DOTFILES_HOME/data/tmux/scripts/upload_buffer.sh"
+bind-key G run-shell "$DOTFILES_HOME/data/tmux/scripts/copy_nested_buffer.sh"
+
 # Refresh upon changing panes (overrides parts of the tmux-pain-control plugin configuration)
 bind -r k select-pane -U\; shell-post-command
 bind -r j select-pane -D\; shell-post-command
