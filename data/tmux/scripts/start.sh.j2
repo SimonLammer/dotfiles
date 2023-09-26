@@ -7,17 +7,21 @@
 
 which tmux >/dev/null 2>&1
 if [ $? -eq 0 ] && [ -z "$TMUX" ]; then
-	start_tmux=true
-	if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-		echo "Do you want to create a tmux session. (This will clear the screen!)"
-		read -p "choice?(Y/n)? " choice
+  start_tmux=true
+  if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    echo "Do you want to create a tmux session. (This will clear the screen!)"
+    read -p "choice?(Y/n)? " choice
     case "$choice" in
       n|N ) start_tmux=false
       # * ) echo "y";;
     esac
   fi
   if [ $start_tmux = true ]; then
-    t=$(tmux -f "${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf" new -A -s $(id -un))
+    session_id="$(id -un)"
+    if [ -n "$(tmux -f \"${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf\" list-clients -t $session_id)" ]; then
+      session_id="${session_id}-$(date +%y%m%dT%H%M%S.%3N)"
+    fi
+    t=$(tmux -f "${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf" new -A -s $session_id)
     if [ "$t" = "[exited]" ]; then
       {% if not log_shell_startup %}# {% endif %}$DOTFILES_HOME/data/scripts/dotfiles_log.sh shell tmux/start.sh exiting shell because tmux exited normally
       exit 1
