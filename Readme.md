@@ -54,6 +54,11 @@ Contents:
 
 Archive of saved web pages.
 
+## [board.net](board.net)
+
+> Etherpads for all
+> Quick notes on the web, write simultaneously.
+
 ## [consensus.app](https://consensus.app)
 
 > Consensus is a search engine that uses AI to extract and
