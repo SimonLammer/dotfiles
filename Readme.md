@@ -54,6 +54,11 @@ Contents:
 
 Archive of saved web pages.
 
+## [board.net](board.net)
+
+> Etherpads for all
+> Quick notes on the web, write simultaneously.
+
 ## [consensus.app](https://consensus.app)
 
 > Consensus is a search engine that uses AI to extract and
@@ -414,6 +419,7 @@ shasum -a 512 -c elasticsearch-6.4.0.deb.sha512 && sudo dpkg -i elasticsearch-6.
 - [Chessvision.ai](https://addons.mozilla.org/en-CA/firefox/addon/chessvision-ai-for-firefox/)
 - [Cookie-Editor](https://addons.mozilla.org/en-US/firefox/addon/cookie-editor/)
 - [Keepa.com - Amazon Price Tracker](https://addons.mozilla.org/en-GB/firefox/addon/keepa/)
+- [KeePassXC-Browser](https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/)
 - [Netflix 1080p](https://addons.mozilla.org/en-US/firefox/addon/netflix-1080p-firefox/) ([alternate installation](https://github.com/vladikoff/netflix-1080p-firefox/issues/63#issuecomment-1470154520))
 - [Recommendation Tweaker for YouTube](https://addons.mozilla.org/en-US/firefox/addon/recommendation-tweaker-yt/)
 - [Reverse Image Search](https://addons.mozilla.org/en-US/firefox/addon/image-reverse-search/)
