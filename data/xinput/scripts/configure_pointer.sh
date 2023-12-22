@@ -23,10 +23,10 @@ xinput map-to-output "$pointer" "$display"
 mat0=`xinput list-props $pointer | grep "Coordinate Transformation Matrix" | cut -d ':' -f 2`
 
 # Select orientation
-o1="0°C"
-o2="90°C"
-o3="180°C"
-o4="270°C"
+o1="0°"
+o2="90°"
+o3="180°"
+o4="270°"
 orientation=`$ZENITY --list --text "Choose an orientation" --column Orientation --column Name "$o1" "Normal" "$o2" "Rotate left" "$o3" "Invert" "$o4" "Rotate right"`
 # https://wiki.ubuntu.com/X/InputCoordinateTransformation
 if [ "$orientation" = "$o1" ]; then
