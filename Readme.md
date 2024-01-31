@@ -50,6 +50,10 @@ Contents:
 
 # Interesting websites
 
+## [ambientcg.com](https://ambientcg.com/)
+
+CC0 assets (Materials, HDRIs, SBSARs, 3D, ...)
+
 ## [https://archive.org/web/](https://archive.org/web/)
 
 Archive of saved web pages.
