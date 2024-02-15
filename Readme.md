@@ -95,6 +95,9 @@ ASCII art fonts in this repo were created using:
 - http://patorjk.com/software/taag/#p=display&f=Epic&t=github.com%2FSimonLammer%2Fdotfiles
 - http://patorjk.com/software/taag/#p=display&f=Ivrit&t=github.com%2FSimonLammer%2Fdotfiles
 
+## [scienceos.ai](https://scienceos.ai)
+
+> Get scientific answers by asking millions of research papers
 
 ## [webhook.site](https://webhook.site)
 
