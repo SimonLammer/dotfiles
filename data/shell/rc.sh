@@ -24,6 +24,7 @@ alias lmkw='find . -name "*.tex" | entr latexmk -interaction=nonstopmode -pdf'
 alias tmux='tmux -f "${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf"'
 alias xci='xclip -i -sel c'
 alias xco='xclip -o -sel c'
+alias nvchad='NVIM_APPNAME=nvchad nvim'
 
 # $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell shell/rc.sh update aliases
 
