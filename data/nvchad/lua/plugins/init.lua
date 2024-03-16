@@ -15,14 +15,26 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = require("configs.treesitter"),
   },
-
-  --{
---  "neovim/nvim-lspconfig",
---  config = function()
---    require("nvchad.configs.lspconfig")
---    require("configs.lspconfig")
---  end,
---},
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "lua-language-server",
+        "pyright",
+        --"html-lsp",
+        --"prettier",
+        --"stylua",
+        --"gopls"
+      },
+    },
+  },
+  {
+    "neovim/nvim-lspconfig",
+    config = function()
+      require("nvchad.configs.lspconfig").defaults()
+      require("configs.lspconfig")
+    end,
+  },
   { -- https://github.com/NvChad/NvChad/issues/1246#issuecomment-1817582042
     "folke/which-key.nvim",
     config = function(_, opts)
