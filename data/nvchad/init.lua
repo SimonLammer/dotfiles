@@ -24,7 +24,6 @@ require("lazy").setup({
       require "options"
     end,
   },
-
   { import = "plugins" },
 }, lazy_config)
 
@@ -39,4 +38,6 @@ vim.schedule(function()
 end)
 
 
--- TODO: change autocomplete confirmation away from enter/tab
+-- TODO:
+-- change autocomplete confirmation away from enter/tab
+-- config neovim/nvim-lspconfig
