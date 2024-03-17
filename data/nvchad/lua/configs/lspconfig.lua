@@ -5,14 +5,13 @@ local on_init = configs.on_init
 local capabilities = configs.capabilities
 
 local lspconfig = require("lspconfig")
-local servers = {
+local servers = { -- `:help lspconfig-all` / https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+  ["clangd"] = {},
   ["pyright"] = {
-    filetypes = {"python"}
-  }
+    filetypes = {"python"},
+  },
   --"html",
   --"cssls",
-  --"clangd",
-  --"pyre",
 }
 
 for lsp, conf in pairs(servers) do

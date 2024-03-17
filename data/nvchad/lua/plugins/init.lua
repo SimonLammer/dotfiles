@@ -17,16 +17,7 @@ return {
   },
   {
     "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = {
-        "lua-language-server",
-        "pyright",
-        --"html-lsp",
-        --"prettier",
-        --"stylua",
-        --"gopls"
-      },
-    },
+    opts = require("configs.mason"),
   },
   {
     "neovim/nvim-lspconfig",
