@@ -1,5 +1,6 @@
 return { -- https://github.com/NvChad/NvChad/issues/1246#issuecomment-1817582042
   config = function(_, opts)
+    -- TODO: adjust mappings acc. https://github.com/folke/which-key.nvim?tab=readme-ov-file#%EF%B8%8F-mappings
     dofile(vim.g.base46_cache .. "whichkey")
     require("which-key").setup(opts)
     local present, wk = pcall(require, "which-key")
