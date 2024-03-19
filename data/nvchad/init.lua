@@ -38,7 +38,7 @@ vim.schedule(function()
   require "mappings"
 end)
 
-
 -- TODO:
 -- change autocomplete confirmation away from enter/tab
 -- config neovim/nvim-lspconfig
+-- LaTeX LSP?
