@@ -4,12 +4,12 @@ return {
     ensure_installed = {
       "clangd",
       "lua-language-server",
+      "jdtls",
       "pyright",
       --"html-lsp",
       --"prettier",
       --"stylua",
       --"gopls"
-      -- TODO: java lsp
     },
   },
 }
