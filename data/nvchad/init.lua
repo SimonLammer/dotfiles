@@ -39,6 +39,5 @@ vim.schedule(function()
 end)
 
 -- TODO:
--- change autocomplete confirmation away from enter/tab
--- config neovim/nvim-lspconfig
 -- LaTeX LSP?
+-- create mapping <C-}> for a block scope thingy  
