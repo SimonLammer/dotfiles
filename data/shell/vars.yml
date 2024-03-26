@@ -10,7 +10,7 @@ shell_aliases:
   gds: git diff --no-index --color-words="[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+" --word-diff=plain
 
   ls: ls --color=auto
-  ll: ls -alF
+  ll: ls -alhF
   la: ls -A
   l: ls -CF
 
