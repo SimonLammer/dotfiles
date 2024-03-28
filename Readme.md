@@ -68,6 +68,11 @@ Archive of saved web pages.
 > Consensus is a search engine that uses AI to extract and
 distill findings directly from scientific research
 
+## [examine.com](https://examine.com)
+
+> Nutrition and supplement information you can trust
+> Examine has no ads or industry ties. We use the latest evidence to find what works and what doesn’t.
+
 ## [browse.feddit.de](https://browse.feddit.de/)
 
 Find Lemmy communities across instances.
