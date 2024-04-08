@@ -598,13 +598,18 @@ update-alternatives --install /usr/local/bin/nvim nvim /usr/local/bin/nvim_$vers
 update-alternatives --config nvim
 ~~~
 
-## Link `vim` to `nvim`
+### Link `vim` to `nvim`
 
 ~~~shell
 sudo su
 update-alternatives --install /usr/local/bin/vim vim /usr/local/bin/nvim 150
 update-alternatives --config vim
 ~~~
+
+## Configuration
+
+Plugins will be installed automatically by [lazy.nvim](https://github.com/folke/lazy.nvim) upon starting nvim.
+The only thing left to do manually is asking [mason](https://github.com/williamboman/mason.nvim) to install the configured language servers via `:MasonInstallAll`.
 
 
 # NodeJS
