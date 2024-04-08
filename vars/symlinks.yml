@@ -8,6 +8,8 @@ config_file_symlinks:
     dest: "$HOME/.config/vim"
   - src: data/nvim
     dest: "$HOME/.config/nvim"
+  - src: data/nvchad
+    dest: "$HOME/.config/nvchad"
  #- src: data/vscode/keybindings.json
  #  dest: "$HOME/.config/Code/User/keybindings.json"
  #- src: data/vscode/settings.json
