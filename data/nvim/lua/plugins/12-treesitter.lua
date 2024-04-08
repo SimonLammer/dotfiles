@@ -45,7 +45,7 @@ return { -- opts
       "jsonc",
       "jsonnet",
       "kotlin",
-      "latex",
+      -- "latex",
       "llvm",
       "lua",
       "luadoc",
