@@ -50,6 +50,10 @@ Contents:
 
 # Interesting websites
 
+## [ambientcg.com](https://ambientcg.com/)
+
+CC0 assets (Materials, HDRIs, SBSARs, 3D, ...)
+
 ## [https://archive.org/web/](https://archive.org/web/)
 
 Archive of saved web pages.
@@ -63,6 +67,11 @@ Archive of saved web pages.
 
 > Consensus is a search engine that uses AI to extract and
 distill findings directly from scientific research
+
+## [examine.com](https://examine.com)
+
+> Nutrition and supplement information you can trust
+> Examine has no ads or industry ties. We use the latest evidence to find what works and what doesn’t.
 
 ## [browse.feddit.de](https://browse.feddit.de/)
 
@@ -91,6 +100,9 @@ ASCII art fonts in this repo were created using:
 - http://patorjk.com/software/taag/#p=display&f=Epic&t=github.com%2FSimonLammer%2Fdotfiles
 - http://patorjk.com/software/taag/#p=display&f=Ivrit&t=github.com%2FSimonLammer%2Fdotfiles
 
+## [scienceos.ai](https://scienceos.ai)
+
+> Get scientific answers by asking millions of research papers
 
 ## [webhook.site](https://webhook.site)
 
