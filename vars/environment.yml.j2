@@ -15,6 +15,7 @@ environment_variables:
   PYENV_ROOT: "${XDG_DATA_HOME:-{{XDG_DATA_HOME_DEFAULT}}}/pyenv" # otherwise ~/.pyenv
   PYTHONSTARTUP: "{{ dotfiles_home }}/data/python/pythonstartup.py"
   RUSTUP_HOME: "${XDG_DATA_HOME:-{{XDG_DATA_HOME_DEFAULT}}}/rustup" # otherwise ~/.rustup
+  TEXMFHOME: "{{ XDG_CONFIG_HOME_DEFAULT }}/texmf"
   WORKON_HOME: "${XDG_DATA_HOME:-{{XDG_DATA_HOME_DEFAULT}}}/virtualenvs" # otherwise ~/.virtualenvs
   # The following 3 lines should not be necessary, but some programs improperly apply the XDG spec
   XDG_CONFIG_HOME: "{{ XDG_CONFIG_HOME_DEFAULT }}"
