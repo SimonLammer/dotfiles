@@ -24,8 +24,6 @@ shell_aliases:
   xci: xclip -i -sel c
   xco: xclip -o -sel c
 
-  nvchad: NVIM_APPNAME=nvchad nvim
-
 shell_path_additions:
 - $HOME/bin:$PATH
 - $HOME/.local/bin
