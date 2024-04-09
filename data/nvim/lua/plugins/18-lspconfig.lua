@@ -14,6 +14,9 @@ return {
       ["pyright"] = {
         filetypes = {"python"},
       },
+      ["jdtls"] = {
+        cmd = {vim.fn.stdpath "data" .. "/mason/bin/jdtls"},
+      },
       --"html",
       --"cssls",
       -- TODO: java lsp
