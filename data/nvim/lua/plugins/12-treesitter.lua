@@ -1,6 +1,9 @@
 return { -- opts
   "nvim-treesitter/nvim-treesitter",
   opts = {
+    indent = {
+      enable = false,
+    },
     ensure_installed = {
       "awk",
       "angular",

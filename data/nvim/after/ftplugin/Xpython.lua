@@ -1,0 +1,15 @@
+-- local generalSettingsGroup = vim.api.nvim_create_augroup('General settings', { clear = true })
+-- vim.api.nvim_create_autocmd('FileType', {
+--   desc = 'config python ftplugin',
+--   pattern = { '*.py' },
+--   group = generalSettingsGroup,
+--   callback = function()
+--     vim.opt.tabstop = 2
+--     vim.opt.foldmethod = 'indent'
+--     print("configd python ftplugin")
+--   end,
+-- })
+-- vim.opt.shiftwidth = 2
+-- vim.opt.tabstop = 2
+-- vim.opt.softtabstop = 2
+-- vim.opt.foldmethod = 'indent'
