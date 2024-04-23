@@ -89,6 +89,9 @@ Find LaTeX symbols by drawing them.
 
 > Impose online is FREE service that enables you to impose your pdf documents without the high cost of specialised imposition software. Upload your pdf, configure your imposition, then download your new imposed file instantly!
 
+## [ipify.org](https://www.ipify.org)
+> A Simple Public IP Address API
+
 ## [Ninite](https://ninite.com/)
 > Install and Update All Your Programs at Once [on Windows]
 
