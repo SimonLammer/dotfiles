@@ -89,6 +89,9 @@ Find LaTeX symbols by drawing them.
 
 > Impose online is FREE service that enables you to impose your pdf documents without the high cost of specialised imposition software. Upload your pdf, configure your imposition, then download your new imposed file instantly!
 
+## [ipify.org](https://www.ipify.org)
+> A Simple Public IP Address API
+
 ## [Ninite](https://ninite.com/)
 > Install and Update All Your Programs at Once [on Windows]
 
@@ -434,6 +437,7 @@ shasum -a 512 -c elasticsearch-6.4.0.deb.sha512 && sudo dpkg -i elasticsearch-6.
 - [KeePassXC-Browser](https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/)
 - [Netflix 1080p](https://addons.mozilla.org/en-US/firefox/addon/netflix-1080p-firefox/) ([alternate installation](https://github.com/vladikoff/netflix-1080p-firefox/issues/63#issuecomment-1470154520))
 - [Recommendation Tweaker for YouTube](https://addons.mozilla.org/en-US/firefox/addon/recommendation-tweaker-yt/)
+- [Rotate Youtube Vide (+ Zoom / Mirror)](https://addons.mozilla.org/en-US/firefox/addon/rotate-youtube-video/)
 - [Reverse Image Search](https://addons.mozilla.org/en-US/firefox/addon/image-reverse-search/)
 - [Save Page WE](https://addons.mozilla.org/en-CA/firefox/addon/save-page-we/)
 - [Stylus](https://addons.mozilla.org/en-US/firefox/addon/styl-us/)
