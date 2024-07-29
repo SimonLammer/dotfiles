@@ -5,7 +5,7 @@ return {
       "clangd",
       "lua-language-server",
       "jdtls",
-      "pyright",
+      --"pyright",
       --"html-lsp",
       --"prettier",
       --"stylua",
