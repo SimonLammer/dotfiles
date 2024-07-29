@@ -34,11 +34,17 @@ vim.opt.cursorlineopt = "both"
 --vim.opt.colorcolumn = [80]
 vim.api.nvim_set_option_value("colorcolumn", "80,120", {})
 
-vim.opt.expandtab = true -- Replace tabs with spaces
+-- vim.opt.expandtab = true -- Replace tabs with spaces
 vim.opt.shiftwidth = 2   -- Width for autoindents
 vim.opt.softtabstop = 2  -- See multiple spaces as tabstops so <BS> is sane
 vim.opt.tabstop = 2      -- Tabs display as 2 spaces
+vim.opt.smartindent = true
 
-
+-- cd /usr/share/nvim; rg recommended_style | sort
+vim.g.python_recommended_style = 0
+-- vim.g.rust_recommended_style = 0
+-- vim.g.markdown_recommended_style = 0
+-- vim.g.meson_recommended_style = 0
+-- vim.g.yaml_recommended_style = 0
 
 return M

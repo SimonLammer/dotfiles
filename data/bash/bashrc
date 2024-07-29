@@ -115,13 +115,6 @@ function __my_prompt_command() {
 }
 if [ -n "$TMUX" ]; then
     PROMPT_COMMAND="__my_prompt_command;$PROMPT_COMMAND"
-
-    # Override timestamp of previous prompt before executing command
-    PS0=`echo -en "\[\x1b[1F\]"`
-    PS0+=`echo -en "$PROMPT_TIMESTAMP_PRE"`
-    PS0+='$(date +"$PROMPT_TIMESTAMP_FORMAT")'
-    PS0+=`echo -en "$PROMPT_TIMESTAMP_POST"`
-    PS0+=`echo -en "\[\x1b[1E\]"`
 fi
 
 # $HOME/.config/dotfiles/data/scripts/dotfiles_log.sh shell bash/bashrc end

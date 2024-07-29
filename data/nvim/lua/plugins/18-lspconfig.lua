@@ -11,9 +11,12 @@ return {
     local lspconfig = require("lspconfig")
     local servers = { -- `:help lspconfig-all` / https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
       ["clangd"] = {},
-      -- ["pyright"] = {
-      --   filetypes = {"python"},
-      -- },
+      ["pyright"] = {
+        filetypes = {"python"},
+      },
+      ["jdtls"] = {
+        cmd = {vim.fn.stdpath "data" .. "/mason/bin/jdtls"},
+      },
       --"html",
       --"cssls",
       -- TODO: java lsp
