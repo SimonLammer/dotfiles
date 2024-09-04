@@ -394,6 +394,9 @@ sudo ln -s /media/data/storage/programs/drawio-x86_64-16.4.0.AppImage /usr/local
 sudo cp $DOTFILES_HOME/data/drawio/drawio.desktop /usr/local/share/applications/
 ~~~
 
+# [dutree](https://github.com/nachoparker/dutree/releases)
+Command line tool to analyze file system usage visually.
+
 # Eclipse
 
 [Download page](https://www.eclipse.org/downloads/)
