@@ -957,6 +957,10 @@ mkdir ~/.steam/ubuntu12_32/steam-runtime
 sudo apt install subversion
 ~~~
 
+# tar
+
+Create zstd archive (multithreaded (number of cores) with maximum compression (1-19)): `tar c -I"zstd -19 -T0" archive.tar.zstd files*`
+
 # Tectonic
 
 https://tectonic-typesetting.github.io/en-US/index.html
