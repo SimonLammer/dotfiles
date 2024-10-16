@@ -446,6 +446,7 @@ shasum -a 512 -c elasticsearch-6.4.0.deb.sha512 && sudo dpkg -i elasticsearch-6.
 - [Stylus](https://addons.mozilla.org/en-US/firefox/addon/styl-us/)
 - [Tabliss](https://addons.mozilla.org/en-US/firefox/addon/tabliss/)
 - [uBlock Origin](https://addons.mozilla.org/en-CA/firefox/addon/ublock-origin)
+- [Video Control for Instagram](https://addons.mozilla.org/en-US/firefox/addon/instagram-video-control/)
 - [Video DownloadHelper](https://addons.mozilla.org/en-US/firefox/addon/video-downloadhelper/)
 - [Vimium-FF](https://addons.mozilla.org/en-US/firefox/addon/vimium-ff/)
 - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
