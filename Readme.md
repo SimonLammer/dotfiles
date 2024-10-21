@@ -1789,6 +1789,12 @@ References:
 
 ---
 
+Android Apps:
+
+# [QuickTiles](https://f-droid.org/packages/com.asdoi.quicktiles/)
+
+---
+
 # TODO
 
 - Gnome Shell
