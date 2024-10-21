@@ -443,6 +443,7 @@ shasum -a 512 -c elasticsearch-6.4.0.deb.sha512 && sudo dpkg -i elasticsearch-6.
 - [Rotate Youtube Vide (+ Zoom / Mirror)](https://addons.mozilla.org/en-US/firefox/addon/rotate-youtube-video/)
 - [Reverse Image Search](https://addons.mozilla.org/en-US/firefox/addon/image-reverse-search/)
 - [Save Page WE](https://addons.mozilla.org/en-CA/firefox/addon/save-page-we/)
+- [SponsorBlock](https://sponsor.ajay.app/)
 - [Stylus](https://addons.mozilla.org/en-US/firefox/addon/styl-us/)
 - [Tabliss](https://addons.mozilla.org/en-US/firefox/addon/tabliss/)
 - [uBlock Origin](https://addons.mozilla.org/en-CA/firefox/addon/ublock-origin)
