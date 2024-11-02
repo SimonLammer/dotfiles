@@ -964,7 +964,7 @@ sudo apt install subversion
 
 # tar
 
-Create zstd archive (multithreaded (number of cores) with maximum compression (1-19)): `tar c -I"zstd -19 -T0" archive.tar.zstd files*`
+Create zstd archive (multithreaded (number of cores) with maximum compression (1-19)): `tar c -I"zstd -19 -T0" -f archive.tar.zstd files*`
 
 # Tectonic
 
