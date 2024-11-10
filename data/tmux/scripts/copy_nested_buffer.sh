@@ -8,14 +8,18 @@ tmux_leader=$(tmux show-option -gqv prefix)
 cmd='new-window "echo \"Uploading buffer...\"; $DOTFILES_HOME/data/tmux/scripts/upload_buffer.sh; read"'
 
 tmux send-keys $tmux_leader ":"
-while true; do
+for i in $(seq 0 100); do
   pane_height=$(tmux display-message -p '#{pane_height}')
   status=$(tmux capture-pane -p -S $(expr "$pane_height" - 1))
   if [ "$status" = ":" ]; then
     break
   fi
-  sleep 0.005
+  sleep 0.001
 done
+if [ "$status" != ":" ]; then
+  echo "Couldn't enter command mode in nested tmux session!"
+  exit 1
+fi
 
 tmux send-keys "$cmd" C-m
 
