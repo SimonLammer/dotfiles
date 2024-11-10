@@ -6,7 +6,17 @@ f=$(mktemp --tmpdir tmux-copy_nested_buffer-$d.XXXXXXXXXX)
 
 tmux_leader=$(tmux show-option -gqv prefix)
 cmd='new-window "echo \"Uploading buffer...\"; $DOTFILES_HOME/data/tmux/scripts/upload_buffer.sh; read"'
+
 tmux send-keys $tmux_leader ":"
+while true; do
+  pane_height=$(tmux display-message -p '#{pane_height}')
+  status=$(tmux capture-pane -p -S $(expr "$pane_height" - 1))
+  if [ "$status" = ":" ]; then
+    break
+  fi
+  sleep 0.005
+done
+
 tmux send-keys "$cmd" C-m
 
 prefix="https://file.io/"
