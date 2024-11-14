@@ -394,6 +394,9 @@ sudo ln -s /media/data/storage/programs/drawio-x86_64-16.4.0.AppImage /usr/local
 sudo cp $DOTFILES_HOME/data/drawio/drawio.desktop /usr/local/share/applications/
 ~~~
 
+# [dutree](https://github.com/nachoparker/dutree/releases)
+Command line tool to analyze file system usage visually.
+
 # Eclipse
 
 [Download page](https://www.eclipse.org/downloads/)
@@ -440,9 +443,11 @@ shasum -a 512 -c elasticsearch-6.4.0.deb.sha512 && sudo dpkg -i elasticsearch-6.
 - [Rotate Youtube Vide (+ Zoom / Mirror)](https://addons.mozilla.org/en-US/firefox/addon/rotate-youtube-video/)
 - [Reverse Image Search](https://addons.mozilla.org/en-US/firefox/addon/image-reverse-search/)
 - [Save Page WE](https://addons.mozilla.org/en-CA/firefox/addon/save-page-we/)
+- [SponsorBlock](https://sponsor.ajay.app/)
 - [Stylus](https://addons.mozilla.org/en-US/firefox/addon/styl-us/)
 - [Tabliss](https://addons.mozilla.org/en-US/firefox/addon/tabliss/)
 - [uBlock Origin](https://addons.mozilla.org/en-CA/firefox/addon/ublock-origin)
+- [Video Control for Instagram](https://addons.mozilla.org/en-US/firefox/addon/instagram-video-control/)
 - [Video DownloadHelper](https://addons.mozilla.org/en-US/firefox/addon/video-downloadhelper/)
 - [Vimium-FF](https://addons.mozilla.org/en-US/firefox/addon/vimium-ff/)
 - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
@@ -956,6 +961,10 @@ mkdir ~/.steam/ubuntu12_32/steam-runtime
 ~~~
 sudo apt install subversion
 ~~~
+
+# tar
+
+Create zstd archive (multithreaded (number of cores) with maximum compression (1-19)): `tar c -I"zstd -19 -T0" -f archive.tar.zstd files*`
 
 # Tectonic
 
@@ -1781,11 +1790,48 @@ References:
 
 ---
 
+Android Apps:
+
+# [Aves Libre](https://f-droid.org/en/packages/deckers.thibault.aves.libre/)
+> Gallery and metadata explorer
+> Aves can handle all sorts of images and videos, including your typical JPEGs and MP4s, but also more exotic things like multi-page TIFFs, SVGs, old AVIs and more! It scans your media collection to identify motion photos, panoramas (aka photo spheres), 360° videos, as well as GeoTIFF files.
+
+# [Bubble Level Galaxy](https://play.google.com/store/apps/details?id=pl.nenter.app.bubblelevel&hl=en)
+
+# [Gadgetbridge](https://f-droid.org/en/packages/nodomain.freeyourgadget.gadgetbridge/)
+> Use your smart watch and other bluetooth devices and keep your data private! 
+
+# [Genius Scan - PDF Scanner](https://play.google.com/store/apps/details?id=com.thegrizzlylabs.geniusscan.free&hl=en)
+
+# [JuiceSSH - SSH Client](https://play.google.com/store/apps/details?id=com.sonelli.juicessh)
+
+# [KeePassDX](https://www.keepassdx.com/)
+> Open source Password Manager for Android
+> Edit encrypted keys and digital identities in a single KeePass file and fill out forms securely.
+
+# [MegaSync](https://play.google.com/store/apps/details?id=com.ttxapps.megasync&hl=en)
+
+# [QuickTiles](https://f-droid.org/packages/com.asdoi.quicktiles/)
+
+# [RealCalc Scientific Calculator](https://play.google.com/store/apps/details?id=uk.co.nickfines.RealCalc)
+
+# [SalsaMemo](https://play.google.com/store/apps/details?id=com.kwetree.salsamemo)
+> This app can be used to see different Rueda turns, Solo turns (animación) and standard Couple Salsa turns i Cuban style. 
+
+# [SleepTimer (Turn music off)](https://play.google.com/store/apps/details?id=ch.pboos.android.SleepTimer&hl=en)
+> Sleep Timer lets you fall asleep to your favorite music. You simply start your music, and then set the countdown timer. At the end of the countdown, Sleep Timer softly fades your music out and stops it. Allowing you to get your precious sleep and stops your battery from draining.
+
+# [Spectroid](https://play.google.com/store/apps/details?id=org.intoorbit.spectrum&hl=en)
+> Spectroid is a real-time audio spectrum analyzer with reasonable frequency resolution across the the entire frequency spectrum.
+
+# [Thumb-Key](https://f-droid.org/en/packages/com.dessalines.thumbkey/)
+> Thumb-Key is a privacy-conscious smart keyboard, made specifically for your thumbs.
+> It features a 3x3 grid layout, and uses swipes for the less common letters. Its easy to learn, and designed for fast typing speeds.
+
+---
+
 # TODO
 
-- Gnome Shell
-  - Fix Airplane mode after suspend
-    - https://www.reddit.com/r/archlinux/comments/62lk65/arch_gnome_stopped_suspend_now_how_do_i_prevent/
 - Anki
 - Entr
 - Firefox
@@ -1802,8 +1848,6 @@ References:
   - Automatically trust GH and GL
 - Tmux
   - Hide window name on current window if not named
-- Vim
-  - Clipboard interaction
 - ? Powerline font
   - Tmux powerline theme
 - ? ENV Variable
