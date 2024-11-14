@@ -3,9 +3,16 @@
 
 set -e
 
+unzoom_pane_later=""
+
 err_msg=""
 trap_err() { tmux display-message "ERROR $err_msg"; }
-trap_exit() { e=$?; [ $e -eq 0 ] || trap_err; exit $e; }
+trap_exit() {
+  e=$?
+  [ $e -eq 0 ] || trap_err
+  [ "$unzoom_pane_later" ] && tmux resize-pane -Z && unzoom_pane_later=""
+  exit $e
+}
 trap 'trap_exit' EXIT
 
 err_msg="Couldn't create temporary directory."
@@ -28,35 +35,46 @@ rcv_line="" # set via `receive`
 rcv_status="" # set via `receive`; first space-separated part of rcv_line
 rcv_data="" # set via `receive`; rcv_line without rcv_status
 RCV_ERROR="ERR"
+RCV_LINE_SUFFIX=" ;"
 receive() {
   pane_height=$(tmux display-message -p '#{pane_height}')
   for i in $(seq 0 100); do
     rcv_line=$(tmux capture-pane -p -J -S 0 -E $(expr "$pane_height" - 2) | grep . | tail -n 1)
-    # echo "rcv_line $rcv_line" >>/tmp/asdf/log
-    case "$rcv_line" in "$RCV_ERROR"*)
-      echo "$err_msg" >>/tmp/asdf/log
-      err_msg+=" Received '$rcv_line' whilst waiting for $@!"
-      echo "$err_msg" >>/tmp/asdf/log
-      exit 1
-      ;;
-    esac
-    rcv_status=$(echo "$rcv_line" | cut -d ' ' -f 1)
-    echo "rcv_status $rcv_status" >>/tmp/asdf/log
-    for target in "$@"; do
-      case "$rcv_status" in "$target"*)
-        echo "received '$target' '$rcv_status'" >>/tmp/asdf/log
-        rcv_data=$(echo "$rcv_line" | cut -d ' ' -f 2-)
-        echo "rcv_data $rcv_data" >>/tmp/asdf/log
-        return
+    case "$rcv_line" in *"$RCV_LINE_SUFFIX") # received complete line?
+      rcv_line="${rcv_line%$RCV_LINE_SUFFIX}"
+      # echo "rcv_line $rcv_line" >>/tmp/asdf/log
+      case "$rcv_line" in "$RCV_ERROR"*)
+        echo "$err_msg" >>/tmp/asdf/log
+        err_msg+=" Received '$rcv_line' whilst waiting for $@!"
+        echo "$err_msg" >>/tmp/asdf/log
+        exit 1
         ;;
       esac
-    done
+      rcv_status=$(echo "$rcv_line" | cut -d ' ' -f 1)
+      echo "rcv_status $rcv_status" >>/tmp/asdf/log
+      for target in "$@"; do
+        case "$rcv_status" in "$target"*)
+          echo "received '$target' '$rcv_status'" >>/tmp/asdf/log
+          rcv_data=$(echo "$rcv_line" | cut -d ' ' -f 2-)
+          echo "rcv_data $rcv_data" >>/tmp/asdf/log
+          return
+          ;;
+        esac
+      done
+      ;;
+    esac
     sleep 0.001
   done
   err_msg+=" Didn't receive $@!"
   exit 1
 }
-# TODO: handle failure
+
+err_msg="Couldn't zoom tmux pane."
+unzoom_pane_later=""
+if [ "$(tmux list-panes | wc -l)" -ge 1 -a "$(tmux display-message -p '#{window_zoomed_flag}')" -eq 0 ]; then
+  tmux resize-pane -Z
+  unzoom_pane_later="true"
+fi
 
 err_msg="Couldn't complete key exchange."
 receive "KX"
@@ -87,6 +105,7 @@ while true; do
   case "$rcv_status" in
     "DONE!"*)
       echo "done" >>/tmp/asdf/log
+      [ "$unzoom_pane_later" ] && tmux resize-pane -Z \;&& unzoom_pane_later=""
       tmux send-keys C-m
       break
       ;;
@@ -104,6 +123,11 @@ while true; do
   echo -n "$plain_enc_b64" >>plain.enc.b64
   tmux send-keys C-m
 done
+if [ "$rcv_data" != "$(sha256sum plain.enc.b64)" ]; then
+  err_msg+=" Hashsums of transmitted data don't match."
+  ls -l
+  exit 1
+fi
 
 err_msg="Couldn't decrypt received message."
 base64 -d plain.enc.b64 >plain.enc
