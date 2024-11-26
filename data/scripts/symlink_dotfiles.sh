@@ -7,7 +7,7 @@ create_link () {
   if [ -e "$target" ]; then
     if [ -f "$name" -a ! -L "$name" ]; then
       backup="$name-`date +%Y%m%dT%H%M%S`"
-      echo mv "$name" "$backup"
+      mv "$name" "$backup"
     fi
     mkdir -p "`dirname \"$name\"`"
     ln -fsT "$target" "$name"
