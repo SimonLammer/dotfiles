@@ -943,6 +943,20 @@ chmod 600 ~/.ssh/*
 ~~~
 https://superuser.com/a/1729534
 
+# Starship
+
+## Installation
+
+System-wide:
+~~~shell
+curl -sS https://starship.rs/install.sh | sh
+~~~
+
+User:
+~~~shell
+curl -sS https://starship.rs/install.sh | sh -s -- -b ~/.local/bin
+~~~
+
 # Steam
 
 ## Can't launch
