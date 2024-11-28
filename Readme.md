@@ -632,6 +632,13 @@ update-alternatives --config vim
 Plugins will be installed automatically by [lazy.nvim](https://github.com/folke/lazy.nvim) upon starting nvim.
 The only thing left to do manually is asking [mason](https://github.com/williamboman/mason.nvim) to install the configured language servers via `:MasonInstallAll`.
 
+## Errors
+
+### Missing `~/.local/share/nvim/nvchad/base46/defaults`
+`E5113: Error while calling lua chunk: cannot open /workstore/slammer/home/.local/share/nvim/nvchad/base46/defaults: No such file or directory`
+Solution: `rm -rf ~/.local/share/nvim ~/.cache/nvim`
+References:
+- https://github.com/NvChad/base46/issues/166#issuecomment-1471102555
 
 # NodeJS
 
