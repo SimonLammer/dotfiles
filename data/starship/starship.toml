@@ -5,9 +5,6 @@ command_timeout = 900
 [character]
 disabled = true
 
-[python]
-# python_binary = "python3"
-
 [directory]
 disabled = true
 truncation_length=0
@@ -16,12 +13,21 @@ truncation_length=0
 description = "Custom `directory` module - truncating middle parts"
 when = "true"
 command = """
-  p=`starship module directory`;
-  if [ `echo $p | wc -c` -gt 75 ]; then
-    echo -n "$p" | head -c 25;
-    echo -n "…";
-    echo -n "$p"| tail -c 50;
-  else
-    echo $p;
-  fi
-  """
+ p=`starship module directory`;
+ if [ `echo $p | wc -c` -gt 75 ]; then
+   echo -n "$p" | head -c 25;
+   echo -n "…";
+   echo -n "$p"| tail -c 50;
+ else
+   echo $p;
+ fi
+ """
+
+[hostname]
+disabled = true
+
+[python]
+# python_binary = "python3"
+
+[username]
+disabled = true
