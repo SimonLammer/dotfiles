@@ -875,6 +875,18 @@ https://github.com/SimonLammer/services/tree/master/docker-compose/redmine
 | Issue To-do Lists Plugin | Organize issues in to-do lists by manually ordering their priority | https://github.com/canidas/redmine_issue_todo_lists |
 
 
+# rsync
+
+## Copy files
+Merge files of a folder (`/src`) to another folder (`/dest`) recursively, without copying files that have the same name and file size in the destination directory. (Useful for transferring files from/to directories that might become unavailable during transfer - e.g., SD-Cards with flimsy connections, or phone in file-transfer mode that will disconnect automatically after some time.) 
+~~~shell
+rsync -aiP --size-only src/ dest/
+~~~
+References:
+- https://superuser.com/questions/547282/which-is-the-rsync-command-to-smartly-merge-two-folders
+- https://stackoverflow.com/questions/13778889/rsync-difference-between-size-only-and-ignore-times
+- https://explainshell.com/explain?cmd=rsync+-aiP+--size-only+src%2F+dest%2F
+
 
 # Ruby
 
