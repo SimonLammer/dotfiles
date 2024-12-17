@@ -899,6 +899,41 @@ source ~/.rvm/scripts/rvm
 rvm install ruby --default
 ~~~
 
+# Spotify
+
+## Errors
+
+### Flatpak Spotify doesn't open
+~~~shell
+$ flatpak run -v com.spotify.Client
+F: No installations directory in /etc/flatpak/installations.d. Skipping
+F: Opening system flatpak installation at path /var/lib/flatpak
+F: Opening user flatpak installation at path /home/slammer/.local/share/flatpak
+F: Opening user flatpak installation at path /home/slammer/.local/share/flatpak
+F: Opening system flatpak installation at path /var/lib/flatpak
+F: Opening user flatpak installation at path /home/slammer/.local/share/flatpak
+F: Opening system flatpak installation at path /var/lib/flatpak
+F: /var/lib/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/f10e853118ae4f617c0457acfdb9086c2987c5ad0623ef16ce2c1692c6677d79/files/lib32 does not exist
+F: Cleaning up unused container id 4238752176
+F: Cleaning up per-app-ID state for com.spotify.Client
+F: Allocated instance id 4210003001
+F: Add defaults in dir /com/spotify/Client/
+F: Add locks in dir /com/spotify/Client/
+F: Allowing dri access
+F: Xdg dir xdg-pictures is $HOME (i.e. disabled), ignoring
+F: Xdg dir xdg-music is $HOME (i.e. disabled), ignoring
+F: Allowing x11 access
+F: Allowing pulseaudio access
+F: Pulseaudio user configuration file '/home/slammer/.config/pulse/client.conf': Error opening file /home/slammer/.config/pulse/client.conf: No such file or directory
+F: Running '/usr/bin/bwrap --args 40 -- /usr/bin/xdg-dbus-proxy --args=43'
+F: Running '/usr/bin/bwrap --args 40 -- spotify'
+~~~
+
+**Solution**: `rm ~/.var/app/com.spotify.Client/cache/`
+
+References:
+- https://github.com/flathub/com.spotify.Client/issues/277#issuecomment-2040543875
+
 # Sqlite Browser
 
 [Download Page](https://sqlitebrowser.org/)
