@@ -92,6 +92,9 @@ Find LaTeX symbols by drawing them.
 ## [ipify.org](https://www.ipify.org)
 > A Simple Public IP Address API
 
+## [Leetle](https://leetle.app/)
+> Leetle is a daily coding game, in the spirit of LeetCode & Wordle. The challenges are meant to be quick and easy, but help reinforce Python syntax and methods. The challenges are created by a mix of LLMs, mostly Claude 3.5 Sonnet, and hand-tested.
+
 ## [Ninite](https://ninite.com/)
 > Install and Update All Your Programs at Once [on Windows]
 
