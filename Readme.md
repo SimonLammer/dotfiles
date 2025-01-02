@@ -1265,6 +1265,27 @@ for ext in \
 sudo apt install -y vlc
 ~~~
 
+## Audio Effects - Compressor
+
+The Compressor tool can be used to even out movies which have both very quiet and very loud scenes so you can hear what people say and not damage your ears when the action scenes kick in.
+
+Tools > Effects and Filters > Audio Effects > Compressor
+
+| Slider | Effect | Selected Value |
+|-------:|:-------|---------------:|
+| RMS/peak | If threshold should apply to peaks (machine-like) or RMS values (human-ear-like) | 0.0 |
+| Attack | How quick to react | 50 ms |
+| Release | How slow to release | 300 ms |
+| Threshold | | -20.0 dB |
+| Ratio | Increase all the way to ensure any sound over a certain volume threshold will be turned down to the level you set. | 20.0:1 |
+| Knee radius | How soft the compressor should kick in. Zero will apply ratio immediately when level hits threshold. Higher values leads to softer compression closer to the threshold. | 1.0 dB |
+| Makeup gain | Increase to make quiet parts louder. | 12.0 dB |
+
+References:
+- https://www.geekality.net/blog/settings-for-vlc-dynamic-range-compression
+- https://www.thewindowsclub.com/compressor-tool-in-vlc
+- https://lifehacker.com/how-to-fix-movies-that-are-really-quiet-then-really-lo-5920290
+
 # xfce4-terminal
 
 ## Color schemes
