@@ -1321,6 +1321,20 @@ Select `/usr/local/share/xournalpp/default_template.tex` in the setting: Edit > 
 References:
 - https://github.com/xournalpp/xournalpp.github.io/issues/33
 
+# [yazi](https://github.com/sxyazi/yazi/)
+
+>  💥 Blazing fast terminal file manager written in Rust, based on async I/O.
+
+~~~shell
+yazi_version="0.4.2"
+wget https://github.com/sxyazi/yazi/releases/download/v${yazi_version}/yazi-x86_64-unknown-linux-gnu.zip
+unzip yazi-x86_64-unknown-linux-gnu.zip
+rm yazi-x86_64-unknown-linux-gnu.zip
+mv yazi-x86_64-unknown-linux-gnu ~/.local/share/yazi-x86_64-unknown-linux-gnu-v${yazi_version}
+ln -s ~/.local/share/yazi-x86_64-unknown-linux-gnu-v${yazi_version}/yazi ~/.local/bin/yazi-v${yazi_version}
+ln -s ~/.local/bin/yazi-v${yazi_version} ~/.local/bin/yazi
+~~~
+
 # ZSH
 
 ~~~shell
