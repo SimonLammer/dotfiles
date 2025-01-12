@@ -303,6 +303,7 @@ References:
 Download: [https://www.blackmagicdesign.com/products/davinciresolve/](https://www.blackmagicdesign.com/products/davinciresolve/)
 
 ## Import mp4 in DaVinci Resolve
+Supported Codecs: https://documents.blackmagicdesign.com/SupportNotes/DaVinci_Resolve_19_Supported_Codec_List.pdf?_v=1723705210000
 
 ### mjpeg
 
@@ -319,6 +320,26 @@ References:
 - https://www.youtube.com/watch?v=WLcW4UWPC5Y
 - https://brushlesswhoop.com/converting-fpv-footage-for-davinci-resolve/
 - https://superuser.com/a/1273941
+
+### DNxHR
+
+~~~shell
+ffmpeg -i "$f" -vcodec dnxhd -profile:v dnxhr_hq -acodec pcm_s16le -f mov "${f%.mp4}.mov"
+~~~
+
+Key DNxHR Profiles in FFmpeg:
+- dnxhr_lb: Low-bandwidth (suitable for proxies or low-quality use).
+- dnxhr_sq: Standard quality.
+- dnxhr_hq: High quality.
+- dnxhr_hqx: High quality with 12-bit precision (good for color grading).
+- dnxhr_444: Highest quality with 4:4:4 chroma subsampling (best for final mastering).
+
+References:
+- https://askubuntu.com/questions/907398/how-to-convert-a-video-with-ffmpeg-into-the-dnxhd-dnxhr-format
+- http://macilatthefront.blogspot.com/2018/12/tutorial-using-ffmpeg-for-dnxhddnxhr.html
+- https://dovidenko.com/2019/999/ffmpeg-dnxhd-dnxhr-mxf-proxies-and-optimized-media.html
+- https://forum.blackmagicdesign.com/viewtopic.php?f=21&t=192600
+- https://forum.blackmagicdesign.com/viewtopic.php?f=3&t=199928
 
 ## Errors
 
