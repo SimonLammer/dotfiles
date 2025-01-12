@@ -320,6 +320,22 @@ References:
 - https://brushlesswhoop.com/converting-fpv-footage-for-davinci-resolve/
 - https://superuser.com/a/1273941
 
+## Errors
+
+### `bin/resolve: symbol lookup error: /lib64/libpango-1.0.so.0: undefined symbol: g_once_init_leave_pointer`
+
+~~~shell
+cd /opt/resolve/libs
+sudo mkdir disabled-libraries
+sudo mv libglib* disabled-libraries
+sudo mv libgio* disabled-libraries
+sudo mv libgmodule* disabled-libraries
+~~~
+
+References:
+- https://forum.blackmagicdesign.com/viewtopic.php?f=21&t=184316
+- https://www.reddit.com/r/davinciresolve/comments/1d7cr2w/optresolvebinresolve_symbol_lookup_error/
+
 # Docker
 
 [Reference](https://docs.docker.com/install/linux/docker-ce/ubuntu/#upgrade-docker-ce-1)
