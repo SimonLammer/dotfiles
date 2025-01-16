@@ -92,6 +92,9 @@ Find LaTeX symbols by drawing them.
 ## [ipify.org](https://www.ipify.org)
 > A Simple Public IP Address API
 
+## [Lagom LCD Monitor Test Images](http://www.lagom.nl/lcd-test/)
+> With the test images on these pages, you can easily adjust the settings of your monitor to get the best possible picture quality. Additionally, there are a number of test images that can help you to judge the image quality of a monitor. You can check the images on this webpage or put them on a usb stick and try them in the computer store like I did when I created these test patterns. These test images are much more revealing regarding monitor shortcomings than ordinary photographs.
+
 ## [Leetle](https://leetle.app/)
 > Leetle is a daily coding game, in the spirit of LeetCode & Wordle. The challenges are meant to be quick and easy, but help reinforce Python syntax and methods. The challenges are created by a mix of LLMs, mostly Claude 3.5 Sonnet, and hand-tested.
 
