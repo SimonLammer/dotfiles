@@ -27,6 +27,14 @@ Contents:
         sudo dnf update -y && sudo dnf install -y make https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
         ~~~
 
+2. Setup python:
+
+    ~~~
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install -r requirements/python-requirements.txt
+    ~~~
+
 2. Perform ansible magic:
 
     ~~~
@@ -45,6 +53,8 @@ Contents:
     - Programs not yet installed automatically
 
         - [Mega](#mega)
+
+    - Manual
 
 ---
 
