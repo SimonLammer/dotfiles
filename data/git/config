@@ -67,3 +67,5 @@
 	ff = yes
 [merge]
 	ff = no
+[include]
+	path = path_prefix/_

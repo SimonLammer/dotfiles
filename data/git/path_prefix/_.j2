@@ -1,0 +1,7 @@
+{% for prefix in [
+	'coresec'
+]%}
+[includeIf "gitdir:{{prefix}}-*/**"]
+	path = "{{prefix}}"
+{% endfor %}
+
