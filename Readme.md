@@ -102,6 +102,12 @@ Find LaTeX symbols by drawing them.
 ## [ipify.org](https://www.ipify.org)
 > A Simple Public IP Address API
 
+## [Lagom LCD Monitor Test Images](http://www.lagom.nl/lcd-test/)
+> With the test images on these pages, you can easily adjust the settings of your monitor to get the best possible picture quality. Additionally, there are a number of test images that can help you to judge the image quality of a monitor. You can check the images on this webpage or put them on a usb stick and try them in the computer store like I did when I created these test patterns. These test images are much more revealing regarding monitor shortcomings than ordinary photographs.
+
+## [Leetle](https://leetle.app/)
+> Leetle is a daily coding game, in the spirit of LeetCode & Wordle. The challenges are meant to be quick and easy, but help reinforce Python syntax and methods. The challenges are created by a mix of LLMs, mostly Claude 3.5 Sonnet, and hand-tested.
+
 ## [Ninite](https://ninite.com/)
 > Install and Update All Your Programs at Once [on Windows]
 
@@ -310,6 +316,7 @@ References:
 Download: [https://www.blackmagicdesign.com/products/davinciresolve/](https://www.blackmagicdesign.com/products/davinciresolve/)
 
 ## Import mp4 in DaVinci Resolve
+Supported Codecs: https://documents.blackmagicdesign.com/SupportNotes/DaVinci_Resolve_19_Supported_Codec_List.pdf?_v=1723705210000
 
 ### mjpeg
 
@@ -326,6 +333,42 @@ References:
 - https://www.youtube.com/watch?v=WLcW4UWPC5Y
 - https://brushlesswhoop.com/converting-fpv-footage-for-davinci-resolve/
 - https://superuser.com/a/1273941
+
+### DNxHR
+
+~~~shell
+ffmpeg -i "$f" -vcodec dnxhd -profile:v dnxhr_hq -acodec pcm_s16le -f mov "${f%.mp4}.mov"
+~~~
+
+Key DNxHR Profiles in FFmpeg:
+- dnxhr_lb: Low-bandwidth (suitable for proxies or low-quality use).
+- dnxhr_sq: Standard quality.
+- dnxhr_hq: High quality.
+- dnxhr_hqx: High quality with 12-bit precision (good for color grading).
+- dnxhr_444: Highest quality with 4:4:4 chroma subsampling (best for final mastering).
+
+References:
+- https://askubuntu.com/questions/907398/how-to-convert-a-video-with-ffmpeg-into-the-dnxhd-dnxhr-format
+- http://macilatthefront.blogspot.com/2018/12/tutorial-using-ffmpeg-for-dnxhddnxhr.html
+- https://dovidenko.com/2019/999/ffmpeg-dnxhd-dnxhr-mxf-proxies-and-optimized-media.html
+- https://forum.blackmagicdesign.com/viewtopic.php?f=21&t=192600
+- https://forum.blackmagicdesign.com/viewtopic.php?f=3&t=199928
+
+## Errors
+
+### `bin/resolve: symbol lookup error: /lib64/libpango-1.0.so.0: undefined symbol: g_once_init_leave_pointer`
+
+~~~shell
+cd /opt/resolve/libs
+sudo mkdir disabled-libraries
+sudo mv libglib* disabled-libraries
+sudo mv libgio* disabled-libraries
+sudo mv libgmodule* disabled-libraries
+~~~
+
+References:
+- https://forum.blackmagicdesign.com/viewtopic.php?f=21&t=184316
+- https://www.reddit.com/r/davinciresolve/comments/1d7cr2w/optresolvebinresolve_symbol_lookup_error/
 
 # Docker
 
@@ -456,6 +499,7 @@ shasum -a 512 -c elasticsearch-6.4.0.deb.sha512 && sudo dpkg -i elasticsearch-6.
 - [SponsorBlock](https://sponsor.ajay.app/)
 - [Stylus](https://addons.mozilla.org/en-US/firefox/addon/styl-us/)
 - [Tabliss](https://addons.mozilla.org/en-US/firefox/addon/tabliss/)
+- [Tampermonkey](https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/)
 - [uBlock Origin](https://addons.mozilla.org/en-CA/firefox/addon/ublock-origin)
 - [Video Control for Instagram](https://addons.mozilla.org/en-US/firefox/addon/instagram-video-control/)
 - [Video DownloadHelper](https://addons.mozilla.org/en-US/firefox/addon/video-downloadhelper/)
@@ -642,6 +686,13 @@ update-alternatives --config vim
 Plugins will be installed automatically by [lazy.nvim](https://github.com/folke/lazy.nvim) upon starting nvim.
 The only thing left to do manually is asking [mason](https://github.com/williamboman/mason.nvim) to install the configured language servers via `:MasonInstallAll`.
 
+## Errors
+
+### Missing `~/.local/share/nvim/nvchad/base46/defaults`
+`E5113: Error while calling lua chunk: cannot open /workstore/slammer/home/.local/share/nvim/nvchad/base46/defaults: No such file or directory`
+Solution: `rm -rf ~/.local/share/nvim ~/.cache/nvim`
+References:
+- https://github.com/NvChad/base46/issues/166#issuecomment-1471102555
 
 # NodeJS
 
@@ -878,6 +929,18 @@ https://github.com/SimonLammer/services/tree/master/docker-compose/redmine
 | Issue To-do Lists Plugin | Organize issues in to-do lists by manually ordering their priority | https://github.com/canidas/redmine_issue_todo_lists |
 
 
+# rsync
+
+## Copy files
+Merge files of a folder (`/src`) to another folder (`/dest`) recursively, without copying files that have the same name and file size in the destination directory. (Useful for transferring files from/to directories that might become unavailable during transfer - e.g., SD-Cards with flimsy connections, or phone in file-transfer mode that will disconnect automatically after some time.) 
+~~~shell
+rsync -aiP --size-only src/ dest/
+~~~
+References:
+- https://superuser.com/questions/547282/which-is-the-rsync-command-to-smartly-merge-two-folders
+- https://stackoverflow.com/questions/13778889/rsync-difference-between-size-only-and-ignore-times
+- https://explainshell.com/explain?cmd=rsync+-aiP+--size-only+src%2F+dest%2F
+
 
 # Ruby
 
@@ -889,6 +952,41 @@ wget -O - https://get.rvm.io | bash -s stable
 source ~/.rvm/scripts/rvm
 rvm install ruby --default
 ~~~
+
+# Spotify
+
+## Errors
+
+### Flatpak Spotify doesn't open
+~~~shell
+$ flatpak run -v com.spotify.Client
+F: No installations directory in /etc/flatpak/installations.d. Skipping
+F: Opening system flatpak installation at path /var/lib/flatpak
+F: Opening user flatpak installation at path /home/slammer/.local/share/flatpak
+F: Opening user flatpak installation at path /home/slammer/.local/share/flatpak
+F: Opening system flatpak installation at path /var/lib/flatpak
+F: Opening user flatpak installation at path /home/slammer/.local/share/flatpak
+F: Opening system flatpak installation at path /var/lib/flatpak
+F: /var/lib/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/f10e853118ae4f617c0457acfdb9086c2987c5ad0623ef16ce2c1692c6677d79/files/lib32 does not exist
+F: Cleaning up unused container id 4238752176
+F: Cleaning up per-app-ID state for com.spotify.Client
+F: Allocated instance id 4210003001
+F: Add defaults in dir /com/spotify/Client/
+F: Add locks in dir /com/spotify/Client/
+F: Allowing dri access
+F: Xdg dir xdg-pictures is $HOME (i.e. disabled), ignoring
+F: Xdg dir xdg-music is $HOME (i.e. disabled), ignoring
+F: Allowing x11 access
+F: Allowing pulseaudio access
+F: Pulseaudio user configuration file '/home/slammer/.config/pulse/client.conf': Error opening file /home/slammer/.config/pulse/client.conf: No such file or directory
+F: Running '/usr/bin/bwrap --args 40 -- /usr/bin/xdg-dbus-proxy --args=43'
+F: Running '/usr/bin/bwrap --args 40 -- spotify'
+~~~
+
+**Solution**: `rm ~/.var/app/com.spotify.Client/cache/`
+
+References:
+- https://github.com/flathub/com.spotify.Client/issues/277#issuecomment-2040543875
 
 # Sqlite Browser
 
@@ -945,6 +1043,20 @@ chmod 700 ~/.ssh
 chmod 600 ~/.ssh/*
 ~~~
 https://superuser.com/a/1729534
+
+# Starship
+
+## Installation
+
+System-wide:
+~~~shell
+curl -sS https://starship.rs/install.sh | sh
+~~~
+
+User:
+~~~shell
+curl -sS https://starship.rs/install.sh | sh -s -- -b ~/.local/bin
+~~~
 
 # Steam
 
@@ -1204,6 +1316,27 @@ for ext in \
 sudo apt install -y vlc
 ~~~
 
+## Audio Effects - Compressor
+
+The Compressor tool can be used to even out movies which have both very quiet and very loud scenes so you can hear what people say and not damage your ears when the action scenes kick in.
+
+Tools > Effects and Filters > Audio Effects > Compressor
+
+| Slider | Effect | Selected Value |
+|-------:|:-------|---------------:|
+| RMS/peak | If threshold should apply to peaks (machine-like) or RMS values (human-ear-like) | 0.0 |
+| Attack | How quick to react | 50 ms |
+| Release | How slow to release | 300 ms |
+| Threshold | | -20.0 dB |
+| Ratio | Increase all the way to ensure any sound over a certain volume threshold will be turned down to the level you set. | 20.0:1 |
+| Knee radius | How soft the compressor should kick in. Zero will apply ratio immediately when level hits threshold. Higher values leads to softer compression closer to the threshold. | 1.0 dB |
+| Makeup gain | Increase to make quiet parts louder. | 12.0 dB |
+
+References:
+- https://www.geekality.net/blog/settings-for-vlc-dynamic-range-compression
+- https://www.thewindowsclub.com/compressor-tool-in-vlc
+- https://lifehacker.com/how-to-fix-movies-that-are-really-quiet-then-really-lo-5920290
+
 # xfce4-terminal
 
 ## Color schemes
@@ -1238,6 +1371,20 @@ Select `/usr/local/share/xournalpp/default_template.tex` in the setting: Edit > 
 
 References:
 - https://github.com/xournalpp/xournalpp.github.io/issues/33
+
+# [yazi](https://github.com/sxyazi/yazi/)
+
+>  💥 Blazing fast terminal file manager written in Rust, based on async I/O.
+
+~~~shell
+yazi_version="0.4.2"
+wget https://github.com/sxyazi/yazi/releases/download/v${yazi_version}/yazi-x86_64-unknown-linux-gnu.zip
+unzip yazi-x86_64-unknown-linux-gnu.zip
+rm yazi-x86_64-unknown-linux-gnu.zip
+mv yazi-x86_64-unknown-linux-gnu ~/.local/share/yazi-x86_64-unknown-linux-gnu-v${yazi_version}
+ln -s ~/.local/share/yazi-x86_64-unknown-linux-gnu-v${yazi_version}/yazi ~/.local/bin/yazi-v${yazi_version}
+ln -s ~/.local/bin/yazi-v${yazi_version} ~/.local/bin/yazi
+~~~
 
 # ZSH
 
