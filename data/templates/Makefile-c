@@ -4,7 +4,7 @@
 
 BINARY = main
 CC = gcc
-CFLAGS = -MMD -Wall -Wextra -pedantic -std=c23
+CFLAGS = -MMD -Wall -Wextra -pedantic -std=c2x
 
 SRC = $(wildcard *.c)
 OBJ = $(SRC:%.c=%.o)
