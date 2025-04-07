@@ -1,5 +1,6 @@
 #!/bin/sh
 # Automatically creates mountpoint for sshfs before runnning the sshfs command itself.
+# Use `umount ...` to unmount the mountpoint afterwards.
 
 MOUNT_DIR_PARENT="$HOME/.sshfs"
 SSHFS="sshfs"
