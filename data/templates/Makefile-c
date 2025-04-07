@@ -1,0 +1,43 @@
+# Default Makefile for C Projects
+# https://gist.github.com/SimonLammer/ba500cc2ba332cfec756bcd5369b40e6
+# https://www.reddit.com/r/C_Programming/comments/1ghy847/the_perfect_makefile/
+
+BINARY = main
+CC = gcc
+CFLAGS = -MMD -Wall -Wextra -pedantic -std=c23
+
+SRC = $(wildcard *.c)
+OBJ = $(SRC:%.c=%.o)
+DEP = $(OBJ:%.o=%.d)
+LIBS=$(addprefix -l,)
+
+_help: help
+
+#= Main targets
+
+.PHONY:  build
+build: $(OBJ) # Compile the project
+	$(CC) -o $(BINARY) $^ $(LIBS)
+
+.PHONY: run
+run: build # Run the project
+	./$(BINARY)
+
+.PHONY: clean
+clean: # Remove temporary files
+	rm -f $(OBJ) $(DEP) $(BINARY)
+
+-include $(DEP)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+
+#= Miscellaneous
+help: # Shows this help message
+	@sed -nr \
+		-e '/\s*\.PHONY/d' \
+		-e 's/^#= (.*)/\n\n\1:/p' \
+		-e 's/^([^_][_a-zA-Z0-9-]*):([^#]*)(# (.*))?/  \1|\4/p' \
+		${MAKEFILE_LIST} \
+		| column -t -s '|'
