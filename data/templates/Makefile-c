@@ -16,7 +16,8 @@ _help: help
 #= Main targets
 
 .PHONY:  build
-build: $(OBJ) # Compile the project
+build: $(BINARY) # Compile the project
+$(BINARY): $(OBJ) # Compile the project
 	$(CC) -o $(BINARY) $^ $(LIBS)
 
 .PHONY: run
