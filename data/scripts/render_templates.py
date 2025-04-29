@@ -29,6 +29,7 @@ from jinja2 import Environment, FileSystemLoader
 from jinja2_ansible_filters import AnsibleCoreFiltersExtension
 from glob import glob
 from tempfile import TemporaryDirectory
+from typing import List, Dict
 
 
 LOGGER = logging.getLogger(__name__)
@@ -102,7 +103,7 @@ def create_template_environment(directory: str) -> Environment:
   )
   return env
 
-def load_variable_file(yaml_file: str) -> dict:
+def load_variable_file(yaml_file: str) -> Dict:
   LOGGER.debug(f"Loading variable file '{yaml_file}'")
   with open(yaml_file, 'r') as f:
     data = yaml.safe_load(f) # TODO: cache?
@@ -111,24 +112,26 @@ def load_variable_file(yaml_file: str) -> dict:
       raise RuntimeError(msg)
     return data
 
-def load_variables(files: list[str]) -> dict:
+def load_variables(files: List[str]) -> Dict:
   if type(files) is not list:
     files = list(files)
   LOGGER.info(f"Loading variables from files {files}")
   return merge_dicts(*map(load_variable_file, files))
 
-def merge_dicts(*dicts: list[dict]) -> dict:
+def merge_dicts(*dicts: List[Dict]) -> Dict:
   if not dicts:
     return dict()
   elif len(dicts) == 1:
     return dicts[0]
   elif len(dicts) == 2:
-    return dicts[0] | dicts[1]
+    merged = dicts[0].copy()
+    merged.update(dicts[1])
+    return merged
   else:
     pivot = len(dicts) // 2
     return merge_dicts(merge_dicts(*dicts[:pivot]), merge_dicts(*dicts[pivot:]))
 
-def render_templates(environment: Environment, files: list[str], variables: dict) -> None:
+def render_templates(environment: Environment, files: List[str], variables: Dict) -> None:
   if type(files) is not list:
     files = list(files)
   LOGGER.info(f"Rendering templates {files}")
