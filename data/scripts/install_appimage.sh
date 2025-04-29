@@ -8,7 +8,7 @@ fi
 appimage=$1
 name=$2
 
-chmod 755
+chmod 755 "$appimage"
 dest=~/.local/bin
 mv "$appimage" "$dest"
 cd "$dest"
