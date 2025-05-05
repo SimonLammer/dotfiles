@@ -1,9 +1,8 @@
 USER := $(shell whoami)
-ANSIBLE_PLAYBOOK_ENV = ANSIBLE_COW_SELECTION=random ANSIBLE_FORCE_COLOR=true
-#ANSIBLE_PLAYBOOK_ENV = ANSIBLE_NOCOWS=true ANSIBLE_FORCE_COLOR=true
-
-PYTHON3 = python
-
+PYTHON3 := python
+ifeq ($(shell test -d venv && echo $$?),0)
+	PYTHON3 := . venv/bin/activate && ${PYTHON3}
+endif
 
 ifndef XDG_CONFIG_HOME
 	XDG_CONFIG_HOME := $(HOME)/.config
@@ -11,12 +10,6 @@ endif
 ifndef XDG_CACHE_HOME
 	XDG_CACHE_HOME := $(HOME)/.cache
 endif
-
-# https://wiki.archlinux.org/title/XDG_Base_Directory
-ANSIBLE_XDG_ENV := ANSIBLE_HOME="$(XDG_CONFIG_HOME)/ansible" ANSIBLE_CONFIG="$(XDG_CONFIG_HOME)/ansible.cfg" ANSIBLE_GALAXY_CACHE_DIR="$(XDG_CACHE_HOME)/ansible/galaxy_cache"
-#ANSIBLE_LOCAL_TEMP="$(XDG_CACHE_HOME)/ansible/tmp"
-ANSIBLE-PLAYBOOK = env $(ANSIBLE_XDG_ENV) $(ANSIBLE_PLAYBOOK_ENV) ansible-playbook
-ANSIBLE-GALAXY = env $(ANSIBLE_XDG_ENV) $(ANSIBLE_PLAYBOOK_ENV) ansible-galaxy
 
 
 templates:
@@ -47,30 +40,7 @@ watch-templates:
 symlinks: templates
 	data/scripts/symlink_dotfiles.sh
 
-setup: install-ansible
-	$(ANSIBLE-GALAXY) collection install -r requirements/setup.yml
-	$(ANSIBLE-GALAXY) install -r requirements/setup.yml
-	$(ANSIBLE-PLAYBOOK) setup.yml -u ${USER} --ask-become-pass 2>&1 | tee log
-
-test: install-ansible
-	$(ANSIBLE-PLAYBOOK) test.yml -u ${USER}
-
-xfce: install-ansible
-	${ANSIBLE-PLAYBOOK} xfce.yml -u ${USER}
-
-install-ansible:
-	if [ -z "`command -v ansible`" ]; then \
-		if [ -x "`command -v apt-get`" ]; then \
-			sudo apt-get -y install ansible; \
-		elif [ -x "`command -v dnf`" ]; then \
-			sudo dnf install -y ansible; \
-		elif [ -x "`command -v zypper`" ]; then \
-			sudo zypper install -y ansible; \
-		else \
-			exit 1; \
-		fi \
-	fi
-
+setup: templates git-setup-hooks symlinks
 
 _git-hook-pre_push:
 	echo Checking templates...

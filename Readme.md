@@ -35,18 +35,12 @@ Contents:
     pip install -r requirements/python-requirements.txt
     ~~~
 
-2. Perform ansible magic:
+2. Perform setup:
 
     ~~~
     make setup
     ~~~
 
-    or
-
-    ~~~
-    ansible-galaxy install -r requirements.yml
-    ansible-playbook setup.yml -e 'ansible_python_interpreter=/usr/bin/python3' -u `whoami`
-    ~~~
 
 3. Remaining setup
 
