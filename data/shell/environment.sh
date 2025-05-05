@@ -41,6 +41,9 @@ fi
 if [ -d "$HOME/.pyenv/bin" ] ; then
     PATH="$HOME/.pyenv/bin:$PATH"
 fi
+if [ -d "${XDG_DATA_HOME:-$HOME/.local/share}/pyenv/bin" ] ; then
+    PATH="${XDG_DATA_HOME:-$HOME/.local/share}/pyenv/bin:$PATH"
+fi
 if [ -d "${XDG_DATA_HOME:-$HOME/.local/share}/npm/bin" ] ; then
     PATH="${XDG_DATA_HOME:-$HOME/.local/share}/npm/bin:$PATH"
 fi
