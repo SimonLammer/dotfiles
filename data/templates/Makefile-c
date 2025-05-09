@@ -2,14 +2,14 @@
 # https://gist.github.com/SimonLammer/ba500cc2ba332cfec756bcd5369b40e6
 # https://www.reddit.com/r/C_Programming/comments/1ghy847/the_perfect_makefile/
 
-BINARY = main
-CC = gcc
-CFLAGS = -MMD -Wall -Wextra -pedantic -std=c2x
+BINARY := main
+CC := gcc
+CFLAGS := -MMD -Wall -Wextra -pedantic -std=c2x
 
-SRC = $(wildcard *.c)
-OBJ = $(SRC:%.c=%.o)
-DEP = $(OBJ:%.o=%.d)
-LIBS=$(addprefix -l,)
+SRC  := $(wildcard *.c)
+OBJ  := $(SRC:%.c=%.o)
+DEP  := $(OBJ:%.o=%.d)
+LIBS := $(addprefix -l,)
 
 _help: help
 
