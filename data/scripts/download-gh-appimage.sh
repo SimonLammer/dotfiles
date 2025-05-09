@@ -47,7 +47,7 @@ repo_files_to_check_script="$metadata_dir/repo_files_to_check.sh"
 appimage_asset_substring=$(cat "$metadata_dir/appimage_asset_substring.txt")
 
 ask_continue() {
-  printf "Do you want to continue the installation? [y/N] " >/dev/tty
+  printf "Do you want to continue? [y/N] " >/dev/tty
   read in </dev/tty
   echo $in
   case $in in
