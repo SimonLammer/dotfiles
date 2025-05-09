@@ -1,0 +1,130 @@
+name: Appimage
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  schedule:
+    - cron: "0 21 * * 0"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    container: alpine:latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: build
+      if: always()
+      run: |
+        apk add bash \
+          bash \
+          bison \
+          build-base \
+          cairo-dev \
+          check-dev \
+          coreutils \
+          cppcheck \
+          flex \
+          gdk-pixbuf-dev \
+          git \
+          glib-dev \
+          gvfs \
+          librsvg-dev \
+          libxcb-dev \
+          libxkbcommon-dev \
+          meson \
+          musl-fts-dev \
+          pango-dev \
+          patchelf \
+          ronn \
+          startup-notification-dev \
+          strace \
+          wget \
+          xcb-util-cursor-dev \
+          xcb-util-dev \
+          xcb-util-keysyms-dev \
+          xcb-util-wm-dev \
+          xcb-util-xrm-dev \
+          xkeyboard-config-dev
+
+        chmod +x ./rofi-appimage.sh && ./rofi-appimage.sh
+        mkdir dist
+        mv *.AppImage* dist/
+
+    - name: Check version file
+      run: |
+       cat ~/version
+       echo "APP_VERSION=$(cat ~/version)" >> "${GITHUB_ENV}"
+    
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4.6.1
+      with:
+        name: AppImage
+        path: 'dist'
+        
+    - name: Upload version file
+      uses: actions/upload-artifact@v4.6.1
+      with:
+       name: version
+       path: ~/version
+    
+  release:
+      needs: [build]
+      permissions: write-all
+      runs-on: ubuntu-latest
+
+      steps:
+        - uses: actions/download-artifact@v4.1.9
+          with:
+            name: AppImage
+        - uses: actions/download-artifact@v4.1.9
+          with:
+            name: version
+
+        - name: Read version
+          run: |
+            cat version
+            export VERSION="$(<version)"
+            echo "APP_VERSION=${VERSION}" >> "${GITHUB_ENV}"
+    
+        #Version Release
+        - name: Del Previous Release
+          run: |
+            gh release delete "${APP_VERSION}" --repo "${GITHUB_REPOSITORY}" --cleanup-tag  -y
+            sleep 5
+          env:
+            GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          continue-on-error: true
+        - name: Continuous Releaser
+          uses: softprops/action-gh-release@v2
+          with:
+            name: "rofi AppImage ${{ env.APP_VERSION }}"
+            tag_name: "${{ env.APP_VERSION}}"
+            prerelease: false
+            draft: false
+            generate_release_notes: false
+            make_latest: true
+            files: |
+              *.AppImage*
+          continue-on-error: false
+
+        #Snapshot Release
+        - name: Get Date
+          run: |
+            SNAPSHOT_TAG="$(date --utc +'%Y%m%d-%H%M%S')"
+            echo SNAPSHOT_TAG="${SNAPSHOT_TAG}" >> "${GITHUB_ENV}"
+          continue-on-error: false
+        - name: Snapshot Releaser
+          uses: softprops/action-gh-release@v2
+          with:
+            name: "Snapshot ${{ env.APP_VERSION }}"
+            tag_name: "${{ env.SNAPSHOT_TAG }}"
+            prerelease: false
+            draft: false
+            generate_release_notes: false
+            make_latest: false
+            files: |
+              *.AppImage*
+          continue-on-error: false
