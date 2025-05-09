@@ -28,6 +28,7 @@ shell_path_additions:
 - $HOME/bin:$PATH
 - $HOME/.local/bin
 - $HOME/.pyenv/bin
+- "${XDG_DATA_HOME:-$HOME/.local/share}/pyenv/bin" # otherwise ~/.pyenv
 - "${XDG_DATA_HOME:-$HOME/.local/share}/npm/bin"
 - $CARGO_HOME/bin
 - /opt/anki/bin
