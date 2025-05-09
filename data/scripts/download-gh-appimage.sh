@@ -93,7 +93,8 @@ cd repo
 repo_files_ok=false
 echo "asdf">>rofi-appimage.sh
 version_dir="$metadata_dir/versions/$gh_version"
-"$repo_files_to_check_script" >"$metadata_dir/filelist.txt"
+filelist="$tmpdir/filelist.txt"
+"$repo_files_to_check_script" >"$filelist"
 if [ ! -d "$version_dir" ]; then
   echo "The $program_name (GitHub)version '$gh_version' has not been verified!" >&2
   echo "Check 'https://github.com/$gh_repo/tree/$program_version' before continuing."
@@ -102,7 +103,7 @@ if [ ! -d "$version_dir" ]; then
   while IFS= read -r file; do
     mkdir -p "$version_dir/$(dirname "$file")"
     cp "$file" "$version_dir/$file"
-  done <"$metadata_dir/filelist.txt"
+  done <"$filelist"
 else
   while IFS= read -r file; do
     if [ -f "$version_dir/$file" ]; then
@@ -117,7 +118,7 @@ else
     fi
     mkdir -p "$version_dir/$(dirname "$file")"
     cp "$file" "$version_dir/$file"
-  done <"$metadata_dir/filelist.txt"
+  done <"$filelist"
 fi
 
 if [ "$gh_version" != "tags/$program_version" ]; then

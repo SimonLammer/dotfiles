@@ -1,2 +1,0 @@
-.github/workflows/blank.yml
-rofi-appimage.sh
