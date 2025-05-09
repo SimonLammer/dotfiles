@@ -57,7 +57,7 @@ ask_continue() {
 }
 
 vars=$(
-  wget --quiet --output-document=- "https://api.github.com/repos/$gh_repo/releases/$gh_version" \
+  wget --quiet --output-document=- --https-only "https://api.github.com/repos/$gh_repo/releases/$gh_version" \
     | jq -r \
         --arg appimage_asset_substring "$appimage_asset_substring" \
         '
@@ -129,7 +129,7 @@ fi
 cd "$maindir"
 program_version_path=$(echo $program_version | tr '.' '_')
 appimage_file="$program_name-$program_version_path.AppImage"
-wget "$appimage_url" -O "$appimage_file"
+wget --https-only "$appimage_url" -O "$appimage_file"
 chmod 555 "$appimage_file"
 
 cd "$maindir"
