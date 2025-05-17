@@ -573,6 +573,22 @@ sudo flatpak override --filesystem=host org.gnucash.GnuCash
 References:
 - https://unix.stackexchange.com/a/525104/367736
 
+## Errors
+
+### Reports / Graphs / Plots are blank
+
+Set `WEBKIT_DISABLE_COMPOSITING_MODE=1`:
+~~~
+flatpak run --env=WEBKIT_DISABLE_COMPOSITING_MODE=1 org.gnucash.GnuCash 
+~~~
+To permanently fix it:
+~~~
+sudo flatpak override --env=WEBKIT_DISABLE_COMPOSITING_MODE=1 org.gnucash.GnuCash
+~~~
+
+References:
+- https://bugs.gnucash.org/show_bug.cgi?id=799445
+
 # gscan2pdf
 
 ~~~shell
