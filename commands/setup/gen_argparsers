@@ -10,7 +10,7 @@ argparser_definition() {
 		"Usage: $PROGRAM [options...] ..."
 	msg -- '' 'Dotfiles management utility.' ''
 	msg -- 'Options:'
-	param   SCRIPT  -s --script init:="dotfiles" -- "Name of the main script."
+	param   SCRIPT  -s --script init:="$DOTFILES_MAIN_SCRIPT" -- "Name of the main script."
 	disp    :usage  -h --help
 
 }
@@ -25,13 +25,11 @@ find "$COMMANDS_DIR" -type f | while read -r file; do
   program=$(
     echo "$file" | sed -e "s/^.\{$(echo "$COMMANDS_DIR" | wc -c)\}/$SCRIPT /; s|/| |; s|/*_$||; s/ $//"
   )
-  echo "$program"
   env \
-    PROGRAM="$program" \
+    DOTFILES_MAIN_SCRIPT="$DOTFILES_MAIN_SCRIPT" \
     COMMANDS_DIR="$COMMANDS_DIR" \
     COMMAND_PD="$(dirname "$file")" \
     COMMAND="$file" \
-    USE_GENERATED_ARGPARSER=false \
-    DEBUG=false \
+    PROGRAM="$program" \
     gengetoptions parser -f "$file" argparser_definition parse_args >"$file.parse_args"
 done

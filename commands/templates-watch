@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -eu
+
+
+set -x
+find "$DOTFILES_HOME" \
+        -name '*.j2' -o \
+        -name '*.yml' -o \
+        -name 'render_templates.py' \
+    | entr -c "$DOTFILES_HOME/$DOTFILES_MAIN_SCRIPT" templates "$@"
+{ set +x; } 2>/dev/null

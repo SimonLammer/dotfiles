@@ -6,7 +6,8 @@ set -eu
 VERSION=0.0.1
 PROGRAM=${0##*/}
 
-DOTFILES_HOME="$(dirname "$(realpath $0)")"
+DOTFILES_MAIN_SCRIPT="$PROGRAM"
+DOTFILES_HOME="$(dirname "$(realpath $DOTFILES_MAIN_SCRIPT)")"
 COMMANDS_DIR="$DOTFILES_HOME/commands"
 COMMAND_PD="$COMMANDS_DIR"
 
