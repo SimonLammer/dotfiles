@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -eu
+
+
+. "$COMMANDS_DIR/_python3_helper" # Load VENV_DIR
+if [ -d "$VENV_DIR" -a -f "$VENV_DIR/bin/activate" ]; then
+    echo "Venv '$VENV_DIR' already exists."
+else
+    set -x
+    ${PYTHON3} -m venv "$VENV_DIR"
+    { set +x; } 2>/dev/null
+fi
+
+set -x
+"$VENV_DIR/bin/pip" install -r "$DOTFILES_HOME/requirements/python-requirements.txt"
+{ set +x; } 2>/dev/null
