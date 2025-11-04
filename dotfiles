@@ -1,0 +1,30 @@
+#!/bin/sh
+
+set -eu
+
+# shellcheck disable=SC2034
+VERSION=0.0.1
+PROGRAM=${0##*/}
+
+DOTFILES_HOME="$(dirname "$(realpath $0)")"
+COMMANDS_DIR="$DOTFILES_HOME/commands"
+COMMAND_PD="$COMMANDS_DIR"
+
+# Not using the generated argparser requires `getoption`.
+# This is slower than the generated argparser, but doesn't need to generate the argparser beforehand, which makes it very useful for debugging/extending this script.
+# Using the generated argparser is faster, but requires generation of the argparser with `gengetoptions parser -f <path/to/the/parser_definition_script> parser_definition parse prog`
+USE_GENERATED_ARGPARSER=true
+
+
+# TODO: ensure not run as root (unless this script is owned by root - then warn?)
+# TODO: subcommand autocomplete
+
+
+
+
+. "$COMMANDS_DIR/_parse_args_helpers"
+. "$COMMANDS_DIR/_"
+COMMAND="$COMMANDS_DIR/_"
+run_nested_command "$@"
+
+

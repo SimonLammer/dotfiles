@@ -1,0 +1,14 @@
+#!/bin/sh
+
+type generate_subcommand_parser_definitions >/dev/null || . $COMMANDS_DIR/_parse_args_helpers
+
+if $USE_GENERATED_ARGPARSER; then
+    dbg "_parse_args" "Parsing args for $COMMAND (with generated argparser)"
+    . "$COMMAND.parse_args"
+    parse_args "$@"
+    eval "set -- $REST"
+else
+    dbg "_parse_args" "Parsing args for $COMMAND"
+#     getoptions argparser_definition | less
+    eval "$(getoptions argparser_definition)"
+fi

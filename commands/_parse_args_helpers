@@ -1,0 +1,55 @@
+#!/bin/sh
+
+DEBUG="${DBG:-false}"
+dbg() {
+    $DEBUG || return 0
+    tag="$1"; shift
+    msg="$@"
+    echo "[$(date +%H%M%S.%N | cut -c -10) $tag] $msg"
+}
+
+generate_subcommand_parser_definitions() {
+  dir="$1"
+  if [ ! -d "$dir" ]; then
+    echo "Could not generate parser definition for unknown directory '$dir'!" >&2
+    exit 1
+  fi
+
+  commands_file=$(mktemp)
+  find "$dir" -mindepth 1 -maxdepth 1 ! -name '_*' -a ! -name '*.parse_args' >"$commands_file"
+  while IFS='' read -r file; do
+    [ -e "$file" ] || continue
+    b="$(basename "$file")"
+    case "$b" in _*|*.parse_args) continue;; esac
+    cmd "$b" -- "$dir | $file | $b"
+    # TODO: list nested subcommands as 'msg'?
+  done <"$commands_file"
+  rm "$commands_file"
+}
+
+
+run_nested_command() {
+  . "$COMMANDS_DIR/_parse_args"
+  if [ $# -gt 0 ]; then
+    cmd=$1
+    shift
+    PROGRAM="$PROGRAM $cmd"
+    if [ -f "$COMMAND_PD/$cmd" ]; then
+      dbg "run_nested_command" "script '$cmd' started"
+      COMMAND="$COMMAND_PD/$cmd"
+      . "$COMMAND"
+      dbg "run_nested_command" "script '$cmd' finished"
+    elif [ -d "$COMMAND_PD/$cmd" ]; then
+      dbg "run_nested_command" "   dir '$cmd'"
+      COMMAND_PD="$COMMAND_PD/$cmd"
+      COMMAND="$COMMAND_PD/_"
+      . "$COMMAND"
+      run_nested_command "$@"
+    else
+      echo "Unknown command '$cmd'!" >&2
+      exit 1
+    fi
+  else
+    usage
+  fi
+}

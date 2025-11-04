@@ -1,0 +1,41 @@
+#!/bin/sh
+
+set -eu
+
+# @getoptions
+argparser_definition() {
+  type generate_subcommand_parser_definitions >/dev/null || . $COMMANDS_DIR/_parse_args_helpers
+
+	setup   REST help:usage abbr:true -- \
+		"Usage: $PROGRAM [options...] ..."
+	msg -- '' 'Dotfiles management utility.' ''
+	msg -- 'Options:'
+	param   SCRIPT  -s --script init:="dotfiles" -- "Name of the main script."
+	disp    :usage  -h --help
+
+}
+# echo "gen_argparsers $0 $@"
+if [ "$(basename "$0")" = "gengetoptions" ]; then return; fi
+# echo "gen_argparsers actual script"
+# @end
+
+# SCRIPT="dotfiles"
+. "$COMMANDS_DIR/_parse_args"
+echo "GENERATING ARGPARSERS"
+
+find "$COMMANDS_DIR" -type f | while read -r file; do
+  grep --quiet --max-count 1 "^argparser_definition" "$file" || continue
+  echo "$file"
+  program=$(
+    echo "$file" | sed -e "s/^.\{$(echo "$COMMANDS_DIR" | wc -c)\}/$SCRIPT /; s|/| |; s|/*_$||; s/ $//"
+  )
+  echo "$program"
+  env \
+    PROGRAM="$program" \
+    COMMANDS_DIR="$COMMANDS_DIR" \
+    COMMAND_PD="$(dirname "$file")" \
+    COMMAND="$file" \
+    USE_GENERATED_ARGPARSER=false \
+    DEBUG=false \
+    gengetoptions parser -f "$file" argparser_definition parse_args >"$file.parse_args"
+done

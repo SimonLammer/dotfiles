@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# @getoptions
+argparser_definition() {
+  type generate_subcommand_parser_definitions >/dev/null || . $COMMANDS_DIR/_parse_args_helpers
+
+	setup   REST help:usage abbr:true -- \
+		"Usage: $PROGRAM [global options...] [command] [options...] [arguments...]"
+	msg -- '' 'Dotfiles management utility.' ''
+	msg -- 'Options:'
+	disp    :usage  -h --help
+
+	msg -- '' 'Commands:'
+	generate_subcommand_parser_definitions "$COMMAND_PD"
+}
+# @end
