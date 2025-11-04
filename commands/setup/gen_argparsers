@@ -14,14 +14,10 @@ argparser_definition() {
 	disp    :usage  -h --help
 
 }
-# echo "gen_argparsers $0 $@"
-if [ "$(basename "$0")" = "gengetoptions" ]; then return; fi
-# echo "gen_argparsers actual script"
+[ "$(basename "$0")" = "gengetoptions" ] && return 0 || true
 # @end
 
-# SCRIPT="dotfiles"
 . "$COMMANDS_DIR/_parse_args"
-echo "GENERATING ARGPARSERS"
 
 find "$COMMANDS_DIR" -type f | while read -r file; do
   grep --quiet --max-count 1 "^argparser_definition" "$file" || continue

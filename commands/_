@@ -15,4 +15,5 @@ argparser_definition() {
 	msg -- '' 'Commands:'
 	generate_subcommand_parser_definitions "$COMMAND_PD"
 }
+[ "$(basename "$0")" = "gengetoptions" ] && return 0 || true
 # @end

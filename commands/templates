@@ -1,0 +1,36 @@
+#!/bin/sh
+
+set -eu
+
+# @getoptions
+argparser_definition() {
+  type generate_subcommand_parser_definitions >/dev/null || . $COMMANDS_DIR/_parse_args_helpers
+
+	setup   REST help:usage abbr:true -- \
+		"Usage: $PROGRAM [options...] ..."
+	msg -- '' 'Dotfiles management utility.' ''
+	msg -- 'Options:'
+	flag    DIFF  -d --diff -- "Show differences in rendered templates"
+	disp    :usage  -h --help
+
+}
+[ "$(basename "$0")" = "gengetoptions" ] && return 0 || true
+# @end
+
+. "$COMMANDS_DIR/_parse_args"
+. "$COMMANDS_DIR/_python3_helper"
+
+if [ "$DIFF" = "1" ]; then
+    changes=$(env LOGLEVEL=WARNING ${PYTHON3} "$DOTFILES_HOME/data/scripts/render_templates.py" "$DOTFILES_HOME" --diff --dry-run "$@")
+    if [ "$changes" = "" ]; then
+        echo All templates rendered correctly.
+    else
+        echo Template\(s\) have not been rendered. \(Use \`$PROGRAM\` to render templates.\)
+        echo Changes:
+        echo "$changes"
+        return 1
+    fi
+    return 0
+fi
+
+env ${PYTHON3} "$DOTFILES_HOME/data/scripts/render_templates.py" "$DOTFILES_HOME" "$@"
