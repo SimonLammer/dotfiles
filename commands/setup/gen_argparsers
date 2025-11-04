@@ -2,17 +2,17 @@
 
 set -eu
 
+
 # @getoptions
 argparser_definition() {
   type generate_subcommand_parser_definitions >/dev/null || . $COMMANDS_DIR/_parse_args_helpers
 
 	setup   REST help:usage abbr:true -- \
-		"Usage: $PROGRAM [options...] ..."
-	msg -- '' 'Dotfiles management utility.' ''
+        "$(dotfiles_banner)" '' \
+		"Usage: $PROGRAM [options...]"
 	msg -- 'Options:'
 	param   SCRIPT  -s --script init:="$DOTFILES_MAIN_SCRIPT" -- "Name of the main script."
 	disp    :usage  -h --help
-
 }
 [ "$(basename "$0")" = "gengetoptions" ] && return 0 || true
 # @end

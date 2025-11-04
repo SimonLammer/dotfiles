@@ -79,10 +79,22 @@ parse_args() {
 }
 usage() {
 cat<<'GETOPTIONSHERE'
-Usage: dotfiles setup gen_argparsers [options...] ...
+              ▘▗ ▌   ▌           ▌▄▖▘       ▖              ▌
+            ▛▌▌▜▘▛▌▌▌▛▌  ▛▘▛▌▛▛▌▐ ▚ ▌▛▛▌▛▌▛▌▌ ▀▌▛▛▌▛▛▌█▌▛▘▐
+            ▙▌▌▐▖▌▌▙▌▙▌▗ ▙▖▙▌▌▌▌▞ ▄▌▌▌▌▌▙▌▌▌▙▖█▌▌▌▌▌▌▌▙▖▌ ▞
+            ▄▌                  ▘                         ▘
+      █████           █████       ██████   ███  ████
+     ░░███           ░░███       ███░░███ ░░░  ░░███
+   ███████   ██████  ███████    ░███ ░░░  ████  ░███   ██████   █████
+  ███░░███  ███░░███░░░███░    ███████   ░░███  ░███  ███░░███ ███░░
+ ░███ ░███ ░███ ░███  ░███    ░░░███░     ░███  ░███ ░███████ ░░█████
+ ░███ ░███ ░███ ░███  ░███ ███  ░███      ░███  ░███ ░███░░░   ░░░░███
+ ░░████████░░██████   ░░█████   █████     █████ █████░░██████  ██████
+  ░░░░░░░░  ░░░░░░     ░░░░░   ░░░░░     ░░░░░ ░░░░░  ░░░░░░  ░░░░░░
 
-Dotfiles management utility.
+    Management utility for 'https://github.com/SimonLammer/dotfiles'
 
+Usage: dotfiles setup gen_argparsers [options...]
 Options:
   -s, --script SCRIPT         Name of the main script.
   -h, --help                  

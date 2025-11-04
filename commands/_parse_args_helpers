@@ -1,5 +1,30 @@
 #!/bin/sh
 
+dotfiles_banner() {
+	# https://patorjk.com/software/taag/#p=display&f=miniwi&t=github.com%2FSimonLammer%2F&x=none&w=70
+    cat <<EOF
+              ▘▗ ▌   ▌           ▌▄▖▘       ▖              ▌
+            ▛▌▌▜▘▛▌▌▌▛▌  ▛▘▛▌▛▛▌▐ ▚ ▌▛▛▌▛▌▛▌▌ ▀▌▛▛▌▛▛▌█▌▛▘▐
+            ▙▌▌▐▖▌▌▙▌▙▌▗ ▙▖▙▌▌▌▌▞ ▄▌▌▌▌▌▙▌▌▌▙▖█▌▌▌▌▌▌▌▙▖▌ ▞
+            ▄▌                  ▘                         ▘
+EOF
+	# https://patorjk.com/software/taag/#p=display&f=DOS%20Rebel&t=dotfiles&x=none&w=70
+    cat <<EOF
+      █████           █████       ██████   ███  ████
+     ░░███           ░░███       ███░░███ ░░░  ░░███
+   ███████   ██████  ███████    ░███ ░░░  ████  ░███   ██████   █████
+  ███░░███  ███░░███░░░███░    ███████   ░░███  ░███  ███░░███ ███░░
+ ░███ ░███ ░███ ░███  ░███    ░░░███░     ░███  ░███ ░███████ ░░█████
+ ░███ ░███ ░███ ░███  ░███ ███  ░███      ░███  ░███ ░███░░░   ░░░░███
+ ░░████████░░██████   ░░█████   █████     █████ █████░░██████  ██████
+  ░░░░░░░░  ░░░░░░     ░░░░░   ░░░░░     ░░░░░ ░░░░░  ░░░░░░  ░░░░░░
+EOF
+    cat <<EOF
+
+    Management utility for 'https://github.com/SimonLammer/dotfiles'
+EOF
+}
+
 DEBUG="${DBG:-false}"
 dbg() {
     $DEBUG || return 0
@@ -16,7 +41,11 @@ generate_subcommand_parser_definitions() {
   fi
 
   commands_file=$(mktemp)
-  find "$dir" -mindepth 1 -maxdepth 1 ! -name '_*' -a ! -name '*.parse_args' >"$commands_file"
+  find "$dir" -mindepth 1 -maxdepth 1 \
+       ! -name '_*' \
+    -a ! -name '.*' \
+    -a ! -name '*.parse_args' \
+    >"$commands_file"
   while IFS='' read -r file; do
     [ -e "$file" ] || continue
     b="$(basename "$file")"
