@@ -33,55 +33,41 @@ dbg() {
     echo "[$(date +%H%M%S.%N | cut -c -10) $tag] $msg"
 }
 
-generate_subcommand_parser_definitions() {
+generate_subcommand_parser_definitions() (
   dir="$1"
   if [ ! -d "$dir" ]; then
     echo "Could not generate parser definition for unknown directory '$dir'!" >&2
     exit 1
   fi
+  use_cmd=${2:-1}
+  indent=${3:-"┗━"}
 
   commands_file=$(mktemp)
-  find "$dir" -mindepth 1 -maxdepth 1 \
+  prevdir="$(pwd)"
+  cd "$dir"
+  find . -mindepth 1 -maxdepth 1 \
        ! -name '_*' \
     -a ! -name '.*' \
     -a ! -name '*.parse_args' \
+    | cut -c 3- \
     >"$commands_file"
   while IFS='' read -r file; do
-    [ -e "$file" ] || continue
-    b="$(basename "$file")"
-    case "$b" in _*|*.parse_args) continue;; esac
     desc="$(awk -F'"' '/^COMMAND_DESCRIPTION=/ { print $2; exit; };' "$file" 2>/dev/null)"
-    cmd "$b" -- "$desc"
+    if [ "$use_cmd" = "1" ]; then
+      echo "cmd \"$file\" -- \"$desc\"" # getoptions breaks when 'cmd' is run from a subshell
+    else
+      echo "msg -- \"  $indent $file $desc\"" # getoptions breaks when 'msg' is run from a subshell
+    fi
     if [ -d "$file" ]; then
-      generate_subcommand_parser_definitions_subdir "$file"
+      if [ "$use_cmd" != "1" ]; then
+        indent="╏  $indent"
+      fi
+      generate_subcommand_parser_definitions "$file" 0 "$indent"
     fi
   done <"$commands_file"
-  rm "$commands_file"
-}
-
-generate_subcommand_parser_definitions_subdir() (
-  dir="$1"
-  indent=${2:-"┗━"}
-
-  subcommands_file=$(mktemp)
-  prevdir="$(pwd)"
-  cd "$dir"
-  find . -mindepth 1 -maxdepth 1\
-        ! -name '_*' \
-    -a ! -name '.*' \
-    -a ! -name '*.parse_args' \
-    | cut -c 3- \
-    >"$subcommands_file"
-  while IFS='' read -r file; do
-    msg -- "  $indent $file"
-    if [ -d "$file" ]; then
-      generate_subcommand_parser_definitions_subdir "$file" "╏  $indent"
-    fi
-  done <"$subcommands_file"
-  rm "$subcommands_file"
   cd "$prevdir"
+  rm "$commands_file"
 )
-
 
 run_nested_command() {
   . "$COMMANDS_DIR/_parse_args"

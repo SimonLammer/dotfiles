@@ -1,5 +1,6 @@
 #!/bin/sh
 
+
 # @getoptions
 argparser_definition() {
   type generate_subcommand_parser_definitions >/dev/null || . $COMMANDS_DIR/_parse_args_helpers
@@ -13,7 +14,9 @@ argparser_definition() {
 	disp    VERSION    --version
 
 	msg -- '' 'Commands:'
-	generate_subcommand_parser_definitions "$COMMAND_PD"
+	gen="$(generate_subcommand_parser_definitions "$COMMAND_PD")"
+	eval "$gen"
+
 }
 [ "$(basename "$0")" = "gengetoptions" ] && return 0 || true
 # @end

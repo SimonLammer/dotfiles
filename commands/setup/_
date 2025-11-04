@@ -12,7 +12,8 @@ argparser_definition() {
 	disp    :usage  -h --help
 
 	msg -- '' 'Commands:'
-	generate_subcommand_parser_definitions "$COMMAND_PD"
+	gen="$(generate_subcommand_parser_definitions "$COMMAND_PD")"
+	eval "$gen"
 }
 [ "$(basename "$0")" = "gengetoptions" ] && return 0 || true
 # @end

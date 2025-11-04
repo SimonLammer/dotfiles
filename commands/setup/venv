@@ -3,7 +3,7 @@
 set -eu
 
 
-COMMAND_DESCRIPTION="Sets up a python venv."
+COMMAND_DESCRIPTION="Sets up the dotfiles' python venv"
 
 . "$COMMANDS_DIR/_python3_helper" # Load VENV_DIR
 if [ -d "$VENV_DIR" -a -f "$VENV_DIR/bin/activate" ]; then
