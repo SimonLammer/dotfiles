@@ -3,6 +3,8 @@
 set -eu
 
 
+COMMAND_DESCRIPTION="Runs the 'templates' command upon file changes."
+
 set -x
 find "$DOTFILES_HOME" \
         -name '*.j2' -o \

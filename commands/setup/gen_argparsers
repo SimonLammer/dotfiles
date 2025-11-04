@@ -2,14 +2,15 @@
 
 set -eu
 
-
+COMMAND_DESCRIPTION="Generates the argument parsers for all dotfiles commands."
 # @getoptions
 argparser_definition() {
   type generate_subcommand_parser_definitions >/dev/null || . $COMMANDS_DIR/_parse_args_helpers
 
 	setup   REST help:usage abbr:true -- \
-        "$(dotfiles_banner)" '' \
-		"Usage: $PROGRAM [options...]"
+        "$(dotfiles_banner)" '' '' \
+		"Usage: $PROGRAM [options...]" '' \
+        "$COMMAND_DESCRIPTION" ''
 	msg -- 'Options:'
 	param   SCRIPT  -s --script init:="$DOTFILES_MAIN_SCRIPT" -- "Name of the main script."
 	disp    :usage  -h --help

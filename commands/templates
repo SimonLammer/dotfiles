@@ -2,6 +2,9 @@
 
 set -eu
 
+
+COMMAND_DESCRIPTION="Renders templated files (marked with '.j2' extension)"
+
 . "$COMMANDS_DIR/_python3_helper"
 
 set -x

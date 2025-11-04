@@ -50,7 +50,8 @@ generate_subcommand_parser_definitions() {
     [ -e "$file" ] || continue
     b="$(basename "$file")"
     case "$b" in _*|*.parse_args) continue;; esac
-    cmd "$b" -- "$dir | $file | $b"
+    desc="$(awk -F'"' '/^COMMAND_DESCRIPTION=/ { print $2; exit; };' "$file" 2>/dev/null)"
+    cmd "$b" -- "$desc"
     # TODO: list nested subcommands as 'msg'?
   done <"$commands_file"
   rm "$commands_file"
