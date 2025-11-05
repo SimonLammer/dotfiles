@@ -6,8 +6,8 @@ argparser_definition() {
   type generate_subcommand_parser_definitions >/dev/null || . $COMMANDS_DIR/_parse_args_helpers
 
 	setup   REST help:usage abbr:true -- \
-        "$(dotfiles_banner)" '' \
-		"Usage: $PROGRAM [options...] <command> [...]"
+        "$(dotfiles_banner)" '' '' \
+		"Usage: $PROGRAM [options...] <command> [...]" ''
 	msg -- 'Options:'
 	flag    DEBUG  -d +d --debug on:true no:false init:@no -- "Print debug info"
 	disp    :usage  -h --help
