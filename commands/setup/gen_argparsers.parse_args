@@ -94,7 +94,11 @@ cat<<'GETOPTIONSHERE'
 
     Management utility for 'https://github.com/SimonLammer/dotfiles'
 
+
 Usage: dotfiles setup gen_argparsers [options...]
+
+Generate the argument parsers for all dotfiles commands.
+
 Options:
   -s, --script SCRIPT         Name of the main script.
   -h, --help                  

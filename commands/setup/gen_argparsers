@@ -21,7 +21,7 @@ argparser_definition() {
 
 . "$COMMANDS_DIR/_parse_args"
 
-find "$COMMANDS_DIR" -type f | while read -r file; do
+find "$COMMANDS_DIR" -type f ! -name '*.j2' | while read -r file; do
   grep --quiet --max-count 1 "^argparser_definition" "$file" || continue
   echo "$file"
   program=$(
