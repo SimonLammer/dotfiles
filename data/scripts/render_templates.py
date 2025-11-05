@@ -13,7 +13,8 @@ It follows these steps:
 08. Render templated variable files <directory>/data/vars.yml.j2
 09. Render templated variable files <directory>/data/**/vars.yml.j2
 10. Load just rendered variable files
-11. Render template files <directory>/data/**/*.j2 (excluding templated variable files).
+11. Render template files <directory>/commands/**/*.j2 (excluding templated variable files).
+12. Render template files <directory>/data/**/*.j2 (excluding templated variable files).
 """
 
 LOGLEVEL_DEFAULT = 'INFO' # can be overwritten via environment variable 'LOGLEVEL'
@@ -83,13 +84,14 @@ def main(directory) -> None:
     else:
       LOGGER.info(f"No templated variable files found in '{folder}'.")
 
-  LOGGER.info(f"Rendering templates")
-  files = (
-    f for f in glob(f'data/**/*{TEMPLATE_EXTENSION}', recursive=True)
-    if not f.endswith(f'yml{TEMPLATE_EXTENSION}')
-  )
-  if files:
-    render_templates(environment, files, variables)
+  for folder in ("commands", "data"):
+    LOGGER.info(f"Rendering templates in '{folder}'")
+    files = (
+          f for f in glob(f'{folder}/**/*{TEMPLATE_EXTENSION}', recursive=True)
+          if not f.endswith(f'yml{TEMPLATE_EXTENSION}')
+    )
+    if files:
+      render_templates(environment, files, variables)
 
 def create_template_environment(directory: str) -> Environment:
   os.chdir(directory)

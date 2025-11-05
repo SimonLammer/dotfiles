@@ -48,6 +48,7 @@ generate_subcommand_parser_definitions() (
   find . -mindepth 1 -maxdepth 1 \
        ! -name '_*' \
     -a ! -name '.*' \
+    -a ! -name '*.j2' \
     -a ! -name '*.parse_args' \
     | cut -c 3- \
     >"$commands_file"

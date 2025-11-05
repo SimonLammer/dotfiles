@@ -2,7 +2,8 @@
 
 set -eu
 
-COMMAND_DESCRIPTION="Generates the argument parsers for all dotfiles commands."
+
+COMMAND_DESCRIPTION="Generate the argument parsers for all dotfiles commands."
 # @getoptions
 argparser_definition() {
   type generate_subcommand_parser_definitions >/dev/null || . $COMMANDS_DIR/_parse_args_helpers
