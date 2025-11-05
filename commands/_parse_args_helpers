@@ -34,6 +34,7 @@ dbg() {
 }
 
 generate_subcommand_parser_definitions() (
+  # The output of this function is 'eval'ed allow for recursiveness and still execute 'cmd' and 'msg' from the main shell that 'getoptions' runs in.
   dir="$1"
   if [ ! -d "$dir" ]; then
     echo "Could not generate parser definition for unknown directory '$dir'!" >&2
