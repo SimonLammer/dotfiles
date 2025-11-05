@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -eu
+
+
+COMMAND_DESCRIPTION="Perform all necessary setup steps for using dotfiles on a new system."
+# @getoptions
+argparser_definition() {
+  type generate_subcommand_parser_definitions >/dev/null || . $COMMANDS_DIR/_parse_args_helpers
+
+	setup   REST help:usage abbr:true -- \
+        "$(dotfiles_banner)" '' '' \
+		"Usage: $PROGRAM [options...]" '' \
+        "$COMMAND_DESCRIPTION" ''
+	msg -- 'Options:'
+	disp    :usage  -h --help
+}
+[ "$(basename "$0")" = "gengetoptions" ] && return 0 || true
+# @end
+
+. "$COMMANDS_DIR/_parse_args"
+
+setup="\"$DOTFILES_HOME/$(echo "${PROGRAM% *}" | sed '{ s/ /" /; }')"
+set -x
+for subcmd in \
+    symlinks \
+    venv \
+; do
+    eval "$setup $subcmd"
+done
+{ set +x; } 2>/dev/null

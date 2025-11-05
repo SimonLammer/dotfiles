@@ -12,25 +12,8 @@ argparser_definition() {
 	disp    :usage  -h --help
 
 	msg -- '' 'Commands:'
-	cmd all -- "Perform all necessary setup steps for using dotfiles on a new system."
 	gen="$(generate_subcommand_parser_definitions "$COMMAND_PD")"
 	eval "$gen"
 }
 [ "$(basename "$0")" = "gengetoptions" ] && return 0 || true
 # @end
-
-if [ $# -gt 0 ]; then
-	cmd="$1"
-	if [ "$cmd" = "all" ]; then
-		setup="\"$DOTFILES_HOME/$(echo "$PROGRAM" | sed s'/ /" /g')"
-		set -x
-		for subcmd in \
-			venv \
-			symlinks \
-		; do
-			eval "$setup $subcmd"
-		done
-		{ set +x; } 2>/dev/null
-		exit 0
-	fi
-fi
