@@ -13,6 +13,7 @@ argparser_definition() {
 		"Usage: $PROGRAM [options...]" '' \
         "$COMMAND_DESCRIPTION" ''
 	msg -- 'Options:'
+	flag    DRY_RUN -n --dry-run -- "Show what would be done without actually doing any of it."
 	disp    :usage  -h --help
 }
 [ "$(basename "$0")" = "gengetoptions" ] && return 0 || true
@@ -21,11 +22,17 @@ argparser_definition() {
 . "$COMMANDS_DIR/_parse_args"
 
 setup="\"$DOTFILES_HOME/$(echo "${PROGRAM% *}" | sed '{ s/ /" /; }')"
-set -x
+execute="eval"
+if [ "$DRY_RUN" = "1" ]; then
+    execute="echo + eval"
+else
+    execute="eval"
+    set -x
+fi
 for subcmd in \
     symlinks \
     venv \
 ; do
-    eval "$setup $subcmd"
+    $execute "$setup $subcmd"
 done
 { set +x; } 2>/dev/null
