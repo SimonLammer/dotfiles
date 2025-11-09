@@ -1,5 +1,7 @@
 # Use $HOME instead of ~ (https://stackoverflow.com/questions/58124257/use-of-variable-in-mkdir-command)
 config_file_symlinks:
+  - src: .git_hooks
+    dest: "{{ dotfiles_home }}/.git/hooks"
   - src: data/git
     dest: "{{ XDG_CONFIG_HOME }}/git"
   - src: data/tmux
