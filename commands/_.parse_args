@@ -120,6 +120,7 @@ Commands:
   setup     
   ┗━ all Perform all necessary setup steps for using dotfiles on a new system.
   ┗━ gen_argparsers Generate the argument parsers for all dotfiles commands.
+  ┗━ git Manage the dotfiles' git repository
   ┗━ symlinks Manage dotfiles' symlinks.
   ┗━ venv Sets up the dotfiles' python venv
   templates Renders templated files (marked with '.j2' extension)
