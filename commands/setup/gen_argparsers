@@ -24,7 +24,7 @@ argparser_definition() {
 
 if [ "$RENDER_TEMPLATES" ]; then
   . "$COMMANDS_DIR/_python3_helper"
-  ${PYTHON3} data/scripts/render_templates.py 'commands/**/*.j2' \
+  ${PYTHON3} "data/scripts/render_templates.py" 'commands/**/*.j2' \
     -v 'vars/main.yml' 'vars/xdg.yml' 'vars/**.j2.yml' \
     -t 'vars/**.j2' \
     -v 'vars/**.yml'
