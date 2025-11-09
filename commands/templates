@@ -7,6 +7,33 @@ COMMAND_DESCRIPTION="Renders templated files (marked with '.j2' extension)"
 
 . "$COMMANDS_DIR/_python3_helper"
 
+print_banner=""
+for arg in "$@"; do
+  case "$arg" in
+    '-h'|'--help')
+        print_banner=1
+      ;;
+  esac
+done
+if [ "$print_banner" ]; then
+  dotfiles_banner
+  echo ""
+  echo ""
+fi
+
+#${PYTHON3} "$DOTFILES_HOME/data/scripts/render_templates.py" "$DOTFILES_HOME" "$@"
 set -x
-${PYTHON3} "$DOTFILES_HOME/data/scripts/render_templates.py" "$DOTFILES_HOME" "$@"
+${PYTHON3} "data/scripts/render_templates.py" \
+  -v 'vars/main.yml' 'vars/xdg.yml' 'vars/**.j2.yml' \
+  -t 'vars/**.j2' \
+  -v 'vars/**.yml' \
+  \
+  -t 'commands/**/*.j2' \
+  \
+  -v 'data/vars.yml' 'data/**/vars.yml.j2.yml' \
+  -t 'data/**/vars.yml.j2' \
+  -v 'data/**/vars.yml' \
+  -t 'data/**/*.j2' \
+  \
+  "$@"
 { set +x; } 2>/dev/null

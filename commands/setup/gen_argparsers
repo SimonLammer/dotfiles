@@ -13,13 +13,22 @@ argparser_definition() {
 		"Usage: $PROGRAM [options...]" '' \
         "$COMMAND_DESCRIPTION" ''
 	msg -- 'Options:'
-	param   SCRIPT  -s --script init:="$DOTFILES_MAIN_SCRIPT" -- "Name of the main script."
+	param   SCRIPT  -s --script init:="$DOTFILES_MAIN_SCRIPT" -- "Name of the main script. [default: \"${PROGRAM%% *}\"]"
+  flag    RENDER_TEMPLATES --{no-}render-templates -- "Render templates in '$COMMANDS_DIR' before generating argparsers."
 	disp    :usage  -h --help
 }
 [ "$(basename "$0")" = "gengetoptions" ] && return 0 || true
 # @end
 
 . "$COMMANDS_DIR/_parse_args"
+
+if [ "$RENDER_TEMPLATES" ]; then
+  . "$COMMANDS_DIR/_python3_helper"
+  ${PYTHON3} data/scripts/render_templates.py 'commands/**/*.j2' \
+    -v 'vars/main.yml' 'vars/xdg.yml' 'vars/**.j2.yml' \
+    -t 'vars/**.j2' \
+    -v 'vars/**.yml'
+fi
 
 find "$COMMANDS_DIR" -type f ! -name '*.j2' | while read -r file; do
   grep --quiet --max-count 1 "^argparser_definition" "$file" || continue
