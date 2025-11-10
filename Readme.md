@@ -13,26 +13,20 @@ Contents:
 # Usage
 
 
-1. Install git and clone repo:
+1. Install `git` and `make`:
 
-    - Debian:
+    `sudo apt install -y git make`
 
-        ~~~
-        sudo apt install -y git && git clone git@github.com:SimonLammer/dotfiles.git ~/.dotfiles
-        ~~~
+2. Clone the repository:
 
-    - Fedora:
-
-        ~~~
-        sudo dnf update -y && sudo dnf install -y make https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-        ~~~
+    ~~~
+    git clone https://github.com/SimonLammer/dotfiles.git ~/.config/dotfiles
+    ~~~
 
 2. Setup python:
 
     ~~~
-    python3 -m venv venv
-    source venv/bin/activate
-    pip install -r requirements/python-requirements.txt
+    make venv
     ~~~
 
 2. Perform setup:

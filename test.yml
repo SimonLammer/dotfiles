@@ -1,6 +1,0 @@
----
-- name: dotfiles - test
-  hosts: local
-  tasks:
-    - debug: {msg: "{{ ansible_distribution }}"}
-

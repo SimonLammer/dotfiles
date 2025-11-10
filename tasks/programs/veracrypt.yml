@@ -1,5 +1,0 @@
----
-- name: install veracrypt
-  import_role:
-    name: coglinev3.veracrypt
-

@@ -1,5 +1,0 @@
----
-- name: dotfiles - Gnome
-  hosts: local
-  tasks:
-  - import_tasks: tasks/gnome.yml

@@ -1,0 +1,57 @@
+#!/bin/sh
+
+set -eu
+
+
+COMMAND_DESCRIPTION="Manage dotfiles' symlinks."
+# @getoptions
+argparser_definition() {
+  type generate_subcommand_parser_definitions >/dev/null || . $COMMANDS_DIR/_parse_args_helpers
+
+	setup   REST help:usage abbr:true -- \
+        "$(dotfiles_banner)" '' '' \
+		"Usage: $PROGRAM [options...]" '' \
+        "$COMMAND_DESCRIPTION" ''
+	msg -- 'Options:'
+    flag    BACKUP_FILES --{no-}file-backups init:@on -- "Move existing configuration files to a backup (suffix them with a timestamp). [default: on]"
+    flag    BACKUP_FOLDERS --{no-}folder-backups init:@on -- "Move existing configuration folders to a backup (suffix them with a timestamp). [default: on]"
+    flag    BACKUPS --{no-}backups no:0 -- "Shorthand for --{no-}file-backups and --{no-}folder-backups."
+	flag    DRY_RUN -n --dry-run -- "Show what would be done without actually doing any of it."
+	disp    :usage  -h --help
+}
+[ "$(basename "$0")" = "gengetoptions" ] && return 0 || true
+# @end
+
+. "$COMMANDS_DIR/_parse_args"
+
+if [ "$BACKUPS" ]; then
+  BACKUP_FILES="$BACKUPS"
+  BACKUP_FOLDERS="$BACKUPS"
+fi
+
+do_unless_dry_run() {
+	if [ "$DRY_RUN" = "1" ]; then
+		echo "$@"
+	else
+		"$@"
+	fi
+}
+
+create_link () {
+  target="$1"
+  name="$2"
+  if [ -e "$target" ]; then
+    [ -L "$name" -a "$(realpath "$target")" = "$(realpath "$name")" ] && return || true
+    if   [ -f "$name" -a "$BACKUP_FILES" ] \
+      || [ -d "$name" -a "$BACKUP_FOLDERS" ]; then
+      backup="$name-`date +%Y%m%dT%H%M%S`"
+      do_unless_dry_run mv "$name" "$backup"
+    fi
+    do_unless_dry_run mkdir -p "`dirname \"$name\"`"
+    do_unless_dry_run ln -fsT "$target" "$name"
+  fi
+}
+
+{% for link in config_file_symlinks %}
+create_link "{{ dotfiles_home }}/{{ link.src }}" "{{ link.dest }}"
+{% endfor %}

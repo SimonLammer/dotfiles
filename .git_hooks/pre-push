@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -eu
+
+
+diff="$(env LOGLEVEL=error ./dotfiles templates --dry-run --diff 2>&1)"
+[ "$(echo -n "$diff" | wc -l)" = "0" ] && exit 0 || true
+
+echo "Some templates have not been rendered. Changes:"
+echo "$diff"
+
+exit 1
+

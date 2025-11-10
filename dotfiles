@@ -1,0 +1,51 @@
+#!/bin/sh
+
+#              ▘▗ ▌   ▌           ▌▄▖▘       ▖              ▌
+#            ▛▌▌▜▘▛▌▌▌▛▌  ▛▘▛▌▛▛▌▐ ▚ ▌▛▛▌▛▌▛▌▌ ▀▌▛▛▌▛▛▌█▌▛▘▐
+#            ▙▌▌▐▖▌▌▙▌▙▌▗ ▙▖▙▌▌▌▌▞ ▄▌▌▌▌▌▙▌▌▌▙▖█▌▌▌▌▌▌▌▙▖▌ ▞
+#            ▄▌                  ▘                         ▘
+#      █████           █████       ██████   ███  ████
+#     ░░███           ░░███       ███░░███ ░░░  ░░███
+#   ███████   ██████  ███████    ░███ ░░░  ████  ░███   ██████   █████
+#  ███░░███  ███░░███░░░███░    ███████   ░░███  ░███  ███░░███ ███░░
+# ░███ ░███ ░███ ░███  ░███    ░░░███░     ░███  ░███ ░███████ ░░█████
+# ░███ ░███ ░███ ░███  ░███ ███  ░███      ░███  ░███ ░███░░░   ░░░░███
+# ░░████████░░██████   ░░█████   █████     █████ █████░░██████  ██████
+#  ░░░░░░░░  ░░░░░░     ░░░░░   ░░░░░     ░░░░░ ░░░░░  ░░░░░░  ░░░░░░
+#
+#    Management utility for 'https://github.com/SimonLammer/dotfiles'
+#
+# This script (including the scripts in the 'commands/' directory) are designed
+# to work on any POSIX-compliant shell, such that these dotfiles can easily be
+# used on any machine that supports at least one POSIX-compliant shell.
+# That being said, some of the commands scripts may use/call other scripts -
+# external to 'commands/' -, which may not underly the same constraints, so
+# some of the commands might not work correctly on some bare shells with limited
+# features.
+
+set -eu
+
+
+# shellcheck disable=SC2034
+VERSION=0.0.1
+DOTFILES_MAIN_SCRIPT_="$0"
+PROGRAM=${0##*/}
+
+DOTFILES_MAIN_SCRIPT="$PROGRAM" # TODO: rename to ..._BASENAME (if useful)
+DOTFILES_HOME="$(dirname "$(realpath $DOTFILES_MAIN_SCRIPT_)")"
+COMMANDS_DIR="$DOTFILES_HOME/commands"
+COMMAND_PD="$COMMANDS_DIR"
+
+# Not using the generated argparser requires `getoption`.
+# This is slower than the generated argparser, but doesn't need to generate the argparser beforehand, which makes it very useful for debugging/extending this script.
+# Using the generated argparser is faster, but requires generation of the argparser with `dotfiles setup gen_argparsers`
+USE_GENERATED_ARGPARSER=true
+
+
+# TODO: ensure not run as root (unless this script is owned by root - then warn?)
+# TODO: subcommand autocomplete
+
+. "$COMMANDS_DIR/_parse_args_helpers"
+. "$COMMANDS_DIR/_"
+COMMAND="$COMMANDS_DIR/_"
+run_nested_command "$@"

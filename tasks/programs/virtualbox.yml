@@ -1,7 +1,0 @@
----
-- name: install virtualbox
-  import_role:
-    name: oefenweb.virtualbox
-  vars:
-    tmux_tpm_plugins_path: "{{ XDG_DATA_HOME }}/tmux/plugins"
-

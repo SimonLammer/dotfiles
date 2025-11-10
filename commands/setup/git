@@ -1,0 +1,71 @@
+#!/bin/sh
+
+set -eu
+
+
+COMMAND_DESCRIPTION="Manage the dotfiles' git repository"
+# @getoptions
+DEFAULT_REMOTE="origin"
+argparser_definition() {
+  type generate_subcommand_parser_definitions >/dev/null || . $COMMANDS_DIR/_parse_args_helpers
+
+	setup   REST help:usage abbr:true -- \
+        "$(dotfiles_banner)" '' '' \
+		"Usage: $PROGRAM [options...]" '' \
+        "$COMMAND_DESCRIPTION" ''
+	msg -- 'Options:'
+	flag PROTOCOL_SSH   --{no-}ssh no:0 init:=2 -- "Use the ssh protocol for the remote. (Otherwise https is used.) [This is the default protocol.]"
+	flag PROTOCOL_HTTPS --{no-}https no:0 -- "Use the https protocol for the remote. (Otherwise ssh is used.)"
+	option REMOTE --remote init:="$DEFAULT_REMOTE" -- "Main git remote. [default: $DEFAULT_REMOTE]"
+	disp    :usage  -h --help
+}
+[ "$(basename "$0")" = "gengetoptions" ] && return 0 || true
+# @end
+
+PROTOCOL_SSH_PREFIX="git@"
+PROTOCOL_SSH_DOMAIN_POSTFIX=":"
+PROTOCOL_HTTPS_PREFIX="https://"
+PROTOCOL_HTTPS_DOMAIN_POSTFIX="/"
+
+. "$COMMANDS_DIR/_parse_args"
+
+if [ "$PROTOCOL_SSH" = "1" -a "$PROTOCOL_HTTPS" = "1" ]; then
+    echo "Protocols ssh and https can't be used simultaneously!\n" >&2
+    usage
+    return 1
+elif [ "$PROTOCOL_SSH" = "0" -a "$PROTOCOL_HTTPS" = "0" ]; then
+    echo "Either ssh or https must be chosen as protocol!\n" >&2
+    usage
+    return 1
+elif [ "$PROTOCOL_SSH" = "0" -o "$PROTOCOL_HTTPS" = "1" ]; then
+    PROTOCOL_SSH=""
+    PROTOCOL_HTTPS="1"
+else
+    PROTOCOL_SSH="1"
+    PROTOCOL_HTTPS=""
+fi
+
+cd "$DOTFILES_HOME" # TODO: should this be done in general for all commands in the main script?
+
+remote_url="$(git remote get-url "$REMOTE")"
+change_remote() {
+    prefix_old="$1"
+    domain_postfix_old="$2"
+    prefix_new="$3"
+    domain_postfix_new="$4"
+    local url_without_prefix="${remote_url#$prefix_old}"
+    local host="${url_without_prefix%%$domain_postfix_old*}"
+    local path="${url_without_prefix#*$domain_postfix_old}"
+    git remote set-url "$REMOTE" "$prefix_new${host}${domain_postfix_new}${path}"
+}
+case "$remote_url" in
+    "$PROTOCOL_HTTPS_PREFIX"*)
+        [ "$PROTOCOL_SSH" ] && change_remote "$PROTOCOL_HTTPS_PREFIX" "$PROTOCOL_HTTPS_DOMAIN_POSTFIX" "$PROTOCOL_SSH_PREFIX" "$PROTOCOL_SSH_DOMAIN_POSTFIX" # TODO: echo sth if verbosely executing the script otherwise
+        ;;
+    "$PROTOCOL_SSH_PREFIX"*)
+        [ "$PROTOCOL_HTTPS" ] && change_remote "$PROTOCOL_SSH_PREFIX" "$PROTOCOL_SSH_DOMAIN_POSTFIX" "$PROTOCOL_HTTPS_PREFIX" "$PROTOCOL_HTTPS_DOMAIN_POSTFIX"
+        ;;
+    *)
+        echo "The current remote url '$remote_url' uses an unknown protocol." >&2
+        exit 1
+esac

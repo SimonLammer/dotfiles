@@ -1,4 +1,0 @@
----
-- name: install virtualbox
-  import_role:
-    name: oefenweb.virtualbox
