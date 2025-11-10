@@ -47,7 +47,7 @@ create_link () {
       || [ -d "$name" -a "$BACKUP_FOLDERS" ]; then
       backup="$name-`date +%Y%m%dT%H%M%S`"
       do_unless_dry_run mv "$name" "$backup"
-    elif [ -d "$name" -a ! "$BACKUP_FOLDERS"]; then
+    elif [ -d "$name" -a ! "$BACKUP_FOLDERS" ]; then
       do_unless_dry_run rm -r "$name"
     fi
     do_unless_dry_run mkdir -p "`dirname \"$name\"`"

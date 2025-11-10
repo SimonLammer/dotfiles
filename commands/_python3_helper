@@ -8,6 +8,6 @@ type python3 >/dev/null 2>&1 \
     && PYTHON3="python3" \
     || PYTHON3="python"
 
-if [ -d "$VENV_DIR" ]; then
+if [ -d "$VENV_DIR" -a -f "$VENV_DIR/bin/activate" ]; then
     . "$VENV_DIR/bin/activate"
 fi
