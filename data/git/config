@@ -58,6 +58,11 @@
 	# Quote / unquote a sh command, converting it to / from a git alias string
 	# https://stackoverflow.com/a/39616600/2808520
 	quote-string = "!read -r l; printf \\\"!; printf %s \"$l\" | sed 's/\\([\\\"]\\)/\\\\\\1/g'; printf \" #\\\"\\n\" #"
+
+	# List how much space which files take up 
+	# https://stackoverflow.com/a/57560917/2808520
+	list-big-files = "!git rev-list --all --objects | git cat-file --batch-check='%(objectname) %(objecttype) %(objectsize) %(rest)' | grep blob | sort -k3n | tail -n 50"
+
 [log]
 	date = iso
 [pull]
