@@ -23,26 +23,13 @@ Contents:
     git clone https://github.com/SimonLammer/dotfiles.git ~/.config/dotfiles
     ~~~
 
-2. Setup python:
+3. Setup dotfiles:
 
     ~~~
-    make venv
+    cd ~/.config/dotfiles
+    ./dotfiles setup all
     ~~~
 
-2. Perform setup:
-
-    ~~~
-    make setup
-    ~~~
-
-
-3. Remaining setup
-
-    - Programs not yet installed automatically
-
-        - [Mega](#mega)
-
-    - Manual
 
 ---
 
