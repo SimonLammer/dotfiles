@@ -39,7 +39,7 @@ COMMAND_PD="$COMMANDS_DIR"
 # Not using the generated argparser requires `getoption`.
 # This is slower than the generated argparser, but doesn't need to generate the argparser beforehand, which makes it very useful for debugging/extending this script.
 # Using the generated argparser is faster, but requires generation of the argparser with `dotfiles setup gen_argparsers`
-USE_GENERATED_ARGPARSER=false
+USE_GENERATED_ARGPARSER=true
 
 
 # TODO: ensure not run as root (unless this script is owned by root - then warn?)
