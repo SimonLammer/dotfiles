@@ -23,7 +23,9 @@ argparser_definition() {
 # @end
 
 PROTOCOL_SSH_PREFIX="git@"
+PROTOCOL_SSH_DOMAIN_POSTFIX=":"
 PROTOCOL_HTTPS_PREFIX="https://"
+PROTOCOL_HTTPS_DOMAIN_POSTFIX="/"
 
 . "$COMMANDS_DIR/_parse_args"
 
@@ -48,15 +50,20 @@ cd "$DOTFILES_HOME" # TODO: should this be done in general for all commands in t
 remote_url="$(git remote get-url "$REMOTE")"
 change_remote() {
     prefix_old="$1"
-    prefix_new="$2"
-    git remote set-url "$REMOTE" "$prefix_new${remote_url#$prefix_old}"
+    domain_postfix_old="$2"
+    prefix_new="$3"
+    domain_postfix_new="$4"
+    local url_without_prefix="${remote_url#$prefix_old}"
+    local host="${url_without_prefix%%$domain_postfix_old*}"
+    local path="${url_without_prefix#*$domain_postfix_old}"
+    git remote set-url "$REMOTE" "$prefix_new${host}${domain_postfix_new}${path}"
 }
 case "$remote_url" in
     "$PROTOCOL_HTTPS_PREFIX"*)
-        [ "$PROTOCOL_SSH" ] && change_remote "$PROTOCOL_HTTPS_PREFIX" "$PROTOCOL_SSH_PREFIX" # TODO: echo sth if verbosely executing the script otherwise
+        [ "$PROTOCOL_SSH" ] && change_remote "$PROTOCOL_HTTPS_PREFIX" "$PROTOCOL_HTTPS_DOMAIN_POSTFIX" "$PROTOCOL_SSH_PREFIX" "$PROTOCOL_SSH_DOMAIN_POSTFIX" # TODO: echo sth if verbosely executing the script otherwise
         ;;
     "$PROTOCOL_SSH_PREFIX"*)
-        [ "$PROTOCOL_HTTPS" ] && change_remote "$PROTOCOL_SSH_PREFIX" "$PROTOCOL_HTTPS_PREFIX"
+        [ "$PROTOCOL_HTTPS" ] && change_remote "$PROTOCOL_SSH_PREFIX" "$PROTOCOL_SSH_DOMAIN_POSTFIX" "$PROTOCOL_HTTPS_PREFIX" "$PROTOCOL_HTTPS_DOMAIN_POSTFIX"
         ;;
     *)
         echo "The current remote url '$remote_url' uses an unknown protocol." >&2
