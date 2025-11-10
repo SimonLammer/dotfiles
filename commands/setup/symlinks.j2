@@ -25,6 +25,7 @@ argparser_definition() {
 . "$COMMANDS_DIR/_parse_args"
 
 if [ "$BACKUPS" ]; then
+  [ "$BACKUPS" = 0 ] && BACKUPS="" || true
   BACKUP_FILES="$BACKUPS"
   BACKUP_FOLDERS="$BACKUPS"
 fi
@@ -46,6 +47,8 @@ create_link () {
       || [ -d "$name" -a "$BACKUP_FOLDERS" ]; then
       backup="$name-`date +%Y%m%dT%H%M%S`"
       do_unless_dry_run mv "$name" "$backup"
+    elif [ -d "$name" -a ! "$BACKUP_FOLDERS"]; then
+      do_unless_dry_run rm -r "$name"
     fi
     do_unless_dry_run mkdir -p "`dirname \"$name\"`"
     do_unless_dry_run ln -fsT "$target" "$name"
