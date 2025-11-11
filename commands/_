@@ -10,6 +10,7 @@ argparser_definition() {
 		"Usage: $PROGRAM [options...] <command> [...]" ''
 	msg -- 'Options:'
 	flag    DEBUG  -d +d --debug on:true no:false init:@no -- "Print debug info"
+	flag    :'choose_generated_argparsers "$@"' -p +p --{no-}generated-argparsers -- "{Don't} use the generated argument parsers. (Does not effect the main command, but only subcommands.) [default: $([ "$USE_GENERATED_ARGPARSER" ] && echo "on" || echo "off")]"
 	disp    :usage  -h --help
 	disp    VERSION    --version
 
@@ -18,5 +19,13 @@ argparser_definition() {
 	eval "$gen"
 
 }
+choose_generated_argparsers() {
+	case "$1" in
+		"+p"|"--no-"*) USE_GENERATED_ARGPARSER='' ;;
+		"-p"|"--gen"*) USE_GENERATED_ARGPARSER=1  ;;
+	esac
+}
 [ "$(basename "$0")" = "gengetoptions" ] && return 0 || true
 # @end
+
+

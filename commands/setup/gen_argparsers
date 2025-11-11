@@ -30,6 +30,7 @@ if [ "$RENDER_TEMPLATES" ]; then
     -v 'vars/**.yml'
 fi
 
+
 find "$COMMANDS_DIR" -type f ! -name '*.j2' | while read -r file; do
   grep --quiet --max-count 1 "^argparser_definition" "$file" || continue
   echo "$file"
@@ -42,5 +43,6 @@ find "$COMMANDS_DIR" -type f ! -name '*.j2' | while read -r file; do
     COMMAND_PD="$(dirname "$file")" \
     COMMAND="$file" \
     PROGRAM="$program" \
+    USE_GENERATED_ARGPARSER="$USE_GENERATED_ARGPARSER" \
     gengetoptions parser -f "$file" argparser_definition parse_args >"$file.parse_args"
 done

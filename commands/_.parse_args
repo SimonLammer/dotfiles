@@ -12,6 +12,14 @@ parse_args() {
 				"$1") OPTARG=; break ;;
 				$1*) OPTARG="$OPTARG --debug"
 			esac
+			case '--generated-argparsers' in
+				"$1") OPTARG=; break ;;
+				$1*) OPTARG="$OPTARG --generated-argparsers"
+			esac
+			case '--no-generated-argparsers' in
+				"$1") OPTARG=; break ;;
+				$1*) OPTARG="$OPTARG --no-generated-argparsers"
+			esac
 			case '--help' in
 				"$1") OPTARG=; break ;;
 				$1*) OPTARG="$OPTARG --help"
@@ -40,10 +48,10 @@ parse_args() {
 				eval 'set -- "${OPTARG%%\=*}" "${OPTARG#*\=}"' ${1+'"$@"'}
 				;;
 			--no-*|--without-*) unset OPTARG ;;
-			-[dh]?*) OPTARG=$1; shift
+			-[dph]?*) OPTARG=$1; shift
 				eval 'set -- "${OPTARG%"${OPTARG#??}"}" -"${OPTARG#??}"' ${1+'"$@"'}
 				case $2 in --*) set -- "$1" unknown "$2" && REST=x; esac;OPTARG= ;;
-			+[d]?*) OPTARG=$1; shift
+			+[dp]?*) OPTARG=$1; shift
 				eval 'set -- "${OPTARG%"${OPTARG#??}"}" +"${OPTARG#??}"' ${1+'"$@"'}
 				unset OPTARG ;;
 			+*) unset OPTARG ;;
@@ -53,6 +61,11 @@ parse_args() {
 				[ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
 				eval '[ ${OPTARG+x} ] &&:' && OPTARG='true' || OPTARG='false'
 				DEBUG="$OPTARG"
+				;;
+			'-p'|'+p'|'--generated-argparsers'|'--no-generated-argparsers')
+				[ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+				eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+				choose_generated_argparsers "$@"
 				;;
 			'-h'|'--help')
 				usage
@@ -113,6 +126,8 @@ Usage: dotfiles [options...] <command> [...]
 
 Options:
   -d, --debug                 Print debug info
+  -p, --{no-}generated-argparsers 
+                              {Don't} use the generated argument parsers. (Does not effect the main command, but only subcommands.) [default: on]
   -h, --help                  
       --version               
 
