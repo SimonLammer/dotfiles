@@ -43,6 +43,10 @@ CC0 assets (Materials, HDRIs, SBSARs, 3D, ...)
 
 Archive of saved web pages.
 
+## [babelstone.co.uk/Unicode/whatisit](https://babelstone.co.uk/Unicode/whatisit.html)
+
+> What Unicode character is this ?
+
 ## [board.net](board.net)
 
 > Etherpads for all
@@ -62,6 +66,11 @@ distill findings directly from scientific research
 
 Find Lemmy communities across instances.
 
+## [fmhy.net](https://fmhy.net/)
+
+> freemediaheckyeah
+> The largest collection of free stuff on the internet!
+
 ## [detexify.kirelabs.org](http://detexify.kirelabs.org/classify.html)
 
 Find LaTeX symbols by drawing them.
@@ -75,16 +84,25 @@ Find LaTeX symbols by drawing them.
 > Impose online is FREE service that enables you to impose your pdf documents without the high cost of specialised imposition software. Upload your pdf, configure your imposition, then download your new imposed file instantly!
 
 ## [ipify.org](https://www.ipify.org)
+
 > A Simple Public IP Address API
 
 ## [Lagom LCD Monitor Test Images](http://www.lagom.nl/lcd-test/)
+
 > With the test images on these pages, you can easily adjust the settings of your monitor to get the best possible picture quality. Additionally, there are a number of test images that can help you to judge the image quality of a monitor. You can check the images on this webpage or put them on a usb stick and try them in the computer store like I did when I created these test patterns. These test images are much more revealing regarding monitor shortcomings than ordinary photographs.
 
 ## [Leetle](https://leetle.app/)
+
 > Leetle is a daily coding game, in the spirit of LeetCode & Wordle. The challenges are meant to be quick and easy, but help reinforce Python syntax and methods. The challenges are created by a mix of LLMs, mostly Claude 3.5 Sonnet, and hand-tested.
 
 ## [Ninite](https://ninite.com/)
+
 > Install and Update All Your Programs at Once [on Windows]
+
+## [osalt.com](https://osalt.com/)
+
+> Find open source software alternatives to well-known commercial software
+> Our mission is to provide easy access to high quality open source alternatives to well-known commercial products. And remember that open source software is also a freeware alternative.
 
 ## [patorjk.com/software/taag](http://patorjk.com/software/taag/)
 
@@ -97,6 +115,16 @@ ASCII art fonts in this repo were created using:
 ## [scienceos.ai](https://scienceos.ai)
 
 > Get scientific answers by asking millions of research papers
+
+## [squoosh.app](https://squoosh.app/)
+
+> Smaller images mean faster load times. Squoosh can reduce file size and maintain high quality.
+
+## [thistothat.com](https://www.thistothat.com/index.shtml)
+
+Look up how to attach two materials.
+
+> Because people have a need to glue things to other things
 
 ## [webhook.site](https://webhook.site)
 
