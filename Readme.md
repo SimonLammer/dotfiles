@@ -138,6 +138,12 @@ Look up how to attach two materials.
 sudo apt-get install -y silversearcher-ag
 ~~~
 
+# AM [Application Manager (AppImage Package Manager)](https://github.com/ivan-hc/AM)
+
+~~~shell
+curl -s -Lo ./AM-INSTALLER https://raw.githubusercontent.com/ivan-hc/AM/main/AM-INSTALLER && chmod a+x ./AM-INSTALLER && ./AM-INSTALLER && rm ./AM-INSTALLER
+~~~
+
 # Android Studio
 
 ~~~shell
