@@ -869,6 +869,18 @@ References:
 - https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-local-programming-environment-on-ubuntu-16-04
 - https://stackoverflow.com/a/74314165/2808520
 
+## Python via [`uv`](https://docs.astral.sh/uv/)
+
+~~~shell
+curl -LsSf https://astral.sh/uv/install.sh | sh
+~~~
+
+### uv pipenv
+
+~~~shell
+uv tool install pipenv
+~~~
+
 ## pipenv
 
 [Reference](https://packaging.python.org/tutorials/managing-dependencies/#managing-dependencies)
